@@ -63,7 +63,7 @@ ChordPress supports note/chord translations
 Optional shortcode parameters
 * float=  Forces the rendered text block to float left or right.
 * hbnotation=  [Input is H/B notation](https://sayandsound.lewe.com/note-h/) (using H for B and Bb for B). Wether it is displayed as such is defined on the Options page.
-* interactive=  Enables interactive mode. A listbox will be shown on the right of the title that allows you to transpose the chords on the fly.
+* interactive=  Enables interactive mode. A listbox will be shown on the right of the title that allows you to transpose the chords on the fly. Also, a print button will be shown fopr printing out the rendered ChordPro text.
 * transpose=  Enter a positive or negative number for the amount of semitones to transpose the chords
 
 Use the "ChordPress" sub-menu of your backend Settings to change the default settings.
@@ -103,6 +103,9 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 1.4.0 =
+* Added print feature for interactive mode
+
 = 1.3.0 =
 * Added interactive mode
 

@@ -57,3 +57,28 @@ function transposeChords()
       divsToShow[i].style.display = "";
    }
 }
+
+/**
+ * Print cpress div
+ *
+ * This function picks the cpress id element, creates a new html page from it
+ * and launches an HTML print event.
+ *
+ * @since 1.4.0
+ *
+ * @param string elem Chordpress element ID
+ */
+function printCpress(elem)
+{
+   var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+   mywindow.document.write('<html><head><title>' + document.title  + '</title>');
+   mywindow.document.write('</head><body style=\"font-family:sans-serif;margin: 1.6cm;\">');
+   mywindow.document.write('<style>@page { margin: 0; } div.cpress_interaction { display: none; }</style>');
+   mywindow.document.write(document.getElementById(elem).innerHTML);
+   mywindow.document.write('</body></html>');
+   mywindow.document.close(); // necessary for IE >= 10
+   mywindow.focus(); // necessary for IE >= 10*/
+   mywindow.print();
+   mywindow.close();
+   return true;
+}
