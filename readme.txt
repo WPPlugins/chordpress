@@ -1,7 +1,7 @@
 === ChordPress - ChordPro Text Formatter ===
 Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
-Tags: chordpro,chord,chords,lyrics,music,notes,sheet
+Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
 Tested up to: 5.3.2
 Stable tag: trunk
@@ -23,59 +23,59 @@ Simply insert a ChordPro text inbetween the [chordpress] and [/chordpress] tags 
 A TinyMCE editor integration is also included, providing an editor menu button to insert the shortcode for you with its default paramaters, e.g. wrapping it around selected text.
 
 The shortags allow specifying custom options that will overwrite the defaults.
-For example: [chordpress transpose="1"] will transpose the chords rendered by one semitone.
+For example: `[chordpress transpose="1"]` will transpose the chords rendered by one semitone.
 
 Check out this example:
 [Chordpress Demo](https://sayandsound.lewe.com/heart-of-gold/ "Chordpress Demo")
 
 If not from the WordPress marketplace, get the plugin here: 
-[ChordPress Homepage](https://www.lewe.com/chordpress-for-wordpress/ "ChordPress Homepage")
+[ChordPress Homepage](https://www.lewe.com/chordpress/ "ChordPress Homepage")
 
 Credits for the beautiful icon go to Ahkâm:
 [ChordPress Plugin Icon](https://www.freeiconspng.com/img/17579 "ChordPress Plugin Icon")
 
-= Features =
+== Features ==
 ChordPress renders the lyrics/chord format of ChordPro.
 
 ChordPress supports the following ChordPro tags:
-* {album}
-* {artist}
-* {composer}
-* {subtitle}
-* {title}
-* {year}
-* {meta} for all of the above
+* `{album}`
+* `{artist}`
+* `{composer}`
+* `{subtitle}`
+* `{title}`
+* `{year}`
+* `{meta}` for all of the above
 
 ChordPress supports custom CSS for the following ChordPro tags:
-* {comment}
-* {start_of_chorus}, {end_of_chorus}
-* {start_of_verse}, {end_of_verse}
+* `{comment}`
+* `{start_of_chorus}`, `{end_of_chorus}`
+* `{start_of_verse}`, `{end_of_verse}`
 
 ChordPress supports note/chord translations
 * Chord transponation
 * [H/B Notation](https://sayandsound.lewe.com/note-h/)
 
-= Usage =
-1. Enter a [chordpress] shortcode in your page or post editor
+== Usage ==
+1. Enter a `[chordpress]` shortcode in your page or post editor
 2. Paste your ChordPro text right after it
 3. Enter the closing [/chordpress] shortcode
 
 Optional shortcode parameters
-* float=  Forces the rendered text block to float left or right.
-* hbnotation=  [Input is H/B notation](https://sayandsound.lewe.com/note-h/) (using H for B and Bb for B). Wether it is displayed as such is defined on the Options page.
-* interactive=  Enables interactive mode. A listbox will be shown on the right of the title that allows you to transpose the chords on the fly. Also, a print button will be shown fopr printing out the rendered ChordPro text.
-* transpose=  Enter a positive or negative number for the amount of semitones to transpose the chords
+* `float=`  Forces the rendered text block to float left or right.
+* `hbnotation=`  [Input is H/B notation](https://sayandsound.lewe.com/note-h/) (using H for B and Bb for B). Wether it is displayed as such is defined on the Options page.
+* `interactive=`  Enables interactive mode. A listbox will be shown on the right of the title that allows you to transpose the chords on the fly. Also, a print button will be shown fopr printing out the rendered ChordPro text.
+* `transpose=`  Enter a positive or negative number for the amount of semitones to transpose the chords
 
 Use the "ChordPress" sub-menu of your backend Settings to change the default settings.
 
-Read more here: [ChordPress User Manual](https://support.lewe.com/docs/chordpro-for-wordpress-manual/ "ChordPress User Manual")
+Read more here: [ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "ChordPress User Manual")
       
-= Support =
+== Support ==
 Choose your preferred support channel:
 1. [Wordpress Support Forum](https://wordpress.org/support/plugin/chordpress/ "Wordpress Support Forum")
 2. [Lewe.com Support Site](http://support.lewe.com/ "Lewe.com Support Site")
 3. [Lewe.com ChordPress Forum](http://forum.lewe.com/viewforum.php?f=41 "Lewe.com ChordPress Forum")
-4. [ChordPress User Manual](https://support.lewe.com/docs/chordpro-for-wordpress-manual/ "ChordPress User Manual")
+4. [ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "ChordPress User Manual")
 
 == Screenshots ==
 1. ChordPress Display Options
@@ -86,23 +86,26 @@ Choose your preferred support channel:
 == Frequently Asked Questions ==
 = Why are empty ChordPro lines not rendered ? =
 Empty lines are stripped from shortcode content and are not passed to the plugin. A good way to work around that is to use the {start_of_verse}/{start_of_chorus} tags and give them a top/bottom margin on the options page.
-= What is teh H/B notation ? =
+= What is the H/B notation ? =
 The H/B notation uses H instead of B and B is used insetad of Bb. This notation is used in some European countries. Read more about it here: [H/BN Notation](https://sayandsound.lewe.com/note-h/ "H/B Notation").
 
 == Installation ==
 = Backend Installation =
 1. Go to Plugin page
 2. Click Add New
-3. Enter ChordPress in search field
+3. Enter "chordpress" in search field
 4. Install and Activate
 
 = Manual Installation =
-1. Download the plugin ZIP file
+1. Download the plugin ZIP file from [here](https://support.lewe.com/docs/chordpress-manual/ "Download ChordPress...")
 2. Unpack the ZIP file locally
 3. Upload the 'chordpress' folder to your '/wp-content/plugins/' directory
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 1.5.0 =
+* Reworked the options page and fixed the tab save bug
+
 = 1.4.0 =
 * Added print feature for interactive mode
 

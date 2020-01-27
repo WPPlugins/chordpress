@@ -3,8 +3,8 @@
 Plugin Name: ChordPress
 Plugin URI:  http://www.lewe.com/chordpress-for-wordpress
 Description: This plugin renders ChordPro formatted text in WordPress sites.
-Version:     1.4.0
-Date:        2020-01-05
+Version:     1.3.0
+Date:        2019-12-23
 Author:      George Lewe
 Author URI:  http://www.lewe.com
 License:     GPLv3
@@ -378,16 +378,9 @@ class ChordPress
    public function displayText( $text )
    {
       //
-      // Start of ChordPress wrapper
-      //
-      $returnText = "\n\n
-      <!-- ChordPress Start -->
-      <div id=\"%cpressID%\" class=\"cpress\">\n";
-
-      //
       // Style sheet
       //
-      $returnText .= 
+      $returnText = 
       '<style>
          div.cpress { float: '.$this->float.'; }
          div.cpress_line { margin: 1em 0 1em 0; }
@@ -410,6 +403,11 @@ class ChordPress
       // $returnText .= '<pre>' . count($text) . '</pre>';
 
       //
+      // Start of ChordPress wrapper
+      //
+      $returnText .= "<div class=\"cpress\">\n";
+
+      //
       // Interactive transpose listbox
       //
       if (strtolower($this->interactive) == "yes")
@@ -428,8 +426,7 @@ class ChordPress
                <option value=\"9\">9</option>
                <option value=\"10\">10</option>
                <option value=\"11\">11</option>
-            </select><br>
-            <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">Print</button>
+            </select>
          </div>";
       }
 
@@ -438,13 +435,7 @@ class ChordPress
       //
       if(strlen($this->arrDirectives['title']) && !$this->hideTitle)
       {
-         $cpressID = str_replace(' ', '-', strtolower(trim($this->arrDirectives['title'])));
-         $returnText = str_replace('%cpressID%', $cpressID, $returnText);
          $returnText .= '<'.$this->titleLevel.'>'.$this->arrDirectives['title'].'</'.$this->titleLevel.'>';
-      }
-      else {
-         $cpressID = 'ccpress-id';
-         $returnText = str_replace('%cpressID%', $cpressID, $returnText);
       }
 
       if(strlen($this->arrDirectives['subtitle']) && !$this->hideSubtitle)
@@ -477,8 +468,7 @@ class ChordPress
       //
       // End of ChordPress wrapper
       //
-      $returnText .= "</div>\n
-      <!-- ChordPress End -->\n\n";
+      $returnText .= '</div>';
       return $returnText;
    }
                
