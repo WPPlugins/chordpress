@@ -1,0 +1,537 @@
+# Copyright (C) 2020 George Lewe
+# This file is distributed under the same license as the ChordPress plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: ChordPress 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chordpress\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2020-01-26T23:02:24+01:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.4.0\n"
+"X-Domain: chordpress\n"
+
+#. Plugin Name of the plugin
+msgid "ChordPress"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://support.lewe.com/docs/chordpress-manual/"
+msgstr ""
+
+#. Description of the plugin
+msgid "This plugin renders ChordPro formatted text in WordPress sites."
+msgstr ""
+
+#. Author of the plugin
+msgid "George Lewe"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://www.lewe.com"
+msgstr ""
+
+#: admin/class-chordpress-admin.php:171
+msgid "Settings"
+msgstr ""
+
+#: admin/class-chordpress-admin.php:173
+#: admin/partials/chordpress-admin-license.php:44
+#: admin/partials/chordpress-admin-options.php:116
+msgid "Documentation"
+msgstr ""
+
+#: admin/class-chordpress-admin.php:192
+msgid "Support"
+msgstr ""
+
+#: admin/class-chordpress-admin.php:193
+#: admin/partials/chordpress-admin-options.php:117
+msgid "Donate"
+msgstr ""
+
+#: admin/class-chordpress-admin.php:194
+msgid "Rate and Review!"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:106
+msgid "Your Connector Jira Server license has expired"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:106
+msgid "days ago. Please renew your license within"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:115
+msgid "Expiring soon!"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:122
+#: admin/partials/chordpress-admin-license.php:133
+#: admin/partials/chordpress-admin-license.php:147
+msgid "Deactivate"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:122
+#: admin/partials/chordpress-admin-license.php:160
+msgid "Renew"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:126
+msgid "Active"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:140
+msgid "Blocked"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:147
+msgid "Unblock"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:153
+msgid "Expired"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:166
+msgid "Pending"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:173
+#: admin/partials/chordpress-admin-license.php:192
+msgid "Activate"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:179
+msgid "Missing License"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:181
+msgid "Please enter the license key for this plugin. You were given a license key when you purchased this item."
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:185
+msgid "Missing"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:192
+msgid "Get a license"
+msgstr ""
+
+#: admin/partials/chordpress-admin-license.php:198
+#: includes/class-chordpress-license.php:103
+msgid "License Key"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:91
+msgid "Success"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:92
+msgid "The changes were saved successfully."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:95
+msgid "Error"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:96
+msgid "An error occurred while trying to save your settings."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:101
+msgid "Information"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:102
+msgid "Nothing was saved because no value was changed."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:131
+msgid "Output Options"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:132
+msgid "Formatting Options"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:133
+msgid "Plugin Options"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:151
+msgid "Use this tab to select what sections and directives will be part of the ChordPress output."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:156
+msgid "Hide Album"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:159
+#: admin/partials/chordpress-admin-options.php:166
+#: admin/partials/chordpress-admin-options.php:180
+#: admin/partials/chordpress-admin-options.php:187
+#: admin/partials/chordpress-admin-options.php:194
+#: admin/partials/chordpress-admin-options.php:201
+#: admin/partials/chordpress-admin-options.php:208
+msgid "With this option selected, the"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:159
+msgid "album directive"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:159
+#: admin/partials/chordpress-admin-options.php:166
+#: admin/partials/chordpress-admin-options.php:180
+#: admin/partials/chordpress-admin-options.php:187
+#: admin/partials/chordpress-admin-options.php:194
+#: admin/partials/chordpress-admin-options.php:201
+#: admin/partials/chordpress-admin-options.php:208
+msgid "will not be displayed"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:163
+msgid "Hide Artist"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:166
+msgid "artist directive"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:170
+msgid "Hide Chords"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:173
+msgid "With this option selected, only the lyrics will be printed (no chords above them)"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:177
+msgid "Hide Comments"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:180
+msgid "comment directive"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:184
+msgid "Hide Composer"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:187
+msgid "composer directive"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:191
+msgid "Hide Subtitle"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:194
+msgid "subtitle directive"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:198
+msgid "Hide Title"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:201
+msgid "title directive"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:205
+msgid "Hide Year"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:208
+msgid "year directive"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:212
+msgid "H/B Notation"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:215
+msgid "With this option selected, chords are displayed in H/B notation: H is used instead of B, B is used insetad of Bb. This notation is used in some European countries. Read more about it"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:215
+msgid "here"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:235
+msgid "Use this tab to select styles and formats of the ChordPress output."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:240
+msgid "Title Level"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:255
+msgid "Select the header level for the title directive."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:259
+msgid "Subtitle Level"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:274
+msgid "Select the header level for the subtitle directive."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:278
+msgid "Meta Information Style"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:281
+msgid "Enter additional CSS for the meta header block, e.g.: font-style: italic;"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:285
+msgid "Chord Text Color"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:288
+msgid "Enter the hex code of the chord text color incl. a leading hash, e.g. #990000. Leave emtpy or enter \"inherit\" to use your theme default."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:292
+msgid "Chord Text Size"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:295
+msgid "Enter the text size of the chords in pixel, em or percent, e.g. 150%. Leave emtpy or enter \"inherit\" to use your theme default."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:299
+msgid "Lyrics Text Color"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:302
+msgid "Enter the hex code of the lyrics text color incl. a leading hash, e.g. #990000. Leave emtpy or enter \"inherit\" to use your theme default."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:306
+msgid "Lyrics Text Size"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:309
+msgid "Enter the text size of the lyrics in pixel, em or percent, e.g. 150%. Leave emtpy or enter \"inherit\" to use your theme default."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:313
+msgid "Comment Style"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:316
+msgid "Enter the CSS for comments, e.g.: background-color: #606060; font-style: italic; padding: 4px;"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:320
+msgid "Chorus Style"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:323
+#: admin/partials/chordpress-admin-options.php:330
+msgid "Enter the CSS for the"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:323
+msgid "chorus sections"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:327
+msgid "Verse Style"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:330
+msgid "verse sections"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:350
+msgid "Select general options for this plugin."
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:355
+msgid "Remove data on uninstall"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:357
+msgid "Yes"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:358
+msgid "Remove plugin options from the database when the plugin is deleted (does not apply when the plugin is just deactivated)."
+msgstr ""
+
+#: includes/class-chordpress-license.php:72
+msgid "Active License"
+msgstr ""
+
+#: includes/class-chordpress-license.php:73
+msgid "This is an active license for this domain. Awesome!"
+msgstr ""
+
+#: includes/class-chordpress-license.php:74
+msgid "This is an active license but not registered for this domain."
+msgstr ""
+
+#: includes/class-chordpress-license.php:75
+msgid "The following error occurred while trying to activate your license:"
+msgstr ""
+
+#: includes/class-chordpress-license.php:76
+msgid "Your license was successfully activated for this domain."
+msgstr ""
+
+#: includes/class-chordpress-license.php:77
+msgid "The following error occurred while trying to register your domain to your license:"
+msgstr ""
+
+#: includes/class-chordpress-license.php:78
+msgid "Your domain was successfully registered to your license."
+msgstr ""
+
+#: includes/class-chordpress-license.php:79
+msgid "The following error occurred while trying to deregister your domain from your license:"
+msgstr ""
+
+#: includes/class-chordpress-license.php:80
+msgid "Your domain was successfully deregistered from your license."
+msgstr ""
+
+#: includes/class-chordpress-license.php:81
+msgid "Blocked License"
+msgstr ""
+
+#: includes/class-chordpress-license.php:82
+msgid "This license key is blocked."
+msgstr ""
+
+#: includes/class-chordpress-license.php:83
+msgid "Please contact your administrator to unblock this license."
+msgstr ""
+
+#: includes/class-chordpress-license.php:84
+msgid "Close this message"
+msgstr ""
+
+#: includes/class-chordpress-license.php:85
+msgid "Company"
+msgstr ""
+
+#: includes/class-chordpress-license.php:86
+msgid "Date Created"
+msgstr ""
+
+#: includes/class-chordpress-license.php:87
+msgid "Date Expiry"
+msgstr ""
+
+#: includes/class-chordpress-license.php:88
+msgid "Date Renewed"
+msgstr ""
+
+#: includes/class-chordpress-license.php:89
+msgid "days left"
+msgstr ""
+
+#: includes/class-chordpress-license.php:90
+msgid "License Details"
+msgstr ""
+
+#: includes/class-chordpress-license.php:91
+msgid "E-mail"
+msgstr ""
+
+#: includes/class-chordpress-license.php:92
+msgid "Expired License"
+msgstr ""
+
+#: includes/class-chordpress-license.php:93
+msgid "This license key has expired."
+msgstr ""
+
+#: includes/class-chordpress-license.php:94
+msgid "Please contact your administrator to renew this license."
+msgstr ""
+
+#: includes/class-chordpress-license.php:95
+msgid "License Expiry Warning"
+msgstr ""
+
+#. translators: %d: Number of days untile license expiry
+#: includes/class-chordpress-license.php:97
+msgid "Your license will expire in %d days."
+msgstr ""
+
+#: includes/class-chordpress-license.php:98
+msgid "Please contact your administrator to renew this license in time."
+msgstr ""
+
+#: includes/class-chordpress-license.php:99
+msgid "Invalid License"
+msgstr ""
+
+#: includes/class-chordpress-license.php:100
+msgid "This license key is invalid."
+msgstr ""
+
+#: includes/class-chordpress-license.php:101
+msgid "This instance is unregistered or a ucfirst license key was not entered and activated yet."
+msgstr ""
+
+#: includes/class-chordpress-license.php:102
+msgid "Please contact the administrator to obtain a valid license."
+msgstr ""
+
+#: includes/class-chordpress-license.php:104
+msgid "Licensee"
+msgstr ""
+
+#: includes/class-chordpress-license.php:105
+msgid "Maximum Allowed Domains"
+msgstr ""
+
+#: includes/class-chordpress-license.php:106
+msgid "Pending License"
+msgstr ""
+
+#: includes/class-chordpress-license.php:107
+msgid "This license is registered but not activated yet."
+msgstr ""
+
+#: includes/class-chordpress-license.php:108
+msgid "Please contact your administrator to activate this license."
+msgstr ""
+
+#: includes/class-chordpress-license.php:109
+msgid "Registered Domains"
+msgstr ""
+
+#: includes/class-chordpress-license.php:110
+msgid "Status"
+msgstr ""
+
+#: includes/class-chordpress-license.php:111
+msgid "Product"
+msgstr ""
+
+#: includes/class-chordpress-license.php:112
+msgid "Unregistered License"
+msgstr ""
+
+#: includes/class-chordpress-license.php:113
+msgid "The license key of this instance is not registered for this domain."
+msgstr ""
+
+#: includes/class-chordpress-license.php:114
+msgid "Please contact the administrator to register this domain or obtain a valid license."
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:611
+msgid "Missing square bracket in line"
+msgstr ""

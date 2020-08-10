@@ -1,17 +1,19 @@
 /**
- * ChordPress TinyMCE Buttons
+ * TinyMCE Buttons
  *
- * Custom Javascript functions for the ChordPress plugin.
+ * Custom Javascript functions for adding menu buttons to TinyMCE.
  *
- * @author George Lewe
- * @link https://www.lewe.com
+ * @link       https://www.lewe.com
+ * @since      1.0.0
  *
- * @package ChordPress
- * @subpackage Scripts
- * @since 2.0.0
+ * @package    ChordPress
+ * @subpackage ChordPress/admin/js
  */
+
 (function() {
-   tinymce.PluginManager.add( 'cprbtn', function( editor, url ) {
+
+   tinymce.PluginManager.add( 'cpressbtn', function( editor, url ) {
+
       //
       // Submenu Array
       //
@@ -21,41 +23,49 @@
       // Chordpress
       //
 		menu_array.push({
-         text:"[chordpress]",
-         value:'[chordpress float="none" format="yes" transpose"0" hbnotation="no"]%content%[/chordpress]',
+
+         text:"Add ChordPress shortcut",
+         value:'[chordpress float="none" format="yes" hbnotation="no" interactive="no" transpose="0"]%content%[/chordpress]',
          onclick:function() {
             var selected_text = editor.selection.getContent({'format': 'html'});
             return_text = this.value().replace("%content%", selected_text);
             editor.execCommand('mceReplaceContent', false, return_text);
          }
+
       });
 
       //
       // Separator
       //
 		menu_array.push({
+
          text:"---",
          value:'',
          onclick:function() {}
+
       });
 
       //
       // Documentation
       //
 		menu_array.push({
+
          text:"Documentation...",
          value:'',
-         onclick:function() {window.open('https://support.lewe.com/docs/chordpro-for-wordpress-manual/', '_blank');}
+         onclick:function() {window.open('https://support.lewe.com/docs/chordpress-manual/', '_blank');}
+
       });
 
       //
       // Add the submenu button
       //
-      editor.addButton( 'cprbtn', {
+      editor.addButton( 'cpressbtn', {
+
          title: 'ChordPress',
          type: 'menubutton',
-         image: url + '/icon-20x20.png',
+         image: url + '../../images/icon-20x20.png',
          menu: menu_array
+         
       });
 
       //

@@ -1,0 +1,1 @@
+php D:/wp-cli.phar i18n make-pot . languages/chordpress.pot --slug=chordpress --include="*.php,admin/*.php,admin/partials/*.php,includes/*.php,public/*.php,public/partials/*.php"

@@ -12,18 +12,23 @@ License URI: https://www.gnu.org/licenses/gpl.html
 ChordPress for WordPress pretty-prints ChordPro formatted text files on your pages or posts.
 
 == Description ==
-ChordPress pretty-prints ChordPro formatted text files on your pages and posts. ChordPro is a simple text syntax standard used to write lead sheets, the lyrics and chords of a song. ChordPro also comes with a command line tool that pretty prints that text into other formats like PDF.
+ChordPress pretty-prints ChordPro formatted text files on your pages and posts. You can configure output and formatting options. With 'interactive' mode on, you can transpose the chords up and down and also print the output right from the page.
+
+Your input to ChordPress needs to be a valid ChordPro formatted text. ChordPro is a simple text-based syntax used to write lead sheets, the lyrics and chords of a song. ChordPro also comes with a command line tool that pretty prints that text into other formats like PDF.
+
 You can read all about ChordPro here:
 [ChordPro](https://www.chordpro.org/chordpro/ChordPro-File-Format-Specification.html "ChordPro file format specification")
 
 The ChordPress plugin allows to put ChordPro text inside its shortcode tags on a page or post and will pretty print it when the web page is displayed.
 
-Simply insert a ChordPro text inbetween the [chordpress] and [/chordpress] tags and it will be rendered based on the default options of the plugin. You can change these default settings on the plugin's option page.
+Simply insert a ChordPro text inbetween the [chordpress] and [/chordpress] tags and it will be rendered based on the default options of the plugin. You can change output and formatting settings on the plugin's admin page.
 
 A TinyMCE editor integration is also included, providing an editor menu button to insert the shortcode for you with its default paramaters, e.g. wrapping it around selected text.
 
-The shortags allow specifying custom options that will overwrite the defaults.
-For example: `[chordpress transpose="1"]` will transpose the chords rendered by one semitone.
+The shortags allow specifying custom options that will overwrite the defaults. For example:
+
+1. `[chordpress transpose="1"]` will transpose the chords rendered by one semitone.
+2. `[chordpress interactive="yes"]` will allow you to transpose the chords up and down and also print the output right from the rendered page.
 
 Check out this example:
 [Chordpress Demo](https://sayandsound.lewe.com/heart-of-gold/ "Chordpress Demo")
@@ -31,13 +36,14 @@ Check out this example:
 If not from the WordPress marketplace, get the plugin here: 
 [ChordPress Homepage](https://www.lewe.com/chordpress/ "ChordPress Homepage")
 
-Credits for the beautiful icon go to Ahkâm:
-[ChordPress Plugin Icon](https://www.freeiconspng.com/img/17579 "ChordPress Plugin Icon")
-
 == Features ==
-ChordPress renders the lyrics/chord format of ChordPro.
+* renders the lyrics/chord format of ChordPro
+* configure output and formatting
+* transpose up and down on the fly from the rendered page
+* print the rendered output
 
 ChordPress supports the following ChordPro tags:
+
 * `{album}`
 * `{artist}`
 * `{composer}`
@@ -47,29 +53,33 @@ ChordPress supports the following ChordPro tags:
 * `{meta}` for all of the above
 
 ChordPress supports custom CSS for the following ChordPro tags:
+
 * `{comment}`
 * `{start_of_chorus}`, `{end_of_chorus}`
 * `{start_of_verse}`, `{end_of_verse}`
 
 ChordPress supports note/chord translations
+
 * Chord transponation
 * [H/B Notation](https://sayandsound.lewe.com/note-h/)
 
 == Usage ==
 1. Enter a `[chordpress]` shortcode in your page or post editor
 2. Paste your ChordPro text right after it
-3. Enter the closing [/chordpress] shortcode
+3. Enter the closing `[/chordpress]` shortcode
 
 Optional shortcode parameters
+
 * `float=`  Forces the rendered text block to float left or right.
 * `hbnotation=`  [Input is H/B notation](https://sayandsound.lewe.com/note-h/) (using H for B and Bb for B). Wether it is displayed as such is defined on the Options page.
 * `interactive=`  Enables interactive mode. A listbox will be shown on the right of the title that allows you to transpose the chords on the fly. Also, a print button will be shown fopr printing out the rendered ChordPro text.
 * `transpose=`  Enter a positive or negative number for the amount of semitones to transpose the chords
 
-Use the "ChordPress" sub-menu of your backend Settings to change the default settings.
+Use the "ChordPress" admin menu of your backend to change the default settings.
 
-Read more here: [ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "ChordPress User Manual")
-      
+== Documentation ==
+[ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "ChordPress User Manual")
+
 == Support ==
 Choose your preferred support channel:
 1. [Wordpress Support Forum](https://wordpress.org/support/plugin/chordpress/ "Wordpress Support Forum")
@@ -77,10 +87,14 @@ Choose your preferred support channel:
 3. [Lewe.com ChordPress Forum](http://forum.lewe.com/viewforum.php?f=41 "Lewe.com ChordPress Forum")
 4. [ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "ChordPress User Manual")
 
+== Credits ==
+[@rlisle](https://profiles.wordpress.org/rlisle/ "@rlisle") for his work on the ChordsAndLyrics plugin that he created in 2009.
+Ahkâm for the beautiful [ChordPress Plugin Icon](https://www.freeiconspng.com/img/17579 "ChordPress Plugin Icon").
+
 == Screenshots ==
-1. ChordPress Display Options
+1. ChordPress Output Options
 2. ChordPress Formatting Options
-3. ChordPro text in editor
+3. Shortcut with ChordPro text in editor
 4. Rendered text on webpage
 
 == Frequently Asked Questions ==
@@ -97,12 +111,19 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Install and Activate
 
 = Manual Installation =
-1. Download the plugin ZIP file from [here](https://support.lewe.com/docs/chordpress-manual/ "Download ChordPress...")
+1. Download the plugin ZIP file from [here](https://www.lewe.com/chordpress/ "Download ChordPress...")
 2. Unpack the ZIP file locally
 3. Upload the 'chordpress' folder to your '/wp-content/plugins/' directory
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 2.0.0 (2020-01-26) =
+* Completely rewritten plugin framework
+* Adeded option to remove plugin data from database when it is deleted
+* Added language translation support
+* Character '~' can now be used in chord brackets as chord placeholder or strumming indicator
+* Fixed TinyMCE ChordPress menu shortcut bug
+
 = 1.5.0 =
 * Reworked the options page and fixed the tab save bug
 

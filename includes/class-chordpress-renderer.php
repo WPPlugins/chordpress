@@ -1,0 +1,1255 @@
+<?php
+
+/**
+ * Rendering functionality of the plugin
+ *
+ * @link       https://www.lewe.com
+ * @since      1.0.0
+ *
+ * @package    ChordPress
+ * @subpackage ChordPress/public
+ */
+
+/**
+ * Public functionality of the plugin.
+ *
+ * - Defines the plugin name and version
+ * - Enqueues stylesheet and JavaScript
+ * - Shortcode handlers
+ *
+ * @package    ChordPress
+ * @subpackage ChordPress/includes
+ * @author     George Lewe <george@lewe.com>
+ */
+class ChordPress_Renderer {
+
+	/**
+	 * Display H/B notation flag.
+	 *
+    * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $displayHBNotation    Display H/B notation flag.
+	 */
+   private $displayHBNotation;
+
+	/**
+	 * Hide album flag.
+	 *
+    * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideAlbum    Hide album flag.
+	 */
+   private $hideAlbum;
+
+	/**
+	 * Hide artist flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideArtist    Hide artist flag.
+	 */
+   private $hideArtist;
+
+	/**
+	 * Hide chords flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideChords    Hide chords flag.
+	 */
+   private $hideChords;
+
+	/**
+	 * Hide comments flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideComments    Hide comments flag.
+	 */
+   private $hideComments;
+
+	/**
+	 * Hide composer flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideComposer    Hide composer flag.
+	 */
+   private $hideComposer;
+
+	/**
+	 * Hide subtitle flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideSubtitle    Hide subtitle flag.
+	 */
+   private $hideSubtitle;
+
+	/**
+	 * Hide title flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideTitle    Hide title flag.
+	 */
+   private $hideTitle;
+
+	/**
+	 * Hide year flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideYear    Hide year flag.
+	 */
+   private $hideYear;
+
+	/**
+	 * HTML header level for title.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $titleLevel    HTML header level for title.
+	 */
+   private $titleLevel;
+
+	/**
+	 * HTML header level for subtitle.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $subtitleLevel    HTML header level for subtitle.
+	 */
+   private $subtitleLevel;
+
+	/**
+	 * CSS styles for meta info.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $metaStyle    CSS styles for meta info.
+	 */
+   private $metaStyle;
+
+	/**
+	 * CSS text color for chords.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $chordTextcolor    CSS text color for chords.
+	 */
+   private $chordTextcolor;
+
+	/**
+	 * CSS text size for chords.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $chordTextsize    CSS text size for chords.
+	 */
+   private $chordTextsize;
+
+	/**
+	 * CSS text color for lyrics.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $lyricsTextcolor    CSS text color for lyrics.
+	 */
+   private $lyricsTextcolor;
+
+	/**
+	 * CSS text size for lyrics.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $lyricsTextsize    CSS text size for lyrics.
+	 */
+   private $lyricsTextsize;
+
+	/**
+	 * CSS styles for comments.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $commentStyle    CSS styles for comments.
+	 */
+   private $commentStyle;
+
+	/**
+	 * CSS styles for the chorus sections.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $chorusStyle    CSS styles for the chorus sections.
+	 */
+   private $chorusStyle;
+
+	/**
+	 * CSS styles for the verse sections.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $chorusStyle    CSS styles for the verse sections.
+	 */
+   private $verseStyle;
+
+	/**
+	 * CSS float directive: no/left/right.
+	 *
+	 * @since    1.5.0
+	 * @access   private
+	 * @var      string    $float    CSS float directive: no/left/right.
+	 */
+   private $float;
+
+	/**
+	 * Shortcode directive hbNotation: no/yes.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $float    Shortcode directive hbNotation: no/yes.
+	 */
+   private $hbNotation;
+
+	/**
+	 * Shortcode directive interactive: no/yes.
+	 *
+	 * @since    1.5.0
+	 * @access   private
+	 * @var      string    $float    Shortcode directive interactive: no/yes.
+	 */
+   private $interactive;
+
+	/**
+	 * Shortcode directive transpose: 0-11 (semitones).
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $float    Shortcode directive transpose: 0-11 (semitones).
+	 */
+   private $transpose;
+
+	/**
+	 * Array of supported ChordPro directives.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      array    $arrDirectives    Array of supported ChordPro directives.
+	 */
+   private $arrDirectives = array (
+      'album' => '',
+      'artist' => '',
+      'composer' => '',
+      'subtitle' => '',
+      'title' => '',
+      'year' => '',
+   );
+
+   //--------------------------------------------------------------------------
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 */
+   public function __construct() {
+
+      /**
+       * Shortcode Defaults
+       */
+      $this->float = 'no';
+      $this->hbNotation = 'no';
+      $this->interactive = 'no';
+      $this->transpose = 0;
+
+      /**
+       * Get options or set defaults
+       */
+      if (!$this->hideAlbum = get_option('chordpress_checkbox_hide_album')) $this->hideAlbum = 0;
+      if (!$this->hideArtist = get_option('chordpress_checkbox_hide_artist')) $this->hideArtist = 0;
+      if (!$this->hideChords = get_option('chordpress_checkbox_hide_chords')) $this->hideChords = 0;
+      if (!$this->hideComments = get_option('chordpress_checkbox_hide_comments')) $this->hideComments = 0;
+      if (!$this->hideComposer = get_option('chordpress_checkbox_hide_composer')) $this->hideComposer = 0;
+      if (!$this->hideSubtitle = get_option('chordpress_checkbox_hide_subtitle')) $this->hideSubtitle = 0;
+      if (!$this->hideTitle = get_option('chordpress_checkbox_hide_title')) $this->hideTitle = 0;
+      if (!$this->hideYear = get_option('chordpress_checkbox_hide_year')) $this->hideYear = 0;
+      if (!$this->displayHBNotation = get_option('chordpress_checkbox_hb_notation')) $this->displayHBNotation = 0;
+
+      if (!$this->titleLevel = get_option('chordpress_select_title_level')) $this->titleLevel = 'h1';
+      if (!$this->subtitleLevel = get_option('chordpress_select_subtitle_level')) $this->subtitleLevel = 'h2';
+      if (!$this->metaStyle = get_option('chordpress_text_meta_style')) $this->metaStyle = '';
+      if (!$this->chordTextcolor = get_option('chordpress_text_chord_textcolor')) $this->chordTextColor = 'inherit';
+      if (!$this->chordTextsize = get_option('chordpress_text_chord_textsize')) $this->chordTextSize = 'inherit';
+      if (!$this->lyricsTextcolor = get_option('chordpress_text_lyrics_textcolor')) $this->lyricsTextColor = 'inherit';
+      if (!$this->lyricsTextsize = get_option('chordpress_text_lyrics_textsize')) $this->lyricsTextSize = 'inherit';
+      if (!$this->commentStyle = get_option('chordpress_text_comment_style')) $this->commentStyle = '';
+      if (!$this->chorusStyle = get_option('chordpress_text_chorus_style')) $this->chorusStyle = '';
+      if (!$this->verseStyle = get_option('chordpress_text_verse_style')) $this->verseStyle = '';
+
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Get the ChordPro directives and store the supported ones in an array.
+    *
+	 * @since    1.0.0
+    * @param    string    $text    Text inside shortcode wrapper.
+    */    
+   public function getDirectives( $text ) {
+
+      foreach( $text as $line ) {
+
+         $line = trim($this->stripTags($line));
+
+         if($line[0] == '{') {
+
+            /**
+             * Line starts with "{": It's a directive
+             * Get directive name and value and store
+             */
+            $arrDirective = explode(":",$line);
+            $directiveName = strtolower(str_replace('{','',trim($arrDirective[0])));
+            $directiveValue = substr(trim($arrDirective[1]),0,strpos(trim($arrDirective[1]),'}'));
+
+            /**
+             * Process directive alternatives
+             */
+            switch (strtolower($directiveName)) {
+
+               case "t":
+                  $directiveName = 'title';
+                  break;
+
+               case "st":
+                  $directiveName = 'subtitle';
+                  break;
+
+               case "meta":
+                  /**
+                   * {meta: title Heart of Gold}
+                   * We have split the "meta:" off already.
+                   * Now comes the part after.
+                   * We only handle the supported directives ($this->arrDirectives)
+                   */
+                  $arrMetaDirective = explode(" ",$directiveValue,2);
+                  foreach ($this->arrDirectives as $key => $value) {
+
+                     if(trim($arrMetaDirective[0]) == $key) {
+
+                        $directiveName = $key;
+                        $directiveValue = trim($arrMetaDirective[1]);
+
+                     }
+
+                  }
+                  break;
+
+            }
+
+            /**
+             * Store directive in directives array for later use
+             */
+            if(array_key_exists($directiveName,$this->arrDirectives)) {
+
+               $this->arrDirectives[$directiveName] = $directiveValue;
+
+            }
+
+         }
+
+      }
+
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Creates the formatted HTML of the ChordPro text.
+    *
+    * HTML Structure
+    *
+    * <div class="cpress">
+    *    <h1>{title}</h1>
+    *    <h2>{subtitle}</h2>
+    *    <h3>
+    *       Album: {album}
+    *       Artist: {artist}<br>
+    *       Composer: {composer}<br>
+    *       Year: {year}
+    *    </h3>
+    *    <div class="cpress-chorus/verse">
+    *       <div class="cpress-line">
+    *          <div class="cpress-line-section">
+    *             <div class="chord">C#</div>
+    *             <div class="lyric">Lyrics</div>
+    *          </div>
+    *          ...
+    *       </div>
+    *       ...
+    *    </div>
+    * </div>
+    *
+	 * @since    1.0.0
+    * @param    string    $text    Text inside shortcode wrapper.
+    * @return   string             Formatted HTML of the ChordPro text.
+    */
+   public function displayText( $text ) {
+
+      /**
+       * Start of ChordPress wrapper
+       */
+      $returnText = "\n\n
+      <!-- ChordPress Start -->
+      <div id=\"%cpressID%\" class=\"cpress\">\n";
+
+      /**
+       * Style sheet
+       */
+      $returnText .= 
+      '<style>
+         div.cpress { float: '.$this->float.'; }
+         div.cpress_line { margin: 1em 0 1em 0; }
+         div.cpress_line_section { display: inline; float: left; }
+         div.cpress_line_section .chord { color: '.$this->chordTextcolor.'; font-size: '.$this->chordTextsize.'; }
+         div.cpress_line_section .lyric { color: '.$this->lyricsTextcolor.'; font-size: '.$this->lyricsTextsize.'; }
+         div.cpress_chorus { '.$this->chorusStyle.' }
+         div.cpress_verse { '.$this->verseStyle.' }
+         div.cpress_clear { clear: both; }
+         div.cpress_meta { '.$this->metaStyle.' }
+         div.cpress_interaction { float: right; }
+         div.cpress_interaction select { width: auto; }
+         span.cpress_comment { '.$this->commentStyle.' }
+      </style>';
+               
+      /**
+       * Interactive transpose listbox
+       */
+      if (strtolower($this->interactive) == "yes") {
+
+         $returnText .= "<div class=\"cpress_interaction\">Transpose up:
+            <select id=\"selTranspose\" onchange=\"transposeChords();return false;\">
+               <option value=\"0\">0</option>
+               <option value=\"1\">1</option>
+               <option value=\"2\">2</option>
+               <option value=\"3\">3</option>
+               <option value=\"4\">4</option>
+               <option value=\"5\">5</option>
+               <option value=\"6\">6</option>
+               <option value=\"7\">7</option>
+               <option value=\"8\">8</option>
+               <option value=\"9\">9</option>
+               <option value=\"10\">10</option>
+               <option value=\"11\">11</option>
+            </select><br>
+            <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">Print</button>
+         </div>";
+
+      }
+
+      /**
+       * Print header if directives exist
+       */
+      if(strlen($this->arrDirectives['title']) && !$this->hideTitle) {
+
+         $cpressID = str_replace(' ', '-', strtolower(trim($this->arrDirectives['title'])));
+         $returnText = str_replace('%cpressID%', $cpressID, $returnText);
+         $returnText .= '<'.$this->titleLevel.'>'.$this->arrDirectives['title'].'</'.$this->titleLevel.'>';
+
+      }
+      else {
+
+         $cpressID = 'ccpress-id';
+         $returnText = str_replace('%cpressID%', $cpressID, $returnText);
+
+      }
+
+      if(strlen($this->arrDirectives['subtitle']) && !$this->hideSubtitle) {
+
+         $returnText .= '<'.$this->subtitleLevel.'>'.$this->arrDirectives['subtitle'].'</'.$this->subtitleLevel.'>';
+         
+      }
+
+      if(strlen($this->arrDirectives['album']) || 
+         strlen($this->arrDirectives['artist']) ||
+         strlen($this->arrDirectives['composer']) ||
+         strlen($this->arrDirectives['year'])
+         ) {
+
+         $returnText .= '<div class="cpress_meta">';
+         if(strlen($this->arrDirectives['composer']) && !$this->hideComposer) $returnText .= 'Composer: '.$this->arrDirectives['composer'].'<br>';
+         if(strlen($this->arrDirectives['artist']) && !$this->hideArtist)     $returnText .= 'Artist: '.$this->arrDirectives['artist'].'<br>';
+         if(strlen($this->arrDirectives['year']) && !$this->hideYear)         $returnText .= 'Year: '.$this->arrDirectives['year'].'<br>';
+         if(strlen($this->arrDirectives['album']) && !$this->hideAlbum)       $returnText .= 'Album: '.$this->arrDirectives['album'].'<br>';
+         $returnText .= '</div>';
+
+      }
+
+      /**
+       * Go through each line and process it
+       */
+      foreach( $text as $line ) {
+
+         $returnText .= $this->formatAndDisplayLine($line);
+
+      }
+
+      /**
+       * End of ChordPress wrapper
+       */
+      $returnText .= "</div>\n
+      <!-- ChordPress End -->\n\n";
+      return $returnText;
+
+   }
+                
+   //--------------------------------------------------------------------------
+   /**
+    * Process a single of the ChordPro text and return the formatted HTML.
+    *
+	 * @since    1.0.0
+    * @param    string    $line    Single line from inside shortcode wrapper.
+    * @return   string             Formatted HTML.
+    */    
+   public function formatAndDisplayLine ($line) {
+
+      $returnText = "";
+      $startOfChorus = false;
+      $endOfChorus = false;
+      $startOfVerse = false;
+      $endOfVerse = false;
+
+      /**
+       * Array of chords
+       */
+      $arrChords = array();
+
+      /**
+       * Array of corresponding lyrics starting at a chord and ending prior
+       * to the next chord or the end-of-line.
+       */
+      $arrLyrics = array();
+
+      /**
+       * Now check what this line is all about
+       */
+      if(substr_count($line,"[") == 0) {
+
+         /**
+          * No chords on this line
+          */
+         if($line[0] == '#') {
+
+            /**
+             * Line starts with "#": It's a comment line => skip
+             */
+
+         }
+         else if($line[0] == '{' || strpos($line,'{')) {
+
+            /**
+             * Line starts with "{" or has one in it: It's a directive
+             * Some of them need consideration for the output
+             */
+            $directive = strstr($line,'{'); // Remove all before the {
+            $arrDirective = explode(":",$directive);
+            $directiveName = strtolower(str_replace('{','',trim($arrDirective[0])));
+            $directiveValue = substr(trim($arrDirective[1]),0,strpos(trim($arrDirective[1]),'}'));
+
+            /**
+             * In case the directive had no colon and value, $directiveName will
+             * still contain the trailing }. So let's remove that.
+             */
+            if (substr_count($directiveName,"}")) $directiveName = str_replace("}","",$directiveName);
+
+            if (strpos($directiveName,'start_of_verse') !== false) {
+
+               $startOfVerse = true;
+
+            } elseif (strpos($directiveName,'end_of_verse') !== false) {
+
+               $endOfVerse = true;
+
+            } elseif (strpos($directiveName,'start_of_chorus') !== false) {
+
+               $startOfChorus = true;
+
+            } elseif (strpos($directiveName,'end_of_chorus') !== false) {
+
+               $endOfChorus = true;
+
+            } elseif (strpos($directiveName,'comment') !== false && !$this->hideComments) {
+
+               $arrLyrics[] = '<span class="cpress_comment">'.$directiveValue.'</span>';
+
+            }
+
+         } else {
+
+            /**
+             * Just lyrics without chords => print it
+             */
+            $arrLyrics[] = $line;
+
+         }
+
+      } elseif (substr_count($line,"[") != substr_count($line,"]")) {
+
+         /**
+          * Square bracket missing in this line
+          */
+         $arrLyrics[] = '<span style="color:#990000;">' . esc_html(__('Missing square bracket in line','chordpress')) . ':</span> <code>' . $line . "</code>";
+
+      } else {
+
+         /**
+          * Chords found. Split the line into segments beginning with '['
+          */
+         $arrBracketSegments = explode("[",$line);
+
+         foreach($arrBracketSegments as $segment) {
+
+            $pad = ($segment[strlen($segment)-1]==' ') ? '&nbsp;' : '';
+            /** 
+             * Does the first segment start before the 1st '['?
+             */
+            if(substr_count($segment,"]")==0) {
+
+               $arrChords[] = " ";
+               $arrLyrics[] = $segment . $pad;
+
+            } else {
+
+               /**
+                * Split this segment into chord an lyrics
+                */
+               $arrChordLyric = explode("]",$segment);
+               $arrChords[] = trim($arrChordLyric[0]);
+               $arrLyrics[] = $arrChordLyric[1] . $pad;
+
+            }
+
+         }
+
+      }
+
+      /**
+       * Start of chorus?
+       */
+      if ($startOfChorus) {
+
+         $returnText .= '<div class="cpress_chorus">';
+         $startOfChorus = false;
+
+      }
+
+      /**
+       * Start of verse?
+       */
+      if ($startOfVerse) {
+
+         $returnText .= '<div class="cpress_verse">';
+         $startOfVerse = false;
+
+      }
+
+      /**
+       * Start of line wrapper (lyrics and chords)
+       */
+      $returnText .= "<div class=\"cpress_line\">\n   ";
+      
+      /** 
+       * Align chords and lyrics together by wrapping each in a floating inline div
+       */
+      if (!$this->hideChords) {
+
+         for ($i=0; $i<count($arrChords); $i++) {
+
+            if (strlen(trim($arrChords[$i])) > 0 || strlen(trim($arrLyrics[$i])) > 0) {
+
+               $lyrics = trim($this->stripTags($arrLyrics[$i]));
+
+               /**
+                * Start of line-section (one chord and its lyrics)
+                */
+               $returnText .= "<div class=\"cpress_line_section\">\n";
+
+               if (strlen(trim($arrChords[$i])) > 0) {
+
+                  $returnText .= "<div class=\"chord chord-hidable key-0\"><strong>";
+
+                  /**
+                   * Allow chords starting with a ~ as chord placeholders. Just return the string.
+                   */
+                  if ($arrChords[$i][0]=="~") {
+
+                     $returnText .= $arrChords[$i];
+
+                  } else {
+
+                     $returnText .= $this->formatChord($arrChords[$i]);
+
+                  }
+                  $returnText .= '</strong>&nbsp;</div>';
+
+                  /**
+                   * Prepare all other 11 transposed versions of the chord 
+                   * but hide them. They need to be on the page for interactive
+                   * mode to show/hide them via Javascript.
+                   * But do not mark empty chord divs as hidable. They need to stay.
+                   */
+                  $returnText .= "\n";
+                  $tempTranspose = $this->getTranspose();
+
+                  for ($t=1; $t<=11; $t++) {
+
+                     $this->setTranspose($t);
+                     
+                     /**
+                      * Allow chords starting with a ~ as chord placeholders. Just return the string.
+                      */
+                     if ($arrChords[$i][0]=='~') {
+
+                        $returnText .= '<div class="chord chord-hidable key-'.$t.'" style="display:none"><strong>'. $arrChords[$i] . '</strong>&nbsp;</div>';
+
+                     } else {
+
+                        $returnText .= '<div class="chord chord-hidable key-'.$t.'" style="display:none"><strong>'. $this->formatChord($arrChords[$i]) . '</strong>&nbsp;</div>';
+
+                     }
+
+                  }
+
+                  $this->setTranspose($tempTranspose);
+
+                  /**
+                   * Now add the lyrics for this section.
+                   */
+                  $returnText .= '<div class="lyric">';
+
+                  if(strlen($lyrics) > 0) {
+
+                     $endOf1stWord = strpos($lyrics,' ');
+                     $numSpaces = substr_count($lyrics,' ');
+
+                     if($endOf1stWord > 0 && $numSpaces == 1) {
+
+                        $returnText .= substr($lyrics,0,$endOf1stWord) . '&nbsp;';
+                        $lyrics = substr($lyrics,$endOf1stWord);
+                        $returnText .= "</div></div>\n<div class=\"cpress_line_section\">\n<div class=\"chord\">&nbsp;</div><div class=\"lyric\">";
+
+                     }
+
+                  }
+
+               } else {
+
+                  $returnText .= '<div class="chord"><strong></strong>&nbsp;</div>';
+                  $returnText .= '<div class="lyric">';
+
+               }
+
+               if(strlen($lyrics) > 0) $returnText .= $lyrics;
+               $returnText .= "</div>\n"; // end of lyric
+               $returnText .= "</div>\n"; // end of line
+
+            }
+
+         }
+
+         /**
+          * If there are more lyric parts than chord parts, add them here
+          */
+         for($i=count($arrChords); $i<count($arrLyrics); $i++) {
+
+            $returnText .= $arrLyrics[$i];
+
+         }
+
+      } else {
+
+         /** 
+          * Hide chords was selected, so only show the lyrics
+          */
+         $returnText .= '<div class="cpress_line_section"><div class="lyric">';
+
+         for($i=0; $i<count($arrLyrics); $i++) {
+
+            $returnText .= $arrLyrics[$i];
+
+         }
+
+         $returnText .= "</div></div>";
+      }
+
+      /**
+       * End of line wrapper
+       */
+      $returnText .= "</div>\n";
+
+      /**
+       * End of chorus?
+       */
+      if ($endOfChorus) {
+
+         $returnText .= "</div>\n";
+         $endOfChorus = false;
+
+      }
+
+      /**
+       * End of verse?
+       */
+      if ($endOfVerse) {
+
+         $returnText .= "</div>\n";
+         $endOfVerse = false;
+
+      }
+
+      /**
+       * Add a clear:both div
+       */
+      $returnText .= "<div class='cpress_clear'></div>\n";
+
+      return $returnText;
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Remove all <> wrapped text from a string.
+    *
+    * @since     1.0.0
+    * @param     string    $string    String to process.
+    * @return    string               Stripped text.
+    */    
+   private function stripTags($string) {
+
+      $retString = "";
+      $isVisible = true;
+
+      for($i = 0; $i < strlen($string); $i++) {
+
+         if($isVisible) {
+
+            if($string[$i]=='<')
+               $isVisible = false;
+            else 
+               $retString .= $string[$i];
+
+         } elseif ($string[$i]=='>') {
+
+            $isVisible = true;
+         }
+
+      }
+
+      return $retString;
+
+   }
+   
+   //--------------------------------------------------------------------------
+   /**
+    * Processes a note text and returns the formatted HTML.
+    *
+    * @since     1.0.0
+    * @param     string    $ch    Chord text, e.g. "A" or "B#" or "Db/F".
+    * @return    string           Uppercase note string.
+    */    
+   public function formatChord( $ch ) {
+
+      $useFlats = false;
+      
+      if (strlen($ch)==0) return;
+      
+      /**
+       * The first letter should be the key note
+       */
+      $note = substr($ch,0,1);
+      $xlatedNote = $note;
+      $rem = substr($ch,1);
+   
+      /**
+       * Convert note to a number
+       */
+      $noteVal = $this->noteToNumber($note);
+      
+      /**
+       * Check sharp/flat
+       */
+      if (strlen($rem) > 0) {
+
+         if (substr($rem,0,1) == '#') {
+
+            $noteVal++;
+            $rem = substr($rem,1);
+
+         } elseif (strncasecmp($rem,"b",1)==0) {
+
+            $useFlats = true;
+            $noteVal--;
+            $rem = substr($rem,1);
+
+         }
+
+      }
+      
+      /**
+       * Add transpose
+       */
+      $noteVal += $this->transpose;
+      if ($noteVal > 11) $noteVal -= 12;
+      if ($noteVal < 0) $noteVal += 12;
+   
+      /**
+       * Build note to display from numeric note value
+       */
+      $xlatedNote = $this->numberToNote($noteVal, $useFlats);
+
+      /**
+       * Return the chord display plus the bass note (if any)
+       */
+      return $xlatedNote . $this->formatRemainder($rem);
+
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Process the remainder of the given chord.
+    *
+    * @since     1.0.0
+    * @param     string    $remainder    Chord text starting at second char.
+    * @return    string                  Formatted remainder.
+    */    
+   public function formatRemainder( $remainder ) {
+
+      $indexOfSlash = strpos($remainder,'/');
+      if($indexOfSlash === false) return $remainder;
+      
+      /**
+       * We have a slash, indicating that a bass note follows.
+       * Break the string into 2 parts at the slash. 
+       * The slash will be lost, and will need to be added back later.
+       */
+      $chord = substr($remainder,0,$indexOfSlash);
+      $bass = substr($remainder,$indexOfSlash+1);
+      
+      $useFlats = false;
+      
+      if (strlen($bass)==0) return $chord . "/?";
+      
+      /** 
+       * The first letter should be the bass note
+       */
+      $note = substr($bass,0,1);
+      $xlatedNote = $note;
+      $rem = substr($bass,1);
+      
+      /** 
+       * Convert note to a number
+       */
+      $noteVal = $this->noteToNumber($note);
+
+      /** 
+       * Check sharp/flat
+       */
+      if (strlen($rem) > 0) {
+
+         if (substr($rem,0,1) == '#') {
+
+            $noteVal++;
+            $rem = substr($rem,1);
+
+         } elseif (strncasecmp($rem,"b",1)==0) {
+
+            $useFlats = true;
+            $noteVal--;
+            $rem = substr($rem,1);
+
+         }
+
+      }
+      
+      /**      
+       * Add transpose
+       */
+      $noteVal += $this->transpose;
+      if($noteVal > 11) $noteVal -= 12;
+      if($noteVal < 0) $noteVal += 12;
+   
+      /**
+       * Build note to display from numeric note value
+       */
+      $xlatedNote = $this->numberToNote($noteVal);
+
+      return $chord . "/" . $xlatedNote . $rem;
+
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Convert note to number.
+    *
+    * @since     1.0.0
+    * @param     string    $n    Note to convert.
+    * @return    integer
+    */    
+   public function noteToNumber( $n ) {
+
+      $regularNotation = array (
+         'A' => 0,
+         'B' => 2,
+         'C' => 3,
+         'D' => 5,
+         'E' => 7,
+         'F' => 8,
+         'G' => 10,
+      );
+      
+      $hbNotation = array (
+         'A' => 0,
+         'B' => 1,
+         'H' => 2,
+         'C' => 3,
+         'D' => 5,
+         'E' => 7,
+         'F' => 8,
+         'G' => 10,
+      );
+      
+      if ($this->hbNotation == 'yes') {
+
+         return $hbNotation[strtoupper($n)];
+
+      } else {
+
+         return $regularNotation[strtoupper($n)];
+
+      }
+
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Convert number to note.
+    *
+    * @since     1.0.0
+    * @param     integer    $n           Numeric note value to convert to note string.
+    * @param     boolean    $useFlats    Whether to use flat notes or not.
+    * @return    string
+    */    
+   public function numberToNote( $n, $useFlats=false ) {
+
+      $retVal = '';
+
+      switch($n) {
+
+         case 0:
+            $retVal = 'A';
+            break;
+
+         case 1:
+            if ($this->displayHBNotation) {
+               $retVal = 'B';
+            } else {
+               if($useFlats) $retVal = "Bb";
+               else $retVal = "A#";
+            }
+            break;
+
+         case 2:
+            if ($this->displayHBNotation) {
+               $retVal = 'H';
+            } else {
+               $retVal = 'B';
+            }
+            break;
+
+         case 3:
+            $retVal = 'C';
+            break;
+
+         case 4:
+            if ($useFlats) $retVal = "Db";
+            else $retVal = "C#";
+            break;
+
+         case 5:
+            $retVal = 'D';
+            break;
+
+         case 6:
+            if ($useFlats) $retVal = "Eb";
+            else $retVal = "D#";
+            break;
+
+         case 7:
+            $retVal = 'E';
+            break;
+
+         case 8:
+            $retVal = 'F';
+            break;
+
+         case 9:
+            if ($useFlats) $retVal = "Gb";
+            else $retVal = "F#";
+            break;
+
+         case 10:
+            $retVal = 'G';
+            break;
+
+         case 11:
+            if ($useFlats) $retVal = "Ab";
+            else $retVal = "G#";
+            break;
+      }
+
+      return $retVal;
+
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Set class variable: displayHBNotation.
+    *
+    * @since     1.0.0
+    * @param     boolean    $g
+    */    
+   public function setDisplayHBNotation( $g ) {
+
+      $this->displayHBNotation = $g;
+
+   }
+ 
+   //--------------------------------------------------------------------------
+   /**
+    * Get class variable: displayHBNotation.
+    *
+    * @since     1.0.0
+    * @return    boolean
+    */    
+   public function getDisplayHBNotation() {
+
+      return $this->displayHBNotation;
+
+   }
+    
+   //--------------------------------------------------------------------------
+   /**
+    * Set class variable: float.
+    *
+    * @since     1.0.0
+    * @param     string    $f    left/right/none/inherit.
+    */    
+   public function setFloat( $f ) {
+
+      $this->float = $f;
+
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Get class variable: float.
+    *
+    * @since     1.0.0
+    * @return    string
+    */    
+   public function getFloat() {
+
+      return $this->float;
+
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Set class variable: hbNotation.
+    *
+    * @since     1.0.0
+    * @param     string    $g    yes/no.
+    */    
+   public function setHBNotation( $g ) {
+
+      $this->hbNotation = $g;
+
+   }
+ 
+   //--------------------------------------------------------------------------
+   /**
+    * Get class variable: hbNotation.
+    *
+    * @since     1.0.0
+    * @return    string    yes/no.
+    */    
+   public function getHBNotation() {
+
+      return $this->hbNotation;
+
+   }
+ 
+   //--------------------------------------------------------------------------
+   /**
+    * Set class variable: interactive.
+    *
+    * @since     1.0.0
+    * @param     string    $g    yes/no.
+    */    
+   public function setInteractive( $i ) {
+
+      $this->interactive = $i;
+
+   }
+ 
+   //--------------------------------------------------------------------------
+   /**
+    * Get class variable: interactive.
+    *
+    * @since     1.0.0
+    * @return    string    yes/no.
+    */    
+   public function getInteractive() {
+
+      return $this->interactive;
+
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Sets class variable: transpose.
+    *
+    * @since     1.0.0
+    * @param     integer    $t    Positive or negative number of steps for transponation.
+    */    
+   public function setTranspose( $t ) {
+
+      $this->transpose = $t;
+
+   }
+ 
+   //--------------------------------------------------------------------------
+   /**
+    * Get class variable: transpose.
+    *
+    * @since     1.0.0
+    * @return    integer
+    */    
+   public function getTranspose() {
+
+      return $this->transpose;
+
+   }
+   
+   // ---------------------------------------------------------------------------
+   /**
+    * Pretty prints an array.
+    *
+    * @since    2.0.0
+    * @param    array    $a    Array to print out pretty
+    * @return   string
+    */
+   function pretty_dump($a) {
+
+      return highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
+
+   }
+ 
+}
