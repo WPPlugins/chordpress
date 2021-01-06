@@ -21,248 +21,248 @@
  */
 class ChordPress_Renderer {
 
-   /**
-    * Guitar chord instance.
-    *
+	/**
+	 * Guitar chord instance.
+	 *
     * @since    2.1.0
-    * @access   private
-    * @var      ChordPress_Chord    $C    Guitar chord instance.
-    */
+	 * @access   private
+	 * @var      ChordPress_Chord    $C    Guitar chord instance.
+	 */
    private $C;
 
-   /**
-    * Display H/B notation flag.
-    *
+	/**
+	 * Display H/B notation flag.
+	 *
     * @since    1.0.0
-    * @access   private
-    * @var      boolean    $displayHBNotation    Display H/B notation flag.
-    */
+	 * @access   private
+	 * @var      boolean    $displayHBNotation    Display H/B notation flag.
+	 */
    private $displayHBNotation;
 
-   /**
-    * Hide album flag.
-    *
+	/**
+	 * Hide album flag.
+	 *
     * @since    1.0.0
-    * @access   private
-    * @var      boolean    $hideAlbum    Hide album flag.
-    */
+	 * @access   private
+	 * @var      boolean    $hideAlbum    Hide album flag.
+	 */
    private $hideAlbum;
 
-   /**
-    * Hide artist flag.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      boolean    $hideArtist    Hide artist flag.
-    */
+	/**
+	 * Hide artist flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideArtist    Hide artist flag.
+	 */
    private $hideArtist;
 
-   /**
-    * Hide chords flag.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      boolean    $hideChords    Hide chords flag.
-    */
+	/**
+	 * Hide chords flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideChords    Hide chords flag.
+	 */
    private $hideChords;
 
-   /**
-    * Hide comments flag.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      boolean    $hideComments    Hide comments flag.
-    */
+	/**
+	 * Hide comments flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideComments    Hide comments flag.
+	 */
    private $hideComments;
 
-   /**
-    * Hide composer flag.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      boolean    $hideComposer    Hide composer flag.
-    */
+	/**
+	 * Hide composer flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideComposer    Hide composer flag.
+	 */
    private $hideComposer;
 
-   /**
-    * Hide subtitle flag.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      boolean    $hideSubtitle    Hide subtitle flag.
-    */
+	/**
+	 * Hide subtitle flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideSubtitle    Hide subtitle flag.
+	 */
    private $hideSubtitle;
 
-   /**
-    * Hide title flag.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      boolean    $hideTitle    Hide title flag.
-    */
+	/**
+	 * Hide title flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideTitle    Hide title flag.
+	 */
    private $hideTitle;
 
-   /**
-    * Hide year flag.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      boolean    $hideYear    Hide year flag.
-    */
+	/**
+	 * Hide year flag.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      boolean    $hideYear    Hide year flag.
+	 */
    private $hideYear;
 
-   /**
-    * HTML header level for title.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $titleLevel    HTML header level for title.
-    */
+	/**
+	 * HTML header level for title.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $titleLevel    HTML header level for title.
+	 */
    private $titleLevel;
 
-   /**
-    * HTML header level for subtitle.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $subtitleLevel    HTML header level for subtitle.
-    */
+	/**
+	 * HTML header level for subtitle.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $subtitleLevel    HTML header level for subtitle.
+	 */
    private $subtitleLevel;
 
-   /**
-    * CSS styles for meta info.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $metaStyle    CSS styles for meta info.
-    */
+	/**
+	 * CSS styles for meta info.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $metaStyle    CSS styles for meta info.
+	 */
    private $metaStyle;
 
-   /**
-    * CSS text color for chords.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $chordTextcolor    CSS text color for chords.
-    */
+	/**
+	 * CSS text color for chords.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $chordTextcolor    CSS text color for chords.
+	 */
    private $chordTextcolor;
 
-   /**
-    * CSS text size for chords.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $chordTextsize    CSS text size for chords.
-    */
+	/**
+	 * CSS text size for chords.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $chordTextsize    CSS text size for chords.
+	 */
    private $chordTextsize;
 
-   /**
-    * CSS text color for lyrics.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $lyricsTextcolor    CSS text color for lyrics.
-    */
+	/**
+	 * CSS text color for lyrics.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $lyricsTextcolor    CSS text color for lyrics.
+	 */
    private $lyricsTextcolor;
 
-   /**
-    * CSS text size for lyrics.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $lyricsTextsize    CSS text size for lyrics.
-    */
+	/**
+	 * CSS text size for lyrics.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $lyricsTextsize    CSS text size for lyrics.
+	 */
    private $lyricsTextsize;
 
-   /**
-    * CSS styles for lyrics.
-    *
-    * @since    2.3.0
-    * @access   private
-    * @var      string    $lyricsStyle    CSS styles for lyrics.
-    */
+	/**
+	 * CSS styles for lyrics.
+	 *
+	 * @since    2.3.0
+	 * @access   private
+	 * @var      string    $lyricsStyle    CSS styles for lyrics.
+	 */
    private $lyricsStyle;
 
-   /**
-    * CSS styles for comments.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $commentStyle    CSS styles for comments.
-    */
+	/**
+	 * CSS styles for comments.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $commentStyle    CSS styles for comments.
+	 */
    private $commentStyle;
 
-   /**
-    * CSS styles for the chorus sections.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $chorusStyle    CSS styles for the chorus sections.
-    */
+	/**
+	 * CSS styles for the chorus sections.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $chorusStyle    CSS styles for the chorus sections.
+	 */
    private $chorusStyle;
 
-   /**
-    * CSS styles for the verse sections.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $chorusStyle    CSS styles for the verse sections.
-    */
+	/**
+	 * CSS styles for the verse sections.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $chorusStyle    CSS styles for the verse sections.
+	 */
    private $verseStyle;
 
-   /**
-    * CSS float directive: no/left/right.
-    *
-    * @since    1.5.0
-    * @access   private
-    * @var      string    $float    CSS float directive: no/left/right.
-    */
+	/**
+	 * CSS float directive: no/left/right.
+	 *
+	 * @since    1.5.0
+	 * @access   private
+	 * @var      string    $float    CSS float directive: no/left/right.
+	 */
    private $float;
 
-   /**
-    * Shortcode directive hbNotation: no/yes.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $float    Shortcode directive hbNotation: no/yes.
-    */
+	/**
+	 * Shortcode directive hbNotation: no/yes.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $float    Shortcode directive hbNotation: no/yes.
+	 */
    private $hbNotation;
 
-   /**
-    * Show Chord Sheet.
-    *
-    * @since    2.1.0
-    * @access   private
-    * @var      string    $float    Show Chord Sheet: no/yes.
-    */
+	/**
+	 * Show Chord Sheet.
+	 *
+	 * @since    2.1.0
+	 * @access   private
+	 * @var      string    $float    Show Chord Sheet: no/yes.
+	 */
    private $showChordSheet;
 
-   /**
-    * Shortcode directive interactive: no/yes.
-    *
-    * @since    1.5.0
-    * @access   private
-    * @var      string    $float    Shortcode directive interactive: no/yes.
-    */
+	/**
+	 * Shortcode directive interactive: no/yes.
+	 *
+	 * @since    1.5.0
+	 * @access   private
+	 * @var      string    $float    Shortcode directive interactive: no/yes.
+	 */
    private $interactive;
 
-   /**
-    * Shortcode directive transpose: 0-11 (semitones).
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      string    $float    Shortcode directive transpose: 0-11 (semitones).
-    */
+	/**
+	 * Shortcode directive transpose: 0-11 (semitones).
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $float    Shortcode directive transpose: 0-11 (semitones).
+	 */
    private $transpose;
 
-   /**
-    * Array of supported ChordPro directives.
-    *
-    * @since    1.0.0
-    * @access   private
-    * @var      array    $arrDirectives    Array of supported ChordPro directives.
-    */
-   private $arrDirectives = array(
+	/**
+	 * Array of supported ChordPro directives.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      array    $arrDirectives    Array of supported ChordPro directives.
+	 */
+   private $arrDirectives = array (
       'album' => '',
       'artist' => '',
       'capo' => '',
@@ -275,30 +275,30 @@ class ChordPress_Renderer {
       'year' => '',
    );
 
-   /**
-    * Array of all chords in this song.
-    *
-    * @since    2.1.0
-    * @access   private
-    * @var      array    $allChords    Array of all chords in this song.
-    */
-   private $allChords = array();
+	/**
+	 * Array of all chords in this song.
+	 *
+	 * @since    2.1.0
+	 * @access   private
+	 * @var      array    $allChords    Array of all chords in this song.
+	 */
+   private $allChords = array ();
 
-   /**
-    * Array of unique chords in this song.
-    *
-    * @since    2.1.0
-    * @access   private
-    * @var      array    $uniqueChords    Array of unique chords in this song.
-    */
-   private $uniqueChords = array();
+	/**
+	 * Array of unique chords in this song.
+	 *
+	 * @since    2.1.0
+	 * @access   private
+	 * @var      array    $uniqueChords    Array of unique chords in this song.
+	 */
+   private $uniqueChords = array ();
 
    //--------------------------------------------------------------------------
-   /**
-    * Initialize the class and set its properties.
-    *
-    * @since    1.0.0
-    */
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since    1.0.0
+	 */
    public function __construct() {
 
       $this->C = new ChordPress_Chord();
@@ -324,7 +324,6 @@ class ChordPress_Renderer {
       if (!$this->hideYear = get_option('chordpress_checkbox_hide_year')) $this->hideYear = 0;
       if (!$this->displayHBNotation = get_option('chordpress_checkbox_hb_notation')) $this->displayHBNotation = 0;
       if (!$this->showChordSheet = get_option('chordpress_checkbox_show_chord_sheet')) $this->showChordSheet = 0;
-      if (!$this->showjTabSheet = get_option('chordpress_checkbox_show_jtab_sheet')) $this->showjTabSheet = 0;
       if (!$this->showChordSheetOnTop = get_option('chordpress_checkbox_show_chord_sheet_on_top')) $this->showChordSheetOnTop = 0;
 
       if (!$this->titleLevel = get_option('chordpress_select_title_level')) $this->titleLevel = 'h1';
@@ -335,30 +334,31 @@ class ChordPress_Renderer {
       if (!$this->commentStyle = get_option('chordpress_text_comment_style')) $this->commentStyle = '';
       if (!$this->chorusStyle = get_option('chordpress_text_chorus_style')) $this->chorusStyle = '';
       if (!$this->verseStyle = get_option('chordpress_text_verse_style')) $this->verseStyle = '';
+
    }
 
    //--------------------------------------------------------------------------
    /**
     * Get the ChordPro directives and store the supported ones in an array.
     *
-    * @since    1.0.0
+	 * @since    1.0.0
     * @param    string    $text    Text inside shortcode wrapper.
-    */
-   public function getDirectives($text) {
+    */    
+   public function getDirectives( $text ) {
 
-      foreach ($text as $line) {
+      foreach( $text as $line ) {
 
          $line = trim($this->stripTags($line));
 
-         if (strlen($line) && $line[0] == '{') {
+         if(strlen($line) && $line[0] == '{') {
 
             /**
              * Line starts with "{": It's a directive
              * Get directive name and value and store
              */
-            $arrDirective = explode(":", $line);
-            $directiveName = strtolower(str_replace('{', '', trim($arrDirective[0])));
-            $directiveValue = substr(trim($arrDirective[1]), 0, strpos(trim($arrDirective[1]), '}'));
+            $arrDirective = explode(":",$line);
+            $directiveName = strtolower(str_replace('{','',trim($arrDirective[0])));
+            $directiveValue = substr(trim($arrDirective[1]),0,strpos(trim($arrDirective[1]),'}'));
 
             /**
              * Process directive alternatives
@@ -380,27 +380,34 @@ class ChordPress_Renderer {
                    * Now comes the part after.
                    * We only handle the supported directives ($this->arrDirectives)
                    */
-                  $arrMetaDirective = explode(" ", $directiveValue, 2);
+                  $arrMetaDirective = explode(" ",$directiveValue,2);
                   foreach ($this->arrDirectives as $key => $value) {
 
-                     if (trim($arrMetaDirective[0]) == $key) {
+                     if(trim($arrMetaDirective[0]) == $key) {
 
                         $directiveName = $key;
                         $directiveValue = trim($arrMetaDirective[1]);
+
                      }
+
                   }
                   break;
+
             }
 
             /**
              * Store directive in directives array for later use
              */
-            if (array_key_exists($directiveName, $this->arrDirectives)) {
+            if(array_key_exists($directiveName,$this->arrDirectives)) {
 
                $this->arrDirectives[$directiveName] = $directiveValue;
+
             }
+
          }
+
       }
+
    }
 
    //--------------------------------------------------------------------------
@@ -430,11 +437,11 @@ class ChordPress_Renderer {
     *    </div>
     * </div>
     *
-    * @since    1.0.0
+	 * @since    1.0.0
     * @param    string    $text    Text inside shortcode wrapper.
     * @return   string             Formatted HTML of the ChordPro text.
     */
-   public function displayText($text) {
+   public function displayText( $text ) {
 
       /**
        * Start of ChordPress wrapper
@@ -446,22 +453,22 @@ class ChordPress_Renderer {
       /**
        * Style sheet
        */
-      $returnText .=
-         '<style>
-         div.cpress { float: ' . $this->float . '; }
+      $returnText .= 
+      '<style>
+         div.cpress { float: '.$this->float.'; }
          div.cpress_line { margin: 1em 0 1em 0; }
          div.cpress_line_section { display: inline; float: left; }
-         div.cpress_line_section .chord { ' . $this->chordStyle . '; }
-         div.cpress_line_section .lyric { ' . $this->lyricsStyle . '; }
-         div.cpress_chorus { ' . $this->chorusStyle . '; }
-         div.cpress_verse { ' . $this->verseStyle . '; }
+         div.cpress_line_section .chord { '.$this->chordStyle.'; }
+         div.cpress_line_section .lyric { '.$this->lyricsStyle.'; }
+         div.cpress_chorus { '.$this->chorusStyle.'; }
+         div.cpress_verse { '.$this->verseStyle.'; }
          div.cpress_clear { clear: both; }
-         div.cpress_meta { ' . $this->metaStyle . ' }
+         div.cpress_meta { '.$this->metaStyle.' }
          div.cpress_interaction { float: right; }
          div.cpress_interaction select { width: auto; }
-         span.cpress_comment { ' . $this->commentStyle . ' }
+         span.cpress_comment { '.$this->commentStyle.' }
       </style>';
-
+               
       /**
        * Interactive transpose listbox
        */
@@ -484,29 +491,33 @@ class ChordPress_Renderer {
             </select><br>
             <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">Print</button>
          </div>";
+
       }
 
       /**
        * Print header if directives exist
        */
-      if (strlen($this->arrDirectives['title']) && !$this->hideTitle) {
+      if(strlen($this->arrDirectives['title']) && !$this->hideTitle) {
 
          $cpressID = str_replace(' ', '-', strtolower(trim($this->arrDirectives['title'])));
          $returnText = str_replace('%cpressID%', $cpressID, $returnText);
-         $returnText .= '<' . $this->titleLevel . '>' . $this->arrDirectives['title'] . '</' . $this->titleLevel . '>';
-      } else {
+         $returnText .= '<'.$this->titleLevel.'>'.$this->arrDirectives['title'].'</'.$this->titleLevel.'>';
+
+      }
+      else {
 
          $cpressID = 'ccpress-id';
          $returnText = str_replace('%cpressID%', $cpressID, $returnText);
+
       }
 
-      if (strlen($this->arrDirectives['subtitle']) && !$this->hideSubtitle) {
+      if(strlen($this->arrDirectives['subtitle']) && !$this->hideSubtitle) {
 
-         $returnText .= '<' . $this->subtitleLevel . '>' . $this->arrDirectives['subtitle'] . '</' . $this->subtitleLevel . '>';
+         $returnText .= '<'.$this->subtitleLevel.'>'.$this->arrDirectives['subtitle'].'</'.$this->subtitleLevel.'>';
+         
       }
 
-      if (
-         strlen($this->arrDirectives['album']) ||
+      if(strlen($this->arrDirectives['album']) || 
          strlen($this->arrDirectives['artist']) ||
          strlen($this->arrDirectives['capo']) ||
          strlen($this->arrDirectives['composer']) ||
@@ -514,26 +525,28 @@ class ChordPress_Renderer {
          strlen($this->arrDirectives['tempo']) ||
          strlen($this->arrDirectives['time']) ||
          strlen($this->arrDirectives['year'])
-      ) {
+         ) {
 
          $returnText .= '<div class="cpress_meta">';
-         if (strlen($this->arrDirectives['composer']) && !$this->hideComposer) $returnText .= 'Composer: ' . $this->arrDirectives['composer'] . '<br>';
-         if (strlen($this->arrDirectives['artist']) && !$this->hideArtist)     $returnText .= 'Artist: ' . $this->arrDirectives['artist'] . '<br>';
-         if (strlen($this->arrDirectives['year']) && !$this->hideYear)         $returnText .= 'Year: ' . $this->arrDirectives['year'] . '<br>';
-         if (strlen($this->arrDirectives['album']) && !$this->hideAlbum)       $returnText .= 'Album: ' . $this->arrDirectives['album'] . '<br>';
-         if (strlen($this->arrDirectives['key']))                              $returnText .= 'Key: ' . $this->arrDirectives['key'] . '<br>';
-         if (strlen($this->arrDirectives['time']))                             $returnText .= 'Time: ' . $this->arrDirectives['time'] . '<br>';
-         if (strlen($this->arrDirectives['tempo']))                            $returnText .= 'Tempo: ' . $this->arrDirectives['tempo'] . '<br>';
-         if (strlen($this->arrDirectives['capo']))                             $returnText .= 'Capo: ' . $this->arrDirectives['capo'] . '<br>';
+         if(strlen($this->arrDirectives['composer']) && !$this->hideComposer) $returnText .= 'Composer: '.$this->arrDirectives['composer'].'<br>';
+         if(strlen($this->arrDirectives['artist']) && !$this->hideArtist)     $returnText .= 'Artist: '.$this->arrDirectives['artist'].'<br>';
+         if(strlen($this->arrDirectives['year']) && !$this->hideYear)         $returnText .= 'Year: '.$this->arrDirectives['year'].'<br>';
+         if(strlen($this->arrDirectives['album']) && !$this->hideAlbum)       $returnText .= 'Album: '.$this->arrDirectives['album'].'<br>';
+         if(strlen($this->arrDirectives['key']))                              $returnText .= 'Key: '.$this->arrDirectives['key'].'<br>';
+         if(strlen($this->arrDirectives['time']))                             $returnText .= 'Time: '.$this->arrDirectives['time'].'<br>';
+         if(strlen($this->arrDirectives['tempo']))                            $returnText .= 'Tempo: '.$this->arrDirectives['tempo'].'<br>';
+         if(strlen($this->arrDirectives['capo']))                             $returnText .= 'Capo: '.$this->arrDirectives['capo'].'<br>';
          $returnText .= '</div>';
+
       }
 
       /**
        * Go through each line and process it
        */
-      foreach ($text as $line) {
+      foreach( $text as $line ) {
 
          $returnText .= $this->formatAndDisplayLine($line);
+
       }
 
       /**
@@ -560,8 +573,8 @@ class ChordPress_Renderer {
 
    const chordChart = [
       {
-         section: '" . esc_html(__('Chord Sheet', 'chordpress')) . "',
-         description: '" . esc_html(__('These known chords are used in this song', 'chordpress')) . ".',
+         section: '".esc_html(__('Chord Sheet','chordpress'))."',
+         description: '".esc_html(__('These known chords are used in this song','chordpress')).".',
          chords: [\n";
 
          foreach ($this->uniqueChords as $uc) {
@@ -570,12 +583,13 @@ class ChordPress_Renderer {
 
                $this->load_guitar_chord($postid);
                $vexchords .= $this->C->createBasicVexchord();
-               // die($this->pretty_dump($vexchord));
+               // die($this->pretty_dump($vexchords));
 
             }
+
          }
 
-         $vexchords = rtrim($vexchords, ",\n");
+         $vexchords = rtrim($vexchords,",\n");
          $chordSheetText .= $vexchords;
 
          $chordSheetText .= "
@@ -657,8 +671,9 @@ class ChordPress_Renderer {
 </script>\n";
 
          $chordSheetText .= "<div style=\"clear:both;\"></div><!-- ChordPress ChordSheet End -->\n\n";
+   
       }
-
+      
       /**
        * Build the return HTML
        */
@@ -667,24 +682,28 @@ class ChordPress_Renderer {
          if ($this->showChordSheetOnTop) {
 
             $returnText = $chordSheetText . $returnText;
+
          } else {
 
             $returnText .= $chordSheetText;
+
          }
+
       }
 
       return $returnText . "\n\n";
-   }
 
+   }
+                
    //--------------------------------------------------------------------------
    /**
     * Process a single of the ChordPro text and return the formatted HTML.
     *
-    * @since    1.0.0
+	 * @since    1.0.0
     * @param    string    $line    Single line from inside shortcode wrapper.
     * @return   string             Formatted HTML.
-    */
-   public function formatAndDisplayLine($line) {
+    */    
+   public function formatAndDisplayLine ($line) {
 
       $returnText = "";
       $startOfChorus = false;
@@ -706,89 +725,104 @@ class ChordPress_Renderer {
       /**
        * Now check what this line is all about
        */
-      if (substr_count($line, "[") == 0) {
+      if(substr_count($line,"[") == 0) {
 
          /**
           * No chords on this line
           */
-         if ($line[0] == '#') {
+         if($line[0] == '#') {
 
             /**
              * Line starts with "#": It's a comment line => skip
              */
-         } else if ($line[0] == '{' || strpos($line, '{')) {
+
+         }
+         else if($line[0] == '{' || strpos($line,'{')) {
 
             /**
              * Line starts with "{" or has one in it: It's a directive
              * Some of them need consideration for the output
              */
-            $directive = strstr($line, '{'); // Remove all before the {
-            $arrDirective = explode(":", $directive);
-            $directiveName = strtolower(str_replace('{', '', trim($arrDirective[0])));
-            $directiveValue = substr(trim($arrDirective[1]), 0, strpos(trim($arrDirective[1]), '}'));
+            $directive = strstr($line,'{'); // Remove all before the {
+            $arrDirective = explode(":",$directive);
+            $directiveName = strtolower(str_replace('{','',trim($arrDirective[0])));
+            $directiveValue = substr(trim($arrDirective[1]),0,strpos(trim($arrDirective[1]),'}'));
 
             /**
              * In case the directive had no colon and value, $directiveName will
              * still contain the trailing }. So let's remove that.
              */
-            if (substr_count($directiveName, "}")) $directiveName = str_replace("}", "", $directiveName);
+            if (substr_count($directiveName,"}")) $directiveName = str_replace("}","",$directiveName);
 
-            if (strpos($directiveName, 'start_of_verse') !== false) {
+            if (strpos($directiveName,'start_of_verse') !== false) {
 
                $startOfVerse = true;
-            } elseif (strpos($directiveName, 'end_of_verse') !== false) {
+
+            } elseif (strpos($directiveName,'end_of_verse') !== false) {
 
                $endOfVerse = true;
-            } elseif (strpos($directiveName, 'start_of_chorus') !== false) {
+
+            } elseif (strpos($directiveName,'start_of_chorus') !== false) {
 
                $startOfChorus = true;
-            } elseif (strpos($directiveName, 'end_of_chorus') !== false) {
+
+            } elseif (strpos($directiveName,'end_of_chorus') !== false) {
 
                $endOfChorus = true;
-            } elseif (strpos($directiveName, 'comment') !== false && !$this->hideComments) {
 
-               $arrLyrics[] = '<span class="cpress_comment">' . $directiveValue . '</span>';
+            } elseif (strpos($directiveName,'comment') !== false && !$this->hideComments) {
+
+               $arrLyrics[] = '<span class="cpress_comment">'.$directiveValue.'</span>';
+
             }
+
          } else {
 
             /**
              * Just lyrics without chords => print it
              */
             $arrLyrics[] = $line;
+
          }
-      } elseif (substr_count($line, "[") != substr_count($line, "]")) {
+
+      } elseif (substr_count($line,"[") != substr_count($line,"]")) {
 
          /**
           * Square bracket missing in this line
           */
-         $arrLyrics[] = '<span style="color:#FF0000;"><i>' . esc_html(__('Missing square bracket in line', 'chordpress')) . ':</i></span> <code>' . $line . "</code>";
+         $arrLyrics[] = '<span style="color:#FF0000;"><i>' . esc_html(__('Missing square bracket in line','chordpress')) . ':</i></span> <code>' . $line . "</code>";
+
       } else {
 
          /**
           * Chords found. Split the line into segments beginning with '['
           */
-         $arrBracketSegments = explode("[", $line);
+         $arrBracketSegments = explode("[",$line);
 
-         foreach ($arrBracketSegments as $segment) {
+         foreach($arrBracketSegments as $segment) {
 
-            $pad = ($segment[strlen($segment) - 1] == ' ') ? '&nbsp;' : '';
+            $pad = ($segment[strlen($segment)-1]==' ') ? '&nbsp;' : '';
             /** 
              * Does the first segment start before the 1st '['?
              */
-            if (substr_count($segment, "]") == 0) {
+            if(substr_count($segment,"]")==0) {
 
                $arrChords[] = " ";
                $arrLyrics[] = $segment . $pad;
+
             } else {
 
                /**
                 * Split this segment into chord an lyrics
                 */
-               $arrChordLyric = explode("]", $segment);
+               $arrChordLyric = explode("]",$segment);
                $arrChords[] = trim($arrChordLyric[0]);
                $arrLyrics[] = $arrChordLyric[1] . $pad;
+
             }
+
          }
+
       }
 
       /**
@@ -798,6 +832,7 @@ class ChordPress_Renderer {
 
          $returnText .= '<div class="cpress_chorus">';
          $startOfChorus = false;
+
       }
 
       /**
@@ -807,19 +842,20 @@ class ChordPress_Renderer {
 
          $returnText .= '<div class="cpress_verse">';
          $startOfVerse = false;
+
       }
 
       /**
        * Start of line wrapper (lyrics and chords)
        */
       $returnText .= "<div class=\"cpress_line\">\n   ";
-
+      
       /** 
        * Align chords and lyrics together by wrapping each in a floating inline div
        */
       if (!$this->hideChords) {
 
-         for ($i = 0; $i < count($arrChords); $i++) {
+         for ($i=0; $i<count($arrChords); $i++) {
 
             if (strlen(trim($arrChords[$i])) > 0 || strlen(trim($arrLyrics[$i])) > 0) {
 
@@ -837,14 +873,16 @@ class ChordPress_Renderer {
                   /**
                    * Allow chords starting with a ~ as chord placeholders. Just return the string.
                    */
-                  if ($arrChords[$i][0] == "~") {
+                  if ($arrChords[$i][0]=="~") {
 
                      $returnText .= $arrChords[$i];
+
                   } else {
 
                      $theChord = $this->formatChord($arrChords[$i]);
                      $this->allChords[] = $theChord;
                      $returnText .= $theChord;
+
                   }
                   $returnText .= '</strong>&nbsp;</div>';
 
@@ -857,24 +895,27 @@ class ChordPress_Renderer {
                   $returnText .= "\n";
                   $tempTranspose = $this->getTranspose();
 
-                  for ($t = 1; $t <= 11; $t++) {
+                  for ($t=1; $t<=11; $t++) {
 
                      $this->setTranspose($t);
-
+                     
                      /**
                       * Allow chords starting with a ~ as chord placeholders. Just return the string.
                       */
-                     if ($arrChords[$i][0] == '~') {
+                     if ($arrChords[$i][0]=='~') {
 
-                        $returnText .= '<div class="chord chord-hidable key-' . $t . '" style="display:none"><strong>' . $arrChords[$i] . '</strong>&nbsp;</div>';
+                        $returnText .= '<div class="chord chord-hidable key-'.$t.'" style="display:none"><strong>'. $arrChords[$i] . '</strong>&nbsp;</div>';
+
                      } else {
 
                         /**
                          * This is a real chord.
                          */
                         $theChord = $this->formatChord($arrChords[$i]);
-                        $returnText .= '<div class="chord chord-hidable key-' . $t . '" style="display:none"><strong>' . $theChord . '</strong>&nbsp;</div>';
+                        $returnText .= '<div class="chord chord-hidable key-'.$t.'" style="display:none"><strong>'. $theChord . '</strong>&nbsp;</div>';
+
                      }
+
                   }
 
                   $this->setTranspose($tempTranspose);
@@ -884,38 +925,45 @@ class ChordPress_Renderer {
                    */
                   $returnText .= '<div class="lyric">';
 
-                  if (strlen($lyrics) > 0) {
+                  if(strlen($lyrics) > 0) {
 
-                     $endOf1stWord = strpos($lyrics, ' ');
-                     $numSpaces = substr_count($lyrics, ' ');
+                     $endOf1stWord = strpos($lyrics,' ');
+                     $numSpaces = substr_count($lyrics,' ');
 
-                     if ($endOf1stWord > 0 && $numSpaces == 1) {
+                     if($endOf1stWord > 0 && $numSpaces == 1) {
 
-                        $returnText .= substr($lyrics, 0, $endOf1stWord) . '&nbsp;';
-                        $lyrics = substr($lyrics, $endOf1stWord);
+                        $returnText .= substr($lyrics,0,$endOf1stWord) . '&nbsp;';
+                        $lyrics = substr($lyrics,$endOf1stWord);
                         $returnText .= "</div></div>\n<div class=\"cpress_line_section\">\n<div class=\"chord\">&nbsp;</div><div class=\"lyric\">";
+
                      }
+
                   }
+
                } else {
 
                   $returnText .= '<div class="chord"><strong></strong>&nbsp;</div>';
                   $returnText .= '<div class="lyric">';
+
                }
 
-               if (strlen($lyrics) > 0) $returnText .= $lyrics;
+               if(strlen($lyrics) > 0) $returnText .= $lyrics;
                $returnText .= "</div>\n"; // end of lyric
                $returnText .= "</div>\n"; // end of line
 
             }
+
          }
 
          /**
           * If there are more lyric parts than chord parts, add them here
           */
-         for ($i = count($arrChords); $i < count($arrLyrics); $i++) {
+         for($i=count($arrChords); $i<count($arrLyrics); $i++) {
 
             $returnText .= $arrLyrics[$i];
+
          }
+
       } else {
 
          /** 
@@ -923,9 +971,10 @@ class ChordPress_Renderer {
           */
          $returnText .= '<div class="cpress_line_section"><div class="lyric">';
 
-         for ($i = 0; $i < count($arrLyrics); $i++) {
+         for($i=0; $i<count($arrLyrics); $i++) {
 
             $returnText .= $arrLyrics[$i];
+
          }
 
          $returnText .= "</div></div>";
@@ -943,6 +992,7 @@ class ChordPress_Renderer {
 
          $returnText .= "</div>\n";
          $endOfChorus = false;
+
       }
 
       /**
@@ -952,6 +1002,7 @@ class ChordPress_Renderer {
 
          $returnText .= "</div>\n";
          $endOfVerse = false;
+
       }
 
       /**
@@ -969,29 +1020,32 @@ class ChordPress_Renderer {
     * @since     1.0.0
     * @param     string    $string    String to process.
     * @return    string               Stripped text.
-    */
+    */    
    private function stripTags($string) {
 
       $retString = "";
       $isVisible = true;
 
-      for ($i = 0; $i < strlen($string); $i++) {
+      for($i = 0; $i < strlen($string); $i++) {
 
-         if ($isVisible) {
+         if($isVisible) {
 
-            if ($string[$i] == '<')
+            if($string[$i]=='<')
                $isVisible = false;
-            else
+            else 
                $retString .= $string[$i];
-         } elseif ($string[$i] == '>') {
+
+         } elseif ($string[$i]=='>') {
 
             $isVisible = true;
          }
+
       }
 
       return $retString;
-   }
 
+   }
+   
    //--------------------------------------------------------------------------
    /**
     * Processes a note text and returns the formatted HTML.
@@ -999,49 +1053,52 @@ class ChordPress_Renderer {
     * @since     1.0.0
     * @param     string    $ch    Chord text, e.g. "A" or "B#" or "Db/F".
     * @return    string           Uppercase note string.
-    */
-   public function formatChord($ch) {
+    */    
+   public function formatChord( $ch ) {
 
       $useFlats = false;
-
-      if (strlen($ch) == 0) return;
-
+      
+      if (strlen($ch)==0) return;
+      
       /**
        * The first letter should be the key note
        */
-      $note = substr($ch, 0, 1);
+      $note = substr($ch,0,1);
       $xlatedNote = $note;
-      $rem = substr($ch, 1);
-
+      $rem = substr($ch,1);
+   
       /**
        * Convert note to a number
        */
       $noteVal = $this->noteToNumber($note);
-
+      
       /**
        * Check sharp/flat
        */
       if (strlen($rem) > 0) {
 
-         if (substr($rem, 0, 1) == '#') {
+         if (substr($rem,0,1) == '#') {
 
             $noteVal++;
-            $rem = substr($rem, 1);
-         } elseif (strncasecmp($rem, "b", 1) == 0) {
+            $rem = substr($rem,1);
+
+         } elseif (strncasecmp($rem,"b",1)==0) {
 
             $useFlats = true;
             $noteVal--;
-            $rem = substr($rem, 1);
-         }
-      }
+            $rem = substr($rem,1);
 
+         }
+
+      }
+      
       /**
        * Add transpose
        */
       $noteVal += $this->transpose;
       if ($noteVal > 11) $noteVal -= 12;
       if ($noteVal < 0) $noteVal += 12;
-
+   
       /**
        * Build note to display from numeric note value
        */
@@ -1051,6 +1108,7 @@ class ChordPress_Renderer {
        * Return the chord display plus the bass note (if any)
        */
       return $xlatedNote . $this->formatRemainder($rem);
+
    }
 
    //--------------------------------------------------------------------------
@@ -1060,31 +1118,31 @@ class ChordPress_Renderer {
     * @since     1.0.0
     * @param     string    $remainder    Chord text starting at second char.
     * @return    string                  Formatted remainder.
-    */
-   public function formatRemainder($remainder) {
+    */    
+   public function formatRemainder( $remainder ) {
 
-      $indexOfSlash = strpos($remainder, '/');
-      if ($indexOfSlash === false) return $remainder;
-
+      $indexOfSlash = strpos($remainder,'/');
+      if($indexOfSlash === false) return $remainder;
+      
       /**
        * We have a slash, indicating that a bass note follows.
        * Break the string into 2 parts at the slash. 
        * The slash will be lost, and will need to be added back later.
        */
-      $chord = substr($remainder, 0, $indexOfSlash);
-      $bass = substr($remainder, $indexOfSlash + 1);
-
+      $chord = substr($remainder,0,$indexOfSlash);
+      $bass = substr($remainder,$indexOfSlash+1);
+      
       $useFlats = false;
-
-      if (strlen($bass) == 0) return $chord . "/?";
-
+      
+      if (strlen($bass)==0) return $chord . "/?";
+      
       /** 
        * The first letter should be the bass note
        */
-      $note = substr($bass, 0, 1);
+      $note = substr($bass,0,1);
       $xlatedNote = $note;
-      $rem = substr($bass, 1);
-
+      $rem = substr($bass,1);
+      
       /** 
        * Convert note to a number
        */
@@ -1095,31 +1153,35 @@ class ChordPress_Renderer {
        */
       if (strlen($rem) > 0) {
 
-         if (substr($rem, 0, 1) == '#') {
+         if (substr($rem,0,1) == '#') {
 
             $noteVal++;
-            $rem = substr($rem, 1);
-         } elseif (strncasecmp($rem, "b", 1) == 0) {
+            $rem = substr($rem,1);
+
+         } elseif (strncasecmp($rem,"b",1)==0) {
 
             $useFlats = true;
             $noteVal--;
-            $rem = substr($rem, 1);
-         }
-      }
+            $rem = substr($rem,1);
 
+         }
+
+      }
+      
       /**      
        * Add transpose
        */
       $noteVal += $this->transpose;
-      if ($noteVal > 11) $noteVal -= 12;
-      if ($noteVal < 0) $noteVal += 12;
-
+      if($noteVal > 11) $noteVal -= 12;
+      if($noteVal < 0) $noteVal += 12;
+   
       /**
        * Build note to display from numeric note value
        */
       $xlatedNote = $this->numberToNote($noteVal);
 
       return $chord . "/" . $xlatedNote . $rem;
+
    }
 
    //--------------------------------------------------------------------------
@@ -1129,10 +1191,10 @@ class ChordPress_Renderer {
     * @since     1.0.0
     * @param     string    $n    Note to convert.
     * @return    integer
-    */
-   public function noteToNumber($n) {
+    */    
+   public function noteToNumber( $n ) {
 
-      $regularNotation = array(
+      $regularNotation = array (
          'A' => 0,
          'B' => 2,
          'C' => 3,
@@ -1141,8 +1203,8 @@ class ChordPress_Renderer {
          'F' => 8,
          'G' => 10,
       );
-
-      $hbNotation = array(
+      
+      $hbNotation = array (
          'A' => 0,
          'B' => 1,
          'H' => 2,
@@ -1152,14 +1214,17 @@ class ChordPress_Renderer {
          'F' => 8,
          'G' => 10,
       );
-
+      
       if ($this->hbNotation == 'yes') {
 
          return $hbNotation[strtoupper($n)];
+
       } else {
 
          return $regularNotation[strtoupper($n)];
+
       }
+
    }
 
    //--------------------------------------------------------------------------
@@ -1170,12 +1235,12 @@ class ChordPress_Renderer {
     * @param     integer    $n           Numeric note value to convert to note string.
     * @param     boolean    $useFlats    Whether to use flat notes or not.
     * @return    string
-    */
-   public function numberToNote($n, $useFlats = false) {
+    */    
+   public function numberToNote( $n, $useFlats=false ) {
 
       $retVal = '';
 
-      switch ($n) {
+      switch($n) {
 
          case 0:
             $retVal = 'A';
@@ -1185,7 +1250,7 @@ class ChordPress_Renderer {
             if ($this->displayHBNotation) {
                $retVal = 'B';
             } else {
-               if ($useFlats) $retVal = "Bb";
+               if($useFlats) $retVal = "Bb";
                else $retVal = "A#";
             }
             break;
@@ -1240,6 +1305,7 @@ class ChordPress_Renderer {
       }
 
       return $retVal;
+
    }
 
    //--------------------------------------------------------------------------
@@ -1248,34 +1314,37 @@ class ChordPress_Renderer {
     *
     * @since     1.0.0
     * @param     boolean    $g
-    */
-   public function setDisplayHBNotation($g) {
+    */    
+   public function setDisplayHBNotation( $g ) {
 
       $this->displayHBNotation = $g;
-   }
 
+   }
+ 
    //--------------------------------------------------------------------------
    /**
     * Get class variable: displayHBNotation.
     *
     * @since     1.0.0
     * @return    boolean
-    */
+    */    
    public function getDisplayHBNotation() {
 
       return $this->displayHBNotation;
-   }
 
+   }
+    
    //--------------------------------------------------------------------------
    /**
     * Set class variable: float.
     *
     * @since     1.0.0
     * @param     string    $f    left/right/none/inherit.
-    */
-   public function setFloat($f) {
+    */    
+   public function setFloat( $f ) {
 
       $this->float = $f;
+
    }
 
    //--------------------------------------------------------------------------
@@ -1284,10 +1353,11 @@ class ChordPress_Renderer {
     *
     * @since     1.0.0
     * @return    string
-    */
+    */    
    public function getFloat() {
 
       return $this->float;
+
    }
 
    //--------------------------------------------------------------------------
@@ -1296,46 +1366,50 @@ class ChordPress_Renderer {
     *
     * @since     1.0.0
     * @param     string    $g    yes/no.
-    */
-   public function setHBNotation($g) {
+    */    
+   public function setHBNotation( $g ) {
 
       $this->hbNotation = $g;
-   }
 
+   }
+ 
    //--------------------------------------------------------------------------
    /**
     * Get class variable: hbNotation.
     *
     * @since     1.0.0
     * @return    string    yes/no.
-    */
+    */    
    public function getHBNotation() {
 
       return $this->hbNotation;
-   }
 
+   }
+ 
    //--------------------------------------------------------------------------
    /**
     * Set class variable: interactive.
     *
     * @since     1.0.0
     * @param     string    $g    yes/no.
-    */
-   public function setInteractive($i) {
+    */    
+   public function setInteractive( $i ) {
 
       $this->interactive = $i;
-   }
 
+   }
+ 
    //--------------------------------------------------------------------------
    /**
     * Get class variable: interactive.
     *
     * @since     1.0.0
     * @return    string    yes/no.
-    */
+    */    
    public function getInteractive() {
 
       return $this->interactive;
+
    }
 
    //--------------------------------------------------------------------------
@@ -1344,24 +1418,26 @@ class ChordPress_Renderer {
     *
     * @since     1.0.0
     * @param     integer    $t    Positive or negative number of steps for transponation.
-    */
-   public function setTranspose($t) {
+    */    
+   public function setTranspose( $t ) {
 
       $this->transpose = $t;
-   }
 
+   }
+ 
    //--------------------------------------------------------------------------
    /**
     * Get class variable: transpose.
     *
     * @since     1.0.0
     * @return    integer
-    */
+    */    
    public function getTranspose() {
 
       return $this->transpose;
-   }
 
+   }
+   
    /**
     * Create a modal guitar chord dialog.
     * 
@@ -1369,36 +1445,37 @@ class ChordPress_Renderer {
     * @param  string     $chord     Vexchord HTML
     * @return string                Modal chord dialog HTML
     */
-   private function create_modal_chord($postid, $chord) {
+   private function create_modal_chord( $postid, $chord ) {
 
-      $modal_chord = '<!-- <button id="cpress-chord-' . $postid . '-modal-button">Click here to trigger the modal!</button> -->
-      <div id="cpress-chord-' . $postid . '-modal" class="cpress-modal">
+      $modal_chord = '<!-- <button id="cpress-chord-'.$postid.'-modal-button">Click here to trigger the modal!</button> -->
+      <div id="cpress-chord-'.$postid.'-modal" class="cpress-modal">
           <div class="cpress-modal-content">
-              <span id="cpress-chord-' . $postid . '-modal-close" class="cpress-modal-close">&times;</span>
-              ' . $chord . '
+              <span id="cpress-chord-'.$postid.'-modal-close" class="cpress-modal-close">&times;</span>
+              '.$chord.'
           </div>
       </div>
       <script>
-      var cpress_' . $postid . '_modal = document.getElementById("cpress-chord-' . $postid . '-modal");
-      var cpress_' . $postid . '_btn = document.getElementById("cpress-chord-' . $postid . '-modal-button");
-      var cpress_' . $postid . '_close = document.getElementById("cpress-chord-' . $postid . '-modal-close");
+      var cpress_'.$postid.'_modal = document.getElementById("cpress-chord-'.$postid.'-modal");
+      var cpress_'.$postid.'_btn = document.getElementById("cpress-chord-'.$postid.'-modal-button");
+      var cpress_'.$postid.'_close = document.getElementById("cpress-chord-'.$postid.'-modal-close");
 
-      cpress_' . $postid . '_btn.onclick = function() {
-         cpress_' . $postid . '_modal.style.display = "block";
+      cpress_'.$postid.'_btn.onclick = function() {
+         cpress_'.$postid.'_modal.style.display = "block";
       }
 
-      cpress_' . $postid . '_close.onclick = function() {
-         cpress_' . $postid . '_modal.style.display = "none";
+      cpress_'.$postid.'_close.onclick = function() {
+         cpress_'.$postid.'_modal.style.display = "none";
       }
 
       window.onclick = function(event) {
-         if (event.target == cpress_' . $postid . '_modal) {
-            cpress_' . $postid . '_modal.style.display = "none";
+         if (event.target == cpress_'.$postid.'_modal) {
+            cpress_'.$postid.'_modal.style.display = "none";
          }
       } 
       </script>';
 
       return $modal_chord;
+   
    }
 
    /**
@@ -1407,7 +1484,7 @@ class ChordPress_Renderer {
     * @param  string    $shortname    Shortname of the guitar post to look for.
     * @return integer                 Post ID or NULL
     */
-   private function find_guitar_chord_post($shortname) {
+   private function find_guitar_chord_post( $shortname ) {
 
       $query_args = array(
          'posts_per_page'   => 1,
@@ -1415,9 +1492,10 @@ class ChordPress_Renderer {
          'meta_key'         => 'guitar_chord_shortname',
          'meta_value'       => $shortname
       );
-      $query_result = new WP_Query($query_args);
+      $query_result = new WP_Query( $query_args );
 
       return $query_result->posts[0]->ID;
+   
    }
 
    /**
@@ -1426,75 +1504,86 @@ class ChordPress_Renderer {
     * @param  integer    $postid    Guitar chord post ID.
     * @return void
     */
-   private function load_guitar_chord($postid) {
+   private function load_guitar_chord( $postid ) {
 
       $post = get_post($postid);
 
       /**
        * Retrieve meta data from chord post
-       */
-      $guitar_chord_shortname     = get_post_meta($postid, 'guitar_chord_shortname', 1);
-      $guitar_chord_position      = get_post_meta($postid, 'guitar_chord_position', 1);
-      $guitar_chord_tuning        = get_post_meta($postid, 'guitar_chord_tuning', 1);
-      $guitar_chord_single_frets  = get_post_meta($postid, 'guitar_chord_single_frets', 1);
-      $guitar_chord_single_labels = get_post_meta($postid, 'guitar_chord_single_labels', 1);
-      $guitar_chord_barre_frets   = get_post_meta($postid, 'guitar_chord_barre_frets', 1);
+         */
+      $guitar_chord_shortname     = get_post_meta( $postid, 'guitar_chord_shortname', 1);
+      $guitar_chord_position      = get_post_meta( $postid, 'guitar_chord_position', 1);
+      $guitar_chord_tuning        = get_post_meta( $postid, 'guitar_chord_tuning', 1);
+      $guitar_chord_single_frets  = get_post_meta( $postid, 'guitar_chord_single_frets', 1);
+      $guitar_chord_single_labels = get_post_meta( $postid, 'guitar_chord_single_labels', 1);
+      $guitar_chord_barre_frets   = get_post_meta( $postid, 'guitar_chord_barre_frets', 1);
 
       /**
        * Build the chord diagram
-       */
-      $this->C->setProperty('title', $post->post_title);
-      $this->C->setProperty('name', $guitar_chord_shortname);
-      $this->C->setProperty('position', $guitar_chord_position);
-
+         */
+      $this->C->setProperty('title',$post->post_title);
+      $this->C->setProperty('name',$guitar_chord_shortname);
+      $this->C->setProperty('position',$guitar_chord_position);
+   
       /**
        * Tuning
        */
-      $tuning_array = explode(",", $guitar_chord_tuning);
+      $tuning_array = explode(",",$guitar_chord_tuning);
       $tuning = "[";
       foreach ($tuning_array as $note) {
 
-         $tuning .= "'" . $note . "',";
+         $tuning .= "'".$note."',";
+
       }
 
-      $tuning = rtrim($tuning, ",");
+      $tuning = rtrim($tuning,",");
       $tuning .= "]";
-      $this->C->setProperty('tuning', $tuning);
-
+      $this->C->setProperty('tuning',$tuning);
+   
       /**
        * Chord
-       */
+         */
       if (strlen($guitar_chord_single_frets)) {
-
-         $single_frets = explode(",", $guitar_chord_single_frets);
+   
+         $single_frets = explode(",",$guitar_chord_single_frets);
          $single_frets = array_reverse($single_frets);
 
          if (strlen($guitar_chord_single_labels)) {
 
-            $single_labels = explode(",", $guitar_chord_single_labels);
+            $single_labels = explode(",",$guitar_chord_single_labels);
             $single_labels = array_reverse($single_labels);
+      
          } else {
+   
+            $single_labels = array('','','','','','',);
+            
+         }
+   
+         for ($i=1; $i<=6; $i++) {
 
-            $single_labels = array('', '', '', '', '', '',);
+            $my_chord[$i]['fret'] = $single_frets[$i-1];
+            $my_chord[$i]['label'] = $single_labels[$i-1];
+
          }
 
-         for ($i = 1; $i <= 6; $i++) {
-
-            $my_chord[$i]['fret'] = $single_frets[$i - 1];
-            $my_chord[$i]['label'] = $single_labels[$i - 1];
-         }
-
-         $this->C->setProperty('chord', $my_chord);
+         $this->C->setProperty('chord',$my_chord);
+      
       }
-
+   
       /**
        * Barre
        */
       if (strlen($guitar_chord_barre_frets)) {
+   
+         $barre_array = explode(",",$guitar_chord_barre_frets);
+         $this->C->addBarre($this->C->flipString($barre_array[0]),$this->C->flipString($barre_array[1]),$barre_array[2]);
+   
+      } else {
 
-         $barre_array = explode(",", $guitar_chord_barre_frets);
-         $this->C->addBarre($this->C->flipString($barre_array[0]), $this->C->flipString($barre_array[1]), $barre_array[2]);
+         $this->C->barres = [];
+
       }
+
    }
 
    // ---------------------------------------------------------------------------
@@ -1508,5 +1597,7 @@ class ChordPress_Renderer {
    function pretty_dump($a) {
 
       return highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
+
    }
+ 
 }

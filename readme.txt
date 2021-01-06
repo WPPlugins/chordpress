@@ -3,7 +3,7 @@ Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
-Tested up to: 5.4.2
+Tested up to: 5.5.3
 Stable tag: trunk
 Requires PHP: 5.2.4
 License: GPLv3
@@ -127,6 +127,9 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 2.3.1 (2020-11-07) =
+* Fixed barre bug in chord sheet
+
 = 2.3.0 (2020-08-10) =
 * Any CSS now for chords and lyrics
 

@@ -374,7 +374,7 @@ class ChordPress_Chord {
       }
 
       /**
-       * Barres
+       * Tuning
        */
       if (strlen($this->tuning)) {
 
@@ -429,7 +429,9 @@ class ChordPress_Chord {
     * Add a barre to private array: barres.
     *
     * @since     2.1.0
-    * @param     array    $value
+    * @param     string    $fromString
+    * @param     string    $toString
+    * @param     string    $fret
     */    
     public function addBarre( $fromString, $toString, $fret ) {
 
