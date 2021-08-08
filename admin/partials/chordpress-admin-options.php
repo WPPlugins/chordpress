@@ -211,6 +211,13 @@ if ($show_alert) {
                   </td>
                </tr>
                <tr>
+                  <th scope="row"><?php echo esc_html(__('Show Chord Sheet on top','chordpress'));?></th>
+                  <td>
+                     <input type='checkbox' id='<?php echo $pname;?>_checkbox_show_chord_sheet_on_top' name='<?php echo $pname;?>_checkbox_show_chord_sheet_on_top' <?php checked( get_option($pname.'_checkbox_show_chord_sheet_on_top'), 1 ); ?> value='1'>
+                     <p class="description"><?php echo esc_html(__('If Show Chord Sheet is selected, this option will display it on top before the song instead of at the bottom after it.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
                   <th sope="row" colspan="2"><?php submit_button(); ?></th>
                </tr>
             </tbody>

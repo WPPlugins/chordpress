@@ -3,7 +3,7 @@ Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
-Tested up to: 5.3.2
+Tested up to: 5.4.1
 Stable tag: trunk
 Requires PHP: 5.2.4
 License: GPLv3
@@ -127,6 +127,14 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 2.2.0 (2020-06-06) =
+* Directive support for capo, key, time, tempo
+* Chord sheet on top option
+
+= 2.1.0 (2020-02-23) =
+* Vexchords support
+* Chord diagrams
+
 = 2.0.0 (2020-01-26) =
 * Completely rewritten plugin framework
 * Adeded option to remove plugin data from database when it is deleted

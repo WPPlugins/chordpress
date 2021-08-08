@@ -256,8 +256,12 @@ class ChordPress_Renderer {
    private $arrDirectives = array(
       'album' => '',
       'artist' => '',
+      'capo' => '',
       'composer' => '',
+      'key' => '',
       'subtitle' => '',
+      'tempo' => '',
+      'time' => '',
       'title' => '',
       'year' => '',
    );
@@ -312,6 +316,7 @@ class ChordPress_Renderer {
       if (!$this->displayHBNotation = get_option('chordpress_checkbox_hb_notation')) $this->displayHBNotation = 0;
       if (!$this->showChordSheet = get_option('chordpress_checkbox_show_chord_sheet')) $this->showChordSheet = 0;
       if (!$this->showjTabSheet = get_option('chordpress_checkbox_show_jtab_sheet')) $this->showjTabSheet = 0;
+      if (!$this->showChordSheetOnTop = get_option('chordpress_checkbox_show_chord_sheet_on_top')) $this->showChordSheetOnTop = 0;
 
       if (!$this->titleLevel = get_option('chordpress_select_title_level')) $this->titleLevel = 'h1';
       if (!$this->subtitleLevel = get_option('chordpress_select_subtitle_level')) $this->subtitleLevel = 'h2';
@@ -428,7 +433,7 @@ class ChordPress_Renderer {
        * Start of ChordPress wrapper
        */
       $returnText = "\n\n
-      <!-- ChordPress Start -->
+      <!-- ChordPress SongSheet Start -->
       <div id=\"%cpressID%\" class=\"cpress\">\n";
 
       /**
@@ -496,7 +501,11 @@ class ChordPress_Renderer {
       if (
          strlen($this->arrDirectives['album']) ||
          strlen($this->arrDirectives['artist']) ||
+         strlen($this->arrDirectives['capo']) ||
          strlen($this->arrDirectives['composer']) ||
+         strlen($this->arrDirectives['key']) ||
+         strlen($this->arrDirectives['tempo']) ||
+         strlen($this->arrDirectives['time']) ||
          strlen($this->arrDirectives['year'])
       ) {
 
@@ -505,6 +514,10 @@ class ChordPress_Renderer {
          if (strlen($this->arrDirectives['artist']) && !$this->hideArtist)     $returnText .= 'Artist: ' . $this->arrDirectives['artist'] . '<br>';
          if (strlen($this->arrDirectives['year']) && !$this->hideYear)         $returnText .= 'Year: ' . $this->arrDirectives['year'] . '<br>';
          if (strlen($this->arrDirectives['album']) && !$this->hideAlbum)       $returnText .= 'Album: ' . $this->arrDirectives['album'] . '<br>';
+         if (strlen($this->arrDirectives['key']))                              $returnText .= 'Key: ' . $this->arrDirectives['key'] . '<br>';
+         if (strlen($this->arrDirectives['time']))                             $returnText .= 'Time: ' . $this->arrDirectives['time'] . '<br>';
+         if (strlen($this->arrDirectives['tempo']))                            $returnText .= 'Tempo: ' . $this->arrDirectives['tempo'] . '<br>';
+         if (strlen($this->arrDirectives['capo']))                             $returnText .= 'Capo: ' . $this->arrDirectives['capo'] . '<br>';
          $returnText .= '</div>';
       }
 
@@ -519,21 +532,22 @@ class ChordPress_Renderer {
       /**
        * End of ChordPress song
        */
-      $returnText .= "</div>\n";
+      $returnText .= "</div> <!-- ChordPress SongSheet End -->\n";
 
       /**
        * Build chord sheet
        */
       if ($this->showChordSheet) {
 
+         $chordSheetText = "";
          $this->uniqueChords = array_unique($this->allChords);
          // die($this->pretty_dump($this->uniqueChords));
 
          $vexchords = "";
-         $returnText .= "\n<!-- ChordPress Chord Sheet Start -->\n";
-         $returnText .= "<hr>\n";
-         $returnText .= "<div id=\"songchords\" class=\"cpress-chord-sheet\"></div>\n";
-         $returnText .= "
+         $chordSheetText .= "\n<!-- ChordPress ChordSheet Start -->\n";
+         $chordSheetText .= "<div><hr></div>\n";
+         $chordSheetText .= "<div id=\"songchords\" class=\"cpress-chord-sheet\"></div>\n";
+         $chordSheetText .= "
 <script>
    const ChordBox = vexchords.ChordBox;
 
@@ -555,9 +569,9 @@ class ChordPress_Renderer {
          }
 
          $vexchords = rtrim($vexchords, ",\n");
-         $returnText .= $vexchords;
+         $chordSheetText .= $vexchords;
 
-         $returnText .= "
+         $chordSheetText .= "
          ]
       }
    ];
@@ -635,16 +649,24 @@ class ChordPress_Renderer {
 
 </script>\n";
 
-         $returnText .= "<!-- ChordPress Chord Sheet End -->\n\n";
+         $chordSheetText .= "<div style=\"clear:both;\"></div><!-- ChordPress ChordSheet End -->\n\n";
       }
 
       /**
-       * End of ChordPress wrapper
+       * Build the return HTML
        */
-      $returnText .= "<!-- ChordPress End -->\n\n";
+      if ($this->showChordSheet) {
 
+         if ($this->showChordSheetOnTop) {
 
-      return $returnText;
+            $returnText = $chordSheetText . $returnText;
+         } else {
+
+            $returnText .= $chordSheetText;
+         }
+      }
+
+      return $returnText . "\n\n";
    }
 
    //--------------------------------------------------------------------------

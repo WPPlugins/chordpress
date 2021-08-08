@@ -151,6 +151,7 @@ class ChordPress_Plugin {
          $this->plugin_name . '_checkbox_hb_notation',
          $this->plugin_name . '_checkbox_show_chord_sheet',
          $this->plugin_name . '_checkbox_show_jtab_sheet',
+         $this->plugin_name . '_checkbox_show_chord_sheet_on_top',
 
          $this->plugin_name . '_select_title_level',
          $this->plugin_name . '_select_subtitle_level',
