@@ -1,7 +1,7 @@
 <?php
 
 /**
- * License management API
+ * License management
  *
  * @link       https://www.lewe.com
  * @since      2.0.0
@@ -11,7 +11,7 @@
  */
 
 /**
- * License management API.
+ * License management
  *
  * @package    ChordPress
  * @subpackage ChordPress/includes

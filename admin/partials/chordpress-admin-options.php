@@ -34,30 +34,7 @@ $pdonuri = $P->get_plugin_donation_uri();
 /**
  * Options array
  */
-$options = array (
-
-   $pname.'_checkbox_uninstall_delete',
-   $pname.'_checkbox_hide_album',
-   $pname.'_checkbox_hide_artist',
-   $pname.'_checkbox_hide_chords',
-   $pname.'_checkbox_hide_comments',
-   $pname.'_checkbox_hide_composer',
-   $pname.'_checkbox_hide_subtitle',
-   $pname.'_checkbox_hide_title',
-   $pname.'_checkbox_hide_year',
-   $pname.'_checkbox_hb_notation',
-   $pname.'_select_title_level',
-   $pname.'_select_subtitle_level',
-   $pname.'_text_meta_style',
-   $pname.'_text_chord_textcolor',
-   $pname.'_text_chord_textsize',
-   $pname.'_text_lyrics_textcolor',
-   $pname.'_text_lyrics_textsize',
-   $pname.'_text_comment_style',
-   $pname.'_text_chorus_style',
-   $pname.'_text_verse_style'
-
-);
+$options = $P->get_options();
 
 /**
  * ,--------------,
@@ -66,7 +43,8 @@ $options = array (
  */
 if (isset($_REQUEST['submit'])) {
 
-   $show_alert = false;
+   $show_alert = true;
+   $alert_style = 'success';
 
    foreach ($options as $option) {
 
@@ -74,21 +52,11 @@ if (isset($_REQUEST['submit'])) {
 
          if (get_option($option) != $_REQUEST[$option]) {
    
-            $show_alert = true;
-   
-            if (update_option($option, $_REQUEST[$option])) {
-   
-               $alert_style = 'success';
-   
-            } else {
+            if (!update_option($option, $_REQUEST[$option])) {
    
                $alert_style = 'danger';
    
             }
-   
-         } else {
-   
-            $show_alert = true;
    
          }
    
@@ -156,6 +124,7 @@ if ($show_alert) {
       <h2 class="nav-tab-wrapper">
          <a href="?page=<?php echo __FILE__;?>&tab=tab_output" class="nav-tab <?php echo $active_tab == 'tab_output' ? 'nav-tab-active cpress-tab-active' : ''; ?>"><?php echo esc_html(__('Output Options','chordpress'));?></a>
          <a href="?page=<?php echo __FILE__;?>&tab=tab_formatting" class="nav-tab <?php echo $active_tab == 'tab_formatting' ? 'nav-tab-active cpress-tab-active' : ''; ?>"><?php echo esc_html(__('Formatting Options','chordpress'));?></a>
+         <a href="?page=<?php echo __FILE__;?>&tab=tab_chord" class="nav-tab <?php echo $active_tab == 'tab_chord' ? 'nav-tab-active cpress-tab-active' : ''; ?>"><?php echo esc_html(__('Chord Diagram Options','chordpress'));?></a>
          <a href="?page=<?php echo __FILE__;?>&tab=tab_plugin" class="nav-tab <?php echo $active_tab == 'tab_plugin' ? 'nav-tab-active '.$pprefix.'-tab-active' : ''; ?>"><?php echo esc_html(__('Plugin Options','chordpress'));?></a>
       </h2>
 
@@ -174,15 +143,8 @@ if ($show_alert) {
                <tr>
                   <td scope="row" colspan="2">
                      <div class="<?php echo $pprefix;?>-callout <?php echo $pprefix;?>-callout-info">
-                        <?php echo esc_html(__('Use this tab to select what sections and directives will be part of the ChordPress output.','chordpress'));?><br>
+                        <?php echo esc_html(__('Use this tab to select what sections and directives will be part of the rendered ChordPro text output.','chordpress'));?><br>
                      </div>
-                  </td>
-               </tr>
-               <tr>
-                  <th scope="row"><?php echo esc_html(__('Hide Album','chordpress'));?></th>
-                  <td>
-                     <input type='checkbox' id='<?php echo $pname;?>_checkbox_hide_album' name='<?php echo $pname;?>_checkbox_hide_album' <?php checked( get_option($pname.'_checkbox_hide_album'), 1 ); ?> value='1'>
-                     <p class="description"><?php echo esc_html(__('With this option selected, the','chordpress'));?> <a href="https://www.chordpro.org/chordpro/Directives-album.html" target="_blank"><?php echo esc_html(__('album directive','chordpress'));?></a> <?php echo esc_html(__('will not be displayed','chordpress'));?>.</p>
                   </td>
                </tr>
                <tr>
@@ -242,6 +204,13 @@ if ($show_alert) {
                   </td>
                </tr>
                <tr>
+                  <th scope="row"><?php echo esc_html(__('Show Chord Sheet','chordpress'));?></th>
+                  <td>
+                     <input type='checkbox' id='<?php echo $pname;?>_checkbox_show_chord_sheet' name='<?php echo $pname;?>_checkbox_show_chord_sheet' <?php checked( get_option($pname.'_checkbox_show_chord_sheet'), 1 ); ?> value='1'>
+                     <p class="description"><?php echo esc_html(__('With this option selected, a chord sheet is displayed at the bottom of the rendered song, showing diagrams of each chord used in the song. This requires that you create a ','chordpress'));?> <a href="edit.php?post_type=guitar_chord" target="_blank"><?php echo esc_html(__('guitar chord post','chordpress'));?></a> <?php echo esc_html(__('for each of them','chordpress'));?>.</p>
+                  </td>
+               </tr>
+               <tr>
                   <th sope="row" colspan="2"><?php submit_button(); ?></th>
                </tr>
             </tbody>
@@ -258,7 +227,7 @@ if ($show_alert) {
                <tr>
                   <td scope="row" colspan="2">
                      <div class="<?php echo $pprefix;?>-callout <?php echo $pprefix;?>-callout-info">
-                        <?php echo esc_html(__('Use this tab to select styles and formats of the ChordPress output.','chordpress'));?><br>
+                        <?php echo esc_html(__('Use this tab to select styles and formats of the rendered ChordPro text.','chordpress'));?><br>
                      </div>
                   </td>
                </tr>
@@ -354,6 +323,174 @@ if ($show_alert) {
                   <td>
                      <input type="text" id="<?php echo $pname;?>_text_verse_style" name="<?php echo $pname;?>_text_verse_style" value="<?php echo get_option($pnmae.'_text_verse_style'); ?>" />
                      <p class="description"><?php echo esc_html(__('Enter the CSS for the','chordpress'));?> <a href="https://www.chordpro.org/chordpro/Directives-env_verse.html" target="_blank"><?php echo esc_html(__('verse sections','chordpress'));?>.</a></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th sope="row" colspan="2"><?php submit_button(); ?></th>
+               </tr>
+            </tbody>
+         </table>
+
+         <?php 
+         //  ,-----------------------------,
+         // _| Tab: Chord Diagrams Options |_
+         //
+         if ($active_tab=='tab_chord') $display = "display:block;"; else $display = "display:none;"; 
+         ?>
+         <table class="form-table" style="margin-left:16px;<?php echo $display; ?>">
+            <tbody>
+               <tr>
+                  <td scope="row" colspan="2">
+                     <div class="<?php echo $pprefix;?>-callout <?php echo $pprefix;?>-callout-info">
+                        <?php echo esc_html(__('Use this tab to specify global styles and formats for the ChordPress guitar chord diagrams. They can be overwritten by shortcode parameters.','chordpress'));?><br>
+                     </div>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_bgcolor"><?php echo esc_html(__('Background Color','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_bgcolor" name="<?php echo $pname;?>_text_chord_bgcolor" value="<?php echo get_option($pname.'_text_chord_bgcolor'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the hex code of the chord diagrams background color incl. a leading hash, e.g. #E0E0E0. Leave emtpy for the default of #FFFFFF.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_canvas_height"><?php echo esc_html(__('Canvas Height','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_canvas_height" name="<?php echo $pname;?>_text_chord_canvas_height" value="<?php echo get_option($pname.'_text_chord_canvas_height'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the height of the chord diagrams canvas in pixel. Leave emtpy for the default of 180.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_canvas_width"><?php echo esc_html(__('Canvas Width','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_canvas_width" name="<?php echo $pname;?>_text_chord_canvas_width" value="<?php echo get_option($pname.'_text_chord_canvas_width'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the width of the chord diagrams canvas in pixel. Leave emtpy for the default of 220.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_circles_radius"><?php echo esc_html(__('Circle Radius','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_circles_radius" name="<?php echo $pname;?>_text_chord_circles_radius" value="<?php echo get_option($pname.'_text_chord_circles_radius'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the circle radius of the chord diagrams canvas in pixel (where to press the string). Leave emtpy for the default of 5.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_default_color"><?php echo esc_html(__('Default Color','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_default_color" name="<?php echo $pname;?>_text_chord_default_color" value="<?php echo get_option($pname.'_text_chord_default_color'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the hex code of the chord diagrams default color incl. a leading hash, e.g. #000099. Leave emtpy for teh default of #666666.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_div_style"><?php echo esc_html(__('DIV Style','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_div_style" name="<?php echo $pname;?>_text_chord_div_style" value="<?php echo get_option($pname.'_text_chord_div_style'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the CSS styles for the div tag of chord diagrams. Leave emtpy for the default of text-align:center;.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_font_family"><?php echo esc_html(__('Font Family','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_font_family" name="<?php echo $pname;?>_text_chord_font_family" value="<?php echo get_option($pname.'_text_chord_font_family'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the CSS font family for the chord diagrams, e.g. sans-serif. Leave emtpy for the default.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_font_size"><?php echo esc_html(__('Font Size','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_font_size" name="<?php echo $pname;?>_text_chord_font_size" value="<?php echo get_option($pname.'_text_chord_font_size'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the CSS font size for the chord diagrams. Leave emtpy for the default.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_font_style"><?php echo esc_html(__('Font Style','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_font_style" name="<?php echo $pname;?>_text_chord_font_style" value="<?php echo get_option($pname.'_text_chord_font_style'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the CSS font style for the chord diagrams. Leave emtpy for the default.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_font_weight"><?php echo esc_html(__('Font Weight','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_font_weight" name="<?php echo $pname;?>_text_chord_font_weight" value="<?php echo get_option($pname.'_text_chord_font_weight'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the CSS font weight for the chord diagrams. Leave emtpy for the default.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_fret_color"><?php echo esc_html(__('Fret Color','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_fret_color" name="<?php echo $pname;?>_text_chord_fret_color" value="<?php echo get_option($pname.'_text_chord_fret_color'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the hex code of the chord diagrams fret color incl. a leading hash, e.g. #990000. Leave emtpy for the default of #666666.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_fret_width"><?php echo esc_html(__('Fret Width','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_fret_width" name="<?php echo $pname;?>_text_chord_fret_width" value="<?php echo get_option($pname.'_text_chord_fret_width'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the fret width of the chord diagrams canvas in pixel. Leave emtpy for the default of 1.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_label_color"><?php echo esc_html(__('Label Color','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_label_color" name="<?php echo $pname;?>_text_chord_label_color" value="<?php echo get_option($pname.'_text_chord_label_color'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the hex code of the chord diagrams label color incl. a leading hash, e.g. #990000. Leave emtpy for the default of #666666.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_label_weight"><?php echo esc_html(__('Label Weight','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_label_weight" name="<?php echo $pname;?>_text_chord_label_weight" value="<?php echo get_option($pname.'_text_chord_label_weight'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the CSS label weight for the chord diagrams. Leave emtpy for the default.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_name_style"><?php echo esc_html(__('Name Style','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_name_style" name="<?php echo $pname;?>_text_chord_name_style" value="<?php echo get_option($pname.'_text_chord_name_style'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the CSS styles for the name tag of chord diagrams. Leave emtpy for the default of "font-size:1.2em;text-align:center;".','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_num_strings"><?php echo esc_html(__('Number of Strings','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_num_strings" name="<?php echo $pname;?>_text_chord_num_strings" value="<?php echo get_option($pname.'_text_chord_num_strings'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the number of strings of the instrument (4 = Bass, 6 = Guitar). Leave emtpy for the default of 6.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_string_color"><?php echo esc_html(__('String Color','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_string_color" name="<?php echo $pname;?>_text_chord_string_color" value="<?php echo get_option($pname.'_text_chord_string_color'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the hex code of the chord diagrams string color incl. a leading hash, e.g. #990000. Leave emtpy for the default of #666666.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_string_width"><?php echo esc_html(__('String Width','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_string_width" name="<?php echo $pname;?>_text_chord_string_width" value="<?php echo get_option($pname.'_text_chord_string_width'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the fret width of the strings in the chord diagrams. Leave emtpy for the default of 1.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_stroke_color"><?php echo esc_html(__('Stroke Color','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_stroke_color" name="<?php echo $pname;?>_text_chord_stroke_color" value="<?php echo get_option($pname.'_text_chord_stroke_color'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the hex code of the chord diagrams stroke color (finger and fret positions) incl. a leading hash, e.g. #990000. Leave emtpy for the default of #666666.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_text_color"><?php echo esc_html(__('Text Color','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_text_color" name="<?php echo $pname;?>_text_chord_text_color" value="<?php echo get_option($pname.'_text_chord_text_color'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the hex code of the chord diagrams text color incl. a leading hash, e.g. #990000. Leave emtpy for the default of #666666.','chordpress'));?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_title_style"><?php echo esc_html(__('Title Style','chordpress'));?></label></th>
+                  <td>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_title_style" name="<?php echo $pname;?>_text_chord_title_style" value="<?php echo get_option($pname.'_text_chord_title_style'); ?>" />
+                      <p class="description"><?php echo esc_html(__('Enter the CSS styles for the title above the chord diagrams. Leave emtpy for the default of "font-size:1.2em;text-align:center;".','chordpress'));?></p>
                   </td>
                </tr>
                <tr>

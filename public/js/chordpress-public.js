@@ -88,3 +88,30 @@ function printCpress(elem) {
    return true;
    
 }
+
+/**
+ * Modal Dialog
+ *
+ * This code block handles the guitar chord modal dialogs
+ *
+ * @since       1.4.0
+ */
+// var cpress_modal = document.querySelector(".cpress-modal");
+// var cpress_trigger = document.querySelector(".cpress-trigger");
+// var cpress_closeButton = document.querySelector(".cpress-close-button");
+
+// function cpressToggleModal() {
+
+//    cpress_modal.classList.toggle("cpress-show-modal");
+
+// }
+
+// function cpressWindowOnClick(event) {
+
+//    if (event.target === cpress_modal) { cpressToggleModal(); }
+
+// }
+
+// cpress_trigger.addEventListener("click", cpressToggleModal);
+// cpress_closeButton.addEventListener("click", cpressToggleModal);
+// window.addEventListener("click", cpressWindowOnClick);

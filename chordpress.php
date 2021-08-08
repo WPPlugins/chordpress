@@ -16,7 +16,7 @@
  * Plugin Name:       ChordPress
  * Plugin URI:        https://support.lewe.com/docs/chordpress-manual/
  * Description:       This plugin renders ChordPro formatted text in WordPress sites.
- * Version:           2.0.0
+ * Version:           2.1.0
  * Author:            George Lewe
  * Author URI:        https://www.lewe.com
  * License:           GPLv3
@@ -78,6 +78,16 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-chordpress-plugin.php';
  * The ChordPress renedering class.
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-chordpress-renderer.php';
+
+/**
+ * The ChordPress chord renedering class.
+ */
+require plugin_dir_path( __FILE__ ) . 'includes/class-chordpress-chord.php';
+
+/**
+ * The ChordPress chord meta box.
+ */
+require plugin_dir_path( __FILE__ ) . 'admin/partials/chordpress-admin-chord-meta-box.php';
 
 /**
  * Begins execution of the plugin.

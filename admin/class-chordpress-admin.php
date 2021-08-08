@@ -23,6 +23,15 @@
 class ChordPress_Admin {
 
 	/**
+	 * Array of option names of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      array    $plugin_name    Array of option names of this plugin.
+	 */
+	private $options = array();
+
+	/**
 	 * The unique name (slug) of this plugin.
 	 *
 	 * @since    1.0.0
@@ -47,10 +56,11 @@ class ChordPress_Admin {
 	 * @param      string    $plugin_name    The slug of this plugin.
 	 * @param      string    $version        The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
+	public function __construct( $plugin_name, $version, $options ) {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->options = $options;
 
 	}
 
@@ -73,47 +83,94 @@ class ChordPress_Admin {
 	public function enqueue_scripts() {
 
 		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/chordpress-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name.'-vexchords', plugin_dir_url( __FILE__ ) . 'js/vexchords.js' );
 
 	}
 
 	/**
-	 * Register Settings
+	 * Register Post Types
+	 *
+	 * @since    2.1.0
+	 */
+	public function register_post_types() {
+
+      $labels = array(
+         'name'                  => _x( 'Guitar Chords', 'Post Type General Name', 'chordpress' ),
+         'singular_name'         => _x( 'Guitar Chord', 'Post Type Singular Name', 'chordpress' ),
+         'menu_name'             => __( 'Guitar Chords', 'chordpress' ),
+         'name_admin_bar'        => __( 'Guitar Chord', 'chordpress' ),
+         'archives'              => __( 'Guitar Chord Archives', 'chordpress' ),
+         'attributes'            => __( 'Guitar Chord Attributes', 'chordpress' ),
+         'parent_item_colon'     => __( 'Parent Chord:', 'chordpress' ),
+         'all_items'             => __( 'All Chords', 'chordpress' ),
+         'add_new_item'          => __( 'Add New Chord', 'chordpress' ),
+         'add_new'               => __( 'Add New', 'chordpress' ),
+         'new_item'              => __( 'New Chord', 'chordpress' ),
+         'edit_item'             => __( 'Edit Chord', 'chordpress' ),
+         'update_item'           => __( 'Update Chord', 'chordpress' ),
+         'view_item'             => __( 'View Chord', 'chordpress' ),
+         'view_items'            => __( 'View Chords', 'chordpress' ),
+         'search_items'          => __( 'Search Chord', 'chordpress' ),
+         'not_found'             => __( 'Not found', 'chordpress' ),
+         'not_found_in_trash'    => __( 'Not found in Trash', 'chordpress' ),
+         'featured_image'        => __( 'Featured Image', 'chordpress' ),
+         'set_featured_image'    => __( 'Set featured image', 'chordpress' ),
+         'remove_featured_image' => __( 'Remove featured image', 'chordpress' ),
+         'use_featured_image'    => __( 'Use as featured image', 'chordpress' ),
+         'insert_into_item'      => __( 'Insert into chord', 'chordpress' ),
+         'uploaded_to_this_item' => __( 'Uploaded to this chord', 'chordpress' ),
+         'items_list'            => __( 'Chords list', 'chordpress' ),
+         'items_list_navigation' => __( 'Chords list navigation', 'chordpress' ),
+         'filter_items_list'     => __( 'Filter chords list', 'chordpress' ),
+      );
+
+      $args = array(
+         'label'                 => __( 'Guitar Chord', 'chordpress' ),
+         'description'           => __( 'Guitar chord diagram', 'chordpress' ),
+         'labels'                => $labels,
+         'supports'              => array( 'title' ),
+         'taxonomies'            => array( 'category', 'post_tag' ),
+         'hierarchical'          => false,
+         'public'                => true,
+         'show_ui'               => true,
+         'show_in_menu'          => true,
+         'menu_position'         => 5,
+         'menu_icon'             => 'dashicons-format-audio',
+         'show_in_admin_bar'     => true,
+         'show_in_nav_menus'     => true,
+         'can_export'            => true,
+         'has_archive'           => true,
+         'exclude_from_search'   => true,
+         'publicly_queryable'    => true,
+         'capability_type'       => 'page',
+      );
+
+      register_post_type( 'guitar_chord', $args );
+
+   }
+
+	/**
+	 * Register Settings.
 	 *
 	 * @since    1.0.0
 	 */
 	public function register_settings() {
 
-      $options = array (
-
-         $this->plugin_name.'_checkbox_uninstall_delete',
-         $this->plugin_name.'_checkbox_hide_album',
-         $this->plugin_name.'_checkbox_hide_artist',
-         $this->plugin_name.'_checkbox_hide_chords',
-         $this->plugin_name.'_checkbox_hide_comments',
-         $this->plugin_name.'_checkbox_hide_composer',
-         $this->plugin_name.'_checkbox_hide_subtitle',
-         $this->plugin_name.'_checkbox_hide_title',
-         $this->plugin_name.'_checkbox_hide_year',
-         $this->plugin_name.'_checkbox_hb_notation',
-         $this->plugin_name.'_select_title_level',
-         $this->plugin_name.'_select_subtitle_level',
-         $this->plugin_name.'_text_meta_style',
-         $this->plugin_name.'_text_chord_textcolor',
-         $this->plugin_name.'_text_chord_textsize',
-         $this->plugin_name.'_text_lyrics_textcolor',
-         $this->plugin_name.'_text_lyrics_textsize',
-         $this->plugin_name.'_text_comment_style',
-         $this->plugin_name.'_text_chorus_style',
-         $this->plugin_name.'_text_verse_style',
-
-      );
-   
-      foreach ($options as $option) {
+      foreach ($this->options as $option) {
 
          add_option( $option, '');
          register_setting( $this->plugin_name.'_options_group', $option, $this->plugin_name.'_callback' );
 
       }
+
+      add_meta_box(
+         'guitar_chord_meta_box',
+         'Guitar Chord Details',
+         'display_guitar_chord_meta_box',
+         'guitar_chord',
+         'normal',
+         'high'
+      );
 
 	}
 
@@ -132,13 +189,22 @@ class ChordPress_Admin {
          null,                                                                 // The name of the function to call when rendering this menu's page (null if file ref above)
          plugin_dir_url(__FILE__).'images/icon-20x20.png'                      // The icon of the menu entry
       );
-
+      
       add_submenu_page(
          $this->plugin_name.'_admin_menu',                                     // The parent menu slug
          'ChordPress Options',                                                 // The title to be displayed in the browser window for this page.
          'Options',                                                            // The text to be displayed for this menu item
          'manage_options',                                                     // Which type of users can see this menu item
          plugin_dir_path(__FILE__).'partials/chordpress-admin-options.php',    // The unique ID for this menu item or file reference
+         null                                                                  // The name of the function to call when rendering this menu's page (null if file ref above)
+      );
+
+      add_submenu_page(
+         $this->plugin_name.'_admin_menu',                                     // The parent menu slug
+         'Guitar Chords',                                                      // The title to be displayed in the browser window for this page.
+         'Guitar Chords',                                                      // The text to be displayed for this menu item
+         'manage_options',                                                     // Which type of users can see this menu item
+         'edit.php?post_type=guitar_chord',                                    // The unique ID for this menu item or file reference
          null                                                                  // The name of the function to call when rendering this menu's page (null if file ref above)
       );
 
@@ -200,5 +266,109 @@ class ChordPress_Admin {
       return $links;
 
 	}
+
+   /**
+    * Save guitar chord post type
+    *
+    * @since 2.1.0
+    *
+    * @param  int     $post_id
+    * @return void    
+    */
+    public function save_guitar_chord( $post_id ) {
+
+      if ( ! current_user_can( 'edit_post', $post_id ) ) {
+         return;
+      }
+   
+      if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
+         return;
+      }
+
+      $post = get_post( $post_id );
+      
+      if ( 'guitar_chord' == $_POST['post_type'] && $post->post_type == 'guitar_chord' ) {
+
+         $meta_options = array (
+            'guitar_chord_shortname',
+            'guitar_chord_position',
+            'guitar_chord_tuning',
+            'guitar_chord_single_frets',
+            'guitar_chord_single_labels',
+            'guitar_chord_barre_frets',
+         );
+         
+         foreach ($meta_options as $meta_option) {
+         
+            update_post_meta( $post_id, $meta_option, sanitize_text_field( $_POST[$meta_option] ) );
+
+         }
+
+      }
+   
+   }
+
+   /**
+    * Set guitar chord columns
+    *
+    * @since 2.1.0
+    *
+    * @param  int      $post_id
+    * @return array    Post columns
+    */
+    public function set_guitar_chords_columns( $columns ) {
+
+      $mycolumns = array(
+         'guitar_chord_shortname' => __( 'Shortname', 'chordpress'),
+         'guitar_chord_position' => __( 'Position', 'chordpress' )
+      );
+      
+      $columns = $this->array_insert_after($columns, 'title', $mycolumns);
+
+      return $columns;   
+   }
+
+   /**
+    * Show guitar chord column
+    *
+    * @since 2.1.0
+    *
+    * @param  string    $column    Column ID
+    * @param  int     $post_id
+    */
+   public function show_guitar_chord_column( $column, $post_id ) {
+
+      switch ( $column ) {
+  
+         case 'guitar_chord_shortname' :
+            echo get_post_meta( $post_id , 'guitar_chord_shortname' , true ); 
+            break;
+  
+         case 'guitar_chord_position' :
+            echo get_post_meta( $post_id , 'guitar_chord_position' , true ); 
+            break;
+  
+      }
+   }
+
+   /**
+    * Insert a value or key/value pair after a specific key in an array.
+    * If key doesn't exist, value is appended to the end of the array.
+    *
+    * @param array     $array
+    * @param string    $key
+    * @param array     $new
+    *
+    * @return array
+    */
+   private function array_insert_after( array $array, $key, array $new ) {
+
+      $keys = array_keys( $array );
+      $index = array_search( $key, $keys );
+      $pos = false === $index ? count( $array ) : $index + 1;
+
+      return array_merge( array_slice( $array, 0, $pos ), $new, array_slice( $array, $pos ) );
+
+   }   
 
 }

@@ -24,8 +24,23 @@
       //
 		menu_array.push({
 
-         text:"Add ChordPress shortcut",
+         text:"[chordpress]",
          value:'[chordpress float="none" format="yes" hbnotation="no" interactive="no" transpose="0"]%content%[/chordpress]',
+         onclick:function() {
+            var selected_text = editor.selection.getContent({'format': 'html'});
+            return_text = this.value().replace("%content%", selected_text);
+            editor.execCommand('mceReplaceContent', false, return_text);
+         }
+
+      });
+
+      //
+      // Chordpress Chord
+      //
+		menu_array.push({
+
+         text:"[chordpress-chord]",
+         value:'[chordpress-chord chord="99"]',
          onclick:function() {
             var selected_text = editor.selection.getContent({'format': 'html'});
             return_text = this.value().replace("%content%", selected_text);

@@ -9,13 +9,14 @@ Requires PHP: 5.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
  
-ChordPress for WordPress pretty-prints ChordPro formatted text files on your pages or posts.
+ChordPress for WordPress pretty-prints ChordPro formatted text and chord diagrams on your pages or posts.
 
 == Description ==
 ChordPress pretty-prints ChordPro formatted text files on your pages and posts. You can configure output and formatting options. With 'interactive' mode on, you can transpose the chords up and down and also print the output right from the page.
 
-Your input to ChordPress needs to be a valid ChordPro formatted text. ChordPro is a simple text-based syntax used to write lead sheets, the lyrics and chords of a song. ChordPro also comes with a command line tool that pretty prints that text into other formats like PDF.
+ChordPress 2.1 introduced "[Vexchords](https://github.com/0xfe/vexchords "Vexchords")", an awesome Javascript library for displaying guitar chord diagrams. Create your own guitar chord diagrams via a new post type and display them using shortcodes. Or enable the Chord Sheet option that will show all chords used in a song as diagrams below the rendered ChordPro text (given that you have created them as guitar chord posts).
 
+Your input to ChordPress needs to be a valid ChordPro formatted text. ChordPro is a simple text-based syntax used to write lead sheets, the lyrics and chords of a song. ChordPro also comes with a command line tool that pretty prints that text into other formats like PDF.
 You can read all about ChordPro here:
 [ChordPro](https://www.chordpro.org/chordpro/ChordPro-File-Format-Specification.html "ChordPro file format specification")
 
@@ -25,13 +26,21 @@ Simply insert a ChordPro text inbetween the [chordpress] and [/chordpress] tags 
 
 A TinyMCE editor integration is also included, providing an editor menu button to insert the shortcode for you with its default paramaters, e.g. wrapping it around selected text.
 
-The shortags allow specifying custom options that will overwrite the defaults. For example:
+The `[chordpress]` shortag allows specifying custom options for rendering ChordPro texts. For example:
 
 1. `[chordpress transpose="1"]` will transpose the chords rendered by one semitone.
 2. `[chordpress interactive="yes"]` will allow you to transpose the chords up and down and also print the output right from the rendered page.
 
 Check out this example:
-[Chordpress Demo](https://sayandsound.lewe.com/heart-of-gold/ "Chordpress Demo")
+[ChordPress Demo](https://sayandsound.lewe.com/heart-of-gold/ "ChordPress Demo")
+
+The `[chordpress-chord]` shortag allows you to display a guitar chord as a diagram. For example:
+
+1. `[chordpress-chord chord="112"]` will show the guitar chord post with ID 112 as a diagram.
+1. `[chordpress-chord chord="100" strokeColor="#000099" canvaswidth="100" canvasheight="100" titlestyle="font-size:1em;text-align:center;"]` will show the guitar chord post with ID 100 as a diagram with custom settings.
+
+Check out this example:
+[ChordPress Guitar Chord Demo](https://sayandsound.lewe.com/guitar-chords/ "ChordPress Guitar Chord Demo")
 
 If not from the WordPress marketplace, get the plugin here: 
 [ChordPress Homepage](https://www.lewe.com/chordpress/ "ChordPress Homepage")
@@ -96,6 +105,7 @@ Ahkâm for the beautiful [ChordPress Plugin Icon](https://www.freeiconspng.com/i
 2. ChordPress Formatting Options
 3. Shortcut with ChordPro text in editor
 4. Rendered text on webpage
+5. Optional chord sheet for each song
 
 == Frequently Asked Questions ==
 = Why are empty ChordPro lines not rendered ? =
