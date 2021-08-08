@@ -175,6 +175,15 @@ class ChordPress_Renderer {
    private $lyricsTextsize;
 
    /**
+    * CSS styles for lyrics.
+    *
+    * @since    2.3.0
+    * @access   private
+    * @var      string    $lyricsStyle    CSS styles for lyrics.
+    */
+   private $lyricsStyle;
+
+   /**
     * CSS styles for comments.
     *
     * @since    1.0.0
@@ -321,10 +330,8 @@ class ChordPress_Renderer {
       if (!$this->titleLevel = get_option('chordpress_select_title_level')) $this->titleLevel = 'h1';
       if (!$this->subtitleLevel = get_option('chordpress_select_subtitle_level')) $this->subtitleLevel = 'h2';
       if (!$this->metaStyle = get_option('chordpress_text_meta_style')) $this->metaStyle = '';
-      if (!$this->chordTextcolor = get_option('chordpress_text_chord_textcolor')) $this->chordTextColor = 'inherit';
-      if (!$this->chordTextsize = get_option('chordpress_text_chord_textsize')) $this->chordTextSize = 'inherit';
-      if (!$this->lyricsTextcolor = get_option('chordpress_text_lyrics_textcolor')) $this->lyricsTextColor = 'inherit';
-      if (!$this->lyricsTextsize = get_option('chordpress_text_lyrics_textsize')) $this->lyricsTextSize = 'inherit';
+      if (!$this->chordStyle = get_option('chordpress_text_chord_style')) $this->chordStyle = '';
+      if (!$this->lyricsStyle = get_option('chordpress_text_lyrics_style')) $this->lyricsStyle = '';
       if (!$this->commentStyle = get_option('chordpress_text_comment_style')) $this->commentStyle = '';
       if (!$this->chorusStyle = get_option('chordpress_text_chorus_style')) $this->chorusStyle = '';
       if (!$this->verseStyle = get_option('chordpress_text_verse_style')) $this->verseStyle = '';
@@ -343,7 +350,7 @@ class ChordPress_Renderer {
 
          $line = trim($this->stripTags($line));
 
-         if ($line[0] == '{') {
+         if (strlen($line) && $line[0] == '{') {
 
             /**
              * Line starts with "{": It's a directive
@@ -444,10 +451,10 @@ class ChordPress_Renderer {
          div.cpress { float: ' . $this->float . '; }
          div.cpress_line { margin: 1em 0 1em 0; }
          div.cpress_line_section { display: inline; float: left; }
-         div.cpress_line_section .chord { color: ' . $this->chordTextcolor . '; font-size: ' . $this->chordTextsize . '; }
-         div.cpress_line_section .lyric { color: ' . $this->lyricsTextcolor . '; font-size: ' . $this->lyricsTextsize . '; }
-         div.cpress_chorus { ' . $this->chorusStyle . ' }
-         div.cpress_verse { ' . $this->verseStyle . ' }
+         div.cpress_line_section .chord { ' . $this->chordStyle . '; }
+         div.cpress_line_section .lyric { ' . $this->lyricsStyle . '; }
+         div.cpress_chorus { ' . $this->chorusStyle . '; }
+         div.cpress_verse { ' . $this->verseStyle . '; }
          div.cpress_clear { clear: both; }
          div.cpress_meta { ' . $this->metaStyle . ' }
          div.cpress_interaction { float: right; }

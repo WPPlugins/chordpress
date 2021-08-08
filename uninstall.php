@@ -54,10 +54,8 @@ $options = array (
    $pname.'_select_title_level',
    $pname.'_select_subtitle_level',
    $pname.'_text_meta_style',
-   $pname.'_text_chord_textcolor',
-   $pname.'_text_chord_textsize',
-   $pname.'_text_lyrics_textcolor',
-   $pname.'_text_lyrics_textsize',
+   $pname.'_text_chord_style',
+   $pname.'_text_lyrics_style',
    $pname.'_text_comment_style',
    $pname.'_text_chorus_style',
    $pname.'_text_verse_style'

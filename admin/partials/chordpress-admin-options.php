@@ -280,56 +280,42 @@ if ($show_alert) {
                   <th scope="row"><label for="<?php echo $pname;?>_text_meta_style"><?php echo esc_html(__('Meta Information Style','chordpress'));?></label></th>
                   <td>
                      <input type="text" id="<?php echo $pname;?>_text_meta_style" name="<?php echo $pname;?>_text_meta_style" value="<?php echo get_option($pname.'_text_meta_style'); ?>" />
-                     <p class="description"><?php echo esc_html(__('Enter additional CSS for the meta header block, e.g.: font-style: italic;','chordpress'));?></p>
+                     <p class="description"><?php echo esc_html(__('Enter CSS for the meta header block, e.g.: font-style: italic;','chordpress'));?></p>
                   </td>
                </tr>
                <tr>
-                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_textcolor"><?php echo esc_html(__('Chord Text Color','chordpress'));?></label></th>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_style"><?php echo esc_html(__('Chord Style','chordpress'));?></label></th>
                   <td>
-                     <input type="text" id="<?php echo $pname;?>_text_chord_textcolor" name="<?php echo $pname;?>_text_chord_textcolor" value="<?php echo get_option($pname.'_text_chord_textcolor'); ?>" />
-                     <p class="description"><?php echo esc_html(__('Enter the hex code of the chord text color incl. a leading hash, e.g. #990000. Leave emtpy or enter "inherit" to use your theme default.','chordpress'));?></p>
+                     <input type="text" id="<?php echo $pname;?>_text_chord_style" name="<?php echo $pname;?>_text_chord_style" value="<?php echo get_option($pname.'_text_chord_style'); ?>" />
+                     <p class="description"><?php echo esc_html(__('Enter CSS for the chords here or leave empty to use the page default.','chordpress'));?></p>
                   </td>
                </tr>
                <tr>
-                  <th scope="row"><label for="<?php echo $pname;?>_text_chord_textsize"><?php echo esc_html(__('Chord Text Size','chordpress'));?></label></th>
+                  <th scope="row"><label for="<?php echo $pname;?>_text_lyrics_style"><?php echo esc_html(__('Lyrics Style','chordpress'));?></label></th>
                   <td>
-                     <input type="text" id="<?php echo $pname;?>_text_chord_textsize" name="<?php echo $pname;?>_text_chord_textsize" value="<?php echo get_option($pname.'_text_chord_textsize'); ?>" />
-                     <p class="description"><?php echo esc_html(__('Enter the text size of the chords in pixel, em or percent, e.g. 150%. Leave emtpy or enter "inherit" to use your theme default.','chordpress'));?></p>
-                  </td>
-               </tr>
-               <tr>
-                  <th scope="row"><label for="<?php echo $pname;?>_text_lyrics_textcolor"><?php echo esc_html(__('Lyrics Text Color','chordpress'));?></label></th>
-                  <td>
-                     <input type="text" id="<?php echo $pname;?>_text_lyrics_textcolor" name="<?php echo $pname;?>_text_lyrics_textcolor" value="<?php echo get_option($pname.'_text_lyrics_textcolor'); ?>" />
-                     <p class="description"><?php echo esc_html(__('Enter the hex code of the lyrics text color incl. a leading hash, e.g. #990000. Leave emtpy or enter "inherit" to use your theme default.','chordpress'));?></p>
-                  </td>
-               </tr>
-               <tr>
-                  <th scope="row"><label for="<?php echo $pname;?>_text_lyrics_textsize"><?php echo esc_html(__('Lyrics Text Size','chordpress'));?></label></th>
-                  <td>
-                     <input type="text" id="<?php echo $pname;?>_text_lyrics_textsize" name="<?php echo $pname;?>_text_lyrics_textsize" value="<?php echo get_option($pname.'_text_lyrics_textsize'); ?>" />
-                     <p class="description"><?php echo esc_html(__('Enter the text size of the lyrics in pixel, em or percent, e.g. 150%. Leave emtpy or enter "inherit" to use your theme default.','chordpress'));?></p>
+                     <input type="text" id="<?php echo $pname;?>_text_lyrics_style" name="<?php echo $pname;?>_text_lyrics_style" value="<?php echo get_option($pname.'_text_lyrics_style'); ?>" />
+                     <p class="description"><?php echo esc_html(__('Enter CSS for the lyrics here or leave empty to use the page default.','chordpress'));?></p>
                   </td>
                </tr>
                <tr>
                   <th scope="row"><label for="<?php echo $pname;?>_text_comment_style"><?php echo esc_html(__('Comment Style','chordpress'));?></label></th>
                   <td>
                      <input type="text" id="<?php echo $pname;?>_text_comment_style" name="<?php echo $pname;?>_text_comment_style" value="<?php echo get_option($pname.'_text_comment_style'); ?>" />
-                     <p class="description"><?php echo esc_html(__('Enter the CSS for comments, e.g.: background-color: #606060; font-style: italic; padding: 4px;','chordpress'));?></p>
+                     <p class="description"><?php echo esc_html(__('Enter CSS for comments, e.g.: background-color: #606060; font-style: italic; padding: 4px;','chordpress'));?></p>
                   </td>
                </tr>
                <tr>
                   <th scope="row"><label for="<?php echo $pname;?>_text_chorus_style"><?php echo esc_html(__('Chorus Style','chordpress'));?></label></th>
                   <td>
                      <input type="text" id="<?php echo $pname;?>_text_chorus_style" name="<?php echo $pname;?>_text_chorus_style" value="<?php echo get_option($pname.'_text_chorus_style'); ?>" />
-                     <p class="description"><?php echo esc_html(__('Enter the CSS for the','chordpress'));?> <a href="https://www.chordpro.org/chordpro/Directives-env_chorus.html" target="_blank"><?php echo esc_html(__('chorus sections','chordpress'));?>.</a></p>
+                     <p class="description"><?php echo esc_html(__('Enter CSS for the','chordpress'));?> <a href="https://www.chordpro.org/chordpro/Directives-env_chorus.html" target="_blank"><?php echo esc_html(__('chorus sections','chordpress'));?>.</a></p>
                   </td>
                </tr>
                <tr>
                   <th scope="row"><label for="<?php echo $pname;?>_text_verse_style"><?php echo esc_html(__('Verse Style','chordpress'));?></label></th>
                   <td>
                      <input type="text" id="<?php echo $pname;?>_text_verse_style" name="<?php echo $pname;?>_text_verse_style" value="<?php echo get_option($pnmae.'_text_verse_style'); ?>" />
-                     <p class="description"><?php echo esc_html(__('Enter the CSS for the','chordpress'));?> <a href="https://www.chordpro.org/chordpro/Directives-env_verse.html" target="_blank"><?php echo esc_html(__('verse sections','chordpress'));?>.</a></p>
+                     <p class="description"><?php echo esc_html(__('Enter CSS for the','chordpress'));?> <a href="https://www.chordpro.org/chordpro/Directives-env_verse.html" target="_blank"><?php echo esc_html(__('verse sections','chordpress'));?>.</a></p>
                   </td>
                </tr>
                <tr>
