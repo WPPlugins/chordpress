@@ -3,7 +3,7 @@ Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
-Tested up to: 5.6
+Tested up to: 5.8
 Stable tag: trunk
 Requires PHP: 5.2.4
 License: GPLv3

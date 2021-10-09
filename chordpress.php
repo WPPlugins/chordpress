@@ -16,7 +16,7 @@
  * Plugin Name:       ChordPress
  * Plugin URI:        https://support.lewe.com/docs/chordpress-manual/
  * Description:       This plugin renders ChordPro formatted text and chord diagrams in WordPress sites.
- * Version:           2.4.0
+ * Version:           2.4.1
  * Author:            George Lewe
  * Author URI:        https://www.lewe.com
  * License:           GPLv3
@@ -28,19 +28,19 @@
 /**
  * If this file is called directly, abort.
  */
-if ( !defined('WPINC') ) die;
+if (!defined('WPINC')) die;
 
 /**
  * Current plugin version.
  * Based on SemVer - https://semver.org
  */
-define( 'CHORDPRESS_VERSION', '2.3.1' );
+define('CHORDPRESS_VERSION', '2.4.1');
 
 /**
  * Plugin requires licensing.
  * This will enable/disable licensing features.
  */
-define( 'CHORDPRESS_LICENSE_REQUIRED', false );
+define('CHORDPRESS_LICENSE_REQUIRED', false);
 
 /**
  * The code that runs during plugin activation.
@@ -48,11 +48,10 @@ define( 'CHORDPRESS_LICENSE_REQUIRED', false );
  */
 function activate_chordpress() {
 
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-chordpress-activator.php';
+   require_once plugin_dir_path(__FILE__) . 'includes/class-chordpress-activator.php';
    ChordPress_Activator::activate();
-   
 }
-register_activation_hook( __FILE__, 'activate_chordpress' );
+register_activation_hook(__FILE__, 'activate_chordpress');
 
 /**
  * The code that runs during plugin deactivation.
@@ -60,32 +59,31 @@ register_activation_hook( __FILE__, 'activate_chordpress' );
  */
 function deactivate_chordpress() {
 
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-chordpress-deactivator.php';
+   require_once plugin_dir_path(__FILE__) . 'includes/class-chordpress-deactivator.php';
    ChordPress_Deactivator::deactivate();
-   
 }
-register_deactivation_hook( __FILE__, 'deactivate_chordpress' );
+register_deactivation_hook(__FILE__, 'deactivate_chordpress');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-chordpress-plugin.php';
+require plugin_dir_path(__FILE__) . 'includes/class-chordpress-plugin.php';
 
 /**
  * The ChordPress renedering class.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-chordpress-renderer.php';
+require plugin_dir_path(__FILE__) . 'includes/class-chordpress-renderer.php';
 
 /**
  * The ChordPress chord renedering class.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-chordpress-chord.php';
+require plugin_dir_path(__FILE__) . 'includes/class-chordpress-chord.php';
 
 /**
  * The ChordPress chord meta box.
  */
-require plugin_dir_path( __FILE__ ) . 'admin/partials/chordpress-admin-chord-meta-box.php';
+require plugin_dir_path(__FILE__) . 'admin/partials/chordpress-admin-chord-meta-box.php';
 
 /**
  * Begins execution of the plugin.
@@ -98,8 +96,7 @@ require plugin_dir_path( __FILE__ ) . 'admin/partials/chordpress-admin-chord-met
  */
 function run_chordpress() {
 
-	$plugin = new ChordPress_Plugin();
-	$plugin->run();
-
+   $plugin = new ChordPress_Plugin();
+   $plugin->run();
 }
 run_chordpress();
