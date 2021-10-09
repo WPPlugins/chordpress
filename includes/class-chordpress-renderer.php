@@ -206,7 +206,7 @@ class ChordPress_Renderer {
     *
     * @since    1.0.0
     * @access   private
-    * @var      string    $chorusStyle    CSS styles for the verse sections.
+    * @var      string    $verseStyle    CSS styles for the verse sections.
     */
    private $verseStyle;
 
@@ -224,25 +224,52 @@ class ChordPress_Renderer {
     *
     * @since    1.0.0
     * @access   private
-    * @var      string    $float    Shortcode directive hbNotation: no/yes.
+    * @var      string    $hbNotation    Shortcode directive hbNotation: no/yes.
     */
    private $hbNotation;
 
    /**
-    * Show Chord Sheet.
+    * Show Chord Sheet for Vexchords.
     *
     * @since    2.1.0
     * @access   private
-    * @var      string    $float    Show Chord Sheet: no/yes.
+    * @var      string    $showChordSheet    Show Chord Sheet: no/yes.
     */
    private $showChordSheet;
+
+   /**
+    * Show Chord Sheet for jTab.
+    *
+    * @since    2.1.0
+    * @access   private
+    * @var      string    $showjTabSheet    Show jTab Sheet: no/yes.
+    */
+   private $showjTabSheet;
+
+   /**
+    * Show Chord Sheet for jTab.
+    *
+    * @since    2.5.0
+    * @access   private
+    * @var      string    $jTabColor    CSS value for jTab chord text color
+    */
+   private $jTabColor;
+
+   /**
+    * Show Chord Sheet for jTab.
+    *
+    * @since    2.5.0
+    * @access   private
+    * @var      string    $jTabBgColor    CSS value for jTab chord background color
+    */
+   private $jTabBgColor;
 
    /**
     * Shortcode directive interactive: no/yes.
     *
     * @since    1.5.0
     * @access   private
-    * @var      string    $float    Shortcode directive interactive: no/yes.
+    * @var      string    $interactive    Shortcode directive interactive: no/yes.
     */
    private $interactive;
 
@@ -251,7 +278,7 @@ class ChordPress_Renderer {
     *
     * @since    1.0.0
     * @access   private
-    * @var      string    $float    Shortcode directive transpose: 0-11 (semitones).
+    * @var      string    $transpose    Shortcode directive transpose: 0-11 (semitones).
     */
    private $transpose;
 
@@ -302,6 +329,7 @@ class ChordPress_Renderer {
    public function __construct() {
 
       $this->C = new ChordPress_Chord();
+      $this->JT = new ChordPress_jTab();
 
       /**
        * Shortcode Defaults
@@ -324,6 +352,7 @@ class ChordPress_Renderer {
       if (!$this->hideYear = get_option('chordpress_checkbox_hide_year')) $this->hideYear = 0;
       if (!$this->displayHBNotation = get_option('chordpress_checkbox_hb_notation')) $this->displayHBNotation = 0;
       if (!$this->showChordSheet = get_option('chordpress_checkbox_show_chord_sheet')) $this->showChordSheet = 0;
+      if (!$this->showjTabSheet = get_option('chordpress_checkbox_show_jtab_sheet')) $this->showjTabSheet = 0;
       if (!$this->showChordSheetOnTop = get_option('chordpress_checkbox_show_chord_sheet_on_top')) $this->showChordSheetOnTop = 0;
 
       if (!$this->titleLevel = get_option('chordpress_select_title_level')) $this->titleLevel = 'h1';
@@ -334,6 +363,10 @@ class ChordPress_Renderer {
       if (!$this->commentStyle = get_option('chordpress_text_comment_style')) $this->commentStyle = '';
       if (!$this->chorusStyle = get_option('chordpress_text_chorus_style')) $this->chorusStyle = '';
       if (!$this->verseStyle = get_option('chordpress_text_verse_style')) $this->verseStyle = '';
+
+      if (!$this->jTabChordsPerRow = get_option('chordpress_number_jtab_chords_per_row')) $this->jTabChordsPerRow = 6;
+      if (!$this->jTabColor = get_option('chordpress_text_jtab_color')) $this->jTabColor = 'inherit';
+      if (!$this->jTabBgColor = get_option('chordpress_text_jtab_bgcolor')) $this->jTabBgColor = 'inherit';
    }
 
    //--------------------------------------------------------------------------
@@ -541,13 +574,12 @@ class ChordPress_Renderer {
       $returnText .= "</div> <!-- ChordPress SongSheet End -->\n";
 
       /**
-       * Build chord sheet
+       * Build chord sheet from Vexchords
        */
       if ($this->showChordSheet) {
 
          $chordSheetText = "";
          $this->uniqueChords = array_unique($this->allChords);
-         // die($this->pretty_dump($this->uniqueChords));
 
          $vexchords = "";
          $chordSheetText .= "\n<!-- ChordPress ChordSheet Start -->\n";
@@ -659,16 +691,69 @@ class ChordPress_Renderer {
       }
 
       /**
-       * Build the return HTML
+       * Build chord sheet from jTab
        */
-      if ($this->showChordSheet) {
+      if ($this->showjTabSheet) {
+
+         $jTabSheetText = "\n<!-- ChordPress jTabSheet Start -->\n";
+         $jTabSheetText .= "<div><hr></div>\n";
+         $jTabSheetText .= "<p>" . esc_html(__('These known chords are used in this song', 'chordpress')) . ".</p>";
+
+
+         // die($this->pretty_dump($this->JT->chords));
+         $phrase = '';
+         $count = 0;
+         $chordsPerRow = $this->jTabChordsPerRow;
+         $this->uniqueChords = array_unique($this->allChords);
+         foreach ($this->uniqueChords as $uc) {
+
+            if (in_array($uc, $this->JT->chords)) {
+
+               $phrase .= $uc . " / ";
+               $count++;
+            }
+
+            if ($count >= $chordsPerRow) {
+
+               $jTabSheetText .= '<div class=\'jtab\' style="color:' . $this->jTabColor . ';background-color:' . $this->jTabBgColor . ';">' . $phrase . '</div>';
+               $phrase = '';
+               $count = 0;
+            }
+         }
+         $jTabSheetText .= '<div class=\'jtab\' style="color:' . $this->jTabColor . ';background-color:' . $this->jTabBgColor . ';">' . $phrase . '</div>';
+         $jTabSheetText .= "<div style=\"clear:both;\"></div>\n<!-- ChordPress jTabSheet End -->\n\n";
+      }
+
+      /**
+       * Build and return final HTML
+       */
+      if ($this->showChordSheet || $this->showjTabSheet) {
 
          if ($this->showChordSheetOnTop) {
 
-            $returnText = $chordSheetText . $returnText;
+            if ($this->showChordSheet && $this->showjTabSheet) {
+
+               $returnText = $chordSheetText . $jTabSheetText . $returnText;
+            } elseif ($this->showChordSheet) {
+
+               $returnText = $chordSheetText . $returnText;
+            } else {
+
+               // die($this->pretty_dump($jTabSheetText));
+               $returnText = $jTabSheetText . $returnText;
+            }
          } else {
 
-            $returnText .= $chordSheetText;
+            if ($this->showChordSheet && $this->showjTabSheet) {
+
+               $returnText .= $chordSheetText . $jTabSheetText;
+            } elseif ($this->showChordSheet) {
+
+               $returnText .= $chordSheetText;
+            } else {
+
+               $returnText .= $jTabSheetText;
+            }
          }
       }
 

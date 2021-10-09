@@ -14,7 +14,9 @@ ChordPress for WordPress pretty-prints ChordPro formatted text and chord diagram
 == Description ==
 ChordPress pretty-prints ChordPro formatted text files on your pages and posts. You can configure output and formatting options. With 'interactive' mode on, you can transpose the chords up and down and also print the output right from the page.
 
-ChordPress 2.1 introduced "[Vexchords](https://github.com/0xfe/vexchords "Vexchords")", an awesome Javascript library for displaying guitar chord diagrams. Create your own guitar chord diagrams via a new post type and display them using shortcodes. Or enable the Chord Sheet option that will show all chords used in a song as diagrams below the rendered ChordPro text (given that you have created them as guitar chord posts).
+ChordPress 2.1 introduced "[VexChords](https://github.com/0xfe/vexchords "VexChords")", an awesome Javascript library for displaying guitar chord diagrams. Create your own guitar chord diagrams via a new post type and display them using shortcodes. Or enable the Chord Sheet option that will show all chords used in a song as diagrams below the rendered ChordPro text (given that you have created them as guitar chord posts).
+
+ChordPress 2.5 introduced "[jTab](https://jtab.tardate.com "jTab")", another stunning Javascript library for displaying guitar chord and score diagrams. You can display them using shortcodes.
 
 Your input to ChordPress needs to be a valid ChordPro formatted text. ChordPro is a simple text-based syntax used to write lead sheets, the lyrics and chords of a song. ChordPro also comes with a command line tool that pretty prints that text into other formats like PDF.
 You can read all about ChordPro here:
@@ -99,6 +101,7 @@ Choose your preferred support channel:
 == Credits ==
 [@rlisle](https://profiles.wordpress.org/rlisle/ "@rlisle") for his work on the ChordsAndLyrics plugin that he created in 2009.
 Ahkâm for the beautiful [ChordPress Plugin Icon](https://www.freeiconspng.com/img/17579 "ChordPress Plugin Icon").
+The fine people at [VexChords](https://github.com/0xfe/vexchords "VexChords") and [jTab](https://jtab.tardate.com "jTab").
 
 == Screenshots ==
 1. ChordPress Output Options
@@ -127,6 +130,12 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 2.5.1 (2021-08-08) =
+* Added missing class file
+
+= 2.5.0 (2021-08-05) =
+* jTab support
+
 = 2.4.2 (2021-08-05) =
 * Number of strings bugfix
 

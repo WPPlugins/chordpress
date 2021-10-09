@@ -73,6 +73,15 @@ class ChordPress_Public {
 
       wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/chordpress-public.js', array('jquery'), $this->version, null);
       wp_enqueue_script($this->plugin_name . '-vexchords', plugin_dir_url(__FILE__) . 'js/vexchords.js');
+
+      wp_register_script('chordpress_prototype', plugin_dir_url(__FILE__) . "js/prototype.js", array('jquery'), false, true);
+      wp_enqueue_script('chordpress_prototype');
+      wp_register_script('chordpress_raphael', plugin_dir_url(__FILE__) . "js/raphael.js", array('jquery'), false, true);
+      wp_enqueue_script('chordpress_raphael');
+      wp_register_script('chordpress_jtab', plugin_dir_url(__FILE__) . "js/jtab.js", array('jquery'), false, true);
+      wp_enqueue_script('chordpress_jtab');
+      wp_register_script('chordpress_form', plugin_dir_url(__FILE__) . "js/form.js", array('jquery'), false, true);
+      wp_enqueue_script('chordpress_form');
    }
 
    /**
@@ -317,6 +326,84 @@ class ChordPress_Public {
       /** 
        * Return output
        */
+      return $output;
+   }
+
+   /**
+    * Shortcode: chordpress-jtab.
+    * 
+    * jTab phrase examples:
+    * E / / / | Am / B / || 
+    * A x.0.2.2.3.0 $2 2 0 2 3 5/3 A B Cdim
+    * Bm $3 4 4h5p3h4 5 $2 3 5 7 7h8p7 5/7 | A $4 7 9 $3 7 6 $5 9 $4 7h9 7 $5 9\7 5/7 ||
+    *
+    * @param  array   $atts       Array of settings from shortcode
+    * @param  string  $content    Content wrapped in shortcode
+    * @return string              Formatted HTML to display on page
+    */
+   function shortcode_chordpress_jtab($atts, $content = null, $tag = '') {
+
+      /**
+       * Get shortcode arguments and change to lower case
+       */
+      $atts = array_change_key_case((array)$atts, CASE_LOWER);
+
+      /**
+       * Set shortcode argument defaults
+       */
+      $args = shortcode_atts(
+         [
+            'buttontext' => 'Show jTab',
+            'color' => '',
+            'form' => 'false',
+            'id' => '',
+            'phrase' => '',
+         ],
+         $atts,
+         $tag
+      );
+
+
+      /**
+       * Provide option to id the object
+       */
+      $divid = "";
+      if (strlen($args['id'])) {
+
+         $divid = " id='" . $args['id'] . "' ";
+      }
+
+      /**
+       * Overwrite divid cause form script expects id=jtab
+       */
+      if ($args['form'] == 'true') {
+
+         $divid = " id='jtab' ";
+      }
+
+      /**
+       * Allow coloring
+       */
+      $color = "";
+      if (strlen($args['color'])) {
+
+         $color = " style='color:" . $args['color'] . ";' ";
+      }
+
+
+      $output = "\n\n<!-- ChorDpress jTab Shortcode Beginn -->\n";
+      $output .= '<div class=\'jtab\'' . $color . $divid . '>' . $args['phrase'] . '</div>';
+
+      if ($args['form'] == 'true') {
+
+         $output = '
+            <input id="jtab_phrase" type="text" class="jtab-input" size="40" value="' . $args['phrase'] . '">
+            <input id="jtab_button" type="button" class="cpress-btn cpress-btn-primary" value="' . $args['buttontext'] . '">
+            ' . $output;
+      }
+
+      $output .= "\n<!-- ChorDpress jTab Shortcode End -->\n";
+
       return $output;
    }
 
