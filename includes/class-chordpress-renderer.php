@@ -365,8 +365,8 @@ class ChordPress_Renderer {
       if (!$this->verseStyle = get_option('chordpress_text_verse_style')) $this->verseStyle = '';
 
       if (!$this->jTabChordsPerRow = get_option('chordpress_number_jtab_chords_per_row')) $this->jTabChordsPerRow = 6;
-      if (!$this->jTabColor = get_option('chordpress_text_jtab_color')) $this->jTabColor = 'inherit';
-      if (!$this->jTabBgColor = get_option('chordpress_text_jtab_bgcolor')) $this->jTabBgColor = 'inherit';
+      if (!$this->jTabColor = get_option('chordpress_text_jtab_color')) $this->jTabColor = '#000000';
+      if (!$this->jTabBgColor = get_option('chordpress_text_jtab_bgcolor')) $this->jTabBgColor = '#ffffff';
    }
 
    //--------------------------------------------------------------------------
@@ -1542,6 +1542,7 @@ class ChordPress_Renderer {
     */
    private function load_guitar_chord($postid) {
 
+      $my_chord = array();
       $post = get_post($postid);
 
       /**

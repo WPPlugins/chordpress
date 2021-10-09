@@ -28,6 +28,7 @@ $pname = $P->get_plugin_name();
 $pprefix = $P->get_plugin_prefix();
 $puri = $P->get_plugin_uri();
 $pdonuri = $P->get_plugin_donation_uri();
+$show_alert = false;
 
 // $P->pretty_dump($_REQUEST);
 
@@ -200,13 +201,19 @@ if ($show_alert) {
                   <td>
                      <input type='checkbox' id='<?php echo $pname; ?>_checkbox_show_chord_sheet' name='<?php echo $pname; ?>_checkbox_show_chord_sheet' <?php checked(get_option($pname . '_checkbox_show_chord_sheet'), 1); ?> value='1'>
                      <p class="description"><?php echo esc_html(__('With this option selected, a chord sheet is displayed at the bottom or top of the rendered song, showing ', 'chordpress')); ?> <a href="https://github.com/0xfe/vexchords" target="_blank"><?php echo esc_html(__('VexChords', 'chordpress')); ?></a> <?php echo esc_html(__(' diagrams of each chord used in the song. This requires that you create a ', 'chordpress')); ?> <a href="edit.php?post_type=guitar_chord" target="_blank"><?php echo esc_html(__('guitar chord post', 'chordpress')); ?></a> <?php echo esc_html(__('for each of them', 'chordpress')); ?>.</p>
+                     <div class="cpress-callout cpress-callout-danger">
+                        <h4>Attention</h4>
+                        Due to continuous problems and the fact that the Vexchords module has not been updated for three years, the Vexchord module will no longer be supported and removed in the next major release of ChordPress.<br>
+                        With that, the Guitar Chords posts and post type will also be removed.<br>
+                        I apologize for the inconvenience and suggest to disable this option in favor of the jTab chords (setting below).<br>
+                     </div>
                   </td>
                </tr>
                <tr>
                   <th scope="row"><?php echo esc_html(__('Show Chord Sheet (jTab)', 'chordpress')); ?></th>
                   <td>
                      <input type='checkbox' id='<?php echo $pname; ?>_checkbox_show_jtab_sheet' name='<?php echo $pname; ?>_checkbox_show_jtab_sheet' <?php checked(get_option($pname . '_checkbox_show_jtab_sheet'), 1); ?> value='1'>
-                     <p class="description"><?php echo esc_html(__('With this option selected, a chord sheet is displayed at the bottom or top of the rendered song, showing diagrams of each known ', 'chordpress')); ?> <a href="https://jtab.tardate.com/" target="_blank"><?php echo esc_html(__('jTab', 'chordpress')); ?></a> <?php echo esc_html(__(' chord used in the song.', 'chordpress')); ?>.</p>
+                     <p class="description"><?php echo esc_html(__('With this option selected, a chord sheet is displayed at the bottom or top of the rendered song, showing diagrams of each known ', 'chordpress')); ?> <a href="https://jtab.tardate.com/" target="_blank"><?php echo esc_html(__('jTab', 'chordpress')); ?></a> <?php echo esc_html(__(' chord used in the song. You do not need to create your own chords for jTab. It has all commonly used chords built in.', 'chordpress')); ?></p>
                   </td>
                </tr>
                <tr>
@@ -337,6 +344,12 @@ if ($show_alert) {
                   <td scope="row" colspan="2">
                      <div class="<?php echo $pprefix; ?>-callout <?php echo $pprefix; ?>-callout-info">
                         <?php echo esc_html(__('Use this tab to specify global styles and formats for the ChordPress guitar chord diagrams. They can be overwritten by shortcode parameters.', 'chordpress')); ?><br>
+                     </div>
+                     <div class="cpress-callout cpress-callout-danger">
+                        <h4>Attention</h4>
+                        Due to continuous problems and the fact that the Vexchords module has not been updated for three years, the Vexchord module will no longer be supported and removed in the next major release of ChordPress.<br>
+                        With that, the Guitar Chords posts and post type will also be removed.<br>
+                        I apologize for the inconvenience and suggest to disable this option in favor of the jTab chords.<br>
                      </div>
                   </td>
                </tr>

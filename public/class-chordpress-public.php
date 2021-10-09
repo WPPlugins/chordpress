@@ -386,7 +386,7 @@ class ChordPress_Public {
       /**
        * Allow coloring
        */
-      $color = "";
+      $color = "#000000"; // Default: black
       if (strlen($args['color'])) {
 
          $color = " style='color:" . $args['color'] . ";' ";
