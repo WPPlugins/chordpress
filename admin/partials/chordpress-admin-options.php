@@ -117,7 +117,8 @@ if ($show_alert) {
          <a href="?page=<?php echo __FILE__; ?>&tab=tab_formatting" class="nav-tab <?php echo $active_tab == 'tab_formatting' ? 'nav-tab-active cpress-tab-active' : 'cpress-tab-inactive'; ?>"><?php echo esc_html(__('Formatting Options', 'chordpress')); ?></a>
          <a href="?page=<?php echo __FILE__; ?>&tab=tab_chord" class="nav-tab <?php echo $active_tab == 'tab_chord' ? 'nav-tab-active cpress-tab-active' : 'cpress-tab-inactive'; ?>"><?php echo esc_html(__('VexChords Options', 'chordpress')); ?></a>
          <a href="?page=<?php echo __FILE__; ?>&tab=tab_jtab" class="nav-tab <?php echo $active_tab == 'tab_jtab' ? 'nav-tab-active cpress-tab-active' : 'cpress-tab-inactive'; ?>"><?php echo esc_html(__('jTab Options', 'chordpress')); ?></a>
-         <a href="?page=<?php echo __FILE__; ?>&tab=tab_plugin" class="nav-tab <?php echo $active_tab == 'tab_plugin' ? 'nav-tab-active ' . $pprefix . '-tab-active' : 'cpress-tab-inactive'; ?>"><?php echo esc_html(__('Plugin Options', 'chordpress')); ?></a>
+         <a href="?page=<?php echo __FILE__; ?>&tab=tab_plugin_options" class="nav-tab <?php echo $active_tab == 'tab_plugin_options' ? 'nav-tab-active ' . $pprefix . '-tab-active' : 'cpress-tab-inactive'; ?>"><?php echo esc_html(__('Plugin Options', 'chordpress')); ?></a>
+         <a href="?page=<?php echo __FILE__; ?>&tab=tab_plugin_info" class="nav-tab <?php echo $active_tab == 'tab_plugin_info' ? 'nav-tab-active ' . $pprefix . '-tab-active' : 'cpress-tab-inactive'; ?>"><?php echo esc_html(__('Plugin Info', 'chordpress')); ?></a>
       </h2>
 
       <form name="form" action="<?php echo admin_url('admin.php?page=' . $pname . '%2Fadmin%2Fpartials%2Fchordpress-admin-options.php') ?>" method="post">
@@ -553,7 +554,7 @@ if ($show_alert) {
          //  ,---------------------,
          // _| Tab: Plugin Options |_
          //
-         if ($active_tab == 'tab_plugin') $display = "display:block;";
+         if ($active_tab == 'tab_plugin_options') $display = "display:block;";
          else $display = "display:none;";
          ?>
          <table class="form-table" style="margin-left:16px;<?php echo $display; ?>">
@@ -578,6 +579,45 @@ if ($show_alert) {
             </tbody>
          </table>
 
+         <?php
+         //  ,---------------------,
+         // _| Tab: Plugin Info    |_
+         //
+         if ($active_tab == 'tab_plugin_info') $display = "display:block;";
+         else $display = "display:none;";
+         ?>
+         <table class="form-table" style="margin-left:16px;<?php echo $display; ?>">
+            <tbody>
+               <tr>
+                  <th scope="row"><?php echo esc_html(__('Plugin', 'chordpress')); ?></th>
+                  <td>
+                     <p class="description"><?php echo CHORDPRESS_NAME; ?> <?php echo CHORDPRESS_VERSION; ?></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><?php echo esc_html(__('Plugin Author', 'chordpress')); ?></th>
+                  <td>
+                     <p class="description"><a href="<?php echo CHORDPRESS_AUTHOR_URI; ?>" target="_blank"><?php echo CHORDPRESS_AUTHOR; ?></a></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><?php echo esc_html(__('Plugin Documentation', 'chordpress')); ?></th>
+                  <td>
+                     <p class="description"><a href="<?php echo CHORDPRESS_DOC_URI; ?>" target="_blank"><?php echo CHORDPRESS_DOC_URI; ?></a></p>
+                  </td>
+               </tr>
+               <tr>
+                  <th scope="row"><?php echo esc_html(__('Credits', 'chordpress')); ?></th>
+                  <td>
+                     <p class="description">
+                        <a href="https://profiles.wordpress.org/rlisle/" title="@rlisle" rel="nofollow ugc">@rlisle</a> for his work on the ChordsAndLyrics plugin that he created in 2009.<br>
+                        Ahkâm for the beautiful <a href="https://www.freeiconspng.com/img/17579" title="ChordPress Plugin Icon" rel="nofollow ugc">ChordPress Plugin Icon</a>.<br>
+                        The fine people at <a href="https://github.com/0xfe/vexchords" title="VexChords" rel="nofollow ugc">VexChords</a> and <a href="https://jtab.tardate.com" title="jTab" rel="nofollow ugc">jTab</a>.
+                     </p>
+                  </td>
+               </tr>
+            </tbody>
+         </table>
       </form>
    </div>
 </div>

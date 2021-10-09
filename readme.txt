@@ -94,14 +94,14 @@ Use the "ChordPress" admin menu of your backend to change the default settings.
 == Support ==
 Choose your preferred support channel:
 1. [Wordpress Support Forum](https://wordpress.org/support/plugin/chordpress/ "Wordpress Support Forum")
-2. [Lewe.com Support Site](http://support.lewe.com/ "Lewe.com Support Site")
-3. [Lewe.com ChordPress Forum](http://forum.lewe.com/viewforum.php?f=41 "Lewe.com ChordPress Forum")
+2. [Lewe Service Desk](https://georgelewe.atlassian.net/servicedesk/customer/portal/5 "Lewe Service Desk")
 4. [ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "ChordPress User Manual")
 
 == Credits ==
-[@rlisle](https://profiles.wordpress.org/rlisle/ "@rlisle") for his work on the ChordsAndLyrics plugin that he created in 2009.
-Ahkâm for the beautiful [ChordPress Plugin Icon](https://www.freeiconspng.com/img/17579 "ChordPress Plugin Icon").
-The fine people at [VexChords](https://github.com/0xfe/vexchords "VexChords") and [jTab](https://jtab.tardate.com "jTab").
+* [@rlisle](https://profiles.wordpress.org/rlisle/ "@rlisle") for his work on the ChordsAndLyrics plugin that he created in 2009
+* Ahkâm for the beautiful [ChordPress Plugin Icon](https://www.freeiconspng.com/img/17579 "ChordPress Plugin Icon")
+* The developers of [VexChords](https://github.com/0xfe/vexchords "VexChords")
+* The developers of [jTab](https://jtab.tardate.com "jTab")
 
 == Screenshots ==
 1. ChordPress Output Options
@@ -130,6 +130,10 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 2.5.4 (2021-09-13) =
+* jTab formatting fix
+* Plugin Info tab in admin backend
+
 = 2.5.3 (2021-09-10) =
 * Minor bug fixes
 * Notification about rtetiring the Vexchords module

@@ -355,11 +355,12 @@ class ChordPress_Public {
        */
       $args = shortcode_atts(
          [
+            'bgcolor' => '',
             'buttontext' => 'Show jTab',
             'color' => '',
             'form' => 'false',
             'id' => '',
-            'phrase' => '',
+            'phrase' => '<i>'.esc_html(__('Please add a jTab phrase to the [chordpress-jtab] shortcut.', 'chordpress')).'</i>',
          ],
          $atts,
          $tag
@@ -369,10 +370,11 @@ class ChordPress_Public {
       /**
        * Provide option to id the object
        */
-      $divid = "";
+      $divid = '';
       if (strlen($args['id'])) {
 
-         $divid = " id='" . $args['id'] . "' ";
+         $divid = ' id="'.$args['id'].'" ';
+
       }
 
       /**
@@ -380,27 +382,35 @@ class ChordPress_Public {
        */
       if ($args['form'] == 'true') {
 
-         $divid = " id='jtab' ";
+         $divid = ' id="jtab" ';
+
       }
 
       /**
-       * Allow coloring
+       * Set text and background color
        */
-      $color = "#000000"; // Default: black
-      if (strlen($args['color'])) {
+      if (!$color = get_option('chordpress_text_jtab_color')) $color = '';
+      if (!$bgcolor = get_option('chordpress_text_jtab_bgcolor')) $bgcolor = '';
+      if (strlen($args['color'])) $color = $args['color'];
+      if (strlen($args['bgcolor'])) $bgcolor = $args['bgcolor'];
+      $styles = ' style="color:'.$color.';background-color:'.$bgcolor.';" ';
 
-         $color = " style='color:" . $args['color'] . ";' ";
-      }
-
+      /**
+       * Build phrase
+       */
+      if (strlen($args['phrase'])) $phrase = $args['phrase']; else $phrase = '<i>'.esc_html(__('The phrase parameter cannot be empty in the [chordpress-jtab] shortcut.', 'chordpress')).'</i>';
+      // $phrase = html_entity_decode($args['phrase'], ENT_QUOTES, 'UTF-8');
+      // $this->pretty_dump($args['phrase']);
+      // $this->pretty_dump('phrase: ' . $phrase);
 
       $output = "\n\n<!-- ChorDpress jTab Shortcode Beginn -->\n";
-      $output .= '<div class=\'jtab\'' . $color . $divid . '>' . $args['phrase'] . '</div>';
+      $output .= '<div class=\'jtab\'' . $color . $divid . '>' . $phrase . '</div>';
 
       if ($args['form'] == 'true') {
 
          $output = '
-            <input id="jtab_phrase" type="text" class="jtab-input" size="40" value="' . $args['phrase'] . '">
-            <input id="jtab_button" type="button" class="cpress-btn cpress-btn-primary" value="' . $args['buttontext'] . '">
+            <input id="jtab_phrase" type="text" class="jtab-input" size="40" value="' . $phrase . '">
+            <input id="jtab_button" type="button" class="cpress-btn cpress-btn-primary" value="' . $args['buttontext'] . '"  onclick="jtab.render(\'jtab\',$(#\'jtab_phrase\').value);">
             ' . $output;
       }
 

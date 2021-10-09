@@ -365,8 +365,8 @@ class ChordPress_Renderer {
       if (!$this->verseStyle = get_option('chordpress_text_verse_style')) $this->verseStyle = '';
 
       if (!$this->jTabChordsPerRow = get_option('chordpress_number_jtab_chords_per_row')) $this->jTabChordsPerRow = 6;
-      if (!$this->jTabColor = get_option('chordpress_text_jtab_color')) $this->jTabColor = '#000000';
-      if (!$this->jTabBgColor = get_option('chordpress_text_jtab_bgcolor')) $this->jTabBgColor = '#ffffff';
+      if (!$this->jTabColor = get_option('chordpress_text_jtab_color')) $this->jTabColor = '';
+      if (!$this->jTabBgColor = get_option('chordpress_text_jtab_bgcolor')) $this->jTabBgColor = '';
    }
 
    //--------------------------------------------------------------------------
@@ -698,7 +698,7 @@ class ChordPress_Renderer {
 
          $jTabSheetText = "\n<!-- ChordPress jTabSheet Start -->\n";
          $jTabSheetText .= "<div><hr></div>\n";
-         $jTabSheetText .= "<p>" . esc_html(__('These known chords are used in this song', 'chordpress')) . ".</p>";
+         $jTabSheetText .= "<p><i>" . esc_html(__('These known chords are used in this song', 'chordpress')) . ".</i></p>";
 
 
          // die($this->pretty_dump($this->JT->chords));
@@ -706,12 +706,15 @@ class ChordPress_Renderer {
          $count = 0;
          $chordsPerRow = $this->jTabChordsPerRow;
          $this->uniqueChords = array_unique($this->allChords);
+
          foreach ($this->uniqueChords as $uc) {
 
             if (in_array($uc, $this->JT->chords)) {
 
-               $phrase .= $uc . " / ";
+               $phrase .= $uc;
                $count++;
+               if ($count < $chordsPerRow) $phrase .= " / ";
+
             }
 
             if ($count >= $chordsPerRow) {
@@ -719,10 +722,14 @@ class ChordPress_Renderer {
                $jTabSheetText .= '<div class=\'jtab\' style="color:' . $this->jTabColor . ';background-color:' . $this->jTabBgColor . ';">' . $phrase . '</div>';
                $phrase = '';
                $count = 0;
+
             }
+
          }
+
          $jTabSheetText .= '<div class=\'jtab\' style="color:' . $this->jTabColor . ';background-color:' . $this->jTabBgColor . ';">' . $phrase . '</div>';
          $jTabSheetText .= "<div style=\"clear:both;\"></div>\n<!-- ChordPress jTabSheet End -->\n\n";
+
       }
 
       /**
@@ -801,6 +808,7 @@ class ChordPress_Renderer {
             /**
              * Line starts with "#": It's a comment line => skip
              */
+
          } else if ((isset($line[0]) && $line[0] == '{') || (isset($line[0]) && strpos($line, '{'))) {
 
             /**
@@ -821,32 +829,40 @@ class ChordPress_Renderer {
             if (strpos($directiveName, 'start_of_verse') !== false) {
 
                $startOfVerse = true;
+
             } elseif (strpos($directiveName, 'end_of_verse') !== false) {
 
                $endOfVerse = true;
+
             } elseif (strpos($directiveName, 'start_of_chorus') !== false) {
 
                $startOfChorus = true;
+
             } elseif (strpos($directiveName, 'end_of_chorus') !== false) {
 
                $endOfChorus = true;
+
             } elseif (strpos($directiveName, 'comment') !== false && !$this->hideComments) {
 
                $arrLyrics[] = '<span class="cpress_comment">' . $directiveValue . '</span>';
             }
+
          } else {
 
             /**
              * Just lyrics without chords => print it
              */
             $arrLyrics[] = $line;
+
          }
+
       } elseif (substr_count($line, "[") != substr_count($line, "]")) {
 
          /**
           * Square bracket missing in this line
           */
          $arrLyrics[] = '<span style="color:#FF0000;"><i>' . esc_html(__('Missing square bracket in line', 'chordpress')) . ':</i></span> <code>' . $line . "</code>";
+         
       } else {
 
          /**
