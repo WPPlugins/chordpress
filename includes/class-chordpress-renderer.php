@@ -1051,14 +1051,21 @@ class ChordPress_Renderer {
     * Processes a note text and returns the formatted HTML.
     *
     * @since     1.0.0
-    * @param     string    $ch    Chord text, e.g. "A" or "B#" or "Db/F".
+    * @param     string    $ch    Chord text, e.g. "A" or "B#" or "Db/F" or "IV".
     * @return    string           Uppercase note string.
     */    
    public function formatChord( $ch ) {
 
       $useFlats = false;
+      $romanChords = array('I', 'I7', 'II', 'III', 'iii', 'IV', 'V', 'V7', 'VI', 'vi', 'VII');
+      $nashvilleChords = array('1', '2', '3', '4', '5', '6', '7');
       
       if (strlen($ch)==0) return;
+
+      /**
+       * Return roman chords or nashville chords as is
+       */
+      if ( in_array($ch,$romanChords) OR in_array($ch,$nashvilleChords) ) return $ch;
       
       /**
        * The first letter should be the key note
@@ -1103,6 +1110,7 @@ class ChordPress_Renderer {
        * Build note to display from numeric note value
        */
       $xlatedNote = $this->numberToNote($noteVal, $useFlats);
+      // die($this->pretty_dump($xlatedNote));
 
       /**
        * Return the chord display plus the bass note (if any)

@@ -11,7 +11,8 @@
 /**
  * Addl. admin page tab styles
  */
-.cpress-tab-active { border-top: 2px solid #ffb000; }
+.cpress-tab-active { border-top: 2px solid #ffb000 !important; }
+.cpress-tab-inactive { background: transparent !important; }
 
  /**
   * Bootstrap 4 Alertbox styles 

@@ -122,10 +122,10 @@ if ($show_alert) {
 
       <!-- Tabs -->
       <h2 class="nav-tab-wrapper">
-         <a href="?page=<?php echo __FILE__;?>&tab=tab_output" class="nav-tab <?php echo $active_tab == 'tab_output' ? 'nav-tab-active cpress-tab-active' : ''; ?>"><?php echo esc_html(__('Output Options','chordpress'));?></a>
-         <a href="?page=<?php echo __FILE__;?>&tab=tab_formatting" class="nav-tab <?php echo $active_tab == 'tab_formatting' ? 'nav-tab-active cpress-tab-active' : ''; ?>"><?php echo esc_html(__('Formatting Options','chordpress'));?></a>
-         <a href="?page=<?php echo __FILE__;?>&tab=tab_chord" class="nav-tab <?php echo $active_tab == 'tab_chord' ? 'nav-tab-active cpress-tab-active' : ''; ?>"><?php echo esc_html(__('Chord Diagram Options','chordpress'));?></a>
-         <a href="?page=<?php echo __FILE__;?>&tab=tab_plugin" class="nav-tab <?php echo $active_tab == 'tab_plugin' ? 'nav-tab-active '.$pprefix.'-tab-active' : ''; ?>"><?php echo esc_html(__('Plugin Options','chordpress'));?></a>
+         <a href="?page=<?php echo __FILE__;?>&tab=tab_output" class="nav-tab <?php echo $active_tab == 'tab_output' ? 'nav-tab-active cpress-tab-active' : 'cpress-tab-inactive'; ?>"><?php echo esc_html(__('Output Options','chordpress'));?></a>
+         <a href="?page=<?php echo __FILE__;?>&tab=tab_formatting" class="nav-tab <?php echo $active_tab == 'tab_formatting' ? 'nav-tab-active cpress-tab-active' : 'cpress-tab-inactive'; ?>"><?php echo esc_html(__('Formatting Options','chordpress'));?></a>
+         <a href="?page=<?php echo __FILE__;?>&tab=tab_chord" class="nav-tab <?php echo $active_tab == 'tab_chord' ? 'nav-tab-active cpress-tab-active' : 'cpress-tab-inactive'; ?>"><?php echo esc_html(__('Chord Diagram Options','chordpress'));?></a>
+         <a href="?page=<?php echo __FILE__;?>&tab=tab_plugin" class="nav-tab <?php echo $active_tab == 'tab_plugin' ? 'nav-tab-active '.$pprefix.'-tab-active' : 'cpress-tab-inactive'; ?>"><?php echo esc_html(__('Plugin Options','chordpress'));?></a>
       </h2>
 
       <form name="form" action="<?php echo admin_url('admin.php?page='.$pname.'%2Fadmin%2Fpartials%2Fchordpress-admin-options.php')?>" method="post">
