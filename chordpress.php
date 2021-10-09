@@ -7,7 +7,7 @@
  * admin area. This file also includes all of the dependencies used by the plugin,
  * registers the activation and deactivation functions, and defines a function
  * that starts the plugin.
- * 
+ *
  * @link              https://www.lewe.com
  * @since             1.0.0
  * @package           ChordPress
@@ -16,7 +16,7 @@
  * Plugin Name:       ChordPress
  * Plugin URI:        https://support.lewe.com/docs/chordpress-manual/
  * Description:       This plugin renders ChordPro formatted text and chord diagrams in WordPress sites.
- * Version:           2.5.4
+ * Version:           3.0.0
  * Author:            George Lewe
  * Author URI:        https://www.lewe.com
  * License:           GPLv3
@@ -35,10 +35,11 @@ if (!defined('WPINC')) die;
  * Version number based on SemVer - https://semver.org
  */
 define('CHORDPRESS_NAME', 'ChordPress');
-define('CHORDPRESS_VERSION', '2.5.4');
+define('CHORDPRESS_VERSION', '3.0.0');
 define('CHORDPRESS_AUTHOR', 'George Lewe');
 define('CHORDPRESS_AUTHOR_URI', 'https://www.lewe.com');
 define('CHORDPRESS_DOC_URI', 'https://support.lewe.com/docs/chordpress-manual/');
+define('CHORDPRESS_SUPPORT_URI', 'https://georgelewe.atlassian.net/servicedesk/customer/portal/5');
 
 /**
  * Plugin requires licensing.
@@ -54,6 +55,7 @@ function activate_chordpress() {
 
    require_once plugin_dir_path(__FILE__) . 'includes/class-chordpress-activator.php';
    ChordPress_Activator::activate();
+
 }
 register_activation_hook(__FILE__, 'activate_chordpress');
 
@@ -65,6 +67,7 @@ function deactivate_chordpress() {
 
    require_once plugin_dir_path(__FILE__) . 'includes/class-chordpress-deactivator.php';
    ChordPress_Deactivator::deactivate();
+
 }
 register_deactivation_hook(__FILE__, 'deactivate_chordpress');
 
@@ -90,11 +93,6 @@ require plugin_dir_path(__FILE__) . 'includes/class-chordpress-chord.php';
 require plugin_dir_path(__FILE__) . 'admin/partials/chordpress-admin-chord-meta-box.php';
 
 /**
- * The jTab class.
- */
-require plugin_dir_path(__FILE__) . 'includes/class-chordpress-jtab.php';
-
-/**
  * Begins execution of the plugin.
  *
  * Since everything within the plugin is registered via hooks, then kicking
@@ -107,6 +105,6 @@ function run_chordpress() {
 
    $plugin = new ChordPress_Plugin();
    $plugin->run();
-   
+
 }
 run_chordpress();

@@ -81,7 +81,8 @@ class ChordPress_Admin {
    public function enqueue_scripts() {
 
       wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/chordpress-admin.js', array('jquery'), $this->version, false);
-      wp_enqueue_script($this->plugin_name . '-vexchords', plugin_dir_url(__FILE__) . 'js/vexchords.js');
+      wp_enqueue_script($this->plugin_name . '-svguitar', plugin_dir_url(__DIR__) . 'global/js/svguitar.umd.js');
+
    }
 
    /**
@@ -179,22 +180,22 @@ class ChordPress_Admin {
          'ChordPress Admin',                                                   // The title to be displayed in the browser window for this page.
          'ChordPress',                                                         // The text to be displayed for this menu item
          'manage_options',                                                     // Which type of users can see this menu item
-         $this->plugin_name . '_admin_menu',                                     // The unique ID for this menu item or file reference
+         $this->plugin_name . '_admin_menu',                                   // The unique ID for this menu item or file reference
          null,                                                                 // The name of the function to call when rendering this menu's page (null if file ref above)
-         plugin_dir_url(__FILE__) . 'images/icon-20x20.png'                      // The icon of the menu entry
+         plugin_dir_url(__FILE__) . 'images/icon-20x20.png'                    // The icon of the menu entry
       );
 
       add_submenu_page(
-         $this->plugin_name . '_admin_menu',                                     // The parent menu slug
+         $this->plugin_name . '_admin_menu',                                   // The parent menu slug
          'ChordPress Options',                                                 // The title to be displayed in the browser window for this page.
          'Options',                                                            // The text to be displayed for this menu item
          'manage_options',                                                     // Which type of users can see this menu item
-         plugin_dir_path(__FILE__) . 'partials/chordpress-admin-options.php',    // The unique ID for this menu item or file reference
+         plugin_dir_path(__FILE__) . 'partials/chordpress-admin-options.php',  // The unique ID for this menu item or file reference
          null                                                                  // The name of the function to call when rendering this menu's page (null if file ref above)
       );
 
       add_submenu_page(
-         $this->plugin_name . '_admin_menu',                                     // The parent menu slug
+         $this->plugin_name . '_admin_menu',                                   // The parent menu slug
          'Guitar Chords',                                                      // The title to be displayed in the browser window for this page.
          'Guitar Chords',                                                      // The text to be displayed for this menu item
          'manage_options',                                                     // Which type of users can see this menu item
@@ -205,11 +206,11 @@ class ChordPress_Admin {
       if (CHORDPRESS_LICENSE_REQUIRED) {
 
          add_submenu_page(
-            $this->plugin_name . '_admin_menu',                                     // The parent menu slug
+            $this->plugin_name . '_admin_menu',                                   // The parent menu slug
             'ChordPress License',                                                 // The title to be displayed in the browser window for this page.
             'License',                                                            // The text to be displayed for this menu item
             'manage_options',                                                     // Which type of users can see this menu item
-            plugin_dir_path(__FILE__) . 'partials/chordpress-admin-license.php',    // The unique ID for this menu item or file reference
+            plugin_dir_path(__FILE__) . 'partials/chordpress-admin-license.php',  // The unique ID for this menu item or file reference
             null                                                                  // The name of the function to call when rendering this menu's page (null if file ref above)
          );
       }
@@ -278,20 +279,23 @@ class ChordPress_Admin {
       if ( isset($_POST['post_type']) && 'guitar_chord' == $_POST['post_type'] && $post->post_type == 'guitar_chord') {
 
          $meta_options = array(
-            'guitar_chord_shortname',
+            'guitar_chord_name',
+            'guitar_chord_barres',
+            'guitar_chord_fingers',
+            'guitar_chord_frets',
             'guitar_chord_position',
-            'guitar_chord_numstrings',
+            'guitar_chord_strings',
             'guitar_chord_tuning',
-            'guitar_chord_single_frets',
-            'guitar_chord_single_labels',
-            'guitar_chord_barre_frets',
          );
 
          foreach ($meta_options as $meta_option) {
 
             update_post_meta($post_id, $meta_option, sanitize_text_field($_POST[$meta_option]));
+
          }
+
       }
+
    }
 
    /**
@@ -305,8 +309,9 @@ class ChordPress_Admin {
    public function set_guitar_chords_columns($columns) {
 
       $mycolumns = array(
-         'guitar_chord_shortname' => __('Shortname', 'chordpress'),
-         'guitar_chord_position' => __('Position', 'chordpress')
+         'guitar_chord_name' => __('Name', 'chordpress'),
+         'guitar_chord_strings' => __('Strings', 'chordpress'),
+         'guitar_chord_shortcode' => __('Shortcode', 'chordpress'),
       );
 
       $columns = $this->array_insert_after($columns, 'title', $mycolumns);
@@ -326,14 +331,38 @@ class ChordPress_Admin {
 
       switch ($column) {
 
-         case 'guitar_chord_shortname':
-            echo get_post_meta($post_id, 'guitar_chord_shortname', true);
+         case 'guitar_chord_name':
+            echo get_post_meta($post_id, 'guitar_chord_name', true);
             break;
 
-         case 'guitar_chord_position':
-            echo get_post_meta($post_id, 'guitar_chord_position', true);
+         case 'guitar_chord_strings':
+            echo get_post_meta($post_id, 'guitar_chord_strings', true);
             break;
+               
+         case 'guitar_chord_shortcode':
+            echo '[chordpress-chord chord="'.$post_id.'"]';
+            break;
+            
       }
+      
+   }
+
+   /**
+    * Upgrade message (if Upgrade Notice section exists in readme.txt).
+    *
+    * @since 3.0.0
+    *
+    * @param  string  $data
+    * @param  string  $response
+    */
+   public function show_plugin_update_message( $data, $response ) {
+
+      if ( isset( $data['upgrade_notice'] ) ) {
+
+         printf('<div style="padding:8px; background-color:#fefefe; border:1px solid #a0a0a0; border-radius:4px;">%s</div>', wpautop( $data['upgrade_notice'] ));
+
+      }
+      
    }
 
    /**
@@ -353,5 +382,7 @@ class ChordPress_Admin {
       $pos = false === $index ? count($array) : $index + 1;
 
       return array_merge(array_slice($array, 0, $pos), $new, array_slice($array, $pos));
+
    }
+
 }

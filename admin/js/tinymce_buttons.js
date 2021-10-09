@@ -10,9 +10,9 @@
  * @subpackage ChordPress/admin/js
  */
 
-(function() {
+(function () {
 
-   tinymce.PluginManager.add( 'cpressbtn', function( editor, url ) {
+   tinymce.PluginManager.add('cpressbtn', function (editor, url) {
 
       //
       // Submenu Array
@@ -22,12 +22,12 @@
       //
       // Chordpress
       //
-		menu_array.push({
+      menu_array.push({
 
-         text:"[chordpress]",
-         value:'[chordpress float="none" format="yes" hbnotation="no" interactive="no" transpose="0"]%content%[/chordpress]',
-         onclick:function() {
-            var selected_text = editor.selection.getContent({'format': 'html'});
+         text: "[chordpress]",
+         value: '[chordpress float="none" format="yes" hbnotation="no" interactive="no" transpose="0"]%content%[/chordpress]',
+         onclick: function () {
+            var selected_text = editor.selection.getContent({ 'format': 'html' });
             return_text = this.value().replace("%content%", selected_text);
             editor.execCommand('mceReplaceContent', false, return_text);
          }
@@ -35,14 +35,29 @@
       });
 
       //
-      // Chordpress Chord
+      // Chordpress Chord (ID)
       //
-		menu_array.push({
+      menu_array.push({
 
-         text:"[chordpress-chord]",
-         value:'[chordpress-chord chord="99"]',
-         onclick:function() {
-            var selected_text = editor.selection.getContent({'format': 'html'});
+         text: "[chordpress-chord] (Chord ID)",
+         value: '[chordpress-chord chord="99"]',
+         onclick: function () {
+            var selected_text = editor.selection.getContent({ 'format': 'html' });
+            return_text = this.value().replace("%content%", selected_text);
+            editor.execCommand('mceReplaceContent', false, return_text);
+         }
+
+      });
+
+      //
+      // Chordpress Chord (Custom)
+      //
+      menu_array.push({
+
+         text: "[chordpress-chord] (custom)",
+         value: '[chordpress-chord fingers="(3,2,\'2\'),(4,3,\'4\'),(5,3,\'3\')" frets="5" title="F# Major" position=1 tuning="E,A,D,G,X,Y" barre="6,1,1"]',
+         onclick: function () {
+            var selected_text = editor.selection.getContent({ 'format': 'html' });
             return_text = this.value().replace("%content%", selected_text);
             editor.execCommand('mceReplaceContent', false, return_text);
          }
@@ -52,35 +67,35 @@
       //
       // Separator
       //
-		menu_array.push({
+      menu_array.push({
 
-         text:"---",
-         value:'',
-         onclick:function() {}
+         text: "---",
+         value: '',
+         onclick: function () { }
 
       });
 
       //
       // Documentation
       //
-		menu_array.push({
+      menu_array.push({
 
-         text:"Documentation...",
-         value:'',
-         onclick:function() {window.open('https://support.lewe.com/docs/chordpress-manual/', '_blank');}
+         text: "Documentation...",
+         value: '',
+         onclick: function () { window.open('https://support.lewe.com/docs/chordpress-manual/', '_blank'); }
 
       });
 
       //
       // Add the submenu button
       //
-      editor.addButton( 'cpressbtn', {
+      editor.addButton('cpressbtn', {
 
          title: 'ChordPress',
          type: 'menubutton',
          image: url + '../../images/icon-20x20.png',
          menu: menu_array
-         
+
       });
 
       //

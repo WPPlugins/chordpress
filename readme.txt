@@ -14,9 +14,7 @@ ChordPress for WordPress pretty-prints ChordPro formatted text and chord diagram
 == Description ==
 ChordPress pretty-prints ChordPro formatted text files on your pages and posts. You can configure output and formatting options. With 'interactive' mode on, you can transpose the chords up and down and also print the output right from the page.
 
-ChordPress 2.1 introduced "[VexChords](https://github.com/0xfe/vexchords "VexChords")", an awesome Javascript library for displaying guitar chord diagrams. Create your own guitar chord diagrams via a new post type and display them using shortcodes. Or enable the Chord Sheet option that will show all chords used in a song as diagrams below the rendered ChordPro text (given that you have created them as guitar chord posts).
-
-ChordPress 2.5 introduced "[jTab](https://jtab.tardate.com "jTab")", another stunning Javascript library for displaying guitar chord and score diagrams. You can display them using shortcodes.
+ChordPress 3.0 has retired the Vexchord and jTab chord diagram modules. They have been replaced by the superior [SVGuitar](https://github.com/omnibrain/svguitar "SVGuitar chord renderer").
 
 Your input to ChordPress needs to be a valid ChordPro formatted text. ChordPro is a simple text-based syntax used to write lead sheets, the lyrics and chords of a song. ChordPro also comes with a command line tool that pretty prints that text into other formats like PDF.
 You can read all about ChordPro here:
@@ -39,7 +37,7 @@ Check out this example:
 The `[chordpress-chord]` shortag allows you to display a guitar chord as a diagram. For example:
 
 1. `[chordpress-chord chord="112"]` will show the guitar chord post with ID 112 as a diagram.
-1. `[chordpress-chord chord="100" strokeColor="#000099" canvaswidth="100" canvasheight="100" titlestyle="font-size:1em;text-align:center;"]` will show the guitar chord post with ID 100 as a diagram with custom settings.
+2. `[chordpress-chord barre="5,1,1" fingers="(3,2,'2'),(4,3,'4'),(5,3,'3')" title="F# Major" tuning="E,A,D,G,H,E"]` will show a custom guitar chord.
 
 Check out this example:
 [ChordPress Guitar Chord Demo](https://sayandsound.lewe.com/guitar-chords/ "ChordPress Guitar Chord Demo")
@@ -52,6 +50,7 @@ If not from the WordPress marketplace, get the plugin here:
 * configure output and formatting
 * transpose up and down on the fly from the rendered page
 * print the rendered output
+* show chord diagrams
 
 ChordPress supports the following ChordPro tags:
 
@@ -98,14 +97,14 @@ Choose your preferred support channel:
 4. [ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "ChordPress User Manual")
 
 == Credits ==
+* The [ChordPro](https://profiles.wordpress.org/rlisle/ "ChordPro") team of course
 * [@rlisle](https://profiles.wordpress.org/rlisle/ "@rlisle") for his work on the ChordsAndLyrics plugin that he created in 2009
 * Ahkâm for the beautiful [ChordPress Plugin Icon](https://www.freeiconspng.com/img/17579 "ChordPress Plugin Icon")
-* The developers of [VexChords](https://github.com/0xfe/vexchords "VexChords")
-* The developers of [jTab](https://jtab.tardate.com "jTab")
+* The developers of the [SVGuitar](https://github.com/omnibrain/svguitar "SVGuitar") chord rendering module
 
 == Screenshots ==
 1. ChordPress Output Options
-2. ChordPress Formatting Options
+2. Chord Diagram Options
 3. Shortcut with ChordPro text in editor
 4. Rendered text on webpage
 5. Optional chord sheet for each song
@@ -130,6 +129,13 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.0.0 (2021-10-08) =
+* Removal of the Vexchjord module
+* Removal of the jTab module
+* Introduction of the SVGuitar module
+* Minor bugfixes
+* Options page overhaul
+
 = 2.5.4 (2021-09-13) =
 * jTab formatting fix
 * Plugin Info tab in admin backend
@@ -213,3 +219,5 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 * Initital development for http://sayandsound.lewe.com
 
 == Upgrade Notice ==
+= 3.0.0 =
+Attention: the Vexchord and jTab modules have been removed and replaced by the SVGuitar chord diagram renderer. Read more [here...](https://support.lewe.com/docs/chordpress-manual/guitar-chords/)

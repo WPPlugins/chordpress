@@ -31,7 +31,7 @@ class ChordPress_Plugin {
     * @access   protected
     * @var      array     $heading_levels    Array of HTML heading levels.
     */
-   protected $heading_levels = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6');
+   protected $heading_levels = array('h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'strong');
 
    /**
     * The loader that's responsible for maintaining and registering all hooks that power
@@ -121,9 +121,11 @@ class ChordPress_Plugin {
       if (defined('CHORDPRESS_VERSION')) {
 
          $this->version = CHORDPRESS_VERSION;
+
       } else {
 
-         $this->version = '2.0.0';
+         $this->version = 'n/a';
+
       }
 
       $this->plugin_title = 'ChordPress';
@@ -162,32 +164,42 @@ class ChordPress_Plugin {
          $this->plugin_name . '_text_chorus_style',
          $this->plugin_name . '_text_verse_style',
 
-         $this->plugin_name . '_text_chord_bg_color',
-         $this->plugin_name . '_text_chord_canvas_height',
-         $this->plugin_name . '_text_chord_canvas_width',
-         $this->plugin_name . '_text_chord_circle_radius',
-         $this->plugin_name . '_text_chord_default_color',
-         $this->plugin_name . '_text_chord_div_style',
-         $this->plugin_name . '_text_chord_font_family',
-         $this->plugin_name . '_text_chord_font_size',
-         $this->plugin_name . '_text_chord_font_style',
-         $this->plugin_name . '_text_chord_font_weight',
-         $this->plugin_name . '_text_chord_fret_color',
-         $this->plugin_name . '_text_chord_fret_width',
-         $this->plugin_name . '_text_chord_label_color',
-         $this->plugin_name . '_text_chord_label_weight',
-         $this->plugin_name . '_text_chord_name_style',
-         $this->plugin_name . '_text_chord_num_strings',
-         $this->plugin_name . '_text_chord_string_color',
-         $this->plugin_name . '_text_chord_string_width',
-         $this->plugin_name . '_text_chord_stroke_color',
-         $this->plugin_name . '_chord_text_color',
+         $this->plugin_name . '_text_chord_backgroundColor',
+         $this->plugin_name . '_number_chord_barreChordRadius',
+         $this->plugin_name . '_text_chord_barreChordStrokeColor',
+         $this->plugin_name . '_number_chord_barreChordStrokeWidth',
+         $this->plugin_name . '_number_chord_canvasWidth',
+         $this->plugin_name . '_text_chord_color',
+         $this->plugin_name . '_number_chord_emptyStringIndicatorSize',
+         $this->plugin_name . '_checkbox_chord_fixedDiagramPosition',
+         $this->plugin_name . '_text_chord_fontFamily',
+         $this->plugin_name . '_text_chord_fretColor',
+         $this->plugin_name . '_text_chord_fretLabelColor',
+         $this->plugin_name . '_text_chord_fretLabelColor',
+         $this->plugin_name . '_select_chord_fretLabelPosition',
+         $this->plugin_name . '_number_chord_fretLabelFontSize',
+         $this->plugin_name . '_number_chord_frets',
+         $this->plugin_name . '_number_chord_fretSize',
+         $this->plugin_name . '_number_chord_nutSize',
+         $this->plugin_name . '_text_chord_nutColor',
+         $this->plugin_name . '_text_chord_nutStrokeColor',
+         $this->plugin_name . '_number_chord_nutStrokeWidth',
+         $this->plugin_name . '_text_chord_nutTextColor',
+         $this->plugin_name . '_number_chord_nutTextSize',
+         $this->plugin_name . '_number_chord_position',
+         $this->plugin_name . '_number_chord_sidePadding',
+         $this->plugin_name . '_text_chord_stringColor',
+         $this->plugin_name . '_select_chord_strings',
+         $this->plugin_name . '_number_chord_strokeWidth',
+         $this->plugin_name . '_select_chord_style',
+         $this->plugin_name . '_number_chord_titleBottomMargin',
+         $this->plugin_name . '_text_chord_titleColor',
+         $this->plugin_name . '_number_chord_titleFontSize',
+         $this->plugin_name . '_number_chord_topFretWidth',
          $this->plugin_name . '_text_chord_tuning',
-
-         $this->plugin_name . '_number_jtab_chords_per_row',
-         $this->plugin_name . '_text_jtab_color',
-         $this->plugin_name . '_text_jtab_bgcolor',
-
+         $this->plugin_name . '_text_chord_tuningsColor',
+         $this->plugin_name . '_number_chord_tuningsFontSize',
+         
          $this->plugin_name . '_checkbox_uninstall_delete'
 
       );
@@ -230,6 +242,7 @@ class ChordPress_Plugin {
       require_once plugin_dir_path(dirname(__FILE__)) . 'public/class-chordpress-public.php';
 
       $this->loader = new ChordPress_Loader();
+
    }
 
    //--------------------------------------------------------------------------
@@ -249,6 +262,7 @@ class ChordPress_Plugin {
          function cpress_theme_setup() {
             add_action('init', 'cpress_buttons');
          }
+
       }
       add_action('after_setup_theme', 'cpress_theme_setup');
 
@@ -264,6 +278,7 @@ class ChordPress_Plugin {
             add_filter('mce_external_plugins', 'cpress_add_buttons');
             add_filter('mce_buttons', 'cpress_register_buttons');
          }
+
       }
 
       if (!function_exists('cpress_add_buttons')) {
@@ -272,6 +287,7 @@ class ChordPress_Plugin {
             $plugin_array['cpressbtn'] = plugins_url('../admin/js/tinymce_buttons.js', __FILE__);
             return $plugin_array;
          }
+
       }
 
       if (!function_exists('cpress_register_buttons')) {
@@ -281,7 +297,9 @@ class ChordPress_Plugin {
             array_push($buttons, 'cpressbtn');
             return $buttons;
          }
+
       }
+
    }
 
    //--------------------------------------------------------------------------
@@ -298,6 +316,7 @@ class ChordPress_Plugin {
       $plugin_i18n = new ChordPress_i18n();
 
       $this->loader->add_action('plugins_loaded', $plugin_i18n, 'load_plugin_textdomain');
+
    }
 
    //--------------------------------------------------------------------------
@@ -322,6 +341,8 @@ class ChordPress_Plugin {
       $this->loader->add_action('init', $plugin_admin, 'register_post_types');
       $this->loader->add_action('save_post_guitar_chord', $plugin_admin, 'save_guitar_chord');
       $this->loader->add_action('manage_guitar_chord_posts_custom_column', $plugin_admin, 'show_guitar_chord_column', 10, 2);
+      $this->loader->add_action('in_plugin_update_message-chordpress/chordpress.php', $plugin_admin, 'show_plugin_update_message', 10, 2 );
+
    }
 
    //--------------------------------------------------------------------------
@@ -340,6 +361,7 @@ class ChordPress_Plugin {
       $this->loader->add_shortcode('chordpress', $plugin_public, 'shortcode_chordpress');
       $this->loader->add_shortcode('chordpress-chord', $plugin_public, 'shortcode_chordpress_chord');
       $this->loader->add_shortcode('chordpress-jtab', $plugin_public, 'shortcode_chordpress_jtab');
+
    }
 
    //--------------------------------------------------------------------------
@@ -351,6 +373,7 @@ class ChordPress_Plugin {
    public function run() {
 
       $this->loader->run();
+
    }
 
    //--------------------------------------------------------------------------
@@ -363,6 +386,7 @@ class ChordPress_Plugin {
    public function get_options() {
 
       return $this->options;
+
    }
 
    //--------------------------------------------------------------------------
@@ -375,6 +399,7 @@ class ChordPress_Plugin {
    public function get_plugin_title() {
 
       return $this->plugin_title;
+
    }
 
    //--------------------------------------------------------------------------
@@ -388,6 +413,7 @@ class ChordPress_Plugin {
    public function get_plugin_name() {
 
       return $this->plugin_name;
+
    }
 
    //--------------------------------------------------------------------------
@@ -400,6 +426,7 @@ class ChordPress_Plugin {
    public function get_plugin_prefix() {
 
       return $this->plugin_prefix;
+
    }
 
    //--------------------------------------------------------------------------
@@ -412,6 +439,7 @@ class ChordPress_Plugin {
    public function get_plugin_uri() {
 
       return $this->plugin_uri;
+
    }
 
    //--------------------------------------------------------------------------
@@ -424,6 +452,7 @@ class ChordPress_Plugin {
    public function get_plugin_donation_uri() {
 
       return $this->plugin_donation_uri;
+
    }
 
    //--------------------------------------------------------------------------
@@ -436,6 +465,7 @@ class ChordPress_Plugin {
    public function get_loader() {
 
       return $this->loader;
+
    }
 
    //--------------------------------------------------------------------------
@@ -448,6 +478,7 @@ class ChordPress_Plugin {
    public function get_version() {
 
       return $this->version;
+
    }
 
    // -------------------------------------------------------------------------
@@ -482,10 +513,12 @@ class ChordPress_Plugin {
 
          $startTag = str_replace('%style%', $style, $startTag);
          $dismissButton = str_replace('%style%', $style, $dismissButton);
+
       } else {
 
          $startTag = str_replace('%style%', 'primary', $startTag);
          $dismissButton = str_replace('%style%', 'primary', $dismissButton);
+
       }
 
       /**
@@ -502,9 +535,11 @@ class ChordPress_Plugin {
 
             $headingTag = str_replace('%headingLevel%', 'h3', $headingTag);
          }
+
       } else {
 
          $headingTag = '';
+
       }
 
       /**
@@ -513,6 +548,7 @@ class ChordPress_Plugin {
       if (strtolower($dismissible) == 'no') {
 
          $dismissButton = '';
+
       }
 
       /**
@@ -521,15 +557,18 @@ class ChordPress_Plugin {
       if (strpos($width, 'px') || strpos($width, '%')) {
 
          $startTag = str_replace('%width%', $width, $startTag);
+
       } else {
 
          $startTag = str_replace('%width%', '100%', $startTag);
+
       }
 
       /**
        * Return the alert box.
        */
       return $identifier . $startTag . $dismissButton . $headingTag . $content . $endTag;
+
    }
 
    // ---------------------------------------------------------------------------
@@ -543,6 +582,7 @@ class ChordPress_Plugin {
    function pretty_dump($a) {
 
       return highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
+
    }
 
    /**
@@ -573,5 +613,7 @@ class ChordPress_Plugin {
       </tr>";
 
       return $output;
+
    }
+
 }
