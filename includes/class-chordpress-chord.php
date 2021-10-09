@@ -22,246 +22,246 @@
  */
 class ChordPress_Chord {
 
-	/**
-	 * Background color.
-	 *
+   /**
+    * Background color.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $bgColor    Default background color in CSS hex, e.g. #FFFFFF.
-	 */
+    * @access   private
+    * @var      string    $bgColor    Default background color in CSS hex, e.g. #FFFFFF.
+    */
    private $bgColor;
 
-	/**
-	 * Canvas height.
-	 *
+   /**
+    * Canvas height.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      integer    $canvasHeight    Canvas height in pixel.
-	 */
+    * @access   private
+    * @var      integer    $canvasHeight    Canvas height in pixel.
+    */
    private $canvasHeight;
 
-	/**
-	 * Canvas width.
-	 *
+   /**
+    * Canvas width.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      integer    $canvasWidth    Canvas width in pixel.
-	 */
+    * @access   private
+    * @var      integer    $canvasWidth    Canvas width in pixel.
+    */
    private $canvasWidth;
 
-	/**
-	 * Circle radius.
-	 *
+   /**
+    * Circle radius.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      integer    $circleRadius    Circle radius in pixel (canvasWidth/20).
-	 */
+    * @access   private
+    * @var      integer    $circleRadius    Circle radius in pixel (canvasWidth/20).
+    */
    private $circleRadius;
 
-	/**
-	 * Chord.
-	 *
+   /**
+    * Chord.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      array    $chord    The chord. Array of chord properties.
-	 */
+    * @access   private
+    * @var      array    $chord    The chord. Array of chord properties.
+    */
    private $chord;
 
-	/**
-	 * Default color.
-	 *
+   /**
+    * Default color.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $defaultColor    Default color in CSS hex, e.g. #666666.
-	 */
+    * @access   private
+    * @var      string    $defaultColor    Default color in CSS hex, e.g. #666666.
+    */
    private $defaultColor;
 
-	/**
-	 * DIV styles.
-	 *
+   /**
+    * DIV styles.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $divStyle    CSS styles of the chord div.
-	 */
+    * @access   private
+    * @var      string    $divStyle    CSS styles of the chord div.
+    */
    private $divStyles;
 
-	/**
-	 * Font Family.
-	 *
+   /**
+    * Font Family.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $fontFamily    CSS font family.
-	 */
+    * @access   private
+    * @var      string    $fontFamily    CSS font family.
+    */
    private $fontFamily;
 
-	/**
-	 * Font Size.
-	 *
+   /**
+    * Font Size.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $fontSize    CSS font size.
-	 */
+    * @access   private
+    * @var      string    $fontSize    CSS font size.
+    */
    private $fontSize;
 
-	/**
-	 * Font Style.
-	 *
+   /**
+    * Font Style.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $fontStyle    CSS font family.
-	 */
+    * @access   private
+    * @var      string    $fontStyle    CSS font family.
+    */
    private $fontStyle;
 
-	/**
-	 * Font Weight.
-	 *
+   /**
+    * Font Weight.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $fontWeight    CSS font weight.
-	 */
+    * @access   private
+    * @var      string    $fontWeight    CSS font weight.
+    */
    private $fontWeight;
 
-	/**
-	 * Fret color.
-	 *
+   /**
+    * Fret color.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $fretColor    Fret color. Overwrites default color.
-	 */
+    * @access   private
+    * @var      string    $fretColor    Fret color. Overwrites default color.
+    */
    private $fretColor;
 
-	/**
-	 * Fret width.
-	 *
+   /**
+    * Fret width.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      integer    $fretWidth    Fret width in pixel.
-	 */
+    * @access   private
+    * @var      integer    $fretWidth    Fret width in pixel.
+    */
    private $fretWidth;
 
-	/**
-	 * Label color.
-	 *
+   /**
+    * Label color.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $labelColor    Label color. Overwrites default color.
-	 */
+    * @access   private
+    * @var      string    $labelColor    Label color. Overwrites default color.
+    */
    private $labelColor;
 
-	/**
-	 * Label Weight.
-	 *
+   /**
+    * Label Weight.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $labelWeight    CSS label weight.
-	 */
+    * @access   private
+    * @var      string    $labelWeight    CSS label weight.
+    */
    private $labelWeight;
 
-	/**
-	 * Name.
-	 *
+   /**
+    * Name.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $name    Name of the chord.
-	 */
+    * @access   private
+    * @var      string    $name    Name of the chord.
+    */
    private $name;
 
-	/**
-	 * CSS styles for the chord name.
-	 *
+   /**
+    * CSS styles for the chord name.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $nameStyle    CSS styles for the chord name.
-	 */
+    * @access   private
+    * @var      string    $nameStyle    CSS styles for the chord name.
+    */
    private $nameStyle;
 
-	/**
-	 * Number of strings.
-	 *
+   /**
+    * Number of strings.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      integer    $numStrings    Number of strings to show.
-	 */
+    * @access   private
+    * @var      integer    $numStrings    Number of strings to show.
+    */
    private $numStrings;
 
-	/**
-	 * Position. Fret to start render at.
-	 *
+   /**
+    * Position. Fret to start render at.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      integer    $position    Position. Fret to start render at.
-	 */
+    * @access   private
+    * @var      integer    $position    Position. Fret to start render at.
+    */
    private $position;
 
-	/**
-	 * String color.
-	 *
+   /**
+    * String color.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $stringColor    String color. Overwrites default color.
-	 */
+    * @access   private
+    * @var      string    $stringColor    String color. Overwrites default color.
+    */
    private $stringColor;
 
-	/**
-	 * String width.
-	 *
+   /**
+    * String width.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      integer    $stringWidth    String width in pixel.
-	 */
+    * @access   private
+    * @var      integer    $stringWidth    String width in pixel.
+    */
    private $stringWidth;
 
-	/**
-	 * Stroke color.
-	 *
+   /**
+    * Stroke color.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $strokeColor    Stroke color. Overwrites default color.
-	 */
+    * @access   private
+    * @var      string    $strokeColor    Stroke color. Overwrites default color.
+    */
    private $strokeColor;
 
-	/**
-	 * Text color.
-	 *
+   /**
+    * Text color.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $textColor    Stroke color. Overwrites default color.
-	 */
+    * @access   private
+    * @var      string    $textColor    Stroke color. Overwrites default color.
+    */
    private $textColor;
 
-	/**
-	 * Title.
-	 *
+   /**
+    * Title.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $name    Full title of the chord.
-	 */
+    * @access   private
+    * @var      string    $name    Full title of the chord.
+    */
    private $title;
 
-	/**
-	 * CSS styles for the chord title.
-	 *
+   /**
+    * CSS styles for the chord title.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $titleStyle    CSS styles for the chord title.
-	 */
+    * @access   private
+    * @var      string    $titleStyle    CSS styles for the chord title.
+    */
    private $titleStyle;
 
-	/**
-	 * Tuning.
-	 *
+   /**
+    * Tuning.
+    *
     * @since    2.1.0
-	 * @access   private
-	 * @var      string    $tuning    The tuning of the strings.
-	 */
+    * @access   private
+    * @var      string    $tuning    The tuning of the strings.
+    */
    private $tuning;
 
    //--------------------------------------------------------------------------
-	/**
-	 * Initialize the class and set its properties.
-	 *
-	 * @since    1.0.0
-	 */
+   /**
+    * Initialize the class and set its properties.
+    *
+    * @since    1.0.0
+    */
    public function __construct() {
 
       /**
@@ -310,8 +310,7 @@ class ChordPress_Chord {
       if (!$this->textColor = get_option('chordpress_text_chord_text_color')) $this->textColor = '';
       if (!$this->titleStyle = get_option('chordpress_text_chord_title_style')) $this->titleStyle = 'font-size:1.2em;text-align:center;';
 
-      if ($this->customTuning = get_option('chordpress_text_chord_tuning')) $this->setProperty('tuning',$customTuning);
-
+      if ($this->customTuning = get_option('chordpress_text_chord_tuning')) $this->setProperty('tuning', $customTuning);
    }
 
    //--------------------------------------------------------------------------
@@ -321,15 +320,15 @@ class ChordPress_Chord {
     * @since     2.1.0
     * @param     boolean    $simple    If true, just return basic chord block
     * @return    string
-    */    
-   public function buildChordParmeters($simple=false) {
+    */
+   public function buildChordParmeters($simple = false) {
 
       $output = "{\n";
 
       /**
        * Chord name
        */
-      if (strlen($this->name)) $output .= "         name: '".$this->name."',\n";
+      if (strlen($this->name)) $output .= "         name: '" . $this->name . "',\n";
 
 
       /**
@@ -340,21 +339,27 @@ class ChordPress_Chord {
       /**
        * Loop through each string note
        */
+      if ($this->numStrings == 4) {
+
+         unset($this->chord['5']);
+         unset($this->chord['6']);
+         // $this->dnd($this->chord);
+      }
+
       foreach ($this->chord as $key => $note) {
 
          $output .= "            [";
-         $output .= $key.",".$note['fret']; // TODO
-         if (strlen($note['label'])) $output .= ",'" . $note['label'] ."'";
+         $output .= $key . "," . $note['fret']; // TODO
+         if (strlen($note['label'])) $output .= ",'" . $note['label'] . "'";
          $output .= "],\n";
-
       }
-      $output = rtrim($output,",\n");
+      $output = rtrim($output, ",\n");
       $output .= "\n         ],\n";
 
       /**
        * Position
        */
-      $output .= "         position: ".$this->position.",\n";
+      $output .= "         position: " . $this->position . ",\n";
 
       /**
        * Barres
@@ -365,12 +370,10 @@ class ChordPress_Chord {
 
          foreach ($this->barres as $barre) {
 
-            $output .= "            ".$barre.",\n";
-   
+            $output .= "            " . $barre . ",\n";
          }
-         $output = rtrim($output,",\n");
+         $output = rtrim($output, ",\n");
          $output .= "\n         ],\n";
-
       }
 
       /**
@@ -378,52 +381,49 @@ class ChordPress_Chord {
        */
       if (strlen($this->tuning)) {
 
-         $output .= "         tuning: ".$this->tuning."\n";
-
+         $output .= "         tuning: " . $this->tuning . "\n";
       }
       $output .= "      },\n";
 
       if ($simple) {
 
          return $output;
-
       }
 
       /**
        * Options (always set)
        */
       $output .= "      {\n";
-      $output .= "         height: ".$this->canvasHeight.",\n";
-      $output .= "         width: ".$this->canvasWidth.",\n";
-      $output .= "         circleRadius: ".$this->circleRadius.",\n";
-      $output .= "         fretWidth: ".$this->fretWidth.",\n";
-      $output .= "         numStrings: ".$this->numStrings.",\n";
+      $output .= "         height: " . $this->canvasHeight . ",\n";
+      $output .= "         width: " . $this->canvasWidth . ",\n";
+      $output .= "         circleRadius: " . $this->circleRadius . ",\n";
+      $output .= "         fretWidth: " . $this->fretWidth . ",\n";
+      $output .= "         numStrings: " . $this->numStrings . ",\n";
 
       /**
        * Options (only if they have a value)
        */
-      if (strlen($this->bgColor))      $output .= "         bgColor: '".$this->bgColor."',\n";
-      if (strlen($this->defaultColor)) $output .= "         defaultColor: '".$this->defaultColor."',\n";
-      if (strlen($this->fontFamily))   $output .= "         fontFamily: '".$this->fontFamily."',\n";
-      if (strlen($this->fontSize))     $output .= "         fontSize: '".$this->fontSize."',\n";
-      if (strlen($this->fontStyle))    $output .= "         fontStyle: '".$this->fontStyle."',\n";
-      if (strlen($this->fontWeight))   $output .= "         fontWeight: '".$this->fontWeight."',\n";
-      if (strlen($this->fretColor))    $output .= "         fretColor: '".$this->fretColor."',\n";
-      if (strlen($this->labelColor))   $output .= "         labelColor: '".$this->labelColor."',\n";
-      if (strlen($this->labelWeight))  $output .= "         labelWeight: '".$this->labelWeight."',\n";
-      if (strlen($this->stringColor))  $output .= "         stringColor: '".$this->stringColor."',\n";
-      if (strlen($this->stringWidth))  $output .= "         stringWidth: ".$this->stringWidth.",\n";
-      if (strlen($this->strokeColor))  $output .= "         strokeColor: '".$this->strokeColor."',\n";
-      if (strlen($this->textColor))    $output .= "         textColor: '".$this->textColor.",'\n";
-      $output = rtrim($output,",\n");
+      if (strlen($this->bgColor))      $output .= "         bgColor: '" . $this->bgColor . "',\n";
+      if (strlen($this->defaultColor)) $output .= "         defaultColor: '" . $this->defaultColor . "',\n";
+      if (strlen($this->fontFamily))   $output .= "         fontFamily: '" . $this->fontFamily . "',\n";
+      if (strlen($this->fontSize))     $output .= "         fontSize: '" . $this->fontSize . "',\n";
+      if (strlen($this->fontStyle))    $output .= "         fontStyle: '" . $this->fontStyle . "',\n";
+      if (strlen($this->fontWeight))   $output .= "         fontWeight: '" . $this->fontWeight . "',\n";
+      if (strlen($this->fretColor))    $output .= "         fretColor: '" . $this->fretColor . "',\n";
+      if (strlen($this->labelColor))   $output .= "         labelColor: '" . $this->labelColor . "',\n";
+      if (strlen($this->labelWeight))  $output .= "         labelWeight: '" . $this->labelWeight . "',\n";
+      if (strlen($this->stringColor))  $output .= "         stringColor: '" . $this->stringColor . "',\n";
+      if (strlen($this->stringWidth))  $output .= "         stringWidth: " . $this->stringWidth . ",\n";
+      if (strlen($this->strokeColor))  $output .= "         strokeColor: '" . $this->strokeColor . "',\n";
+      if (strlen($this->textColor))    $output .= "         textColor: '" . $this->textColor . ",'\n";
+      $output = rtrim($output, ",\n");
       $output .= "\n      }\n";
 
       $output .= "   );\n";
 
       return $output;
-
    }
- 
+
    //--------------------------------------------------------------------------
    /**
     * Add a barre to private array: barres.
@@ -432,21 +432,19 @@ class ChordPress_Chord {
     * @param     string    $fromString
     * @param     string    $toString
     * @param     string    $fret
-    */    
-    public function addBarre( $fromString, $toString, $fret ) {
+    */
+   public function addBarre($fromString, $toString, $fret) {
 
       $from = $fromString;
       $to = $toString;
 
-      if ($fromString < $toString) { 
-         
+      if ($fromString < $toString) {
+
          $from = $toString;
          $to = $fromString;
-      
       }
 
-      $this->barres[] = "{ fromString: ".$from.",toString: ".$to.",fret: ".$fret."}";
-
+      $this->barres[] = "{ fromString: " . $from . ",toString: " . $to . ",fret: " . $fret . "}";
    }
 
    //--------------------------------------------------------------------------
@@ -455,28 +453,27 @@ class ChordPress_Chord {
     *
     * @since     2.1.0
     * @return    string             HTML Vexchord div and script.
-    */    
-    public function addVexchord() {
+    */
+   public function addVexchord() {
 
       $id = $this->random_string();
 
       $shortname = "";
-      if (strlen($this->getProperty('name'))) $shortname = " ( ".$this->getProperty('name')." )";
+      if (strlen($this->getProperty('name'))) $shortname = " ( " . $this->getProperty('name') . " )";
 
       /** 
        * Build output
        */
       $output = "\n\n<!-- ChordPress Chord -->\n";
-      $output .= "<div style=\"width:".$this->getProperty('canvasWidth')."px;\"><div style=\"".$this->getProperty('titleStyle').";\">".$this->getProperty('title').$shortname."</div>";
-      $output .= "<div id=\"".$id."\" style=\"".$this->getProperty('divStyle')."\"></div></div>
+      $output .= "<div style=\"width:" . $this->getProperty('canvasWidth') . "px;\"><div style=\"" . $this->getProperty('titleStyle') . ";\">" . $this->getProperty('title') . $shortname . "</div>";
+      $output .= "<div id=\"" . $id . "\" style=\"" . $this->getProperty('divStyle') . "\"></div></div>
 <script>
-   const draw".$id." = vexchords.draw;\n
-   draw".$id."(
-      '#".$id."',
-      ".$this->buildChordParmeters()."</script>\n";
+   const draw" . $id . " = vexchords.draw;\n
+   draw" . $id . "(
+      '#" . $id . "',
+      " . $this->buildChordParmeters() . "</script>\n";
 
       return $output;
-
    }
 
    //--------------------------------------------------------------------------
@@ -485,13 +482,12 @@ class ChordPress_Chord {
     *
     * @since     2.1.0
     * @return    array             Vexchord array with divh and script.
-    */    
+    */
    public function createBasicVexchord() {
 
-      $vexchord = "      ".$this->buildChordParmeters(true)."\n";
+      $vexchord = "      " . $this->buildChordParmeters(true) . "\n";
 
       return $vexchord;
-
    }
 
    //--------------------------------------------------------------------------
@@ -501,10 +497,10 @@ class ChordPress_Chord {
     * @since     2.1.0
     * @param     integer    $string
     * @return    integer    Flipped string count 
-    */    
-   public function flipString( $string ) {
+    */
+   public function flipString($string) {
 
-      switch($string) {
+      switch ($string) {
 
          case 1:
             return 6;
@@ -526,9 +522,7 @@ class ChordPress_Chord {
 
          default:
             return $string;
-
       }
-
    }
 
    //--------------------------------------------------------------------------
@@ -537,13 +531,12 @@ class ChordPress_Chord {
     *
     * @since     2.1.0
     * @return    array
-    */    
-    public function getProperty($property) {
+    */
+   public function getProperty($property) {
 
       return $this->{$property};
-
    }
- 
+
    //--------------------------------------------------------------------------
    /**
     * Get private property: barres.
@@ -551,14 +544,13 @@ class ChordPress_Chord {
     * @since     2.1.0
     * @param     string    $property    Prioperty name
     * @param     misc      $value       Value to set the property to
-    */    
+    */
    public function setProperty($property, $value) {
 
       $this->{$property} = $value;
-
    }
- 
-   
+
+
    // ---------------------------------------------------------------------------
    /**
     * Pretty prints an array.
@@ -570,19 +562,30 @@ class ChordPress_Chord {
    public function pretty_dump($a) {
 
       return highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
-
    }
- 
+
+   // ---------------------------------------------------------------------------
+   /**
+    * Dump and Die
+    *
+    * @since    2.0.0
+    * @param    array    $a    Array to print out pretty
+    * @return   string
+    */
+   public function dnd($a) {
+
+      return highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
+      die();
+   }
+
    /**
     * Generate random string.
     * 
     * @param  integer    $length    Length of random string to generate.
     * @return string                Random string
     */
-   private function random_string( $length=10 ) {
+   private function random_string($length = 10) {
 
-      return substr(str_shuffle(str_repeat($x='0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length/strlen($x)) )),1,$length);
-
+      return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
    }
-
 }

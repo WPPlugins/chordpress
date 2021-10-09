@@ -127,6 +127,12 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 2.4.2 (2021-08-05) =
+* Number of strings bugfix
+
+= 2.4.1 (2021-07-19) =
+* WordPress 5.8 compatibility
+
 = 2.4.0 (2021-01-06) =
 * Added Bluegrass and Nashville chord notation
 
