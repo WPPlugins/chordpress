@@ -130,6 +130,11 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+== Changelog ==
+= 2.5.2 (2021-08-31) =
+* Added support for nested shortcodes
+* Added missing term langage support
+
 = 2.5.1 (2021-08-08) =
 * Added missing class file
 

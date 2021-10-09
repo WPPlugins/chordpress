@@ -389,8 +389,9 @@ class ChordPress_Renderer {
              * Get directive name and value and store
              */
             $arrDirective = explode(":", $line);
+            // $this->pretty_dump($arrDirective);
             $directiveName = strtolower(str_replace('{', '', trim($arrDirective[0])));
-            $directiveValue = substr(trim($arrDirective[1]), 0, strpos(trim($arrDirective[1]), '}'));
+            if (isset($arrDirective[1])) $directiveValue = substr(trim($arrDirective[1]), 0, strpos(trim($arrDirective[1]), '}'));
 
             /**
              * Process directive alternatives
@@ -549,14 +550,14 @@ class ChordPress_Renderer {
       ) {
 
          $returnText .= '<div class="cpress_meta">';
-         if (strlen($this->arrDirectives['composer']) && !$this->hideComposer) $returnText .= 'Composer: ' . $this->arrDirectives['composer'] . '<br>';
-         if (strlen($this->arrDirectives['artist']) && !$this->hideArtist)     $returnText .= 'Artist: ' . $this->arrDirectives['artist'] . '<br>';
-         if (strlen($this->arrDirectives['year']) && !$this->hideYear)         $returnText .= 'Year: ' . $this->arrDirectives['year'] . '<br>';
-         if (strlen($this->arrDirectives['album']) && !$this->hideAlbum)       $returnText .= 'Album: ' . $this->arrDirectives['album'] . '<br>';
-         if (strlen($this->arrDirectives['key']))                              $returnText .= 'Key: ' . $this->arrDirectives['key'] . '<br>';
-         if (strlen($this->arrDirectives['time']))                             $returnText .= 'Time: ' . $this->arrDirectives['time'] . '<br>';
-         if (strlen($this->arrDirectives['tempo']))                            $returnText .= 'Tempo: ' . $this->arrDirectives['tempo'] . '<br>';
-         if (strlen($this->arrDirectives['capo']))                             $returnText .= 'Capo: ' . $this->arrDirectives['capo'] . '<br>';
+         if (strlen($this->arrDirectives['composer']) && !$this->hideComposer) $returnText .= esc_html(__('Composer', 'chordpress')) . ': ' . $this->arrDirectives['composer'] . '<br>';
+         if (strlen($this->arrDirectives['artist']) && !$this->hideArtist)     $returnText .= esc_html(__('Artist', 'chordpress')) . ': ' . $this->arrDirectives['artist'] . '<br>';
+         if (strlen($this->arrDirectives['year']) && !$this->hideYear)         $returnText .= esc_html(__('Year', 'chordpress')) . ': ' . $this->arrDirectives['year'] . '<br>';
+         if (strlen($this->arrDirectives['album']) && !$this->hideAlbum)       $returnText .= esc_html(__('Album', 'chordpress')) . ': ' . $this->arrDirectives['album'] . '<br>';
+         if (strlen($this->arrDirectives['key']))                              $returnText .= esc_html(__('Key', 'chordpress')) . ': ' . $this->arrDirectives['key'] . '<br>';
+         if (strlen($this->arrDirectives['time']))                             $returnText .= esc_html(__('Time', 'chordpress')) . ': ' . $this->arrDirectives['time'] . '<br>';
+         if (strlen($this->arrDirectives['tempo']))                            $returnText .= esc_html(__('Tempo', 'chordpress')) . ': ' . $this->arrDirectives['tempo'] . '<br>';
+         if (strlen($this->arrDirectives['capo']))                             $returnText .= esc_html(__('Capo', 'chordpress')) . ': ' . $this->arrDirectives['capo'] . '<br>';
          $returnText .= '</div>';
       }
 
@@ -687,7 +688,7 @@ class ChordPress_Renderer {
 
 </script>\n";
 
-         $chordSheetText .= "<div style=\"clear:both;\"></div><!-- ChordPress ChordSheet End -->\n\n";
+         $chordSheetText .= "<div style=\"clear:both;\"></div>\n<!-- ChordPress ChordSheet End -->\n\n";
       }
 
       /**
@@ -795,12 +796,12 @@ class ChordPress_Renderer {
          /**
           * No chords on this line
           */
-         if ($line[0] == '#') {
+         if (isset($line[0]) && $line[0] == '#') {
 
             /**
              * Line starts with "#": It's a comment line => skip
              */
-         } else if ($line[0] == '{' || strpos($line, '{')) {
+         } else if ((isset($line[0]) && $line[0] == '{') || (isset($line[0]) && strpos($line, '{'))) {
 
             /**
              * Line starts with "{" or has one in it: It's a directive
@@ -809,7 +810,7 @@ class ChordPress_Renderer {
             $directive = strstr($line, '{'); // Remove all before the {
             $arrDirective = explode(":", $directive);
             $directiveName = strtolower(str_replace('{', '', trim($arrDirective[0])));
-            $directiveValue = substr(trim($arrDirective[1]), 0, strpos(trim($arrDirective[1]), '}'));
+            if (isset($arrDirective[1])) $directiveValue = substr(trim($arrDirective[1]), 0, strpos(trim($arrDirective[1]), '}'));
 
             /**
              * In case the directive had no colon and value, $directiveName will
@@ -1552,6 +1553,7 @@ class ChordPress_Renderer {
       $guitar_chord_single_frets  = get_post_meta($postid, 'guitar_chord_single_frets', 1);
       $guitar_chord_single_labels = get_post_meta($postid, 'guitar_chord_single_labels', 1);
       $guitar_chord_barre_frets   = get_post_meta($postid, 'guitar_chord_barre_frets', 1);
+      $guitar_chord_numstrings    = get_post_meta($postid, 'guitar_chord_numstrings', 1);
 
       /**
        * Build the chord diagram
@@ -1591,7 +1593,7 @@ class ChordPress_Renderer {
             $single_labels = array('', '', '', '', '', '',);
          }
 
-         for ($i = 1; $i <= 6; $i++) {
+         for ($i = 1; $i <= $guitar_chord_numstrings; $i++) {
 
             $my_chord[$i]['fret'] = $single_frets[$i - 1];
             $my_chord[$i]['label'] = $single_labels[$i - 1];

@@ -123,6 +123,8 @@ class ChordPress_Public {
          $tag
       );
 
+      $content = do_shortcode($content);
+
       /** 
        * If no formatting is requested, get out of here and display the text as is
        */
@@ -172,8 +174,8 @@ class ChordPress_Public {
       $P = new ChordPress_Plugin();
       $C = new ChordPress_Chord();
       $chord = array();
-
       $id = $this->random_string();
+      $output = '';
 
       /**
        * Get shortcode arguments and change to lower case
@@ -289,7 +291,7 @@ class ChordPress_Public {
                $single_labels = array('', '', '', '', '', '',);
             }
 
-            for ($i = 1; $i <= 6; $i++) {
+            for ($i = 1; $i <= $guitar_chord_numstrings; $i++) {
 
                $my_chord[$i]['fret'] = $single_frets[$i - 1];
                $my_chord[$i]['label'] = $single_labels[$i - 1];

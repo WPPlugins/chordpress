@@ -275,7 +275,7 @@ class ChordPress_Admin {
 
       $post = get_post($post_id);
 
-      if ('guitar_chord' == $_POST['post_type'] && $post->post_type == 'guitar_chord') {
+      if ( isset($_POST['post_type']) && 'guitar_chord' == $_POST['post_type'] && $post->post_type == 'guitar_chord') {
 
          $meta_options = array(
             'guitar_chord_shortname',

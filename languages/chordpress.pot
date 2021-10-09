@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the ChordPress plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: ChordPress 2.5.0\n"
+"Project-Id-Version: ChordPress 2.5.2-rc1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chordpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2021-08-08T18:34:05+02:00\n"
+"POT-Creation-Date: 2021-08-29T19:42:34+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: chordpress\n"
@@ -948,27 +948,59 @@ msgstr ""
 msgid "Please contact the administrator to register this domain or obtain a valid license."
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:594
-msgid "Chord Sheet"
+#: includes/class-chordpress-renderer.php:553
+msgid "Composer"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:554
+msgid "Artist"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:555
+msgid "Year"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:556
+msgid "Album"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:557
+msgid "Key"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:558
+msgid "Time"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:559
+msgid "Tempo"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:560
+msgid "Capo"
 msgstr ""
 
 #: includes/class-chordpress-renderer.php:595
-#: includes/class-chordpress-renderer.php:700
+msgid "Chord Sheet"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:596
+#: includes/class-chordpress-renderer.php:701
 msgid "These known chords are used in this song"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:848
+#: includes/class-chordpress-renderer.php:849
 msgid "Missing square bracket in line"
 msgstr ""
 
-#: public/class-chordpress-public.php:321
+#: public/class-chordpress-public.php:323
 msgid "Warning"
 msgstr ""
 
-#: public/class-chordpress-public.php:322
+#: public/class-chordpress-public.php:324
 msgid "There is no chord record with the ID "
 msgstr ""
 
-#: public/class-chordpress-public.php:322
+#: public/class-chordpress-public.php:324
 msgid "Please create a proper post for this chord."
 msgstr ""

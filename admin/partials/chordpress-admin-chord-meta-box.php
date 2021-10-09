@@ -70,7 +70,7 @@ function display_guitar_chord_meta_box($guitar_chord) {
          $single_labels = array('', '', '', '', '', '',);
       }
 
-      for ($i = 1; $i <= 6; $i++) {
+      for ($i = 1; $i <= $guitar_chord_numstrings; $i++) {
          $my_chord[$i]['fret'] = $single_frets[$i - 1];
          $my_chord[$i]['label'] = $single_labels[$i - 1];
       }
