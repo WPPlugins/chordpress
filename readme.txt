@@ -129,6 +129,10 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.0.1 (2021-10-17) =
+* Fixed a bug for chord formatting in the rendered song
+* Added 'No chords' in the transpose listbox
+
 = 3.0.0 (2021-10-08) =
 * Removal of the Vexchjord module
 * Removal of the jTab module

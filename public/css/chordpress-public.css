@@ -2831,8 +2831,14 @@ cpress-button:-moz-focusring,
    transform: translate(-50%, -50%);
    background-color: white;
    padding: 1rem 1.5rem;
-   width: 24rem;
+   /* width: 24rem; */
+   height: 300px;
    border-radius: 0.5rem;
+}
+
+.cpress-modal-content .cpress-chord svg {
+   height: 240px;
+   width: 180px;
 }
 
 .cpress-modal-close {
@@ -2851,26 +2857,4 @@ cpress-button:-moz-focusring,
 
 .cpress-pointer {
    cursor: pointer;
-}
-
-/**
- * jTab
- */
-.jtab {
-   height: 218px;
-}
-
-.jtab.chordonly {
-   height: 118px;
-}
-
-.jtab.tabonly {
-   height: 100px;
-}
-
-.jtab-input {
-   border: 1px solid #a0a0a0;
-   border-radius: 4px;
-   padding: 8px;
-   margin-right: 8px;
 }

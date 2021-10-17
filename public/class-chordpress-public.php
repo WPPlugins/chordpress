@@ -215,7 +215,7 @@ class ChordPress_Public {
             $C->setProperty('strings', $guitar_chord_strings);
             $C->setProperty('title', $guitar_chord_title);
             $C->setTuning($guitar_chord_tuning);
-         
+
          } else {
 
             /**
@@ -245,9 +245,45 @@ class ChordPress_Public {
       }
 
       $output = $C->createSvgChord();
+      // $C->setProperty('titleBottomMargin', 80);
+      // $output .= $this->create_modal_chord($args['chord'],$C->createSvgChord());
 
       return $output;
 
+   }
+
+   /**
+    * Create a modal guitar chord dialog.
+    * 
+    * @param  integer    $postid    ID of the chord post
+    * @param  string     $chord     SVGuitar HTML
+    * @return string                Modal chord dialog HTML
+    */
+    private function create_modal_chord($postid, $chord) {
+
+      $modal_chord = '<button id="cpress-chord-' . $postid . '-modal-button">Click here to trigger the modal!</button>
+      <div id="cpress-chord-' . $postid . '-modal" class="cpress-modal">
+          <div class="cpress-modal-content">
+              <span id="cpress-chord-' . $postid . '-modal-close" class="cpress-modal-close">&times;</span>
+              ' . $chord . '
+          </div>
+      </div>
+      <script>
+      var cpress_' . $postid . '_modal = document.getElementById("cpress-chord-' . $postid . '-modal");
+      var cpress_' . $postid . '_btn = document.getElementById("cpress-chord-' . $postid . '-modal-button");
+      var cpress_' . $postid . '_close = document.getElementById("cpress-chord-' . $postid . '-modal-close");
+
+      cpress_' . $postid . '_btn.onclick = function()   { cpress_' . $postid . '_modal.style.display = "block"; }
+      cpress_' . $postid . '_close.onclick = function() { cpress_' . $postid . '_modal.style.display = "none"; }
+
+      window.onclick = function(event) {
+         if (event.target == cpress_' . $postid . '_modal) {
+            cpress_' . $postid . '_modal.style.display = "none";
+         }
+      } 
+      </script>';
+
+      return $modal_chord;
    }
 
    /**
@@ -267,6 +303,40 @@ class ChordPress_Public {
       $query_result = new WP_Query($query_args);
 
       return $query_result->posts[0]->ID;
+   }
+
+   /**
+    * Build a guitar chord from post ID.
+    * 
+    * @param  string    $postid    Post ID
+    * @return string               SVGuitar HTML
+    */
+    private function build_guitar_chord_from_postid($postid) {
+
+      /**
+       * Retrieve chord data from chord post
+       */
+      $guitar_chord_barres   = esc_html(get_post_meta($positid, 'guitar_chord_barres', true));
+      $guitar_chord_fingers  = esc_html(get_post_meta($positid, 'guitar_chord_fingers', true));
+      $guitar_chord_frets    = esc_html(get_post_meta($positid, 'guitar_chord_frets', true));
+      $guitar_chord_strings  = esc_html(get_post_meta($positid, 'guitar_chord_strings', true));
+      $guitar_chord_position = esc_html(get_post_meta($positid, 'guitar_chord_position', true));
+      $guitar_chord_title    = get_the_title($positid);
+      $guitar_chord_tuning   = esc_html(get_post_meta($positid, 'guitar_chord_tuning', true));
+
+      /**
+       * Set chord properties
+       */
+      $C->setBarres($guitar_chord_barres);
+      $C->setProperty('fingers', $guitar_chord_fingers);
+      $C->setProperty('frets', $guitar_chord_frets);
+      $C->setProperty('position', $guitar_chord_position);
+      $C->setProperty('strings', $guitar_chord_strings);
+      $C->setProperty('title', $guitar_chord_title);
+      $C->setTuning($guitar_chord_tuning);
+
+      return $C->createSvgChord();
+      
    }
 
    /**

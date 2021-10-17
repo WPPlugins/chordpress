@@ -483,7 +483,7 @@ class ChordPress_Renderer {
          div.cpress { float: ' . $this->float . '; }
          div.cpress_line { margin: 1em 0 1em 0; }
          div.cpress_line_section { display: inline; float: left; }
-         div.cpress_line_section .chord { ' . $this->chordStyle . '; }
+         div.cpress_line_section .chord .chordshort { ' . $this->chordStyle . '; }
          div.cpress_line_section .lyric { ' . $this->lyricsStyle . '; }
          div.cpress_chorus { ' . $this->chorusStyle . '; }
          div.cpress_verse { ' . $this->verseStyle . '; }
@@ -513,9 +513,11 @@ class ChordPress_Renderer {
                <option value=\"9\">9</option>
                <option value=\"10\">10</option>
                <option value=\"11\">11</option>
+               <option value=\"12\">".__('No chords', 'chordpress')."</option>
             </select><br>
             <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">Print</button>
          </div>";
+
       }
 
       /**
@@ -778,7 +780,7 @@ class ChordPress_Renderer {
 
                if (strlen(trim($arrChords[$i])) > 0) {
 
-                  $returnText .= "<div class=\"chord chord-hidable key-0\"><strong>";
+                  $returnText .= "<div class=\"chord chord-hidable key-0\"><span class=\"chordshort\">";
 
                   /**
                    * Allow chords starting with a ~ as chord placeholders. Just return the string.
@@ -794,7 +796,7 @@ class ChordPress_Renderer {
                      $returnText .= $theChord;
                   }
 
-                  $returnText .= '</strong>&nbsp;</div>';
+                  $returnText .= '</span>&nbsp;</div>';
 
                   /**
                    * Prepare all other 11 transposed versions of the chord 
@@ -814,7 +816,7 @@ class ChordPress_Renderer {
                       */
                      if ($arrChords[$i][0] == '~') {
 
-                        $returnText .= '<div class="chord chord-hidable key-' . $t . '" style="display:none"><strong>' . $arrChords[$i] . '</strong>&nbsp;</div>';
+                        $returnText .= '<div class="chord chord-hidable key-' . $t . '" style="display:none"><span class="chordshort">' . $arrChords[$i] . '</span>&nbsp;</div>';
 
                      } else {
 
@@ -822,7 +824,7 @@ class ChordPress_Renderer {
                          * This is a real chord.
                          */
                         $theChord = $this->formatChord($arrChords[$i]);
-                        $returnText .= '<div class="chord chord-hidable key-' . $t . '" style="display:none"><strong>' . $theChord . '</strong>&nbsp;</div>';
+                        $returnText .= '<div class="chord chord-hidable key-' . $t . '" style="display:none"><span class="chordshort">' . $theChord . '</span>&nbsp;</div>';
 
                      }
 
@@ -852,7 +854,7 @@ class ChordPress_Renderer {
 
                } else {
 
-                  $returnText .= '<div class="chord"><strong></strong>&nbsp;</div>';
+                  $returnText .= '<div class="chord">&nbsp;</div>';
                   $returnText .= '<div class="lyric">';
 
                }
@@ -1376,46 +1378,6 @@ class ChordPress_Renderer {
    }
 
    /**
-    * Create a modal guitar chord dialog.
-    * 
-    * @param  integer    $postid    ID of the chord post
-    * @param  string     $chord     Vexchord HTML
-    * @return string                Modal chord dialog HTML
-    */
-   // private function create_modal_chord($postid, $chord) {
-
-   //    $modal_chord = '<!-- <button id="cpress-chord-' . $postid . '-modal-button">Click here to trigger the modal!</button> -->
-   //    <div id="cpress-chord-' . $postid . '-modal" class="cpress-modal">
-   //        <div class="cpress-modal-content">
-   //            <span id="cpress-chord-' . $postid . '-modal-close" class="cpress-modal-close">&times;</span>
-   //            ' . $chord . '
-   //        </div>
-   //    </div>
-   //    <script>
-   //    var cpress_' . $postid . '_modal = document.getElementById("cpress-chord-' . $postid . '-modal");
-   //    var cpress_' . $postid . '_btn = document.getElementById("cpress-chord-' . $postid . '-modal-button");
-   //    var cpress_' . $postid . '_close = document.getElementById("cpress-chord-' . $postid . '-modal-close");
-
-   //    cpress_' . $postid . '_btn.onclick = function() {
-   //       cpress_' . $postid . '_modal.style.display = "block";
-   //    }
-
-   //    cpress_' . $postid . '_close.onclick = function() {
-   //       cpress_' . $postid . '_modal.style.display = "none";
-   //    }
-
-   //    window.onclick = function(event) {
-   //       if (event.target == cpress_' . $postid . '_modal) {
-   //          cpress_' . $postid . '_modal.style.display = "none";
-   //       }
-   //    } 
-   //    </script>';
-
-   //    return $modal_chord;
-
-   // }
-
-   /**
     * Find a guitar chord type post by shortname.
     * 
     * @param  string    $shortname    Shortname of the guitar post to look for.
@@ -1444,12 +1406,12 @@ class ChordPress_Renderer {
    }
 
    /**
-    * Find a guitar chord type post by shortname.
+    * Load a guitar chord based on post ID.
     * 
     * @param  integer    $postid    Guitar chord post ID.
     * @return void
     */
-   private function load_guitar_chord($postid) {
+    private function load_guitar_chord($postid) {
 
       $my_chord = array();
       $post = get_post($postid);
@@ -1475,6 +1437,47 @@ class ChordPress_Renderer {
       $this->C->setProperty('position', $guitar_chord_position);
       $this->C->setProperty('strings', $guitar_chord_strings);
       $this->C->setTuning($guitar_chord_tuning);
+
+   }
+
+   //--------------------------------------------------------------------------
+   /**
+    * Create a modal guitar chord dialog.
+    * 
+    * @param  integer    $postid    ID of the chord post
+    * @param  string     $chord     Vexchord HTML
+    * @return string                Modal chord dialog HTML
+    */
+    private function create_modal_chord($postid, $chord) {
+
+      $modal_chord = '<!-- <button id="cpress-chord-' . $postid . '-modal-button">Click here to trigger the modal!</button> -->
+      <div id="cpress-chord-' . $postid . '-modal" class="cpress-modal">
+          <div class="cpress-modal-content">
+              <span id="cpress-chord-' . $postid . '-modal-close" class="cpress-modal-close">&times;</span>
+              ' . $chord . '
+          </div>
+      </div>
+      <script>
+      var cpress_' . $postid . '_modal = document.getElementById("cpress-chord-' . $postid . '-modal");
+      var cpress_' . $postid . '_btn = document.getElementById("cpress-chord-' . $postid . '-modal-button");
+      var cpress_' . $postid . '_close = document.getElementById("cpress-chord-' . $postid . '-modal-close");
+
+      cpress_' . $postid . '_btn.onclick = function() {
+         cpress_' . $postid . '_modal.style.display = "block";
+      }
+
+      cpress_' . $postid . '_close.onclick = function() {
+         cpress_' . $postid . '_modal.style.display = "none";
+      }
+
+      window.onclick = function(event) {
+         if (event.target == cpress_' . $postid . '_modal) {
+            cpress_' . $postid . '_modal.style.display = "none";
+         }
+      } 
+      </script>';
+
+      return $modal_chord;
 
    }
 

@@ -506,7 +506,7 @@ class ChordPress_Chord {
        */
       $output = "\n\n
       <!-- ChordPress Chord -->
-      <div id=\"" . $id . "\" style=\"width:".$this->canvasWidth."px;".$float."\"></div>
+      <div id=\"" . $id . "\" class=\"cpress-chord\" style=\"width:".$this->canvasWidth."px;".$float."\"></div>
       <script>\n
          var chart = new svguitar.SVGuitarChord('#".$id."')
          ".$this->buildChordParmeters()."
