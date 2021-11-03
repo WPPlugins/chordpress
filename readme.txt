@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
 Tested up to: 5.8
-Stable tag: trunk
+Stable tag: 3.0.2
 Requires PHP: 5.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -129,6 +129,9 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.0.2 (2021-11-03) =
+* Transpose and print can now be hidden in interactive mode
+
 = 3.0.1 (2021-10-17) =
 * Fixed a bug for chord formatting in the rendered song
 * Added 'No chords' in the transpose listbox

@@ -194,6 +194,20 @@ if ($show_alert) {
                         </td>
                      </tr>
                      <tr>
+                        <th scope="row"><?php echo esc_html(__('Hide Transpose', 'chordpress')); ?></th>
+                        <td>
+                           <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_transpose' name='<?php echo $pname; ?>_checkbox_hide_transpose' <?php checked(get_option($pname . '_checkbox_hide_transpose'), 1); ?> value='1'>
+                           <p class="description"><?php echo esc_html(__('With this option selected, the transpose drop down will be hidden in interactive mode.', 'chordpress')); ?>.</p>
+                        </td>
+                     </tr>
+                     <tr>
+                        <th scope="row"><?php echo esc_html(__('Hide Print', 'chordpress')); ?></th>
+                        <td>
+                           <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_print' name='<?php echo $pname; ?>_checkbox_hide_print' <?php checked(get_option($pname . '_checkbox_hide_print'), 1); ?> value='1'>
+                           <p class="description"><?php echo esc_html(__('With this option selected, the print button will be hidden in interactive mode.', 'chordpress')); ?>.</p>
+                        </td>
+                     </tr>
+                     <tr>
                         <th scope="row"><?php echo esc_html(__('H/B Notation', 'chordpress')); ?></th>
                         <td>
                            <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hb_notation' name='<?php echo $pname; ?>_checkbox_hb_notation' <?php checked(get_option($pname . '_checkbox_hb_notation'), 1); ?> value='1'>

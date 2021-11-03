@@ -346,8 +346,10 @@ class ChordPress_Renderer {
       if (!$this->hideChords = get_option('chordpress_checkbox_hide_chords')) $this->hideChords = 0;
       if (!$this->hideComments = get_option('chordpress_checkbox_hide_comments')) $this->hideComments = 0;
       if (!$this->hideComposer = get_option('chordpress_checkbox_hide_composer')) $this->hideComposer = 0;
+      if (!$this->hidePrint = get_option('chordpress_checkbox_hide_print')) $this->hidePrint = 0;
       if (!$this->hideSubtitle = get_option('chordpress_checkbox_hide_subtitle')) $this->hideSubtitle = 0;
       if (!$this->hideTitle = get_option('chordpress_checkbox_hide_title')) $this->hideTitle = 0;
+      if (!$this->hideTranspose = get_option('chordpress_checkbox_hide_transpose')) $this->hideTranspose = 0;
       if (!$this->hideYear = get_option('chordpress_checkbox_hide_year')) $this->hideYear = 0;
       if (!$this->displayHBNotation = get_option('chordpress_checkbox_hb_notation')) $this->displayHBNotation = 0;
       if (!$this->showChordSheet = get_option('chordpress_checkbox_show_chord_sheet')) $this->showChordSheet = 0;
@@ -499,7 +501,30 @@ class ChordPress_Renderer {
        */
       if (strtolower($this->interactive) == "yes") {
 
-         $returnText .= "<div class=\"cpress_interaction\">Transpose up:
+         if (!$this->hideTranspose && !$this->hidePrint) {
+
+            $returnText .= "<div class=\"cpress_interaction\">Transpose up:
+               <select id=\"selTranspose\" onchange=\"transposeChords();return false;\">
+                  <option value=\"0\">0</option>
+                  <option value=\"1\">1</option>
+                  <option value=\"2\">2</option>
+                  <option value=\"3\">3</option>
+                  <option value=\"4\">4</option>
+                  <option value=\"5\">5</option>
+                  <option value=\"6\">6</option>
+                  <option value=\"7\">7</option>
+                  <option value=\"8\">8</option>
+                  <option value=\"9\">9</option>
+                  <option value=\"10\">10</option>
+                  <option value=\"11\">11</option>
+                  <option value=\"12\">".__('No chords', 'chordpress')."</option>
+               </select><br>
+               <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">Print</button>
+               </div>";
+
+         } else if (!$this->hideTranspose && $this->hidePrint) {
+
+            $returnText .= "<div class=\"cpress_interaction\">Transpose up:
             <select id=\"selTranspose\" onchange=\"transposeChords();return false;\">
                <option value=\"0\">0</option>
                <option value=\"1\">1</option>
@@ -514,9 +539,16 @@ class ChordPress_Renderer {
                <option value=\"10\">10</option>
                <option value=\"11\">11</option>
                <option value=\"12\">".__('No chords', 'chordpress')."</option>
-            </select><br>
-            <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">Print</button>
-         </div>";
+            </select>
+            </div>";
+
+         } else if ($this->hideTranspose && !$this->hidePrint) {
+
+            $returnText .= "<div class=\"cpress_interaction\">
+               <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">Print</button>
+            </div>";
+
+         }
 
       }
 
