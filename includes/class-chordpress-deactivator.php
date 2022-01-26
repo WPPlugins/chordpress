@@ -20,17 +20,16 @@
  * @subpackage ChordPress/includes
  * @author     George Lewe <george@lewe.com>
  */
-class ChordPress_Deactivator {
-
-	/**
-	 * Plugin deactivation function.
-	 *
-	 * This functions handles the plugin deactivation actions.
-	 *
-	 * @since    2.0.0
-	 */
-	public static function deactivate() {
-
-	}
-
+class ChordPress_Deactivator
+{
+    /**
+     * Plugin deactivation function.
+     *
+     * This functions handles the plugin deactivation actions.
+     *
+     * @since    2.0.0
+     */
+    public static function deactivate()
+    {
+    }
 }

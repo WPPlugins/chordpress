@@ -24,21 +24,20 @@
  * @subpackage ChordPress/includes
  * @author     George Lewe <george@lewe.com>
  */
-class ChordPress_i18n {
+class ChordPress_i18n
+{
+    /**
+     * Load the plugin text domain for translation.
+     *
+     * @since    2.0.0
+     */
+    public function load_plugin_textdomain()
+    {
 
-	/**
-	 * Load the plugin text domain for translation.
-	 *
-	 * @since    2.0.0
-	 */
-	public function load_plugin_textdomain() {
-
-		load_plugin_textdomain(
-			'chordpress',
-			false,
-			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
-		);
-
-	}
-
+        load_plugin_textdomain(
+            'chordpress',
+            false,
+            dirname(dirname(plugin_basename(__FILE__))) . '/languages/'
+        );
+    }
 }
