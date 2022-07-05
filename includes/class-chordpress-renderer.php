@@ -585,8 +585,7 @@ class ChordPress_Renderer
             }
             if (!$this->hidePrint) {
                 $printForm = "<br>
-                <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">" . __('Print', 'chordpress') . "</button>
-                </div>";
+                <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">" . __('Print', 'chordpress') . "</button>";
             }
             $returnText .= $transposeForm . $printForm . "</div>";
         }
@@ -624,7 +623,7 @@ class ChordPress_Renderer
             if (strlen($this->arrDirectives['album']) && !$this->hideAlbum)       $returnText .= esc_html(__('Album', 'chordpress')) . ': ' . $this->arrDirectives['album'] . '<br>';
 
             if (strlen($this->arrDirectives['key'])) {
-                $returnText .= esc_html(__('Key (original)', 'chordpress')) . ': ' . $this->arrDirectives['key'] . '</br>';
+                $returnText .= esc_html(__('Key (original)', 'chordpress')) . ': ' . $this->arrDirectives['key'] . '<br>';
                 $returnText .= esc_html(__('Key (transposed)', 'chordpress')) . ': <span class="chord-hidable key-0">' . $this->arrDirectives['key'] . '</span>';
                 for ($t = 1; $t <= 11; $t++) {
                     $returnText .= '<span class="chord-hidable key-' . $t . '" style="display:none">' . $this->arrTransposeValues[$this->arrDirectives['key']][$t] . '</span>';
