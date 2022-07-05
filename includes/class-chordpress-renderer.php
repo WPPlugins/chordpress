@@ -320,6 +320,60 @@ class ChordPress_Renderer
      */
     private $uniqueChords = array();
 
+    /**
+     * Array of supported Key directives.
+     *
+     * @since    3.1.0
+     * @access   private
+     * @var      array
+     */
+    private $arrKeys = array('A', 'Am', 'A#', 'Am#', 'Bb', 'Bmb', 'B', 'Bm', 'C', 'Cm', 'C#', 'Cm#', 'Db', 'Dmb', 'D', 'Dm', 'D#', 'Dm#', 'Eb', 'Emb', 'E', 'Em', 'F', 'Fm', 'G', 'Gm', 'G#', 'Gm#', 'Ab', 'Amb');
+
+    /**
+     * Array of transposed keys.
+     *
+     * @since    3.1.0
+     * @access   private
+     * @var      array
+     */
+    private $arrTransposeValues = array(
+        'A' =>  array('A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'),
+        'Am' =>  array('Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#'),
+        'A#' => array('A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'),
+        'Bb' => array('Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A'),
+        'Am#' => array('Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am'),
+        'Bmb' => array('Bmb', 'Bm', 'Cm', 'Dmb', 'Dm', 'Emb', 'Em', 'Fm', 'Gmb', 'Gm', 'Amb', 'Am'),
+        'B' => array('B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#'),
+        'Bm' => array('Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#'),
+        'C' => array('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'),
+        'Cm' => array('Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm'),
+        'C#' => array('C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C'),
+        'Db' => array('Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C'),
+        'Cm#' => array('Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm'),
+        'Dmb' => array('Dmb', 'Dm', 'Emb', 'Em', 'Fm', 'Gmb', 'Gm', 'Amb', 'Am', 'Bmb', 'Bm', 'Cm'),
+        'D' => array('D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#'),
+        'Dm' => array('Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#'),
+        'D#' => array('D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D'),
+        'Eb' => array('Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D'),
+        'Dm#' => array('Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm'),
+        'Emb' => array('Emb', 'Em', 'Fm', 'Gmb', 'Gm', 'Amb', 'Am', 'Bmb', 'Bm', 'Cm', 'Dmb', 'Dm'),
+        'E' => array('E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#'),
+        'Em' => array('Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#'),
+        'F' => array('F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'),
+        'Fm' => array('Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em'),
+        'F#' => array('F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F'),
+        'Gb' => array('Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F'),
+        'Fm#' => array('Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm'),
+        'Gmb' => array('Gmb', 'Gm', 'Amb', 'Am', 'Bmb', 'Bm', 'Cm', 'Dmb', 'Dm', 'Emb', 'Em', 'Fm'),
+        'G' => array('G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#'),
+        'Gm' => array('Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#'),
+        'G#' => array('G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G'),
+        'Ab' => array('Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G'),
+        'Gm#' => array('Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm'),
+        'Amb' => array('Amb', 'Am', 'Bmb', 'Bm', 'Cm', 'Dmb', 'Dm', 'Emb', 'Em', 'Fm', 'Gmb', 'Gm'),
+    );
+
+
     //--------------------------------------------------------------------------
     /**
      * Initialize the class and set its properties.
@@ -375,7 +429,7 @@ class ChordPress_Renderer
      * Get the ChordPro directives and store the supported ones in an array.
      *
      * @since    1.0.0
-     * @param    string    $text    Text inside shortcode wrapper.
+     * @param    object    $text    Text inside shortcode wrapper.
      */
     public function getDirectives($text)
     {
@@ -413,9 +467,7 @@ class ChordPress_Renderer
                          */
                         $arrMetaDirective = explode(" ", $directiveValue, 2);
                         foreach ($this->arrDirectives as $key => $value) {
-
                             if (trim($arrMetaDirective[0]) == $key) {
-
                                 $directiveName = $key;
                                 $directiveValue = trim($arrMetaDirective[1]);
                             }
@@ -493,53 +545,50 @@ class ChordPress_Renderer
             </style>';
 
         /**
-         * Interactive transpose listbox
+         * Interactive transpose / print
          */
         if (strtolower($this->interactive) == "yes") {
+            $returnText .= "<div class=\"cpress_interaction\">";
+            $transposeForm = "";
+            $printForm = "";
+            if (!$this->hideTranspose) {
+                //
+                // Let's see if a 'Key' directive was given. If so, we can add
+                // the transposed keys to the list.
+                //
+                if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
+                    $i = 0;
+                    foreach ($this->arrTransposeValues[$this->arrDirectives['key']] as $val) {
+                        $tvalues[] = (string) $i . ' => ' . $val;
+                        $i++;
+                    }
+                } else {
+                    $tvalues = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11');
+                }
 
-            if (!$this->hideTranspose && !$this->hidePrint) {
-
-                $returnText .= "<div class=\"cpress_interaction\">Transpose up:
+                $transposeForm = __('Transpose up', 'chordpress') . "
                 <select id=\"selTranspose\" onchange=\"transposeChords();return false;\">
-                    <option value=\"0\">0</option>
-                    <option value=\"1\">1</option>
-                    <option value=\"2\">2</option>
-                    <option value=\"3\">3</option>
-                    <option value=\"4\">4</option>
-                    <option value=\"5\">5</option>
-                    <option value=\"6\">6</option>
-                    <option value=\"7\">7</option>
-                    <option value=\"8\">8</option>
-                    <option value=\"9\">9</option>
-                    <option value=\"10\">10</option>
-                    <option value=\"11\">11</option>
+                    <option value=\"0\">" . $tvalues[0] . "</option>
+                    <option value=\"1\">" . $tvalues[1] . "</option>
+                    <option value=\"2\">" . $tvalues[2] . "</option>
+                    <option value=\"3\">" . $tvalues[3] . "</option>
+                    <option value=\"4\">" . $tvalues[4] . "</option>
+                    <option value=\"5\">" . $tvalues[5] . "</option>
+                    <option value=\"6\">" . $tvalues[6] . "</option>
+                    <option value=\"7\">" . $tvalues[7] . "</option>
+                    <option value=\"8\">" . $tvalues[8] . "</option>
+                    <option value=\"9\">" . $tvalues[9] . "</option>
+                    <option value=\"10\">" . $tvalues[10] . "</option>
+                    <option value=\"11\">" . $tvalues[11] . "</option>
                     <option value=\"12\">" . __('No chords', 'chordpress') . "</option>
-                </select><br>
-                <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">Print</button>
-                </div>";
-            } else if (!$this->hideTranspose && $this->hidePrint) {
-                $returnText .= "<div class=\"cpress_interaction\">Transpose up:
-                <select id=\"selTranspose\" onchange=\"transposeChords();return false;\">
-                    <option value=\"0\">0</option>
-                    <option value=\"1\">1</option>
-                    <option value=\"2\">2</option>
-                    <option value=\"3\">3</option>
-                    <option value=\"4\">4</option>
-                    <option value=\"5\">5</option>
-                    <option value=\"6\">6</option>
-                    <option value=\"7\">7</option>
-                    <option value=\"8\">8</option>
-                    <option value=\"9\">9</option>
-                    <option value=\"10\">10</option>
-                    <option value=\"11\">11</option>
-                    <option value=\"12\">" . __('No chords', 'chordpress') . "</option>
-                </select>
-                </div>";
-            } else if ($this->hideTranspose && !$this->hidePrint) {
-                $returnText .= "<div class=\"cpress_interaction\">
-                    <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">Print</button>
+                </select>";
+            }
+            if (!$this->hidePrint) {
+                $printForm = "<br>
+                <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">" . __('Print', 'chordpress') . "</button>
                 </div>";
             }
+            $returnText .= $transposeForm . $printForm . "</div>";
         }
 
         /**
@@ -573,7 +622,16 @@ class ChordPress_Renderer
             if (strlen($this->arrDirectives['artist']) && !$this->hideArtist)     $returnText .= esc_html(__('Artist', 'chordpress')) . ': ' . $this->arrDirectives['artist'] . '<br>';
             if (strlen($this->arrDirectives['year']) && !$this->hideYear)         $returnText .= esc_html(__('Year', 'chordpress')) . ': ' . $this->arrDirectives['year'] . '<br>';
             if (strlen($this->arrDirectives['album']) && !$this->hideAlbum)       $returnText .= esc_html(__('Album', 'chordpress')) . ': ' . $this->arrDirectives['album'] . '<br>';
-            if (strlen($this->arrDirectives['key']))                              $returnText .= esc_html(__('Key', 'chordpress')) . ': ' . $this->arrDirectives['key'] . '<br>';
+
+            if (strlen($this->arrDirectives['key'])) {
+                $returnText .= esc_html(__('Key (original)', 'chordpress')) . ': ' . $this->arrDirectives['key'] . '</br>';
+                $returnText .= esc_html(__('Key (transposed)', 'chordpress')) . ': <span class="chord-hidable key-0">' . $this->arrDirectives['key'] . '</span>';
+                for ($t = 1; $t <= 11; $t++) {
+                    $returnText .= '<span class="chord-hidable key-' . $t . '" style="display:none">' . $this->arrTransposeValues[$this->arrDirectives['key']][$t] . '</span>';
+                }
+                $returnText .= '<br>';
+            }
+
             if (strlen($this->arrDirectives['time']))                             $returnText .= esc_html(__('Time', 'chordpress')) . ': ' . $this->arrDirectives['time'] . '<br>';
             if (strlen($this->arrDirectives['tempo']))                            $returnText .= esc_html(__('Tempo', 'chordpress')) . ': ' . $this->arrDirectives['tempo'] . '<br>';
             if (strlen($this->arrDirectives['capo']))                             $returnText .= esc_html(__('Capo', 'chordpress')) . ': ' . $this->arrDirectives['capo'] . '<br>';
