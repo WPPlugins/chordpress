@@ -211,6 +211,15 @@ class ChordPress_Renderer
     private $verseStyle;
 
     /**
+     * CSS styles for the line sections.
+     *
+     * @since    3.1.2
+     * @access   private
+     * @var      string    $lineStyle    CSS styles for the line sections.
+     */
+    private $lineStyle;
+
+    /**
      * CSS float directive: no/left/right.
      *
      * @since    1.5.0
@@ -418,6 +427,7 @@ class ChordPress_Renderer
         if (!$this->commentStyle = get_option('chordpress_text_comment_style')) $this->commentStyle = '';
         if (!$this->chorusStyle = get_option('chordpress_text_chorus_style')) $this->chorusStyle = '';
         if (!$this->verseStyle = get_option('chordpress_text_verse_style')) $this->verseStyle = '';
+        if (!$this->lineStyle = get_option('chordpress_text_line_style')) $this->lineStyle = 'margin: 1em 0 1em 0;';
 
         if (!$this->jTabChordsPerRow = get_option('chordpress_number_jtab_chords_per_row')) $this->jTabChordsPerRow = 6;
         if (!$this->jTabColor = get_option('chordpress_text_jtab_color')) $this->jTabColor = '';
@@ -531,7 +541,7 @@ class ChordPress_Renderer
         $returnText .=
             '<style>
                 div.cpress { float: ' . $this->float . '; }
-                div.cpress_line { margin: 1em 0 1em 0; }
+                div.cpress_line { ' . $this->lineStyle . '; }
                 div.cpress_line_section { display: inline; float: left; }
                 div.cpress_line_section .chord .chordshort { ' . $this->chordStyle . '; }
                 div.cpress_line_section .lyric { ' . $this->lyricsStyle . '; }

@@ -161,6 +161,7 @@ class ChordPress_Plugin
             $this->plugin_name . '_text_comment_style',
             $this->plugin_name . '_text_chorus_style',
             $this->plugin_name . '_text_verse_style',
+            $this->plugin_name . '_text_line_style',
 
             $this->plugin_name . '_text_chord_backgroundColor',
             $this->plugin_name . '_number_chord_barreChordRadius',

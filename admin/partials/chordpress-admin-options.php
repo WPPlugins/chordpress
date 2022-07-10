@@ -294,6 +294,13 @@ if ($show_alert) {
                                 </td>
                             </tr>
                             <tr>
+                                <th scope="row"><label for="<?php echo $pname; ?>_text_line_style"><?php echo esc_html(__('Line Style', 'chordpress')); ?></label></th>
+                                <td>
+                                    <input type="text" id="<?php echo $pname; ?>_text_line_style" name="<?php echo $pname; ?>_text_line_style" value="<?php echo get_option($pname . '_text_line_style'); ?>" />
+                                    <p class="description"><?php echo esc_html(__('Enter CSS for the lines here or leave empty to use the default (margin: 1em 0 1em 0;).', 'chordpress')); ?></p>
+                                </td>
+                            </tr>
+                            <tr>
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_chord_style"><?php echo esc_html(__('Chord Style', 'chordpress')); ?></label></th>
                                 <td>
                                     <input type="text" id="<?php echo $pname; ?>_text_chord_style" name="<?php echo $pname; ?>_text_chord_style" value="<?php echo get_option($pname . '_text_chord_style'); ?>" />
