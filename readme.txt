@@ -1,26 +1,26 @@
-=== ChordPress - ChordPro Text Formatter ===
+=== Lewe ChordPress - ChordPro Text Formatter ===
 Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
 Tested up to: 6.0
-Stable tag: 3.1.2
+Stable tag: 3.2.0
 Requires PHP: 5.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
  
-ChordPress for WordPress pretty-prints ChordPro formatted text and chord diagrams on your pages or posts.
+Lewe ChordPress for WordPress pretty-prints ChordPro formatted text and chord diagrams on your pages or posts.
 
 == Description ==
-ChordPress pretty-prints ChordPro formatted text files on your pages and posts. You can configure output and formatting options. With 'interactive' mode on, you can transpose the chords up and down and also print the output right from the page.
+Lewe ChordPress pretty-prints ChordPro formatted text files on your pages and posts. You can configure output and formatting options. With 'interactive' mode on, you can transpose the chords up and down and also print the output right from the page.
 
-ChordPress 3.0 has retired the Vexchord and jTab chord diagram modules. They have been replaced by the superior [SVGuitar](https://github.com/omnibrain/svguitar "SVGuitar chord renderer").
+Lewe ChordPress 3.0 has retired the Vexchord and jTab chord diagram modules. They have been replaced by the superior [SVGuitar](https://github.com/omnibrain/svguitar "SVGuitar chord renderer").
 
-Your input to ChordPress needs to be a valid ChordPro formatted text. ChordPro is a simple text-based syntax used to write lead sheets, the lyrics and chords of a song. ChordPro also comes with a command line tool that pretty prints that text into other formats like PDF.
+Your input to Lewe ChordPress needs to be a valid ChordPro formatted text. ChordPro is a simple text-based syntax used to write lead sheets, the lyrics and chords of a song. ChordPro also comes with a command line tool that pretty prints that text into other formats like PDF.
 You can read all about ChordPro here:
 [ChordPro](https://www.chordpro.org/chordpro/ChordPro-File-Format-Specification.html "ChordPro file format specification")
 
-The ChordPress plugin allows to put ChordPro text inside its shortcode tags on a page or post and will pretty print it when the web page is displayed.
+The Lewe ChordPress plugin allows to put ChordPro text inside its shortcode tags on a page or post and will pretty print it when the web page is displayed.
 
 Simply insert a ChordPro text inbetween the [chordpress] and [/chordpress] tags and it will be rendered based on the default options of the plugin. You can change output and formatting settings on the plugin's admin page.
 
@@ -32,7 +32,7 @@ The `[chordpress]` shortag allows specifying custom options for rendering ChordP
 2. `[chordpress interactive="yes"]` will allow you to transpose the chords up and down and also print the output right from the rendered page.
 
 Check out this example:
-[ChordPress Demo](https://sayandsound.lewe.com/heart-of-gold/ "ChordPress Demo")
+[Lewe ChordPress Demo](https://sayandsound.lewe.com/heart-of-gold/ "Lewe ChordPress Demo")
 
 The `[chordpress-chord]` shortag allows you to display a guitar chord as a diagram. For example:
 
@@ -40,10 +40,10 @@ The `[chordpress-chord]` shortag allows you to display a guitar chord as a diagr
 2. `[chordpress-chord barre="5,1,1" fingers="(3,2,'2'),(4,3,'4'),(5,3,'3')" title="F# Major" tuning="E,A,D,G,H,E"]` will show a custom guitar chord.
 
 Check out this example:
-[ChordPress Guitar Chord Demo](https://sayandsound.lewe.com/guitar-chords/ "ChordPress Guitar Chord Demo")
+[Lewe ChordPress Guitar Chord Demo](https://sayandsound.lewe.com/guitar-chords/ "Lewe ChordPress Guitar Chord Demo")
 
 If not from the WordPress marketplace, get the plugin here: 
-[ChordPress Homepage](https://www.lewe.com/chordpress/ "ChordPress Homepage")
+[Lewe ChordPress Homepage](https://www.lewe.com/chordpress/ "Lewe ChordPress Homepage")
 
 == Features ==
 * renders the lyrics/chord format of ChordPro
@@ -52,7 +52,7 @@ If not from the WordPress marketplace, get the plugin here:
 * print the rendered output
 * show chord diagrams
 
-ChordPress supports the following ChordPro tags:
+Lewe ChordPress supports the following ChordPro tags:
 
 * `{album}`
 * `{artist}`
@@ -62,13 +62,13 @@ ChordPress supports the following ChordPro tags:
 * `{year}`
 * `{meta}` for all of the above
 
-ChordPress supports custom CSS for the following ChordPro tags:
+Lewe ChordPress supports custom CSS for the following ChordPro tags:
 
 * `{comment}`
 * `{start_of_chorus}`, `{end_of_chorus}`
 * `{start_of_verse}`, `{end_of_verse}`
 
-ChordPress supports note/chord translations
+Lewe ChordPress supports note/chord translations
 
 * Chord transponation
 * [H/B Notation](https://sayandsound.lewe.com/note-h/)
@@ -85,25 +85,25 @@ Optional shortcode parameters
 * `interactive=`  Enables interactive mode. A listbox will be shown on the right of the title that allows you to transpose the chords on the fly. Also, a print button will be shown fopr printing out the rendered ChordPro text.
 * `transpose=`  Enter a positive or negative number for the amount of semitones to transpose the chords
 
-Use the "ChordPress" admin menu of your backend to change the default settings.
+Use the "Lewe ChordPress" admin menu of your backend to change the default settings.
 
 == Documentation ==
-[ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "ChordPress User Manual")
+[Lewe ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "Lewe ChordPress User Manual")
 
 == Support ==
 Choose your preferred support channel:
 1. [Wordpress Support Forum](https://wordpress.org/support/plugin/chordpress/ "Wordpress Support Forum")
 2. [Lewe Service Desk](https://georgelewe.atlassian.net/servicedesk/customer/portal/5 "Lewe Service Desk")
-4. [ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "ChordPress User Manual")
+4. [Lewe ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "Lewe ChordPress User Manual")
 
 == Credits ==
 * The [ChordPro](https://profiles.wordpress.org/rlisle/ "ChordPro") team of course
 * [@rlisle](https://profiles.wordpress.org/rlisle/ "@rlisle") for his work on the ChordsAndLyrics plugin that he created in 2009
-* Ahkâm for the beautiful [ChordPress Plugin Icon](https://www.freeiconspng.com/img/17579 "ChordPress Plugin Icon")
+* Ahkâm for the beautiful [Lewe ChordPress Plugin Icon](https://www.freeiconspng.com/img/17579 "Lewe ChordPress Plugin Icon")
 * The developers of the [SVGuitar](https://github.com/omnibrain/svguitar "SVGuitar") chord rendering module
 
 == Screenshots ==
-1. ChordPress Output Options
+1. Lewe ChordPress Output Options
 2. Chord Diagram Options
 3. Shortcut with ChordPro text in editor
 4. Rendered text on webpage
@@ -123,12 +123,17 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Install and Activate
 
 = Manual Installation =
-1. Download the plugin ZIP file from [here](https://www.lewe.com/chordpress/ "Download ChordPress...")
+1. Download the plugin ZIP file from [here](https://www.lewe.com/chordpress/ "Download Lewe ChordPress...")
 2. Unpack the ZIP file locally
 3. Upload the 'chordpress' folder to your '/wp-content/plugins/' directory
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.2.0 =
+* 2022-10-11
+* Added VI7 and vi7 to the bluegrass chords
+* Changed display name of plugin to 'Lewe ChordPress'
+
 = 3.1.2 =
 * 2022-07-10
 * Added custom line CSS

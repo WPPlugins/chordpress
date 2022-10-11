@@ -982,7 +982,7 @@ class ChordPress_Renderer
     public function formatChord($ch)
     {
         $useFlats = false;
-        $romanChords = array('I', 'I7', 'II', 'III', 'iii', 'IV', 'V', 'V7', 'VI', 'vi', 'VII');
+        $romanChords = array('I', 'I7', 'II', 'III', 'iii', 'IV', 'V', 'V7', 'VI', 'vi', 'VI7', 'vi7', 'VII');
         $nashvilleChords = array('1', '2', '3', '4', '5', '6', '7');
 
         if (strlen($ch) == 0) return;
