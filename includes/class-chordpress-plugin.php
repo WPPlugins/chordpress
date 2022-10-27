@@ -127,7 +127,7 @@ class ChordPress_Plugin
         $this->plugin_title = 'ChordPress';
         $this->plugin_name = 'chordpress';
         $this->plugin_prefix = 'cpress';
-        $this->plugin_uri = 'https://support.lewe.com/docs/chordpress-manual/';
+        $this->plugin_uri = 'https://lewe.gitbook.io/lewe-chordpress/';
         $this->plugin_donation_uri = 'https://www.paypal.me/GeorgeLewe';
 
         $this->load_dependencies();

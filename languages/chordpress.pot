@@ -19,7 +19,7 @@ msgid "ChordPress"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://support.lewe.com/docs/chordpress-manual/"
+msgid "https://lewe.gitbook.io/lewe-chordpress/"
 msgstr ""
 
 #. Description of the plugin

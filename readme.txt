@@ -3,8 +3,8 @@ Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
-Tested up to: 6.0
-Stable tag: 3.2.0
+Tested up to: 6.1
+Stable tag: 3.2.1
 Requires PHP: 5.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -88,13 +88,13 @@ Optional shortcode parameters
 Use the "Lewe ChordPress" admin menu of your backend to change the default settings.
 
 == Documentation ==
-[Lewe ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "Lewe ChordPress User Manual")
+[Lewe ChordPress User Manual](https://lewe.gitbook.io/lewe-chordpress/ "Lewe ChordPress User Manual")
 
 == Support ==
 Choose your preferred support channel:
 1. [Wordpress Support Forum](https://wordpress.org/support/plugin/chordpress/ "Wordpress Support Forum")
 2. [Lewe Service Desk](https://georgelewe.atlassian.net/servicedesk/customer/portal/5 "Lewe Service Desk")
-4. [Lewe ChordPress User Manual](https://support.lewe.com/docs/chordpress-manual/ "Lewe ChordPress User Manual")
+4. [Lewe ChordPress User Manual](https://lewe.gitbook.io/lewe-chordpress/ "Lewe ChordPress User Manual")
 
 == Credits ==
 * The [ChordPro](https://profiles.wordpress.org/rlisle/ "ChordPro") team of course
@@ -129,6 +129,10 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.2.1 =
+* 2022-10-15
+* Updated documentation and support link
+
 = 3.2.0 =
 * 2022-10-11
 * Added VI7 and vi7 to the bluegrass chords
@@ -252,4 +256,4 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 
 == Upgrade Notice ==
 = 3.0.0 =
-Attention: the Vexchord and jTab modules have been removed and replaced by the SVGuitar chord diagram renderer. Read more [here...](https://support.lewe.com/docs/chordpress-manual/guitar-chords/)
+Attention: the Vexchord and jTab modules have been removed and replaced by the SVGuitar chord diagram renderer. Read more [here...](https://lewe.gitbook.io/lewe-chordpress/guitar-chords)

@@ -226,7 +226,7 @@ class ChordPress_Admin
         if ($file == $this->plugin_name . '/' . $this->plugin_name . '.php') {
             $settings = array('settings' => '<a href="admin.php?page=' . $this->plugin_name . '%2Fadmin%2Fpartials%2Fchordpress-admin-options.php">' . __('Settings', 'chordpress') . '</a>');
             $actions = array_merge($settings, $actions);
-            $documentation = array('documentation' => '<a href="https://support.lewe.com/docs/chordpress-manual/" target="_blank">' . __('Documentation', 'chordpress') . '</a>');
+            $documentation = array('documentation' => '<a href="https://lewe.gitbook.io/lewe-chordpress/" target="_blank">' . __('Documentation', 'chordpress') . '</a>');
             $actions = array_merge($documentation, $actions);
         }
 
@@ -241,7 +241,7 @@ class ChordPress_Admin
     public function meta_links($links, $file)
     {
         if ($file == $this->plugin_name . '/' . $this->plugin_name . '.php') {
-            $support_link = "https://support.lewe.com";
+            $support_link = "https://georgelewe.atlassian.net/servicedesk/customer/portal/5";
             $donate_link = "https://www.paypal.me/GeorgeLewe";
             $review_link = "https://wordpress.org/support/plugin/chordpress/reviews/?filter=5#new-post";
             $links[] = '<a href="' . esc_url($support_link) . '" target="_blank" title="' . __('Support', 'chordpress') . '"><span style="color:#999999;margin-right:4px;" class="dashicons dashicons-sos"></span>' . __('Support', 'chordpress') . '</a>';
