@@ -1,6 +1,1 @@
-<?php
-/**
- * Silence is golden.
- *
- * @package ChordPress
- */
+<?php // Silence is golden
