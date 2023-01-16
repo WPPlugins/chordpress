@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
 Tested up to: 6.1
-Stable tag: 3.3.0
+Stable tag: 3.3.1
 Requires PHP: 5.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -129,6 +129,10 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.3.1 =
+* 2023-01-16
+* Support for more special characters iun chords: ~, |, /, . 
+
 = 3.3.0 =
 * 2022-12-22
 * Added a set of 84 common guitar chords

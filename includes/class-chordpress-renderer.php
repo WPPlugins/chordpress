@@ -94,6 +94,15 @@ class ChordPress_Renderer
     private $hideSubtitle;
 
     /**
+     * Hide print button.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      boolean    $hidePrint    Hide print button.
+     */
+    private $hidePrint;
+
+    /**
      * Hide title flag.
      *
      * @since    1.0.0
@@ -101,6 +110,15 @@ class ChordPress_Renderer
      * @var      boolean    $hideTitle    Hide title flag.
      */
     private $hideTitle;
+
+    /**
+     * Hide transpose button.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      boolean    $hideTranspose    Hide transpose button
+     */
+    private $hideTranspose;
 
     /**
      * Hide year flag.
@@ -193,6 +211,15 @@ class ChordPress_Renderer
     private $commentStyle;
 
     /**
+     * CSS styles for the chords.
+     *
+     * @since    1.0.0
+     * @access   private
+     * @var      string    $chordStyle    CSS styles for the chorus sections.
+     */
+    private $chordStyle;
+
+    /**
      * CSS styles for the chorus sections.
      *
      * @since    1.0.0
@@ -247,31 +274,13 @@ class ChordPress_Renderer
     private $showChordSheet;
 
     /**
-     * Show Chord Sheet for jTab.
+     * Show Chord Sheet on top.
      *
      * @since    2.1.0
      * @access   private
-     * @var      string    $showjTabSheet    Show jTab Sheet: no/yes.
+     * @var      string    $showChordSheetOnTop    Show Chord Sheet on top: no/yes.
      */
-    private $showjTabSheet;
-
-    /**
-     * Show Chord Sheet for jTab.
-     *
-     * @since    2.5.0
-     * @access   private
-     * @var      string    $jTabColor    CSS value for jTab chord text color
-     */
-    private $jTabColor;
-
-    /**
-     * Show Chord Sheet for jTab.
-     *
-     * @since    2.5.0
-     * @access   private
-     * @var      string    $jTabBgColor    CSS value for jTab chord background color
-     */
-    private $jTabBgColor;
+    private $showChordSheetOnTop;
 
     /**
      * Shortcode directive interactive: no/yes.
@@ -416,7 +425,6 @@ class ChordPress_Renderer
         if (!$this->hideYear = get_option('chordpress_checkbox_hide_year')) $this->hideYear = 0;
         if (!$this->displayHBNotation = get_option('chordpress_checkbox_hb_notation')) $this->displayHBNotation = 0;
         if (!$this->showChordSheet = get_option('chordpress_checkbox_show_chord_sheet')) $this->showChordSheet = 0;
-        if (!$this->showjTabSheet = get_option('chordpress_checkbox_show_jtab_sheet')) $this->showjTabSheet = 0;
         if (!$this->showChordSheetOnTop = get_option('chordpress_checkbox_show_chord_sheet_on_top')) $this->showChordSheetOnTop = 0;
 
         if (!$this->titleLevel = get_option('chordpress_select_title_level')) $this->titleLevel = 'h1';
@@ -428,10 +436,6 @@ class ChordPress_Renderer
         if (!$this->chorusStyle = get_option('chordpress_text_chorus_style')) $this->chorusStyle = '';
         if (!$this->verseStyle = get_option('chordpress_text_verse_style')) $this->verseStyle = '';
         if (!$this->lineStyle = get_option('chordpress_text_line_style')) $this->lineStyle = 'margin: 1em 0 1em 0;';
-
-        if (!$this->jTabChordsPerRow = get_option('chordpress_number_jtab_chords_per_row')) $this->jTabChordsPerRow = 6;
-        if (!$this->jTabColor = get_option('chordpress_text_jtab_color')) $this->jTabColor = '';
-        if (!$this->jTabBgColor = get_option('chordpress_text_jtab_bgcolor')) $this->jTabBgColor = '';
     }
 
     //--------------------------------------------------------------------------
@@ -764,9 +768,7 @@ class ChordPress_Renderer
              * Chords found. Split the line into segments beginning with '['
              */
             $arrBracketSegments = explode("[", $line);
-
             foreach ($arrBracketSegments as $segment) {
-
                 if (strlen($segment)) {
                     $pad = ($segment[strlen($segment) - 1] == ' ') ? '&nbsp;' : '';
                     /** 
@@ -829,9 +831,10 @@ class ChordPress_Renderer
                         $returnText .= "<div class=\"chord chord-hidable key-0\"><span class=\"chordshort\">";
 
                         /**
-                         * Allow chords starting with a ~ as chord placeholders. Just return the string.
+                         * Allow chords starting with a ~, |, / and . as chord placeholders. Just return the string.
+                         * Att: ... will end up as &ellip; . Use blanks between each dot.
                          */
-                        if ($arrChords[$i][0] == "~") {
+                        if (in_array($arrChords[$i][0], ['~', '|', '/', '.'])) {
                             $returnText .= $arrChords[$i];
                         } else {
                             $theChord = $this->formatChord($arrChords[$i]);
