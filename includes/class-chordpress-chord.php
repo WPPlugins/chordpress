@@ -509,10 +509,13 @@ class ChordPress_Chord
         <!-- ChordPress Chord -->
         <div id=\"" . $id . "\" class=\"cpress-chord\" style=\"width:" . $this->canvasWidth . "px;" . $float . "\"></div>
         <script>\n
-            var chart = new svguitar.SVGuitarChord('#" . $id . "')
-            " . $this->buildChordParmeters() . "
-            " . $this->buildConfigureParmeters() . "
-            .draw();
+            async function drawChord" . $id . "() {
+                var chart = new svguitar.SVGuitarChord('#" . $id . "')
+                " . $this->buildChordParmeters() . "
+                " . $this->buildConfigureParmeters() . "
+                .draw();
+            };
+            drawChord" . $id . "();
         </script>\n\n";
 
         return $output;

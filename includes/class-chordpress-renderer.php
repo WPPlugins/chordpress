@@ -683,7 +683,7 @@ class ChordPress_Renderer
             $chordSheetText .= "<div style=\"clear:both;\"></div>\n<!-- ChordPress ChordSheet End -->\n\n";
             $returnText .= $chordSheetText;
         }
-
+        // $this->C->dnd($returnText);
         return $returnText . "\n\n";
     }
 
