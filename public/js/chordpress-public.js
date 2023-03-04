@@ -20,7 +20,7 @@
  */
 function dismissParent(el) {
 
-    el.parentNode.style.display='none';
+  el.parentNode.style.display = 'none';
 
 };
 
@@ -32,30 +32,31 @@ function dismissParent(el) {
  *
  * @since       1.3.0
  */
-function transposeChords() {
+function transposeChords(cpressId) {
 
-    /**
-     * Get value from Transpose listbox
-     */
-    var x = document.getElementById("selTranspose").value;
+  /**
+   * Get value from Transpose listbox
+   */
+  var x = document.getElementById("selTranspose-" + cpressId).value;
 
-    /**
-     * Hide all hidable chords
-     */
-    var divsToHide = document.getElementsByClassName("chord-hidable");
+  /**
+   * Hide all hidable chords
+   */
+  // var divsToHide = document.getElementsByClassName("chord-hidable");
+  var divsToHide = document.getElementsByClassName("chord-hidable-" + cpressId);
 
-    for (var i = 0; i < divsToHide.length; i++) {
-        divsToHide[i].style.display = "none";
-    }
+  for (var i = 0; i < divsToHide.length; i++) {
+    divsToHide[i].style.display = "none";
+  }
 
-    /**
-     * Now show those for the selected transpose value
-     */
-    var divsToShow = document.getElementsByClassName("key-"+x);
+  /**
+   * Now show those for the selected transpose value
+   */
+  var divsToShow = document.getElementsByClassName("key-" + cpressId + '-' + x);
 
-    for (var i = 0; i < divsToShow.length; i++) {
-        divsToShow[i].style.display = "";
-    }
+  for (var i = 0; i < divsToShow.length; i++) {
+    divsToShow[i].style.display = "";
+  }
 
 }
 
@@ -71,18 +72,18 @@ function transposeChords() {
  */
 function printCpress(elem) {
 
-    var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-    mywindow.document.write('<html><head><title>' + document.title  + '</title>');
-    mywindow.document.write('</head><body style=\"font-family:sans-serif;margin: 1.6cm;\">');
-    mywindow.document.write('<style>@page { margin: 0; } div.cpress_interaction { display: none; }</style>');
-    mywindow.document.write(document.getElementById(elem).innerHTML);
-    mywindow.document.write('</body></html>');
-    mywindow.document.close(); // necessary for IE >= 10
-    mywindow.focus(); // necessary for IE >= 10*/
-    mywindow.print();
-    mywindow.close();
-    return true;
-   
+  var mywindow = window.open('', 'PRINT', 'height=400,width=600');
+  mywindow.document.write('<html><head><title>' + document.title + '</title>');
+  mywindow.document.write('</head><body style=\"font-family:sans-serif;margin: 1.6cm;\">');
+  mywindow.document.write('<style>@page { margin: 0; } div.cpress_interaction { display: none; }</style>');
+  mywindow.document.write(document.getElementById(elem).innerHTML);
+  mywindow.document.write('</body></html>');
+  mywindow.document.close(); // necessary for IE >= 10
+  mywindow.focus(); // necessary for IE >= 10*/
+  mywindow.print();
+  mywindow.close();
+  return true;
+
 }
 
 /**

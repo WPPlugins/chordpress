@@ -492,8 +492,9 @@ class ChordPress_Chord
     /**
      * Create SVGuitar chord div and script.
      *
-     * @since     2.1.0
-     * @return    string             HTML SVGuitar chord div and script.
+     * @since  2.1.0
+     * @param  boolean  $floatleft Switch to float left (default: false)
+     * @return string  HTML SVGuitar chord div and script.
      */
     public function createSvgChord($floatleft = false)
     {
@@ -518,6 +519,27 @@ class ChordPress_Chord
             drawChord" . $id . "();
         </script>\n\n";
 
+        return $output;
+    }
+
+    //--------------------------------------------------------------------------
+    /**
+     * Create SVGuitar chord Javascript function.
+     *
+     * @since  2.1.0
+     * @param  string  $id  Unique ID
+     * @return string  SVGuitar Javascript function
+     */
+    public function createSvgChordFunction($id)
+    {
+        $output = "\n\n
+        function drawChord" . $id . "() {
+            var chart = new svguitar.SVGuitarChord('#" . $id . "')
+            " . $this->buildChordParmeters() . "
+            " . $this->buildConfigureParmeters() . "
+            .draw();
+        };
+        \n\n";
         return $output;
     }
 

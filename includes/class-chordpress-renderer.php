@@ -345,7 +345,7 @@ class ChordPress_Renderer
      * @access   private
      * @var      array
      */
-    private $arrKeys = array('A', 'Am', 'A#', 'Am#', 'Bb', 'Bmb', 'B', 'Bm', 'C', 'Cm', 'C#', 'Cm#', 'Db', 'Dmb', 'D', 'Dm', 'D#', 'Dm#', 'Eb', 'Emb', 'E', 'Em', 'F', 'Fm', 'G', 'Gm', 'G#', 'Gm#', 'Ab', 'Amb');
+    private $arrKeys = array('A', 'Am', 'A#', 'A#m', 'Bb', 'Bbm', 'B', 'Bm', 'C', 'Cm', 'C#', 'C#m', 'Db', 'Dbm', 'D', 'Dm', 'D#', 'D#m', 'Eb', 'Ebm', 'E', 'Em', 'F', 'Fm', 'G', 'Gm', 'G#', 'G#m', 'Ab', 'Abm');
 
     /**
      * Array of transposed keys.
@@ -356,39 +356,39 @@ class ChordPress_Renderer
      */
     private $arrTransposeValues = array(
         'A' =>  array('A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'),
-        'Am' =>  array('Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#'),
+        'Am' =>  array('Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m'),
         'A#' => array('A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'),
         'Bb' => array('Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A'),
-        'Am#' => array('Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am'),
-        'Bmb' => array('Bmb', 'Bm', 'Cm', 'Dmb', 'Dm', 'Emb', 'Em', 'Fm', 'Gmb', 'Gm', 'Amb', 'Am'),
+        'A#m' => array('A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am'),
+        'Bbm' => array('Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am'),
         'B' => array('B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#'),
-        'Bm' => array('Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#'),
+        'Bm' => array('Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m'),
         'C' => array('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'),
-        'Cm' => array('Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm'),
+        'Cm' => array('Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm'),
         'C#' => array('C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C'),
         'Db' => array('Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C'),
-        'Cm#' => array('Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm'),
-        'Dmb' => array('Dmb', 'Dm', 'Emb', 'Em', 'Fm', 'Gmb', 'Gm', 'Amb', 'Am', 'Bmb', 'Bm', 'Cm'),
+        'C#m' => array('C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm'),
+        'Dbm' => array('Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm'),
         'D' => array('D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#'),
-        'Dm' => array('Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#'),
+        'Dm' => array('Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m'),
         'D#' => array('D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D'),
         'Eb' => array('Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D'),
-        'Dm#' => array('Dm#', 'Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm'),
-        'Emb' => array('Emb', 'Em', 'Fm', 'Gmb', 'Gm', 'Amb', 'Am', 'Bmb', 'Bm', 'Cm', 'Dmb', 'Dm'),
+        'D#m' => array('D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm'),
+        'Ebm' => array('Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm'),
         'E' => array('E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#'),
-        'Em' => array('Em', 'Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#'),
+        'Em' => array('Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m'),
         'F' => array('F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'),
-        'Fm' => array('Fm', 'Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em'),
+        'Fm' => array('Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em'),
         'F#' => array('F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F'),
         'Gb' => array('Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F'),
-        'Fm#' => array('Fm#', 'Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm'),
-        'Gmb' => array('Gmb', 'Gm', 'Amb', 'Am', 'Bmb', 'Bm', 'Cm', 'Dmb', 'Dm', 'Emb', 'Em', 'Fm'),
+        'F#m' => array('F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm'),
+        'Gbm' => array('Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm'),
         'G' => array('G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#'),
-        'Gm' => array('Gm', 'Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#'),
+        'Gm' => array('Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m'),
         'G#' => array('G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G'),
         'Ab' => array('Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G'),
-        'Gm#' => array('Gm#', 'Am', 'Am#', 'Bm', 'Cm', 'Cm#', 'Dm', 'Dm#', 'Em', 'Fm', 'Fm#', 'Gm'),
-        'Amb' => array('Amb', 'Am', 'Bmb', 'Bm', 'Cm', 'Dmb', 'Dm', 'Emb', 'Em', 'Fm', 'Gmb', 'Gm'),
+        'G#m' => array('G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm'),
+        'Abm' => array('Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm'),
     );
 
 
@@ -581,7 +581,7 @@ class ChordPress_Renderer
                 }
 
                 $transposeForm = __('Transpose up', 'chordpress') . "
-                <select id=\"selTranspose\" onchange=\"transposeChords();return false;\">
+                <select id=\"selTranspose-%cpressID%\" onchange=\"transposeChords('%cpressID%');return false;\">
                     <option value=\"0\">" . $tvalues[0] . "</option>
                     <option value=\"1\">" . $tvalues[1] . "</option>
                     <option value=\"2\">" . $tvalues[2] . "</option>
@@ -607,12 +607,13 @@ class ChordPress_Renderer
         /**
          * Print header if directives exist
          */
+        $randId = $this->random_string();
         if (strlen($this->arrDirectives['title']) && !$this->hideTitle) {
-            $cpressID = str_replace(' ', '-', strtolower(trim($this->arrDirectives['title'])));
+            $cpressID = str_replace(' ', '-', strtolower(trim($this->arrDirectives['title']))) . '-' . $randId;
             $returnText = str_replace('%cpressID%', $cpressID, $returnText);
             $returnText .= '<' . $this->titleLevel . '>' . $this->arrDirectives['title'] . '</' . $this->titleLevel . '>';
         } else {
-            $cpressID = 'ccpress-id';
+            $cpressID = 'ccpress-id-' . $randId;
             $returnText = str_replace('%cpressID%', $cpressID, $returnText);
         }
 
@@ -638,9 +639,9 @@ class ChordPress_Renderer
 
             if (strlen($this->arrDirectives['key'])) {
                 $returnText .= esc_html(__('Key (original)', 'chordpress')) . ': ' . $this->arrDirectives['key'] . '<br>';
-                $returnText .= esc_html(__('Key (transposed)', 'chordpress')) . ': <span class="chord-hidable key-0">' . $this->arrDirectives['key'] . '</span>';
+                $returnText .= esc_html(__('Key (transposed)', 'chordpress')) . ': <span class="chord-hidable-%cpressID% key-%cpressID%-0">' . $this->arrDirectives['key'] . '</span>';
                 for ($t = 1; $t <= 11; $t++) {
-                    $returnText .= '<span class="chord-hidable key-' . $t . '" style="display:none">' . $this->arrTransposeValues[$this->arrDirectives['key']][$t] . '</span>';
+                    $returnText .= '<span class="chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none">' . $this->arrTransposeValues[$this->arrDirectives['key']][$t] . '</span>';
                 }
                 $returnText .= '<br>';
             }
@@ -655,7 +656,8 @@ class ChordPress_Renderer
          * Go through each line and process it
          */
         foreach ($text as $line) {
-            $returnText .= $this->formatAndDisplayLine($line);
+            $returnText .= str_replace('%cpressID%', $cpressID, $this->formatAndDisplayLine($line));
+            // $returnText .= $this->formatAndDisplayLine($line);
         }
 
         /**
@@ -828,7 +830,7 @@ class ChordPress_Renderer
 
                     if (strlen(trim($arrChords[$i])) > 0) {
 
-                        $returnText .= "<div class=\"chord chord-hidable key-0\"><span class=\"chordshort\">";
+                        $returnText .= "<div class=\"chord chord-hidable-%cpressID% key-%cpressID%-0\"><span class=\"chordshort\">";
 
                         /**
                          * Allow chords starting with a ~, |, / and . as chord placeholders. Just return the string.
@@ -842,7 +844,7 @@ class ChordPress_Renderer
                             $returnText .= $theChord;
                         }
 
-                        $returnText .= '</span>&nbsp;</div>';
+                        $returnText .= "</span>&nbsp;</div>\n";
 
                         /**
                          * Prepare all other 11 transposed versions of the chord 
@@ -858,14 +860,15 @@ class ChordPress_Renderer
                             /**
                              * Allow chords starting with a ~ as chord placeholders. Just return the string.
                              */
-                            if ($arrChords[$i][0] == '~') {
-                                $returnText .= '<div class="chord chord-hidable key-' . $t . '" style="display:none"><span class="chordshort">' . $arrChords[$i] . '</span>&nbsp;</div>';
+                            if (in_array($arrChords[$i][0], ['~', '|', '/', '.'])) {
+                                $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none"><span class="chordshort">' . $arrChords[$i] . '</span>&nbsp;</div>';
+                                $returnText .= "\n";
                             } else {
                                 /**
                                  * This is a real chord.
                                  */
                                 $theChord = $this->formatChord($arrChords[$i]);
-                                $returnText .= '<div class="chord chord-hidable key-' . $t . '" style="display:none"><span class="chordshort">' . $theChord . '</span>&nbsp;</div>';
+                                $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none"><span class="chordshort">' . $theChord . '</span>&nbsp;</div>';
                             }
                         }
 
@@ -881,7 +884,6 @@ class ChordPress_Renderer
                             $numSpaces = substr_count($lyrics, ' ');
                             if ($endOf1stWord > 0 && $numSpaces == 1) {
                                 $returnText .= substr($lyrics, 0, $endOf1stWord) . '&nbsp;';
-                                // $returnText .= substr($lyrics, 0, $endOf1stWord);
                                 $lyrics = substr($lyrics, $endOf1stWord);
                                 $returnText .= "</div></div>\n<div class=\"cpress_line_section\">\n<div class=\"chord\">&nbsp;</div><div class=\"lyric\">";
                             }
@@ -1447,6 +1449,17 @@ class ChordPress_Renderer
         </script>';
 
         return $modal_chord;
+    }
+
+    /**
+     * Generate random string.
+     * 
+     * @param  integer    $length    Length of random string to generate.
+     * @return string                Random string
+     */
+    private function random_string($length = 10)
+    {
+        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     }
 
     // ---------------------------------------------------------------------------
