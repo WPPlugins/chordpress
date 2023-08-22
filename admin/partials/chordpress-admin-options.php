@@ -443,7 +443,8 @@ if ($show_alert) {
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_meta_style"><?php echo esc_html(__('Meta Information Style', 'chordpress')); ?></label></th>
                                 <td>
                                     <input type="text" id="<?php echo $pname; ?>_text_meta_style" name="<?php echo $pname; ?>_text_meta_style" value="<?php echo get_option($pname . '_text_meta_style'); ?>" />
-                                    <p class="description"><?php echo esc_html(__('Enter CSS for the meta header block, e.g.: font-style: italic;', 'chordpress')); ?></p>
+                                    <p class="description"><?php echo esc_html(__('Enter CSS for the meta header block, e.g.', 'chordpress')); ?>:<br>
+                                    <code>font-style: italic;</code></p>
                                 </td>
                             </tr>
                             <tr>
@@ -457,7 +458,8 @@ if ($show_alert) {
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_chord_style"><?php echo esc_html(__('Chord Style', 'chordpress')); ?></label></th>
                                 <td>
                                     <input type="text" id="<?php echo $pname; ?>_text_chord_style" name="<?php echo $pname; ?>_text_chord_style" value="<?php echo get_option($pname . '_text_chord_style'); ?>" />
-                                    <p class="description"><?php echo esc_html(__('Enter CSS for the chords here or leave empty to use the page default. E.g. font-weight:bold;color:#990000;', 'chordpress')); ?></p>
+                                    <p class="description"><?php echo esc_html(__("Enter CSS for the chords here or leave empty to use the page default. E.g. try this for red text on a light yellow badge", 'chordpress')); ?>:<br>
+                                    <code>background-color: #F7F1AF; border-radius: 0.3em; color: #990000; padding: 0.1em 0.3em 0.1em 0.3em;</code></p>
                                 </td>
                             </tr>
                             <tr>
@@ -471,7 +473,8 @@ if ($show_alert) {
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_comment_style"><?php echo esc_html(__('Comment Style', 'chordpress')); ?></label></th>
                                 <td>
                                     <input type="text" id="<?php echo $pname; ?>_text_comment_style" name="<?php echo $pname; ?>_text_comment_style" value="<?php echo get_option($pname . '_text_comment_style'); ?>" />
-                                    <p class="description"><?php echo esc_html(__('Enter CSS for comments, e.g.: background-color: #606060; font-style: italic; padding: 4px;', 'chordpress')); ?></p>
+                                    <p class="description"><?php echo esc_html(__('Enter CSS for comments, e.g.', 'chordpress')); ?>:<br>
+                                    <code>background-color: #606060; font-style: italic; padding: 4px;</code></p>
                                 </td>
                             </tr>
                             <tr>
@@ -779,8 +782,8 @@ if ($show_alert) {
                 </div>
 
                 <?php
-                //  ,------------------,
-                // _| Tab: Addc Chords |_
+                //  ,-----------------,
+                // _| Tab: Add Chords |_
                 //
                 if ($active_tab == 'tab_samples') $display = "display:block;";
                 else $display = "display:none;";
@@ -894,10 +897,17 @@ if ($show_alert) {
                     <table class="form-table" style="margin-left:16px;">
                         <tbody>
                             <tr>
-                                <th scope="row"><label for="<?php echo $pname; ?>_checkbox_uninstall_delete"><?php echo esc_html(__('Remove data on uninstall', 'chordpress')); ?></label></th>
+                                <th scope="row"><label for="<?php echo $pname; ?>_checkbox_uninstall_delete_options"><?php echo esc_html(__('Remove options on delete', 'chordpress')); ?></label></th>
                                 <td>
-                                    <p><input type="checkbox" id="<?php echo $pname; ?>_checkbox_uninstall_delete" name="<?php echo $pname; ?>_checkbox_uninstall_delete" <?php checked(get_option($pname . '_checkbox_uninstall_delete'), 1); ?> value='1'>&nbsp;<?php echo esc_html(__('Yes', 'chordpress')); ?></p>
-                                    <p class="description"><?php echo esc_html(__('Remove plugin options from the database when the plugin is deleted (does not apply when the plugin is just deactivated).', 'chordpress')); ?></p>
+                                    <p><input type="checkbox" id="<?php echo $pname; ?>_checkbox_uninstall_delete_options" name="<?php echo $pname; ?>_checkbox_uninstall_delete_options" <?php checked(get_option($pname . '_checkbox_uninstall_delete_options'), 1); ?> value='1'>&nbsp;<?php echo esc_html(__('Yes', 'chordpress')); ?></p>
+                                    <p class="description"><?php echo esc_html(__('Remove plugin options and settings from the database when the plugin is deleted (does not apply when the plugin is just deactivated).', 'chordpress')); ?></p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row"><label for="<?php echo $pname; ?>_checkbox_uninstall_delete_chordposts"><?php echo esc_html(__('Remove guitar chord posts on delete', 'chordpress')); ?></label></th>
+                                <td>
+                                    <p><input type="checkbox" id="<?php echo $pname; ?>_checkbox_uninstall_delete_chordposts" name="<?php echo $pname; ?>_checkbox_uninstall_delete_chordposts" <?php checked(get_option($pname . '_checkbox_uninstall_delete_chordposts'), 1); ?> value='1'>&nbsp;<?php echo esc_html(__('Yes', 'chordpress')); ?></p>
+                                    <p class="description"><?php echo esc_html(__('Remove all guitar chord posts from the database when the plugin is deleted (does not apply when the plugin is just deactivated).', 'chordpress')); ?></p>
                                 </td>
                             </tr>
                             <tr>

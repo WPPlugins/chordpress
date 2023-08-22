@@ -527,10 +527,10 @@ class ChordPress_Renderer
      * </div>
      *
      * @since    1.0.0
-     * @param    string    $text    Text inside shortcode wrapper.
+     * @param    object    $text    Text inside shortcode wrapper.
      * @return   string             Formatted HTML of the ChordPro text.
      */
-    public function displayText($text)
+    public function displayText($text): string
     {
         /**
          * Start of ChordPress wrapper
@@ -561,7 +561,7 @@ class ChordPress_Renderer
         /**
          * Interactive transpose / print
          */
-        if (strtolower($this->interactive) == "yes") {
+        if (in_array(strtolower($this->interactive), array("yes", "1", "true"))) {
             $returnText .= "<div class=\"cpress_interaction\">";
             $transposeForm = "";
             $printForm = "";
@@ -990,7 +990,7 @@ class ChordPress_Renderer
         $romanChords = array('I', 'I7', 'II', 'III', 'iii', 'IV', 'V', 'V7', 'VI', 'vi', 'VI7', 'vi7', 'VII');
         $nashvilleChords = array('1', '2', '3', '4', '5', '6', '7');
 
-        if (strlen($ch) == 0) return;
+        if (strlen($ch) == 0) return '';
 
         /**
          * Return roman chords or nashville chords as is
@@ -1139,7 +1139,7 @@ class ChordPress_Renderer
             'G' => 10,
         );
 
-        if ($this->hbNotation == 'yes') {
+        if (in_array(strtolower($this->hbNotation), array("yes", "1", "true"))) {
             if (array_key_exists(strtoupper($n), $hbNotation)) {
                 return $hbNotation[strtoupper($n)];
             } else {

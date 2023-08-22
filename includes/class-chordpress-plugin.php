@@ -199,7 +199,8 @@ class ChordPress_Plugin
             $this->plugin_name . '_text_chord_tuningsColor',
             $this->plugin_name . '_number_chord_tuningsFontSize',
 
-            $this->plugin_name . '_checkbox_uninstall_delete'
+            $this->plugin_name . '_checkbox_uninstall_delete_options',
+            $this->plugin_name . '_checkbox_uninstall_delete_chordposts'
 
         );
     }

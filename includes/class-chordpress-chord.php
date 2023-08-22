@@ -610,8 +610,8 @@ class ChordPress_Chord
      * Replace brackets.
      * Replaces round brackets with square brackets.
      * 
-     * @param  string    $input    String with round bracktes
-     * @return string              String with square brackets
+     * @param  string $input  String with round bracktes
+     * @return string - String with square brackets
      */
     public function replace_brackets($input)
     {
