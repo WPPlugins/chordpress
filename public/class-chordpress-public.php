@@ -28,7 +28,7 @@ class ChordPress_Public
      *
      * @since    1.0.0
      * @access   private
-     * @var      string    $plugin_name    The ID of this plugin.
+     * @var      string $plugin_name The ID of this plugin.
      */
     private $plugin_name;
 
@@ -37,16 +37,16 @@ class ChordPress_Public
      *
      * @since    1.0.0
      * @access   private
-     * @var      string    $version    The current version of this plugin.
+     * @var      string $version The current version of this plugin.
      */
     private $version;
 
     /**
      * Initialize the class and set its properties.
      *
+     * @param string $plugin_name The name of the plugin.
+     * @param string $version The version of this plugin.
      * @since    1.0.0
-     * @param      string    $plugin_name       The name of the plugin.
-     * @param      string    $version    The version of this plugin.
      */
     public function __construct($plugin_name, $version)
     {
@@ -77,16 +77,16 @@ class ChordPress_Public
 
     /**
      * Shortcode: chordpress.
-     * 
+     *
      * Shortcode arguments
      *   float=          Rendered text div float style: none/left/right. Default: none.
      *   format=         Whether to render the text or not: yes/no. Default: yes.
      *   hbnotation=     Whether to use H/B notation or not: yes/no. Default: no.
      *   interactive=    Interactive elements on page: yes/no. Default: no.
      *   transpose=      Positive number of semitones to transpose the chords. Default: 0.
-     * 
-     * @param  array   $atts     Array of settings from shortcode
-     * @param  string  $content  Content wrapped in shortcode
+     *
+     * @param array $atts Array of settings from shortcode
+     * @param string $content Content wrapped in shortcode
      * @return string            Formatted HTML to display on page
      */
     public function shortcode_chordpress($atts, $content = null, $tag = '')
@@ -116,7 +116,7 @@ class ChordPress_Public
 
         $content = do_shortcode($content);
 
-        /** 
+        /**
          * If no formatting is requested, get out of here and display the text as is
          */
         if ($args['format'] != 'yes') return "[chordpress]" . apply_filters('the_content', $content) . "[/chordpress]";
@@ -125,7 +125,7 @@ class ChordPress_Public
          * Check content
          */
         if (!is_null($content)) {
-            /** 
+            /**
              * Initiate ChordPress properties
              */
             $CPR->setFloat($args['float']);
@@ -133,17 +133,17 @@ class ChordPress_Public
             $CPR->setInteractive($args['interactive']);
             $CPR->setTranspose($args['transpose']);
 
-            /** 
+            /**
              * Break content into separate lines
              */
             $lines = explode("\n", $content);
 
-            /** 
+            /**
              * Process the directives of the ChordPro text
              */
             $CPR->getDirectives($lines);
 
-            /** 
+            /**
              * Process and return the whole thing
              */
             $output = $CPR->displayText($lines);
@@ -154,16 +154,16 @@ class ChordPress_Public
 
     /**
      * Shortcode: chordpress-chord.
-     * 
-     * @param  array   $atts       Array of settings from shortcode
-     * @param  string  $content    Content wrapped in shortcode
+     *
+     * @param array $atts Array of settings from shortcode
+     * @param string $content Content wrapped in shortcode
      * @return string              Formatted HTML to display on page
      */
     function shortcode_chordpress_chord($atts, $content = null, $tag = '')
     {
         $P = new ChordPress_Plugin();
         $C = new ChordPress_Chord();
-        $id = $this->random_string();
+        $id = $this->random_string(true);
         $output = '';
 
         /**
@@ -194,13 +194,13 @@ class ChordPress_Public
                 /**
                  * Retrieve chord data from chord post
                  */
-                $guitar_chord_barres   = esc_html(get_post_meta($args['chord'], 'guitar_chord_barres', true));
-                $guitar_chord_fingers  = esc_html(get_post_meta($args['chord'], 'guitar_chord_fingers', true));
-                $guitar_chord_frets    = esc_html(get_post_meta($args['chord'], 'guitar_chord_frets', true));
-                $guitar_chord_strings  = esc_html(get_post_meta($args['chord'], 'guitar_chord_strings', true));
+                $guitar_chord_barres = esc_html(get_post_meta($args['chord'], 'guitar_chord_barres', true));
+                $guitar_chord_fingers = esc_html(get_post_meta($args['chord'], 'guitar_chord_fingers', true));
+                $guitar_chord_frets = esc_html(get_post_meta($args['chord'], 'guitar_chord_frets', true));
+                $guitar_chord_strings = esc_html(get_post_meta($args['chord'], 'guitar_chord_strings', true));
                 $guitar_chord_position = esc_html(get_post_meta($args['chord'], 'guitar_chord_position', true));
-                $guitar_chord_title    = get_the_title($args['chord']);
-                $guitar_chord_tuning   = esc_html(get_post_meta($args['chord'], 'guitar_chord_tuning', true));
+                $guitar_chord_title = get_the_title($args['chord']);
+                $guitar_chord_tuning = esc_html(get_post_meta($args['chord'], 'guitar_chord_tuning', true));
 
                 /**
                  * Set chord properties
@@ -226,14 +226,14 @@ class ChordPress_Public
             /**
              * Retrieve chord data from shortcode parameters
              */
-            if (strlen($args['barre']))     $C->setBarres($args['barre']);
-            if (strlen($args['fingers']))   $C->setProperty('fingers', $C->replace_brackets($args['fingers']));
-            if (strlen($args['frets']))     $C->setProperty('frets', $args['frets']);
-            if (strlen($args['position']))  $C->setProperty('position', $args['position']);
-            if (strlen($args['strings']))   $C->setProperty('strings', $args['strings']);
-            if (strlen($args['title']))     $C->setProperty('title', $args['title']);
+            if (strlen($args['barre'])) $C->setBarres($args['barre']);
+            if (strlen($args['fingers'])) $C->setProperty('fingers', $C->replace_brackets($args['fingers']));
+            if (strlen($args['frets'])) $C->setProperty('frets', $args['frets']);
+            if (strlen($args['position'])) $C->setProperty('position', $args['position']);
+            if (strlen($args['strings'])) $C->setProperty('strings', $args['strings']);
+            if (strlen($args['title'])) $C->setProperty('title', $args['title']);
             else $C->setProperty('title', __('No Title', 'chordpress'));
-            if (strlen($args['tuning']))    $C->setTuning($args['tuning']);
+            if (strlen($args['tuning'])) $C->setTuning($args['tuning']);
         }
 
         $output = $C->createSvgChord();
@@ -245,9 +245,9 @@ class ChordPress_Public
 
     /**
      * Create a modal guitar chord dialog.
-     * 
-     * @param  integer    $postid    ID of the chord post
-     * @param  string     $chord     SVGuitar HTML
+     *
+     * @param integer $postid ID of the chord post
+     * @param string $chord SVGuitar HTML
      * @return string                Modal chord dialog HTML
      */
     private function create_modal_chord($postid, $chord)
@@ -279,17 +279,17 @@ class ChordPress_Public
 
     /**
      * Find a guitar chord type post by shortname.
-     * 
-     * @param  string    $shortname    Shortname of the guitar post to look for.
+     *
+     * @param string $shortname Shortname of the guitar post to look for.
      * @return integer                 Post ID or NULL
      */
     private function find_guitar_chord_post($shortname)
     {
         $query_args = array(
-            'posts_per_page'   => 1,
-            'post_type'        => 'guitar_chord',
-            'meta_key'         => 'guitar_chord_name',
-            'meta_value'       => $shortname
+            'posts_per_page' => 1,
+            'post_type' => 'guitar_chord',
+            'meta_key' => 'guitar_chord_name',
+            'meta_value' => $shortname
         );
         $query_result = new WP_Query($query_args);
 
@@ -298,8 +298,8 @@ class ChordPress_Public
 
     /**
      * Build a guitar chord from post ID.
-     * 
-     * @param  string    $postid    Post ID
+     *
+     * @param string $postid Post ID
      * @return string               SVGuitar HTML
      */
     private function build_guitar_chord_from_postid($postid)
@@ -307,13 +307,13 @@ class ChordPress_Public
         /**
          * Retrieve chord data from chord post
          */
-        $guitar_chord_barres   = esc_html(get_post_meta($positid, 'guitar_chord_barres', true));
-        $guitar_chord_fingers  = esc_html(get_post_meta($positid, 'guitar_chord_fingers', true));
-        $guitar_chord_frets    = esc_html(get_post_meta($positid, 'guitar_chord_frets', true));
-        $guitar_chord_strings  = esc_html(get_post_meta($positid, 'guitar_chord_strings', true));
+        $guitar_chord_barres = esc_html(get_post_meta($positid, 'guitar_chord_barres', true));
+        $guitar_chord_fingers = esc_html(get_post_meta($positid, 'guitar_chord_fingers', true));
+        $guitar_chord_frets = esc_html(get_post_meta($positid, 'guitar_chord_frets', true));
+        $guitar_chord_strings = esc_html(get_post_meta($positid, 'guitar_chord_strings', true));
         $guitar_chord_position = esc_html(get_post_meta($positid, 'guitar_chord_position', true));
-        $guitar_chord_title    = get_the_title($positid);
-        $guitar_chord_tuning   = esc_html(get_post_meta($positid, 'guitar_chord_tuning', true));
+        $guitar_chord_title = get_the_title($positid);
+        $guitar_chord_tuning = esc_html(get_post_meta($positid, 'guitar_chord_tuning', true));
 
         /**
          * Set chord properties
@@ -331,22 +331,28 @@ class ChordPress_Public
 
     /**
      * Generate random string.
-     * 
-     * @param  integer    $length    Length of random string to generate.
-     * @return string                Random string
+     *
+     * @param boolean $alphaonly - Whether to only use alpha charaters
+     * @param integer $length - Length of random string to generate.
+     * @return false|string
      */
-    private function random_string($length = 10)
+    private function random_string($alphaonly = false, $length = 10)
     {
-        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+        if ($alphaonly) {
+            return substr(str_shuffle(str_repeat($x = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+        } else {
+            return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+        }
     }
 
     // ---------------------------------------------------------------------------
+
     /**
      * Pretty prints an array.
      *
-     * @since    2.0.0
-     * @param    array    $a    Array to print out pretty
+     * @param array $a Array to print out pretty
      * @return   string
+     * @since    2.0.0
      */
     private function pretty_dump($a)
     {

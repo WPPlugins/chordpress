@@ -17,7 +17,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $backgroundColor    The background color of the chord diagram. By default the background is transparent.
+     * @var      string $backgroundColor The background color of the chord diagram. By default the background is transparent.
      *                                         To set the background to transparent either set this to 'none' or undefined. Default: 'none'
      */
     private $backgroundColor;
@@ -27,7 +27,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $barreChordRadius    Barre chord rectangle border radius relative to the nutSize (eg. 1 means completely round endges,
+     * @var      integer $barreChordRadius Barre chord rectangle border radius relative to the nutSize (eg. 1 means completely round endges,
      *                                           0 means not rounded at all). Default: 0.25
      */
     private $barreChordRadius;
@@ -37,7 +37,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $barreChordStrokeColor    Stroke color of a barre chord. Defaults to the nut color if not set. Default: '#000000'
+     * @var      string $barreChordStrokeColor Stroke color of a barre chord. Defaults to the nut color if not set. Default: '#000000'
      */
     private $barreChordStrokeColor;
 
@@ -46,7 +46,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $barreChordStrokeWidth    Stroke width of a barre chord. Default: 0
+     * @var      integer $barreChordStrokeWidth Stroke width of a barre chord. Default: 0
      */
     private $barreChordStrokeWidth;
 
@@ -58,7 +58,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $barres    Javascript array of [fromString, toString, fret, text, color, textColor]
+     * @var      string $barres Javascript array of [fromString, toString, fret, text, color, textColor]
      */
     private $barres;
 
@@ -67,7 +67,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer   $canvasWidth    Canvas width in pixel. The height is automatically adjusted.
+     * @var      integer $canvasWidth Canvas width in pixel. The height is automatically adjusted.
      */
     private $canvasWidth;
 
@@ -76,7 +76,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $color    Global color of the whole chart. Can be overridden with more specifig color settings such as
+     * @var      string $color Global color of the whole chart. Can be overridden with more specifig color settings such as
      *                               $titleColor or $stringColor etc. Default: '#000000'
      */
     private $color;
@@ -86,7 +86,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $emptyStringIndicatorSize    Size of the Xs and Os above empty strings relative to the space between two strings. Default: 0.6
+     * @var      integer $emptyStringIndicatorSize Size of the Xs and Os above empty strings relative to the space between two strings. Default: 0.6
      */
     private $emptyStringIndicatorSize;
 
@@ -100,7 +100,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $fingers    Javascript array of [string, fret, text | options]
+     * @var      string $fingers Javascript array of [string, fret, text | options]
      */
     private $fingers;
 
@@ -109,7 +109,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $fixedDiagramPosition    When set to 'true' the distance between the chord diagram and the top of the SVG stayes the same,
+     * @var      string $fixedDiagramPosition When set to 'true' the distance between the chord diagram and the top of the SVG stayes the same,
      *                                              no matter if a title is defined or not. Default: 'false'
      */
     private $fixedDiagramPosition;
@@ -119,7 +119,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $fontFamily    The font family used for all letters and numbers. Default: 'Arial, "Helvetica Neue", Helvetica, sans-serif'
+     * @var      string $fontFamily The font family used for all letters and numbers. Default: 'Arial, "Helvetica Neue", Helvetica, sans-serif'
      */
     private $fontFamily;
 
@@ -128,7 +128,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $fretColor    Fret color (overrides $color). Default: '#000000'
+     * @var      string $fretColor Fret color (overrides $color). Default: '#000000'
      */
     private $fretColor;
 
@@ -137,7 +137,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $fretLabelColor    Fret position color (overrides $color). Default: '#000000'
+     * @var      string $fretLabelColor Fret position color (overrides $color). Default: '#000000'
      */
     private $fretLabelColor;
 
@@ -146,7 +146,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $fretLabelPosition    Position of the fret label (eg. "3fr"). Default: 'right'
+     * @var      string $fretLabelPosition Position of the fret label (eg. "3fr"). Default: 'right'
      */
     private $fretLabelPosition;
 
@@ -155,7 +155,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $fretLabelFontSize    Font size of the fret label. Default: 38
+     * @var      integer $fretLabelFontSize Font size of the fret label. Default: 38
      */
     private $fretLabelFontSize;
 
@@ -164,7 +164,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $frets    Number of frets to show. Default: 4
+     * @var      integer $frets Number of frets to show. Default: 4
      */
     private $frets;
 
@@ -173,7 +173,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $fretSize    Height of a fret, relative to the space between two strings. Default: 1.5
+     * @var      integer $fretSize Height of a fret, relative to the space between two strings. Default: 1.5
      */
     private $fretSize;
 
@@ -182,7 +182,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $nutSize    Size of a nut relative to the string spacing. Default: 0.65
+     * @var      integer $nutSize Size of a nut relative to the string spacing. Default: 0.65
      */
     private $nutSize;
 
@@ -191,7 +191,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $nutColor    Color of a finger/nut. Default: '#000000'
+     * @var      string $nutColor Color of a finger/nut. Default: '#000000'
      */
     private $nutColor;
 
@@ -200,7 +200,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $nutStrokeColor    Stroke color of a nut. Defaults to the nut color if not set. Default: '#000000'
+     * @var      string $nutStrokeColor Stroke color of a nut. Defaults to the nut color if not set. Default: '#000000'
      */
     private $nutStrokeColor;
 
@@ -209,7 +209,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $nutStrokeWidth    Stroke width of a nut. Default: 0
+     * @var      integer $nutStrokeWidth Stroke width of a nut. Default: 0
      */
     private $nutStrokeWidth;
 
@@ -218,7 +218,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $nutTextColor    Color of text inside nuts. Default: '#FFF'
+     * @var      string $nutTextColor Color of text inside nuts. Default: '#FFF'
      */
     private $nutTextColor;
 
@@ -227,7 +227,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $nutTextSize    Size of text inside nuts. Default: 22
+     * @var      integer $nutTextSize Size of text inside nuts. Default: 22
      */
     private $nutTextSize;
 
@@ -236,7 +236,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $position    Default position if no positon is provided (first fret is 1). Default: 1
+     * @var      integer $position Default position if no positon is provided (first fret is 1). Default: 1
      */
     private $position;
 
@@ -245,7 +245,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $sidePadding    The minimum side padding (from the guitar to the edge of the SVG) relative to the whole width.
+     * @var      integer $sidePadding The minimum side padding (from the guitar to the edge of the SVG) relative to the whole width.
      *                                      This is only applied if it's larger than the letters inside of the padding (eg the starting fret). Default: 0.2
      */
     private $sidePadding;
@@ -255,7 +255,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $stringColor    Strings color (overrides $color). Default: '#000000'
+     * @var      string $stringColor Strings color (overrides $color). Default: '#000000'
      */
     private $stringColor;
 
@@ -264,7 +264,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $strings    Number of strings. Default: 6
+     * @var      integer $strings Number of strings. Default: 6
      */
     private $strings;
 
@@ -273,7 +273,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $strokeWidth    Global stroke width. Default: 2
+     * @var      integer $strokeWidth Global stroke width. Default: 2
      */
     private $strokeWidth;
 
@@ -282,7 +282,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $style    Select between 'normal' and 'handdrawn'. Default: 'normal'
+     * @var      string $style Select between 'normal' and 'handdrawn'. Default: 'normal'
      */
     private $style;
 
@@ -291,7 +291,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $title    Chart title. Default: 'F# minor'
+     * @var      string $title Chart title. Default: 'F# minor'
      */
     private $title;
 
@@ -300,7 +300,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $titleBottomMargin    Space between the title and the chart. Default: 0
+     * @var      integer $titleBottomMargin Space between the title and the chart. Default: 0
      */
     private $titleBottomMargin;
 
@@ -309,7 +309,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $titleColor    Title color (overrides color). Default: '#000000'
+     * @var      string $titleColor Title color (overrides color). Default: '#000000'
      */
     private $titleColor;
 
@@ -318,7 +318,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $titleFontSize    Font size of the title. This is only the initial font size. If the title doesn't fit,
+     * @var      integer $titleFontSize Font size of the title. This is only the initial font size. If the title doesn't fit,
      *                                        the title is automatically scaled so that it fits. Default: 48
      */
     private $titleFontSize;
@@ -328,7 +328,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $topFretWidth    Top fret width (only used if position is 1). Default: 10
+     * @var      integer $topFretWidth Top fret width (only used if position is 1). Default: 10
      */
     private $topFretWidth;
 
@@ -337,7 +337,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $tuning    Labels under the strings. Can be any string. Default: '[ 'E', 'A', 'D', 'G', 'B', 'E' ]'
+     * @var      string $tuning Labels under the strings. Can be any string. Default: '[ 'E', 'A', 'D', 'G', 'B', 'E' ]'
      */
     private $tuning;
 
@@ -346,7 +346,7 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      string    $tuningsColor    Tunings color (overrides $color). Default: '#000000'
+     * @var      string $tuningsColor Tunings color (overrides $color). Default: '#000000'
      */
     private $tuningsColor;
 
@@ -355,13 +355,13 @@ class ChordPress_Chord
      *
      * @since    3.0.0
      * @access   private
-     * @var      integer    $tuningsFontSize    Font size of the tuning labels. Default: 28
+     * @var      integer $tuningsFontSize Font size of the tuning labels. Default: 28
      */
     private $tuningsFontSize;
 
 
-
     //--------------------------------------------------------------------------
+
     /**
      * Initialize the class and set its properties.
      *
@@ -420,18 +420,19 @@ class ChordPress_Chord
     }
 
     //--------------------------------------------------------------------------
+
     /**
      * Build the SVGuitar Javascript chord parameters
      *
-     * @since     3.0.0
      * @return    string
+     * @since     3.0.0
      */
     public function buildChordParmeters()
     {
         $this->fingers = $this->replace_brackets($this->fingers);
         if (!strpos($this->barres, 'fromString')) $this->barres = $this->setBarres($this->barres);
 
-        $output  = ".chord({
+        $output = ".chord({
             title: '" . $this->title . "',
             fingers: [" . htmlspecialchars_decode($this->fingers, ENT_QUOTES) . "],
             barres: [" . htmlspecialchars_decode($this->barres, ENT_QUOTES) . "],
@@ -442,15 +443,16 @@ class ChordPress_Chord
     }
 
     //--------------------------------------------------------------------------
+
     /**
      * Build the SVGuitar Javascript configure parameters
      *
-     * @since     3.0.0
      * @return    string
+     * @since     3.0.0
      */
     public function buildConfigureParmeters()
     {
-        $output  = ".configure({
+        $output = ".configure({
             backgroundColor: '" . $this->backgroundColor . "',
             barreChordRadius: " . $this->barreChordRadius . ",
             barreChordStrokeColor: '" . $this->barreChordStrokeColor . "',
@@ -489,21 +491,22 @@ class ChordPress_Chord
     }
 
     //--------------------------------------------------------------------------
+
     /**
      * Create SVGuitar chord div and script.
      *
-     * @since  2.1.0
-     * @param  boolean  $floatleft Switch to float left (default: false)
+     * @param boolean $floatleft Switch to float left (default: false)
      * @return string  HTML SVGuitar chord div and script.
+     * @since  2.1.0
      */
     public function createSvgChord($floatleft = false)
     {
-        $id = $this->random_string();
+        $id = $this->random_string(true);
 
         if ($floatleft) $float = 'float:left;';
         else $float = '';
 
-        /** 
+        /**
          * Build output
          */
         $output = "\n\n
@@ -523,12 +526,13 @@ class ChordPress_Chord
     }
 
     //--------------------------------------------------------------------------
+
     /**
      * Create SVGuitar chord Javascript function.
      *
-     * @since  2.1.0
-     * @param  string  $id  Unique ID
+     * @param string $id Unique ID
      * @return string  SVGuitar Javascript function
+     * @since  2.1.0
      */
     public function createSvgChordFunction($id)
     {
@@ -544,11 +548,12 @@ class ChordPress_Chord
     }
 
     //--------------------------------------------------------------------------
+
     /**
      * Get private property.
      *
-     * @since     3.0.0
      * @return    misc
+     * @since     3.0.0
      */
     public function getProperty($property)
     {
@@ -556,12 +561,13 @@ class ChordPress_Chord
     }
 
     //--------------------------------------------------------------------------
+
     /**
      * Set private property.
      *
+     * @param string $property Property name
+     * @param misc $value Value to set the property to
      * @since     2.1.0
-     * @param     string    $property    Property name
-     * @param     misc      $value       Value to set the property to
      */
     public function setProperty($property, $value)
     {
@@ -569,12 +575,13 @@ class ChordPress_Chord
     }
 
     // ---------------------------------------------------------------------------
+
     /**
      * Pretty prints an array.
      *
-     * @since    2.0.0
-     * @param    array    $a    Array to print out pretty
+     * @param array $a Array to print out pretty
      * @return   string
+     * @since    2.0.0
      */
     public function pretty_dump($a)
     {
@@ -582,12 +589,13 @@ class ChordPress_Chord
     }
 
     // ---------------------------------------------------------------------------
+
     /**
      * Dump and Die.
      *
-     * @since    2.0.0
-     * @param    array    $a    Array to print out pretty
+     * @param array $a Array to print out pretty
      * @return   string
+     * @since    2.0.0
      */
     public function dnd($a)
     {
@@ -597,20 +605,25 @@ class ChordPress_Chord
 
     /**
      * Generate random string.
-     * 
-     * @param  integer    $length    Length of random string to generate.
-     * @return string                Random string
+     *
+     * @param boolean $alphaonly - Whether to only use alpha charaters
+     * @param integer $length - Length of random string to generate
+     * @return false|string
      */
-    private function random_string($length = 10)
+    private function random_string($alphaonly = false, $length = 10)
     {
-        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+        if ($alphaonly) {
+            return substr(str_shuffle(str_repeat($x = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+        } else {
+            return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+        }
     }
 
     /**
      * Replace brackets.
      * Replaces round brackets with square brackets.
-     * 
-     * @param  string $input  String with round bracktes
+     *
+     * @param string $input String with round bracktes
      * @return string - String with square brackets
      */
     public function replace_brackets($input)
@@ -621,6 +634,7 @@ class ChordPress_Chord
     }
 
     //--------------------------------------------------------------------------
+
     /**
      * Set Barre.
      * This function converts a simplified barre input:
@@ -628,8 +642,8 @@ class ChordPress_Chord
      * and convert it into anSVGuitar chord javascript tuning parameter:
      * {fromString:6,toString:1,fret:1}
      *
+     * @param string   Simple tuning string
      * @since     3.0.0
-     * @param     string   Simple tuning string
      */
     public function setBarres($simpleBarre)
     {
@@ -637,11 +651,12 @@ class ChordPress_Chord
             return;
         }
         $barre_array = explode(",", $simpleBarre);
-        $barres  = "{fromString:" . $barre_array[0] . ",toString:" . $barre_array[1] . ",fret:" . $barre_array[2] . "}";
+        $barres = "{fromString:" . $barre_array[0] . ",toString:" . $barre_array[1] . ",fret:" . $barre_array[2] . "}";
         $this->setProperty('barres', $barres);
     }
 
     //--------------------------------------------------------------------------
+
     /**
      * Set Tuning.
      * This function converts a simplified tuning input:
@@ -649,8 +664,8 @@ class ChordPress_Chord
      * and convert it into anSVGuitar chord javascript tuning parameter:
      * ['E','A','D','G','B','E']
      *
+     * @param string   Simple tuning string
      * @since     3.0.0
-     * @param     string   Simple tuning string
      */
     public function setTuning($simpleTuning)
     {

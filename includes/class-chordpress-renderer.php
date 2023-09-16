@@ -607,7 +607,7 @@ class ChordPress_Renderer
         /**
          * Print header if directives exist
          */
-        $randId = $this->random_string();
+        $randId = $this->random_string(true);
         if (strlen($this->arrDirectives['title']) && !$this->hideTitle) {
             $cpressID = str_replace(' ', '-', strtolower(trim($this->arrDirectives['title']))) . '-' . $randId;
             $returnText = str_replace('%cpressID%', $cpressID, $returnText);
@@ -1453,13 +1453,18 @@ class ChordPress_Renderer
 
     /**
      * Generate random string.
-     * 
-     * @param  integer    $length    Length of random string to generate.
-     * @return string                Random string
+     *
+     * @param boolean $alphaonly - Whether to only use alpha charaters
+     * @param integer $length - Length of random string to generate
+     * @return false|string
      */
-    private function random_string($length = 10)
+    private function random_string($alphaonly = false, $length = 10)
     {
-        return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+        if ($alphaonly) {
+            return substr(str_shuffle(str_repeat($x = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+        } else {
+            return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
+        }
     }
 
     // ---------------------------------------------------------------------------
