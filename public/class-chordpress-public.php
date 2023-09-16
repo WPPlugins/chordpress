@@ -98,6 +98,7 @@ class ChordPress_Public
          * Get shortcode arguments and change to lower case
          */
         $atts = array_change_key_case((array)$atts, CASE_LOWER);
+//        $this->dnd($atts);
 
         /**
          * Set shortcode argument defaults
@@ -113,7 +114,7 @@ class ChordPress_Public
             $atts,
             $tag
         );
-
+//        $this->dnd($atts);
         $content = do_shortcode($content);
 
         /**
@@ -129,7 +130,17 @@ class ChordPress_Public
              * Initiate ChordPress properties
              */
             $CPR->setFloat($args['float']);
-            $CPR->setHBNotation($args['hbnotation']);
+            if (isset($atts['hbnotation'])) $CPR->setHBNotation($atts['hbnotation']);
+            if (isset($atts['hidechords'])) $CPR->setHideChords($atts['hidechords']);
+            if (isset($atts['hidecomments'])) $CPR->setHideComments($atts['hidecomments']);
+            if (isset($atts['hidecomposer'])) $CPR->setHideComposer($atts['hidecomposer']);
+            if (isset($atts['hidesubtitle'])) $CPR->setHideSubtitle($atts['hidesubtitle']);
+            if (isset($atts['hidetitle'])) $CPR->setHideTitle($atts['hidetitle']);
+            if (isset($atts['hideyear'])) $CPR->setHideYear($atts['hideyear']);
+            if (isset($atts['hidetranspose'])) $CPR->setHideTranspose($atts['hidetranspose']);
+            if (isset($atts['hideprint'])) $CPR->setHidePrint($atts['hideprint']);
+            if (isset($atts['showchordsheet'])) $CPR->setShowChordSheet($atts['showchordsheet']);
+            if (isset($atts['showchordsheetontop'])) $CPR->setShowChordSheetOnTop($atts['showchordsheetontop']);
             $CPR->setInteractive($args['interactive']);
             $CPR->setTranspose($args['transpose']);
 
@@ -336,7 +347,7 @@ class ChordPress_Public
      * @param integer $length - Length of random string to generate.
      * @return false|string
      */
-    private function random_string($alphaonly = false, $length = 10)
+    private function random_string($alphaonly = false, $length = 15)
     {
         if ($alphaonly) {
             return substr(str_shuffle(str_repeat($x = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
@@ -346,16 +357,18 @@ class ChordPress_Public
     }
 
     // ---------------------------------------------------------------------------
-
     /**
-     * Pretty prints an array.
+     * Dump and Die.
      *
+     * @since 3.2.0
      * @param array $a Array to print out pretty
-     * @return   string
-     * @since    2.0.0
+     * @param bool  $die Flag to die after dump or not
+     * @return string
      */
-    private function pretty_dump($a)
+    private function dnd($a, $die = true)
     {
-        return highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
+        $dump = highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
+        if ($die) die($dump);
+        else return $dump;
     }
 }

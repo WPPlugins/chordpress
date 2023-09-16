@@ -486,7 +486,6 @@ class ChordPress_Chord
             tuningsColor: '" . $this->tuningsColor . "',
             tuningsFontSize: " . $this->tuningsFontSize . ",
          })";
-
         return $output;
     }
 
@@ -521,7 +520,6 @@ class ChordPress_Chord
             };
             drawChord" . $id . "();
         </script>\n\n";
-
         return $output;
     }
 
@@ -593,15 +591,18 @@ class ChordPress_Chord
     /**
      * Dump and Die.
      *
-     * @param array $a Array to print out pretty
+     * @param array|string $a Array to print out pretty
+     * @param boolean $die - Wether to die after dump or not. Default: true.
      * @return   string
      * @since    2.0.0
      */
-    public function dnd($a)
+    public function dnd($a, $die = true)
     {
         $dump = highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
-        die($dump);
+        if ($die) die($dump);
     }
+
+    //--------------------------------------------------------------------------
 
     /**
      * Generate random string.
@@ -610,7 +611,7 @@ class ChordPress_Chord
      * @param integer $length - Length of random string to generate
      * @return false|string
      */
-    private function random_string($alphaonly = false, $length = 10)
+    private function random_string($alphaonly = false, $length = 15)
     {
         if ($alphaonly) {
             return substr(str_shuffle(str_repeat($x = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
@@ -618,6 +619,8 @@ class ChordPress_Chord
             return substr(str_shuffle(str_repeat($x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
         }
     }
+
+    //--------------------------------------------------------------------------
 
     /**
      * Replace brackets.

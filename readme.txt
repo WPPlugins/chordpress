@@ -3,12 +3,12 @@ Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
-Tested up to: 6.1
-Stable tag: 3.4.1
+Tested up to: 6.3
+Stable tag: 3.5.0
 Requires PHP: 5.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
- 
+
 Lewe ChordPress for WordPress pretty-prints ChordPro formatted text and chord diagrams on your pages or posts.
 
 == Description ==
@@ -42,7 +42,7 @@ The `[chordpress-chord]` shortag allows you to display a guitar chord as a diagr
 Check out this example:
 [Lewe ChordPress Guitar Chord Demo](https://sayandsound.lewe.com/guitar-chords/ "Lewe ChordPress Guitar Chord Demo")
 
-If not from the WordPress marketplace, get the plugin here: 
+If not from the WordPress marketplace, get the plugin here:
 [Lewe ChordPress Homepage](https://www.lewe.com/chordpress/ "Lewe ChordPress Homepage")
 
 == Features ==
@@ -123,12 +123,18 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Install and Activate
 
 = Manual Installation =
-1. Download the plugin ZIP file from [here](https://www.lewe.com/chordpress/ "Download Lewe ChordPress...")
+1. Download the plugin ZIP file from [here](https://wordpress.org/plugins/chordpress/ "Download Lewe ChordPress...")
 2. Unpack the ZIP file locally
 3. Upload the 'chordpress' folder to your '/wp-content/plugins/' directory
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.5.0 =
+* 2023-09-16
+* Added support for monospace sections
+* Added support for Italian key names
+* Made output options available as shortcode params as well
+
 = 3.4.1 =
 * 2023-08-22
 * Fixed randomly missing chords in cord sheet
@@ -149,7 +155,7 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 
 = 3.3.1 =
 * 2023-01-16
-* Support for more special characters iun chords: ~, |, /, . 
+* Support for more special characters iun chords: ~, |, /, .
 
 = 3.3.0 =
 * 2022-12-22

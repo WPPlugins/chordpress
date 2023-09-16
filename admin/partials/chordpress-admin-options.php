@@ -63,7 +63,6 @@ if (isset($_REQUEST['submit'])) {
         }
     }
 } else if (isset($_REQUEST['addchords'])) {
-
     $chords_major = array(
         array('chord_title' => 'A Major', 'chord_name' => 'A', 'chord_barres' => '', 'chord_fingers' => "(6,'x'),(5,0),(4,2,'2'),(3,2,'3'),(2,2,'4'),(1,0),", 'chord_frets' => '4', 'chord_position' => '1', 'chord_strings' => '6', 'chord_tuning' => 'E,A,D,G,B,E',),
         array('chord_title' => 'B Major', 'chord_name' => 'B', 'chord_barres' => '5,1,2', 'chord_fingers' => "(6,'x'),(4,4,'2'),(3,4,'3'),(2,4,'4'),", 'chord_frets' => '4', 'chord_position' => '1', 'chord_strings' => '6', 'chord_tuning' => 'E,A,D,G,B,E',),
@@ -308,56 +307,56 @@ if ($show_alert) {
                                 <th scope="row"><?php echo esc_html(__('Hide Chords', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_chords' name='<?php echo $pname; ?>_checkbox_hide_chords' <?php checked(get_option($pname . '_checkbox_hide_chords'), 1); ?> value='1'>
-                                    <p class="description"><?php echo esc_html(__('With this option selected, only the lyrics will be printed (no chords above them)', 'chordpress')); ?>.</p>
+                                    <p class="description"><?php echo esc_html(__('With this option selected, only the lyrics will be printed (no chords above them). You can overwrite this setting per shortcut with "hidechords=yes/no"', 'chordpress')); ?>.</p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><?php echo esc_html(__('Hide Comments', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_comments' name='<?php echo $pname; ?>_checkbox_hide_comments' <?php checked(get_option($pname . '_checkbox_hide_comments'), 1); ?> value='1'>
-                                    <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-comment.html" target="_blank"><?php echo esc_html(__('comment directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed', 'chordpress')); ?>.</p>
+                                    <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-comment.html" target="_blank"><?php echo esc_html(__('comment directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidecomments=yes/no"', 'chordpress')); ?>.</p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><?php echo esc_html(__('Hide Composer', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_composer' name='<?php echo $pname; ?>_checkbox_hide_composer' <?php checked(get_option($pname . '_checkbox_hide_composer'), 1); ?> value='1'>
-                                    <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-composer.html" target="_blank"><?php echo esc_html(__('composer directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed', 'chordpress')); ?>.</p>
+                                    <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-composer.html" target="_blank"><?php echo esc_html(__('composer directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidecomposer=yes/no"', 'chordpress')); ?>.</p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><?php echo esc_html(__('Hide Subtitle', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_subtitle' name='<?php echo $pname; ?>_checkbox_hide_subtitle' <?php checked(get_option($pname . '_checkbox_hide_subtitle'), 1); ?> value='1'>
-                                    <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-subtitle.html" target="_blank"><?php echo esc_html(__('subtitle directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed', 'chordpress')); ?>.</p>
+                                    <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-subtitle.html" target="_blank"><?php echo esc_html(__('subtitle directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidesubtitle=yes/no"', 'chordpress')); ?>.</p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><?php echo esc_html(__('Hide Title', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_title' name='<?php echo $pname; ?>_checkbox_hide_title' <?php checked(get_option($pname . '_checkbox_hide_title'), 1); ?> value='1'>
-                                    <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-title.html" target="_blank"><?php echo esc_html(__('title directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed', 'chordpress')); ?>.</p>
+                                    <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-title.html" target="_blank"><?php echo esc_html(__('title directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidetitle=yes/no"', 'chordpress')); ?>.</p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><?php echo esc_html(__('Hide Year', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_year' name='<?php echo $pname; ?>_checkbox_hide_year' <?php checked(get_option($pname . '_checkbox_hide_year'), 1); ?> value='1'>
-                                    <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-year.html" target="_blank"><?php echo esc_html(__('year directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed', 'chordpress')); ?>.</p>
+                                    <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-year.html" target="_blank"><?php echo esc_html(__('year directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hideyear=yes/no"', 'chordpress')); ?>.</p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><?php echo esc_html(__('Hide Transpose', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_transpose' name='<?php echo $pname; ?>_checkbox_hide_transpose' <?php checked(get_option($pname . '_checkbox_hide_transpose'), 1); ?> value='1'>
-                                    <p class="description"><?php echo esc_html(__('With this option selected, the transpose drop down will be hidden in interactive mode.', 'chordpress')); ?>.</p>
+                                    <p class="description"><?php echo esc_html(__('With this option selected, the transpose drop down will be hidden in interactive mode. You can overwrite this setting per shortcut with "hidetranspose=yes/no"', 'chordpress')); ?>.</p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><?php echo esc_html(__('Hide Print', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_print' name='<?php echo $pname; ?>_checkbox_hide_print' <?php checked(get_option($pname . '_checkbox_hide_print'), 1); ?> value='1'>
-                                    <p class="description"><?php echo esc_html(__('With this option selected, the print button will be hidden in interactive mode.', 'chordpress')); ?>.</p>
+                                    <p class="description"><?php echo esc_html(__('With this option selected, the print button will be hidden in interactive mode. You can overwrite this setting per shortcut with "hideprint=yes/no"', 'chordpress')); ?>.</p>
                                 </td>
                             </tr>
                             <tr>
@@ -371,14 +370,14 @@ if ($show_alert) {
                                 <th scope="row"><?php echo esc_html(__('Show Chord Sheet', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_show_chord_sheet' name='<?php echo $pname; ?>_checkbox_show_chord_sheet' <?php checked(get_option($pname . '_checkbox_show_chord_sheet'), 1); ?> value='1'>
-                                    <p class="description"><?php echo esc_html(__('With this option selected, a chord sheet is displayed at the bottom or top of the rendered song, showing ', 'chordpress')); ?> <a href="https://github.com/omnibrain/svguitar" target="_blank"><?php echo esc_html(__('SVGuitar Chords', 'chordpress')); ?></a> <?php echo esc_html(__(' diagrams of each chord used in the song. This requires that you create a ', 'chordpress')); ?> <a href="edit.php?post_type=guitar_chord" target="_blank"><?php echo esc_html(__('guitar chord post', 'chordpress')); ?></a> <?php echo esc_html(__('for each of them', 'chordpress')); ?>.</p>
+                                    <p class="description"><?php echo esc_html(__('With this option selected, a chord sheet is displayed at the bottom or top of the rendered song, showing ', 'chordpress')); ?> <a href="https://github.com/omnibrain/svguitar" target="_blank"><?php echo esc_html(__('SVGuitar Chords', 'chordpress')); ?></a> <?php echo esc_html(__(' diagrams of each chord used in the song. This requires that you create a ', 'chordpress')); ?> <a href="edit.php?post_type=guitar_chord" target="_blank"><?php echo esc_html(__('guitar chord post', 'chordpress')); ?></a> <?php echo esc_html(__('for each of them. You can overwrite this setting per shortcut with "showchordsheet=yes/no"', 'chordpress')); ?>.</p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><?php echo esc_html(__('Show Chord Sheet on top', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_show_chord_sheet_on_top' name='<?php echo $pname; ?>_checkbox_show_chord_sheet_on_top' <?php checked(get_option($pname . '_checkbox_show_chord_sheet_on_top'), 1); ?> value='1'>
-                                    <p class="description"><?php echo esc_html(__('If one fo the Chord Sheet options is selected, this option will display it on top before the song instead of at the bottom after it.', 'chordpress')); ?></p>
+                                    <p class="description"><?php echo esc_html(__('If one fo the Chord Sheet options is selected, this option will display it on top before the song instead of at the bottom after it. You can overwrite this setting per shortcut with "showchordsheetontop=yes/no"', 'chordpress')); ?>.</p>
                                 </td>
                             </tr>
                             <tr>
@@ -394,6 +393,7 @@ if ($show_alert) {
                 //
                 if ($active_tab == 'tab_formatting') $display = "display:block;";
                 else $display = "display:none;";
+                $inputSize = '60';
                 ?>
                 <div style="<?php echo $display; ?>">
                     <div class="<?php echo $pprefix; ?>-callout <?php echo $pprefix; ?>-callout-info">
@@ -442,7 +442,7 @@ if ($show_alert) {
                             <tr>
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_meta_style"><?php echo esc_html(__('Meta Information Style', 'chordpress')); ?></label></th>
                                 <td>
-                                    <input type="text" id="<?php echo $pname; ?>_text_meta_style" name="<?php echo $pname; ?>_text_meta_style" value="<?php echo get_option($pname . '_text_meta_style'); ?>" />
+                                    <input size="<?php echo $inputSize; ?>" type="text" id="<?php echo $pname; ?>_text_meta_style" name="<?php echo $pname; ?>_text_meta_style" value="<?php echo get_option($pname . '_text_meta_style'); ?>" />
                                     <p class="description"><?php echo esc_html(__('Enter CSS for the meta header block, e.g.', 'chordpress')); ?>:<br>
                                     <code>font-style: italic;</code></p>
                                 </td>
@@ -450,14 +450,14 @@ if ($show_alert) {
                             <tr>
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_line_style"><?php echo esc_html(__('Line Style', 'chordpress')); ?></label></th>
                                 <td>
-                                    <input type="text" id="<?php echo $pname; ?>_text_line_style" name="<?php echo $pname; ?>_text_line_style" value="<?php echo get_option($pname . '_text_line_style'); ?>" />
+                                    <input size="<?php echo $inputSize; ?>" type="text" id="<?php echo $pname; ?>_text_line_style" name="<?php echo $pname; ?>_text_line_style" value="<?php echo get_option($pname . '_text_line_style'); ?>" />
                                     <p class="description"><?php echo esc_html(__('Enter CSS for the lines here or leave empty to use the default (margin: 1em 0 1em 0;).', 'chordpress')); ?></p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_chord_style"><?php echo esc_html(__('Chord Style', 'chordpress')); ?></label></th>
                                 <td>
-                                    <input type="text" id="<?php echo $pname; ?>_text_chord_style" name="<?php echo $pname; ?>_text_chord_style" value="<?php echo get_option($pname . '_text_chord_style'); ?>" />
+                                    <input size="<?php echo $inputSize; ?>" type="text" id="<?php echo $pname; ?>_text_chord_style" name="<?php echo $pname; ?>_text_chord_style" value="<?php echo get_option($pname . '_text_chord_style'); ?>" />
                                     <p class="description"><?php echo esc_html(__("Enter CSS for the chords here or leave empty to use the page default. E.g. try this for red text on a light yellow badge", 'chordpress')); ?>:<br>
                                     <code>background-color: #F7F1AF; border-radius: 0.3em; color: #990000; padding: 0.1em 0.3em 0.1em 0.3em;</code></p>
                                 </td>
@@ -465,14 +465,14 @@ if ($show_alert) {
                             <tr>
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_lyrics_style"><?php echo esc_html(__('Lyrics Style', 'chordpress')); ?></label></th>
                                 <td>
-                                    <input type="text" id="<?php echo $pname; ?>_text_lyrics_style" name="<?php echo $pname; ?>_text_lyrics_style" value="<?php echo get_option($pname . '_text_lyrics_style'); ?>" />
+                                    <input size="<?php echo $inputSize; ?>" type="text" id="<?php echo $pname; ?>_text_lyrics_style" name="<?php echo $pname; ?>_text_lyrics_style" value="<?php echo get_option($pname . '_text_lyrics_style'); ?>" />
                                     <p class="description"><?php echo esc_html(__('Enter CSS for the lyrics here or leave empty to use the page default.', 'chordpress')); ?></p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_comment_style"><?php echo esc_html(__('Comment Style', 'chordpress')); ?></label></th>
                                 <td>
-                                    <input type="text" id="<?php echo $pname; ?>_text_comment_style" name="<?php echo $pname; ?>_text_comment_style" value="<?php echo get_option($pname . '_text_comment_style'); ?>" />
+                                    <input size="<?php echo $inputSize; ?>" type="text" id="<?php echo $pname; ?>_text_comment_style" name="<?php echo $pname; ?>_text_comment_style" value="<?php echo get_option($pname . '_text_comment_style'); ?>" />
                                     <p class="description"><?php echo esc_html(__('Enter CSS for comments, e.g.', 'chordpress')); ?>:<br>
                                     <code>background-color: #606060; font-style: italic; padding: 4px;</code></p>
                                 </td>
@@ -480,14 +480,14 @@ if ($show_alert) {
                             <tr>
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_chorus_style"><?php echo esc_html(__('Chorus Style', 'chordpress')); ?></label></th>
                                 <td>
-                                    <input type="text" id="<?php echo $pname; ?>_text_chorus_style" name="<?php echo $pname; ?>_text_chorus_style" value="<?php echo get_option($pname . '_text_chorus_style'); ?>" />
+                                    <input size="<?php echo $inputSize; ?>" type="text" id="<?php echo $pname; ?>_text_chorus_style" name="<?php echo $pname; ?>_text_chorus_style" value="<?php echo get_option($pname . '_text_chorus_style'); ?>" />
                                     <p class="description"><?php echo esc_html(__('Enter CSS for the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-env_chorus.html" target="_blank"><?php echo esc_html(__('chorus sections', 'chordpress')); ?>.</a></p>
                                 </td>
                             </tr>
                             <tr>
                                 <th scope="row"><label for="<?php echo $pname; ?>_text_verse_style"><?php echo esc_html(__('Verse Style', 'chordpress')); ?></label></th>
                                 <td>
-                                    <input type="text" id="<?php echo $pname; ?>_text_verse_style" name="<?php echo $pname; ?>_text_verse_style" value="<?php echo get_option($pname . '_text_verse_style'); ?>" />
+                                    <input size="<?php echo $inputSize; ?>" type="text" id="<?php echo $pname; ?>_text_verse_style" name="<?php echo $pname; ?>_text_verse_style" value="<?php echo get_option($pname . '_text_verse_style'); ?>" />
                                     <p class="description"><?php echo esc_html(__('Enter CSS for the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-env_verse.html" target="_blank"><?php echo esc_html(__('verse sections', 'chordpress')); ?>.</a></p>
                                 </td>
                             </tr>
