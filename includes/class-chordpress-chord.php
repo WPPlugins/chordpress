@@ -359,7 +359,6 @@ class ChordPress_Chord
      */
     private $tuningsFontSize;
 
-
     //--------------------------------------------------------------------------
 
     /**
@@ -575,20 +574,6 @@ class ChordPress_Chord
     // ---------------------------------------------------------------------------
 
     /**
-     * Pretty prints an array.
-     *
-     * @param array $a Array to print out pretty
-     * @return   string
-     * @since    2.0.0
-     */
-    public function pretty_dump($a)
-    {
-        return highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
-    }
-
-    // ---------------------------------------------------------------------------
-
-    /**
      * Dump and Die.
      *
      * @param array|string $a Array to print out pretty
@@ -642,7 +627,7 @@ class ChordPress_Chord
      * Set Barre.
      * This function converts a simplified barre input:
      * '6,1,1'
-     * and convert it into anSVGuitar chord javascript tuning parameter:
+     * and converts it into an SVGuitar chord javascript tuning parameter:
      * {fromString:6,toString:1,fret:1}
      *
      * @param string   Simple tuning string
@@ -651,6 +636,7 @@ class ChordPress_Chord
     public function setBarres($simpleBarre)
     {
         if (!strlen($simpleBarre)) {
+            $this->setProperty('barres', "");
             return;
         }
         $barre_array = explode(",", $simpleBarre);

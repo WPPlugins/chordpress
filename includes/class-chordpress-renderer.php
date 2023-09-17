@@ -1697,7 +1697,11 @@ class ChordPress_Renderer
          * Retrieve meta data from chord post
          */
         $guitar_chord_name = get_post_meta($postid, 'guitar_chord_name', true);
-        $guitar_chord_barres = get_post_meta($postid, 'guitar_chord_barres', true);
+        if (get_post_meta($postid, 'guitar_chord_barres', true)) {
+            $guitar_chord_barres = get_post_meta($postid, 'guitar_chord_barres', true);
+        } else {
+            $guitar_chord_barres = "";
+        }
         $guitar_chord_fingers = get_post_meta($postid, 'guitar_chord_fingers', true);
         $guitar_chord_frets = get_post_meta($postid, 'guitar_chord_frets', true);
         $guitar_chord_strings = get_post_meta($postid, 'guitar_chord_strings', true);
