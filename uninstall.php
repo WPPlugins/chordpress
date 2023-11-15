@@ -32,6 +32,7 @@ if (!get_option($pname . '_checkbox_uninstall_delete_options') && !get_option($p
  */
 if (get_option($pname . '_checkbox_uninstall_delete_options')) {
     $options = array(
+        $pname . '_checkbox_fixed_interaction',
         $pname . '_checkbox_hide_album',
         $pname . '_checkbox_hide_artist',
         $pname . '_checkbox_hide_chords',
@@ -46,6 +47,7 @@ if (get_option($pname . '_checkbox_uninstall_delete_options')) {
         $pname . '_checkbox_show_chord_sheet',
         $pname . '_checkbox_show_jtab_sheet',
         $pname . '_checkbox_show_chord_sheet_on_top',
+        $pname . '_checkbox_show_numeric_transpose',
         $pname . '_select_title_level',
         $pname . '_select_subtitle_level',
         $pname . '_text_meta_style',

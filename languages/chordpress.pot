@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Lewe ChordPress plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lewe ChordPress 3.5.0\n"
+"Project-Id-Version: Lewe ChordPress 3.6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chordpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-09-16T18:41:07+02:00\n"
+"POT-Creation-Date: 2023-11-15T10:11:19+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: chordpress\n"
@@ -156,12 +156,12 @@ msgstr ""
 #: admin/class-chordpress-admin.php:228
 #: admin/partials/chordpress-admin-license.php:41
 #: admin/partials/chordpress-admin-options.php:252
-#: admin/partials/chordpress-admin-options.php:953
+#: admin/partials/chordpress-admin-options.php:967
 msgid "Documentation"
 msgstr ""
 
 #: admin/class-chordpress-admin.php:246
-#: admin/partials/chordpress-admin-options.php:959
+#: admin/partials/chordpress-admin-options.php:973
 msgid "Support"
 msgstr ""
 
@@ -177,12 +177,12 @@ msgstr ""
 
 #: admin/class-chordpress-admin.php:301
 #: admin/partials/chordpress-admin-chord-meta-box.php:53
-#: admin/partials/chordpress-admin-options.php:935
+#: admin/partials/chordpress-admin-options.php:949
 msgid "Name"
 msgstr ""
 
 #: admin/class-chordpress-admin.php:302
-#: admin/partials/chordpress-admin-options.php:692
+#: admin/partials/chordpress-admin-options.php:706
 msgid "Strings"
 msgstr ""
 
@@ -220,7 +220,7 @@ msgid "Select the number of strings. Default is 6."
 msgstr ""
 
 #: admin/partials/chordpress-admin-chord-meta-box.php:92
-#: admin/partials/chordpress-admin-options.php:757
+#: admin/partials/chordpress-admin-options.php:771
 msgid "Tuning"
 msgstr ""
 
@@ -509,532 +509,548 @@ msgid "With this option selected, the print button will be hidden in interactive
 msgstr ""
 
 #: admin/partials/chordpress-admin-options.php:363
-msgid "H/B Notation"
+msgid "Numeric Transpose"
 msgstr ""
 
 #: admin/partials/chordpress-admin-options.php:366
-msgid "With this option selected, chords are displayed in H/B notation: H is used instead of B, B is used insetad of Bb. This notation is used in some European countries. Read more about it"
-msgstr ""
-
-#: admin/partials/chordpress-admin-options.php:366
-msgid "here"
+msgid "With this option selected, the transpose drop down will be replaced by a numeric plus/minus input field. This setting has no effect if Hide Transpose is checked. You can overwrite this setting per shortcut with \"numerictranspose=yes/no\"\""
 msgstr ""
 
 #: admin/partials/chordpress-admin-options.php:370
-msgid "Show Chord Sheet"
+msgid "Fixed Interaction"
 msgstr ""
 
 #: admin/partials/chordpress-admin-options.php:373
-msgid "With this option selected, a chord sheet is displayed at the bottom or top of the rendered song, showing "
-msgstr ""
-
-#: admin/partials/chordpress-admin-options.php:373
-msgid "SVGuitar Chords"
-msgstr ""
-
-#: admin/partials/chordpress-admin-options.php:373
-msgid " diagrams of each chord used in the song. This requires that you create a "
-msgstr ""
-
-#: admin/partials/chordpress-admin-options.php:373
-msgid "guitar chord post"
-msgstr ""
-
-#: admin/partials/chordpress-admin-options.php:373
-msgid "for each of them. You can overwrite this setting per shortcut with \"showchordsheet=yes/no\""
+msgid "With this option selected, the interaction menu will be fixed at the bottom of the page. Note, that this might lead to unexpected results depending on the WordPress theme you use. You can overwrite this setting per shortcut with \"fixedinteraction=yes/no\""
 msgstr ""
 
 #: admin/partials/chordpress-admin-options.php:377
-msgid "Show Chord Sheet on top"
+msgid "H/B Notation"
 msgstr ""
 
 #: admin/partials/chordpress-admin-options.php:380
+msgid "With this option selected, chords are displayed in H/B notation: H is used instead of B, B is used insetad of Bb. This notation is used in some European countries. Read more about it"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:380
+msgid "here"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:384
+msgid "Show Chord Sheet"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:387
+msgid "With this option selected, a chord sheet is displayed at the bottom or top of the rendered song, showing "
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:387
+msgid "SVGuitar Chords"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:387
+msgid " diagrams of each chord used in the song. This requires that you create a "
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:387
+msgid "guitar chord post"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:387
+msgid "for each of them. You can overwrite this setting per shortcut with \"showchordsheet=yes/no\""
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:391
+msgid "Show Chord Sheet on top"
+msgstr ""
+
+#: admin/partials/chordpress-admin-options.php:394
 msgid "If one fo the Chord Sheet options is selected, this option will display it on top before the song instead of at the bottom after it. You can overwrite this setting per shortcut with \"showchordsheetontop=yes/no\""
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:400
+#: admin/partials/chordpress-admin-options.php:414
 msgid "Use this tab to select styles and formats of the rendered ChordPro text."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:405
+#: admin/partials/chordpress-admin-options.php:419
 msgid "Title Level"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:420
+#: admin/partials/chordpress-admin-options.php:434
 msgid "Select the header level for the title directive."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:424
+#: admin/partials/chordpress-admin-options.php:438
 msgid "Subtitle Level"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:439
+#: admin/partials/chordpress-admin-options.php:453
 msgid "Select the header level for the subtitle directive."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:443
+#: admin/partials/chordpress-admin-options.php:457
 msgid "Meta Information Style"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:446
+#: admin/partials/chordpress-admin-options.php:460
 msgid "Enter CSS for the meta header block, e.g."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:451
+#: admin/partials/chordpress-admin-options.php:465
 msgid "Line Style"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:454
+#: admin/partials/chordpress-admin-options.php:468
 msgid "Enter CSS for the lines here or leave empty to use the default (margin: 1em 0 1em 0;)."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:458
+#: admin/partials/chordpress-admin-options.php:472
 msgid "Chord Style"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:461
+#: admin/partials/chordpress-admin-options.php:475
 msgid "Enter CSS for the chords here or leave empty to use the page default. E.g. try this for red text on a light yellow badge"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:466
+#: admin/partials/chordpress-admin-options.php:480
 msgid "Lyrics Style"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:469
+#: admin/partials/chordpress-admin-options.php:483
 msgid "Enter CSS for the lyrics here or leave empty to use the page default."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:473
+#: admin/partials/chordpress-admin-options.php:487
 msgid "Comment Style"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:476
+#: admin/partials/chordpress-admin-options.php:490
 msgid "Enter CSS for comments, e.g."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:481
+#: admin/partials/chordpress-admin-options.php:495
 msgid "Chorus Style"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:484
-#: admin/partials/chordpress-admin-options.php:491
+#: admin/partials/chordpress-admin-options.php:498
+#: admin/partials/chordpress-admin-options.php:505
 msgid "Enter CSS for the"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:484
+#: admin/partials/chordpress-admin-options.php:498
 msgid "chorus sections"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:488
+#: admin/partials/chordpress-admin-options.php:502
 msgid "Verse Style"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:491
+#: admin/partials/chordpress-admin-options.php:505
 msgid "verse sections"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:510
+#: admin/partials/chordpress-admin-options.php:524
 msgid "Use this tab to specify global styles and formats for the ChordPress guitar chord diagrams.<br>For single chords using the <code>[chordpress-chord]</code> shortcode, some of them can be overwritten by shortcode parameters."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:515
+#: admin/partials/chordpress-admin-options.php:529
 msgid "Sample Display"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:527
+#: admin/partials/chordpress-admin-options.php:541
 msgid "This is a sample display based on your settings. You might need to refresh the page to show the diagram."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:531
+#: admin/partials/chordpress-admin-options.php:545
 msgid "Background Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:534
+#: admin/partials/chordpress-admin-options.php:548
 msgid "The background CSS color of the chord diagram, e.g. #FFFFFF. To set the background to transparent (default) either set this to 'none' or leave empty."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:538
+#: admin/partials/chordpress-admin-options.php:552
 msgid "Barre Border Radius"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:541
+#: admin/partials/chordpress-admin-options.php:555
 msgid "The barre chord rectangle border radius relative to the nutSize (eg. 1 means completely round endges, 0 means not rounded at all). Leave empty for the default: 0.25."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:545
+#: admin/partials/chordpress-admin-options.php:559
 msgid "Barre Bar Stroke Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:548
+#: admin/partials/chordpress-admin-options.php:562
 msgid "The stroke CSS color of a barre chord. Defaults to the nut color if not set. Leave empty for the default 'Nut Color'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:552
+#: admin/partials/chordpress-admin-options.php:566
 msgid "Barre Bar Stroke Width"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:555
+#: admin/partials/chordpress-admin-options.php:569
 msgid "The stroke width of a barre chord in pixel. Leave empty for the default 0."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:559
+#: admin/partials/chordpress-admin-options.php:573
 msgid "Canvas Width"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:562
+#: admin/partials/chordpress-admin-options.php:576
 msgid "Enter the width of the chord diagrams canvas in pixel. Leave emtpy for the default of 180. The height will be adjusted automatically."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:566
+#: admin/partials/chordpress-admin-options.php:580
 msgid "Global Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:569
+#: admin/partials/chordpress-admin-options.php:583
 msgid "Global color of the whole chart. Can be overridden with more specific color settings such as 'Title Color' or 'String Color'. Leave empty for the default #000000."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:573
+#: admin/partials/chordpress-admin-options.php:587
 msgid "Empty String Indicator Size"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:576
+#: admin/partials/chordpress-admin-options.php:590
 msgid "Size of the Xs and Os above empty strings relative to the space between two strings. Leave empty for the default: 0.6."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:580
+#: admin/partials/chordpress-admin-options.php:594
 msgid "Fixed Diagram Position"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:583
+#: admin/partials/chordpress-admin-options.php:597
 msgid "With this option selected, the distance between the chord diagram and the top of the SVG stays the same, no matter if a title is defined or not. Default is off."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:587
+#: admin/partials/chordpress-admin-options.php:601
 msgid "Font Family"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:590
+#: admin/partials/chordpress-admin-options.php:604
 msgid "The font family used for all letters and numbers. Leave empty for the default: 'Arial, \"Helvetica Neue\", Helvetica, sans-serif'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:594
+#: admin/partials/chordpress-admin-options.php:608
 msgid "Fret Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:597
+#: admin/partials/chordpress-admin-options.php:611
 msgid "Fret color. Leave empty for default: 'Global Color'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:601
+#: admin/partials/chordpress-admin-options.php:615
 msgid "Fret Label Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:604
+#: admin/partials/chordpress-admin-options.php:618
 msgid "Fret label color. Leave empty for default: 'Global Color'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:608
+#: admin/partials/chordpress-admin-options.php:622
 msgid "Fret Label Font Size"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:611
+#: admin/partials/chordpress-admin-options.php:625
 msgid "Font size of the fret label. Leave empty for the default: 38."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:615
+#: admin/partials/chordpress-admin-options.php:629
 msgid "Frets"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:618
+#: admin/partials/chordpress-admin-options.php:632
 msgid "Number of frets to show in the chart. Leave empty for the default: 4."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:622
+#: admin/partials/chordpress-admin-options.php:636
 msgid "Fret Height"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:625
+#: admin/partials/chordpress-admin-options.php:639
 msgid "Height of a fret, relative to the space between two strings. Leave empty for the default: 1.5."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:629
+#: admin/partials/chordpress-admin-options.php:643
 msgid "Nut Size"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:632
+#: admin/partials/chordpress-admin-options.php:646
 msgid "Size of a nut relative to the string spacing. Leave empty for the default: 0.85."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:636
+#: admin/partials/chordpress-admin-options.php:650
 msgid "Nut Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:639
+#: admin/partials/chordpress-admin-options.php:653
 msgid "Color of a finger/nut. Leave empty for default: 'Global Color'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:643
+#: admin/partials/chordpress-admin-options.php:657
 msgid "Nut Stroke Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:646
+#: admin/partials/chordpress-admin-options.php:660
 msgid "Stroke color of a nut. Leave empty for default: 'Nut Color'. If nut color is not set it defaults to 'Global Color'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:650
+#: admin/partials/chordpress-admin-options.php:664
 msgid "Nut Stroke Width"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:653
+#: admin/partials/chordpress-admin-options.php:667
 msgid "Stroke width of a nut. Leave empty for the default: 0."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:657
+#: admin/partials/chordpress-admin-options.php:671
 msgid "Nut Text Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:660
+#: admin/partials/chordpress-admin-options.php:674
 msgid "Text color of a nut. Leave empty for default: #FFFFFF."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:664
+#: admin/partials/chordpress-admin-options.php:678
 msgid "Nut Text Size"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:667
+#: admin/partials/chordpress-admin-options.php:681
 msgid "Font size of the nut label. Leave empty for the default: 24."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:671
+#: admin/partials/chordpress-admin-options.php:685
 msgid "Position"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:674
+#: admin/partials/chordpress-admin-options.php:688
 msgid "Default start fret position (first fret is 1). Leave empty for the default: 1."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:678
+#: admin/partials/chordpress-admin-options.php:692
 msgid "Side Padding"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:681
+#: admin/partials/chordpress-admin-options.php:695
 msgid "The minimum side padding (from the guitar to the edge of the chart) relative to the whole width. This is only applied if it's larger than the letters inside of the padding (eg the starting fret). Leave empty for the default: 0.2."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:685
+#: admin/partials/chordpress-admin-options.php:699
 msgid "String Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:688
+#: admin/partials/chordpress-admin-options.php:702
 msgid "Text color of a nut. Leave empty for default: 'Global Color'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:703
+#: admin/partials/chordpress-admin-options.php:717
 msgid "Number of strings. Default is '6'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:707
+#: admin/partials/chordpress-admin-options.php:721
 msgid "Stroke Width"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:710
+#: admin/partials/chordpress-admin-options.php:724
 msgid "Global stroke width. Leave empty for the default: 2."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:714
+#: admin/partials/chordpress-admin-options.php:728
 msgid "Style"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:725
+#: admin/partials/chordpress-admin-options.php:739
 msgid "Select between 'Normal' and 'Handdrawn'. Default is 'Normal'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:729
+#: admin/partials/chordpress-admin-options.php:743
 msgid "Title Bottom Margin"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:732
+#: admin/partials/chordpress-admin-options.php:746
 msgid "Space between the title and the chart. Leave empty for the default: 0."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:736
+#: admin/partials/chordpress-admin-options.php:750
 msgid "Title Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:739
+#: admin/partials/chordpress-admin-options.php:753
 msgid "Text color of the title. Leave empty for default: 'Global Color'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:743
+#: admin/partials/chordpress-admin-options.php:757
 msgid "Title Font Size"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:746
+#: admin/partials/chordpress-admin-options.php:760
 msgid "Font size of the title. This is only the initial font size. If the title doesn't fit, the title is automatically scaled so that it fits. Leave empty for the default: 48."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:750
+#: admin/partials/chordpress-admin-options.php:764
 msgid "Top Fret Width"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:753
+#: admin/partials/chordpress-admin-options.php:767
 msgid "Top fret width (only used if position is 1). Leave empty for the default: 10."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:760
+#: admin/partials/chordpress-admin-options.php:774
 msgid "Labels under the strings for their tuning. Leave empty for default: [ 'E', 'A', 'D', 'G', 'B', 'E' ]."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:764
+#: admin/partials/chordpress-admin-options.php:778
 msgid "Tunings Color"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:767
+#: admin/partials/chordpress-admin-options.php:781
 msgid "Tunings color. Leave empty for default: 'Global Color'."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:771
+#: admin/partials/chordpress-admin-options.php:785
 msgid "Tunings Font Size"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:774
+#: admin/partials/chordpress-admin-options.php:788
 msgid "Font size of the tunig labels. Leave empty for the default: 28."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:793
+#: admin/partials/chordpress-admin-options.php:807
 msgid "Use this tab to create chord diagrams. These diagram are saved as \"Guitar Chord\" posts. They will be added to the ones that already exist."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:798
+#: admin/partials/chordpress-admin-options.php:812
 msgid "Major Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:801
+#: admin/partials/chordpress-admin-options.php:815
 msgid "Imports a common version of the major chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:805
+#: admin/partials/chordpress-admin-options.php:819
 msgid "Major 7 Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:808
+#: admin/partials/chordpress-admin-options.php:822
 msgid "Imports a common version of the major 7 chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:812
+#: admin/partials/chordpress-admin-options.php:826
 msgid "Major 5 Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:815
+#: admin/partials/chordpress-admin-options.php:829
 msgid "Imports a common version of the major 5 chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:819
+#: admin/partials/chordpress-admin-options.php:833
 msgid "Minor Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:822
+#: admin/partials/chordpress-admin-options.php:836
 msgid "Imports a common version of the minor chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:826
+#: admin/partials/chordpress-admin-options.php:840
 msgid "Minor 7 Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:829
+#: admin/partials/chordpress-admin-options.php:843
 msgid "Imports a common version of the minor 7 chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:833
+#: admin/partials/chordpress-admin-options.php:847
 msgid "Diminished Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:836
+#: admin/partials/chordpress-admin-options.php:850
 msgid "Imports a common version of the diminished chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:840
+#: admin/partials/chordpress-admin-options.php:854
 msgid "Diminished 7 Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:843
+#: admin/partials/chordpress-admin-options.php:857
 msgid "Imports a common version of the diminished 7 chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:847
+#: admin/partials/chordpress-admin-options.php:861
 msgid "Augurated Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:850
+#: admin/partials/chordpress-admin-options.php:864
 msgid "Imports a common version of the augurated chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:854
+#: admin/partials/chordpress-admin-options.php:868
 msgid "Suspended 2 Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:857
+#: admin/partials/chordpress-admin-options.php:871
 msgid "Imports a common version of the suspended 2 chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:861
+#: admin/partials/chordpress-admin-options.php:875
 msgid "Suspended 4 Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:864
+#: admin/partials/chordpress-admin-options.php:878
 msgid "Imports a common version of the suspended 4 chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:868
+#: admin/partials/chordpress-admin-options.php:882
 msgid "Suspended 7_4 Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:871
+#: admin/partials/chordpress-admin-options.php:885
 msgid "Imports a common version of the suspended 7_4 chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:875
+#: admin/partials/chordpress-admin-options.php:889
 msgid "Maj 7 Chords"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:878
+#: admin/partials/chordpress-admin-options.php:892
 msgid "Imports a common version of the Maj 7 chords for the base notes A, B, C, D, E, F and G."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:895
+#: admin/partials/chordpress-admin-options.php:909
 msgid "Select general options for this plugin."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:900
+#: admin/partials/chordpress-admin-options.php:914
 msgid "Remove options on delete"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:902
-#: admin/partials/chordpress-admin-options.php:909
+#: admin/partials/chordpress-admin-options.php:916
+#: admin/partials/chordpress-admin-options.php:923
 msgid "Yes"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:903
+#: admin/partials/chordpress-admin-options.php:917
 msgid "Remove plugin options and settings from the database when the plugin is deleted (does not apply when the plugin is just deactivated)."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:907
+#: admin/partials/chordpress-admin-options.php:921
 msgid "Remove guitar chord posts on delete"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:910
+#: admin/partials/chordpress-admin-options.php:924
 msgid "Remove all guitar chord posts from the database when the plugin is deleted (does not apply when the plugin is just deactivated)."
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:941
+#: admin/partials/chordpress-admin-options.php:955
 msgid "Version"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:947
+#: admin/partials/chordpress-admin-options.php:961
 msgid "Author"
 msgstr ""
 
-#: admin/partials/chordpress-admin-options.php:965
+#: admin/partials/chordpress-admin-options.php:979
 msgid "Credits"
 msgstr ""
 
@@ -1203,78 +1219,79 @@ msgstr ""
 msgid "Please contact the administrator to register this domain or obtain a valid license."
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:584
-msgid "Transpose up"
+#: includes/class-chordpress-renderer.php:592
+msgid "Font"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:585
+#: includes/class-chordpress-renderer.php:602
+#: includes/class-chordpress-renderer.php:622
+msgid "Transpose"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:623
 msgid "Only works for international key names"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:598
-msgid "No chords"
-msgstr ""
-
-#: includes/class-chordpress-renderer.php:603
+#: includes/class-chordpress-renderer.php:642
 msgid "Print"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:636
+#: includes/class-chordpress-renderer.php:678
 msgid "Composer"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:637
+#: includes/class-chordpress-renderer.php:679
 msgid "Artist"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:638
+#: includes/class-chordpress-renderer.php:680
 msgid "Year"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:639
+#: includes/class-chordpress-renderer.php:681
 msgid "Album"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:642
+#: includes/class-chordpress-renderer.php:684
 msgid "Key (original)"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:643
+#: includes/class-chordpress-renderer.php:685
 msgid "Key (transposed)"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:650
+#: includes/class-chordpress-renderer.php:692
 msgid "Time"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:651
+#: includes/class-chordpress-renderer.php:693
 msgid "Tempo"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:652
+#: includes/class-chordpress-renderer.php:694
 msgid "Capo"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:686
+#: includes/class-chordpress-renderer.php:728
 msgid "These known chords are used in this song"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:801
+#: includes/class-chordpress-renderer.php:844
 msgid "Missing square bracket in line"
 msgstr ""
 
-#: public/class-chordpress-public.php:231
+#: public/class-chordpress-public.php:235
 msgid "ChordPress Warning"
 msgstr ""
 
-#: public/class-chordpress-public.php:232
+#: public/class-chordpress-public.php:236
 msgid "There is no chord record with the ID "
 msgstr ""
 
-#: public/class-chordpress-public.php:232
+#: public/class-chordpress-public.php:236
 msgid "Please check your input or create a proper post for this chord first."
 msgstr ""
 
-#: public/class-chordpress-public.php:246
+#: public/class-chordpress-public.php:250
 msgid "No Title"
 msgstr ""

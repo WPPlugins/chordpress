@@ -3,8 +3,8 @@ Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
-Tested up to: 6.3
-Stable tag: 3.5.2
+Tested up to: 6.4
+Stable tag: 3.6.0
 Requires PHP: 5.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -14,7 +14,7 @@ Lewe ChordPress for WordPress pretty-prints ChordPro formatted text and chord di
 == Description ==
 Lewe ChordPress pretty-prints ChordPro formatted text files on your pages and posts. You can configure output and formatting options. With 'interactive' mode on, you can transpose the chords up and down and also print the output right from the page.
 
-Lewe ChordPress 3.0 has retired the Vexchord and jTab chord diagram modules. They have been replaced by the superior [SVGuitar](https://github.com/omnibrain/svguitar "SVGuitar chord renderer").
+Lewe ChordPress supports [SVGuitar](https://github.com/omnibrain/svguitar "SVGuitar chord renderer") for visual chord representation.
 
 Your input to Lewe ChordPress needs to be a valid ChordPro formatted text. ChordPro is a simple text-based syntax used to write lead sheets, the lyrics and chords of a song. ChordPro also comes with a command line tool that pretty prints that text into other formats like PDF.
 You can read all about ChordPro here:
@@ -129,6 +129,12 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.6.0 =
+* 2023-11-15
+* Added alternative transpose input (numeric plus/minus)
+* Added interactive font size change (percentage plus/minus)
+* Fixed Print button
+
 = 3.5.2 =
 * 2023-09-21
 * Fixed unclosed div bug

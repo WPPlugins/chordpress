@@ -1,16 +1,6 @@
 <?php
 
 /**
- * Plugin core class serving both, public and admin functionalities
- *
- * @link       https://www.lewe.com
- * @since      2.0.0
- *
- * @package    ChordPress
- * @subpackage ChordPress/includes
- */
-
-/**
  * Plugin core class serving both, public and admin functionalities.
  *
  * This is used to define internationalization, public and admin hooks.
@@ -21,6 +11,7 @@
  * @package    ChordPress
  * @subpackage ChordPress/includes
  * @author     George Lewe <george@lewe.com>
+ * @link       https://www.lewe.com
  */
 class ChordPress_Plugin
 {
@@ -138,6 +129,7 @@ class ChordPress_Plugin
 
         $this->options = array(
 
+            $this->plugin_name . '_checkbox_fixed_interaction',
             $this->plugin_name . '_checkbox_hide_album',
             $this->plugin_name . '_checkbox_hide_artist',
             $this->plugin_name . '_checkbox_hide_chords',
@@ -152,6 +144,7 @@ class ChordPress_Plugin
             $this->plugin_name . '_checkbox_show_chord_sheet',
             $this->plugin_name . '_checkbox_show_jtab_sheet',
             $this->plugin_name . '_checkbox_show_chord_sheet_on_top',
+            $this->plugin_name . '_checkbox_show_numeric_transpose',
 
             $this->plugin_name . '_select_title_level',
             $this->plugin_name . '_select_subtitle_level',
@@ -601,7 +594,7 @@ class ChordPress_Plugin
      *
      * @since 3.3.0
      * @param array $chord
-     * @return void    
+     * @return void
      */
     public function add_guitar_chord($chord)
     {

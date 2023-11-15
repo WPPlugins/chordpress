@@ -110,6 +110,8 @@ class ChordPress_Public
                 'hbnotation' => 'no',
                 'interactive' => 'no',
                 'transpose' => '0',
+                'numerictranspose' => '0',
+                'fixedinteraction' => '0',
             ],
             $atts,
             $tag
@@ -141,6 +143,8 @@ class ChordPress_Public
             if (isset($atts['hideprint'])) $CPR->setHidePrint($atts['hideprint']);
             if (isset($atts['showchordsheet'])) $CPR->setShowChordSheet($atts['showchordsheet']);
             if (isset($atts['showchordsheetontop'])) $CPR->setShowChordSheetOnTop($atts['showchordsheetontop']);
+            if (isset($atts['numerictranspose'])) $CPR->setNumericTranspose($atts['numerictranspose']);
+            if (isset($atts['fixedinteraction'])) $CPR->setFixedInteraction($atts['fixedinteraction']);
             $CPR->setInteractive($args['interactive']);
             $CPR->setTranspose($args['transpose']);
 

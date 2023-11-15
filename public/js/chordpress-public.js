@@ -30,21 +30,42 @@ function dismissParent(el) {
  * This function hides all chord divs, then shows those for the given transpose
  * value.
  *
- * @since       1.3.0
+ * @since 1.3.0
  */
-function transposeChords(cpressId) {
+function transposeChords(cpressId, formControlId, direction) {
+
+  let transposeElementId = "selTranspose-" + cpressId;
+  if (formControlId) {
+    transposeElementId = formControlId + cpressId;
+  }
+  // console.log(">>> " + transposeElementId);
 
   /**
-   * Get value from Transpose listbox
+   * Get value from transpose form element
    */
-  var x = document.getElementById("selTranspose-" + cpressId).value;
+  var x = document.getElementById(transposeElementId).value;
+  if (direction) {
+    if (direction === 'up') {
+      if (x < 11) {
+        x++;
+      } else {
+        x = 0;
+      }
+    } else if (direction === 'down') {
+      if (x > 0) {
+        x--;
+      } else {
+        x = 0;
+      }
+    } else if (direction === 'reset') {
+      x = 0;
+    }
+  }
 
   /**
    * Hide all hidable chords
    */
-  // var divsToHide = document.getElementsByClassName("chord-hidable");
   var divsToHide = document.getElementsByClassName("chord-hidable-" + cpressId);
-
   for (var i = 0; i < divsToHide.length; i++) {
     divsToHide[i].style.display = "none";
   }
@@ -53,37 +74,46 @@ function transposeChords(cpressId) {
    * Now show those for the selected transpose value
    */
   var divsToShow = document.getElementsByClassName("key-" + cpressId + '-' + x);
-
   for (var i = 0; i < divsToShow.length; i++) {
     divsToShow[i].style.display = "";
   }
 
+  /**
+   * Change value and text of the transpose button
+   */
+  if (formControlId === 'btnTranspose-') {
+    var btn = document.getElementById(transposeElementId);
+    btn.value = x;
+    btn.innerText = x;
+  }
 }
 
 /**
- * Print cpress div
+ * Change Font Size.
  *
- * This function picks the cpress id element, creates a new html page from it
- * and launches an HTML print event.
+ * Increases/decreases the font size of an element. Usage:
+ * - changeFontSize('myElement', 2);
+ * - changeFontSize('myElement', -2);
  *
- * @since       1.4.0
- *
- * @param string    elem    Chordpress element ID
+ * @since 5.6.0
  */
-function printCpress(elem) {
-
-  var mywindow = window.open('', 'PRINT', 'height=400,width=600');
-  mywindow.document.write('<html><head><title>' + document.title + '</title>');
-  mywindow.document.write('</head><body style=\"font-family:sans-serif;margin: 1.6cm;\">');
-  mywindow.document.write('<style>@page { margin: 0; } div.cpress_interaction { display: none; }</style>');
-  mywindow.document.write(document.getElementById(elem).innerHTML);
-  mywindow.document.write('</body></html>');
-  mywindow.document.close(); // necessary for IE >= 10
-  mywindow.focus(); // necessary for IE >= 10*/
-  mywindow.print();
-  mywindow.close();
-  return true;
-
+function changeFontSize(elementId, amount){
+  const element = document.getElementById(elementId);
+  const sizeButton = document.getElementById('btnFontSize-' + elementId);
+  let currentFontSize = parseFloat(element.style.fontSize);
+  if (isNaN(currentFontSize)) {
+    currentFontSize = 100; // Default font size
+  }
+  if (amount === 0) {
+    element.style.fontSize = '100%';
+    sizeButton.innerText = '100%';
+    return;
+  }
+  const newFontSize = currentFontSize + amount;
+  if (newFontSize >= 0) {
+    element.style.fontSize = newFontSize + '%';
+    sizeButton.innerText = newFontSize + '%';
+  }
 }
 
 /**
@@ -96,19 +126,12 @@ function printCpress(elem) {
 // var cpress_modal = document.querySelector(".cpress-modal");
 // var cpress_trigger = document.querySelector(".cpress-trigger");
 // var cpress_closeButton = document.querySelector(".cpress-close-button");
-
 // function cpressToggleModal() {
-
 //    cpress_modal.classList.toggle("cpress-show-modal");
-
 // }
-
 // function cpressWindowOnClick(event) {
-
 //    if (event.target === cpress_modal) { cpressToggleModal(); }
-
 // }
-
 // cpress_trigger.addEventListener("click", cpressToggleModal);
 // cpress_closeButton.addEventListener("click", cpressToggleModal);
 // window.addEventListener("click", cpressWindowOnClick);

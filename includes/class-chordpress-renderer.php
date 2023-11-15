@@ -121,6 +121,24 @@ class ChordPress_Renderer
     private $hideTranspose;
 
     /**
+     * Show numeric transpose input.
+     *
+     * @since    3.6.0
+     * @access   private
+     * @var      boolean $showNumericTranspose Hide transpose button
+     */
+    private $showNumericTranspose;
+
+    /**
+     * Place interaction bar fixed at bottom of page.
+     *
+     * @since    3.6.0
+     * @access   private
+     * @var      boolean $fixedInteraction
+     */
+    private $fixedInteraction;
+
+    /**
      * Hide year flag.
      *
      * @since    1.0.0
@@ -434,6 +452,8 @@ class ChordPress_Renderer
         if (!$this->displayHBNotation = get_option('chordpress_checkbox_hb_notation')) $this->displayHBNotation = 0;
         if (!$this->showChordSheet = get_option('chordpress_checkbox_show_chord_sheet')) $this->showChordSheet = 0;
         if (!$this->showChordSheetOnTop = get_option('chordpress_checkbox_show_chord_sheet_on_top')) $this->showChordSheetOnTop = 0;
+        if (!$this->showNumericTranspose = get_option('chordpress_checkbox_show_numeric_transpose')) $this->showNumericTranspose = 0;
+        if (!$this->fixedInteraction = get_option('chordpress_checkbox_fixed_interaction')) $this->fixedInteraction = 0;
 
         if (!$this->titleLevel = get_option('chordpress_select_title_level')) $this->titleLevel = 'h1';
         if (!$this->subtitleLevel = get_option('chordpress_select_subtitle_level')) $this->subtitleLevel = 'h2';
@@ -558,54 +578,74 @@ class ChordPress_Renderer
                 span.cpress_comment { " . $this->commentStyle . "; }
                 div.cpress_chordsheet { text-align: center; }
             </style>
-        </div>
-        <div id=\"%cpressID%\" class=\"cpress\">\n";
+        </div>\n";
 
         /**
-         * Interactive transpose / print
+         * Interaction menu
          */
         if (in_array(strtolower($this->interactive), array("yes", "1", "true"))) {
-            $returnText .= "<div class=\"cpress_interaction\">";
-            $transposeForm = "";
-            $printForm = "";
+            $interactionForm = "<div class=\"cpress-interaction cpress-row";
+            if ($this->fixedInteraction) {
+                $interactionForm .= " fixed";
+            }
+            $interactionForm .= "\">";
+            $interactionForm .= "<div class='cpress-col cpress-pl-0'>" . __('Font', 'chordpress') . " 
+              <div class='cpress-btn-group' role='group'>
+                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', -5);\">-</button>
+                <button id=\"btnFontSize-%cpressID%\"  type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 0);\">100%</button>
+                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 5);\">+</button>
+              </div>
+            </div>";
             if (!$this->hideTranspose) {
-                //
-                // Let's see if a 'Key' directive was given. If so, we can add
-                // the transposed keys to the list.
-                //
-                if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
-                    $i = 0;
-                    foreach ($this->arrTransposeValues[$this->arrDirectives['key']] as $val) {
-                        $tvalues[] = (string)$i . ' => ' . $val;
-                        $i++;
-                    }
+                $interactionForm .= "<div class='cpress-col cpress-text-center' style='display: inline-block;'>";
+                if ($this->showNumericTranspose) {
+                    $interactionForm .= "<span class=''>" . __('Transpose', 'chordpress') . "</span>
+                      <div class='cpress-btn-group' role='group'>
+                        <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'down');\">-</button>
+                        <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'reset');\" value='0'>0</button>
+                        <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'up');\">+</button>
+                      </div>";
                 } else {
-                    $tvalues = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11');
+                    //
+                    // Let's see if a 'Key' directive was given. If so, we can add
+                    // the transposed keys to the list.
+                    //
+                    if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
+                        $i = 0;
+                        foreach ($this->arrTransposeValues[$this->arrDirectives['key']] as $val) {
+                            $tvalues[] = (string)$i . ' => ' . $val;
+                            $i++;
+                        }
+                    } else {
+                        $tvalues = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11');
+                    }
+                    $interactionForm .= __('Transpose', 'chordpress') . "
+                    <select class=\"cpress-form-control cpress-form-control-sm cpress-w-50 cpress-py-0 cpress-px-2 float-right\" id=\"selTranspose-%cpressID%\" onchange=\"transposeChords('%cpressID%', 'selTranspose-');return false;\" title=\"" . __('Only works for international key names', 'chordpress') . ".\">
+                        <option value=\"0\">" . $tvalues[0] . "</option>
+                        <option value=\"1\">" . $tvalues[1] . "</option>
+                        <option value=\"2\">" . $tvalues[2] . "</option>
+                        <option value=\"3\">" . $tvalues[3] . "</option>
+                        <option value=\"4\">" . $tvalues[4] . "</option>
+                        <option value=\"5\">" . $tvalues[5] . "</option>
+                        <option value=\"6\">" . $tvalues[6] . "</option>
+                        <option value=\"7\">" . $tvalues[7] . "</option>
+                        <option value=\"8\">" . $tvalues[8] . "</option>
+                        <option value=\"9\">" . $tvalues[9] . "</option>
+                        <option value=\"10\">" . $tvalues[10] . "</option>
+                        <option value=\"11\">" . $tvalues[11] . "</option>
+                    </select>";
                 }
-
-                $transposeForm = __('Transpose up', 'chordpress') . "
-                <select id=\"selTranspose-%cpressID%\" onchange=\"transposeChords('%cpressID%');return false;\" title=\"" . __('Only works for international key names', 'chordpress') . ".\">
-                    <option value=\"0\">" . $tvalues[0] . "</option>
-                    <option value=\"1\">" . $tvalues[1] . "</option>
-                    <option value=\"2\">" . $tvalues[2] . "</option>
-                    <option value=\"3\">" . $tvalues[3] . "</option>
-                    <option value=\"4\">" . $tvalues[4] . "</option>
-                    <option value=\"5\">" . $tvalues[5] . "</option>
-                    <option value=\"6\">" . $tvalues[6] . "</option>
-                    <option value=\"7\">" . $tvalues[7] . "</option>
-                    <option value=\"8\">" . $tvalues[8] . "</option>
-                    <option value=\"9\">" . $tvalues[9] . "</option>
-                    <option value=\"10\">" . $tvalues[10] . "</option>
-                    <option value=\"11\">" . $tvalues[11] . "</option>
-                    <option value=\"12\">" . __('No chords', 'chordpress') . "</option>
-                </select>";
+                $interactionForm .=  "</div>";
             }
+            $interactionForm .= "<div class='cpress-col cpress-text-end cpress-pr-0'>";
             if (!$this->hidePrint) {
-                $printForm = "<br>
-                <button onclick=\"printCpress('%cpressID%');return false;\" style=\"float:right;margin-top:8px;\">" . __('Print', 'chordpress') . "</button>\n";
+                $interactionForm .=  "<button class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"window.print();\">" . __('Print', 'chordpress') . "</button>\n";
             }
-            $returnText .= $transposeForm . $printForm . "</div>\n";
+            $interactionForm .=  "</div>";
+            $returnText .= $interactionForm . "</div>\n";
         }
+
+        $returnText .= "<div id=\"%cpressID%\" class=\"cpress\">\n";
 
         /**
          * Print header if directives exist
@@ -700,6 +740,7 @@ class ChordPress_Renderer
                 $returnText = $returnText . $chordSheetText;
             }
         }
+
         // $this->C->dnd($returnText);
         return $returnText . "\n\n";
     }
@@ -1499,6 +1540,66 @@ class ChordPress_Renderer
             $this->hideTranspose = 1;
         } else {
             $this->hideTranspose = 0;
+        }
+    }
+
+    //--------------------------------------------------------------------------
+
+    /**
+     * Get class variable: showNumericTranspose.
+     *
+     * @return string -yes/no.
+     * @since 3.6.0
+     */
+    public function getNumericTranspose()
+    {
+        return $this->showNumericTranspose;
+    }
+
+    //--------------------------------------------------------------------------
+
+    /**
+     * Set class variable: showNumericTranspose.
+     *
+     * @param string $g - yes/no.
+     * @since 3.6.0
+     */
+    public function setNumericTranspose($g)
+    {
+        if (in_array(strtolower($g), array("yes", "1", "true"))) {
+            $this->showNumericTranspose = 1;
+        } else {
+            $this->showNumericTranspose = 0;
+        }
+    }
+
+    //--------------------------------------------------------------------------
+
+    /**
+     * Get class variable: fixedInteraction.
+     *
+     * @return string -yes/no.
+     * @since 3.6.0
+     */
+    public function getFixedInteraction()
+    {
+        return $this->fixedInteraction;
+    }
+
+    //--------------------------------------------------------------------------
+
+    /**
+     * Set class variable: fixedInteraction.
+     *
+     * @param string $g - yes/no.
+     * @since 3.6.0
+     */
+    public function setFixedInteraction($g)
+    {
+        if (in_array(strtolower($g), array("yes", "1", "true"))) {
+            $this->fixedInteraction = 1;
+        } else {
+            $this->fixedInteraction = 0;
         }
     }
 

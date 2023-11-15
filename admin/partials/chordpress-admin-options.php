@@ -360,6 +360,20 @@ if ($show_alert) {
                                 </td>
                             </tr>
                             <tr>
+                              <th scope="row"><?php echo esc_html(__('Numeric Transpose', 'chordpress')); ?></th>
+                              <td>
+                                <input type='checkbox' id='<?php echo $pname; ?>_checkbox_show_numeric_transpose' name='<?php echo $pname; ?>_checkbox_show_numeric_transpose' <?php checked(get_option($pname . '_checkbox_show_numeric_transpose'), 1); ?> value='1'>
+                                <p class="description"><?php echo esc_html(__('With this option selected, the transpose drop down will be replaced by a numeric plus/minus input field. This setting has no effect if Hide Transpose is checked. You can overwrite this setting per shortcut with "numerictranspose=yes/no""', 'chordpress')); ?>.</p>
+                              </td>
+                            </tr>
+                            <tr>
+                              <th scope="row"><?php echo esc_html(__('Fixed Interaction', 'chordpress')); ?></th>
+                              <td>
+                                <input type='checkbox' id='<?php echo $pname; ?>_checkbox_fixed_interaction' name='<?php echo $pname; ?>_checkbox_fixed_interaction' <?php checked(get_option($pname . '_checkbox_fixed_interaction'), 1); ?> value='1'>
+                                <p class="description"><?php echo esc_html(__('With this option selected, the interaction menu will be fixed at the bottom of the page. Note, that this might lead to unexpected results depending on the WordPress theme you use. You can overwrite this setting per shortcut with "fixedinteraction=yes/no"', 'chordpress')); ?>.</p>
+                              </td>
+                            </tr>
+                            <tr>
                                 <th scope="row"><?php echo esc_html(__('H/B Notation', 'chordpress')); ?></th>
                                 <td>
                                     <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hb_notation' name='<?php echo $pname; ?>_checkbox_hb_notation' <?php checked(get_option($pname . '_checkbox_hb_notation'), 1); ?> value='1'>
