@@ -1,15 +1,15 @@
-# Copyright (C) 2023 George Lewe
+# Copyright (C) 2024 George Lewe
 # This file is distributed under the same license as the Lewe ChordPress plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lewe ChordPress 3.6.0\n"
+"Project-Id-Version: Lewe ChordPress 3.6.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chordpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-11-15T10:11:19+01:00\n"
+"POT-Creation-Date: 2024-04-09T17:41:13+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: chordpress\n"
@@ -1219,64 +1219,64 @@ msgstr ""
 msgid "Please contact the administrator to register this domain or obtain a valid license."
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:592
+#: includes/class-chordpress-renderer.php:595
 msgid "Font"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:602
-#: includes/class-chordpress-renderer.php:622
+#: includes/class-chordpress-renderer.php:605
+#: includes/class-chordpress-renderer.php:625
 msgid "Transpose"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:623
+#: includes/class-chordpress-renderer.php:626
 msgid "Only works for international key names"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:642
+#: includes/class-chordpress-renderer.php:645
 msgid "Print"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:678
+#: includes/class-chordpress-renderer.php:681
 msgid "Composer"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:679
+#: includes/class-chordpress-renderer.php:682
 msgid "Artist"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:680
+#: includes/class-chordpress-renderer.php:683
 msgid "Year"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:681
+#: includes/class-chordpress-renderer.php:684
 msgid "Album"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:684
+#: includes/class-chordpress-renderer.php:687
 msgid "Key (original)"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:685
+#: includes/class-chordpress-renderer.php:688
 msgid "Key (transposed)"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:692
+#: includes/class-chordpress-renderer.php:695
 msgid "Time"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:693
+#: includes/class-chordpress-renderer.php:696
 msgid "Tempo"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:694
+#: includes/class-chordpress-renderer.php:697
 msgid "Capo"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:728
+#: includes/class-chordpress-renderer.php:731
 msgid "These known chords are used in this song"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:844
+#: includes/class-chordpress-renderer.php:845
 msgid "Missing square bracket in line"
 msgstr ""
 

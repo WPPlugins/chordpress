@@ -16,7 +16,7 @@
  * Plugin Name:       Lewe ChordPress
  * Plugin URI:        https://lewe.gitbook.io/lewe-chordpress/
  * Description:       This plugin renders ChordPro formatted text and chord diagrams in WordPress sites.
- * Version:           3.6.0
+ * Version:           3.6.1
  * Author:            George Lewe
  * Author URI:        https://www.lewe.com
  * License:           GPLv3
@@ -35,7 +35,7 @@ if (!defined('WPINC')) die;
  * Version number based on SemVer - https://semver.org
  */
 define('CHORDPRESS_NAME', 'ChordPress');
-define('CHORDPRESS_VERSION', '3.6.0');
+define('CHORDPRESS_VERSION', '3.6.1');
 define('CHORDPRESS_AUTHOR', 'George Lewe');
 define('CHORDPRESS_AUTHOR_URI', 'https://www.lewe.com');
 define('CHORDPRESS_DOC_URI', 'https://lewe.gitbook.io/lewe-chordpress/');
@@ -51,22 +51,22 @@ define('CHORDPRESS_LICENSE_REQUIRED', false);
  * The code that runs during plugin activation.
  * This action is documented in includes/class-chordpress-activator.php
  */
-function activate_chordpress()
-{
-    require_once plugin_dir_path(__FILE__) . 'includes/class-chordpress-activator.php';
-    ChordPress_Activator::activate();
+function activate_chordpress() {
+  require_once plugin_dir_path(__FILE__) . 'includes/class-chordpress-activator.php';
+  ChordPress_Activator::activate();
 }
+
 register_activation_hook(__FILE__, 'activate_chordpress');
 
 /**
  * The code that runs during plugin deactivation.
  * This action is documented in includes/class-chordpress-deactivator.php
  */
-function deactivate_chordpress()
-{
-    require_once plugin_dir_path(__FILE__) . 'includes/class-chordpress-deactivator.php';
-    ChordPress_Deactivator::deactivate();
+function deactivate_chordpress() {
+  require_once plugin_dir_path(__FILE__) . 'includes/class-chordpress-deactivator.php';
+  ChordPress_Deactivator::deactivate();
 }
+
 register_deactivation_hook(__FILE__, 'deactivate_chordpress');
 
 /**
@@ -99,9 +99,9 @@ require plugin_dir_path(__FILE__) . 'admin/partials/chordpress-admin-chord-meta-
  *
  * @since    1.0.0
  */
-function run_chordpress()
-{
-    $plugin = new ChordPress_Plugin();
-    $plugin->run();
+function run_chordpress() {
+  $plugin = new ChordPress_Plugin();
+  $plugin->run();
 }
+
 run_chordpress();

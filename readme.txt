@@ -3,8 +3,8 @@ Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
-Tested up to: 6.4
-Stable tag: 3.6.0
+Tested up to: 6.5
+Stable tag: 3.6.1
 Requires PHP: 5.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -129,6 +129,11 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.6.1 =
+* 2024-04-09
+* WordPress 6.5 compatibility
+* Added '-' as allowed chord prefix
+
 = 3.6.0 =
 * 2023-11-15
 * Added alternative transpose input (numeric plus/minus)

@@ -979,10 +979,10 @@ if ($show_alert) {
                             <th scope="row"><?php echo esc_html(__('Credits', 'chordpress')); ?></th>
                             <td>
                                 <ul class="description" style="list-style: square; margin-left:12px;">
-                                    <li>The <a href="https://www.chordpro.org" title="ChordPro" rel="nofollow ugc">ChordPro</a> team</li>
-                                    <li><a href="https://profiles.wordpress.org/rlisle/" title="@rlisle" rel="nofollow ugc">@rlisle</a> for his work on the ChordsAndLyrics plugin that he created in 2009</li>
-                                    <li>Ahkâm for the beautiful <a href="https://www.freeiconspng.com/img/17579" title="ChordPress Plugin Icon" rel="nofollow ugc">ChordPress Plugin Icon</a></li>
-                                    <li>The fine people maintaining the <a href="https://github.com/omnibrain/svguitar" title="SVGuitar" rel="nofollow ugc">SVGuitar</a> module</li>
+                                    <li>The <a href="https://www.chordpro.org" title="ChordPro" rel="nofollow ugc" target="_blank">ChordPro</a> team</li>
+                                    <li><a href="https://profiles.wordpress.org/rlisle/" title="@rlisle" rel="nofollow ugc" target="_blank">@rlisle</a> for his work on the ChordsAndLyrics plugin that he created in 2009</li>
+                                    <li>Ahkâm for the beautiful <a href="https://www.freeiconspng.com/img/17579" title="ChordPress Plugin Icon" rel="nofollow ugc" target="_blank">ChordPress Plugin Icon</a></li>
+                                    <li>The fine people maintaining the <a href="https://github.com/omnibrain/svguitar" title="SVGuitar" rel="nofollow ugc" target="_blank">SVGuitar</a> module</li>
                                 </ul>
                             </td>
                         </tr>
