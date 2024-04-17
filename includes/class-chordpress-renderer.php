@@ -425,7 +425,7 @@ class ChordPress_Renderer {
    * @access   private
    * @var      array
    */
-  private $allowedChordPrefixes = array( '~', '|', '/', '.', '-' );
+  private $allowedChordPrefixes = array( '~', '|', '/', '.', '-', '+', '1', '2', '3', '4', '5', '6', '7', '8', '9' );
 
 
   //---------------------------------------------------------------------------
@@ -610,8 +610,7 @@ class ChordPress_Renderer {
             </div>";
         } else {
           //
-          // Let's see if a 'Key' directive was given. If so, we can add
-          // the transposed keys to the list.
+          // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
           //
           if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
             $i = 0;
@@ -895,7 +894,7 @@ class ChordPress_Renderer {
             $returnText .= "<div class=\"chord chord-hidable-%cpressID% key-%cpressID%-0\"><span class=\"chordshort\">";
 
             /**
-             * Allow chords starting with a ~, |, / and . as chord placeholders. Just return the string.
+             * Allow chords starting with allowed prefixes as chord placeholders. Just return the string.
              * Att: ... will end up as &ellip; . Use blanks between each dot.
              */
             if (in_array($arrChords[$i][0], $this->allowedChordPrefixes)) {
