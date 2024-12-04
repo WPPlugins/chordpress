@@ -9,6 +9,10 @@
  */
 
 /**
+ * ----------------------------------------------------------------------------
+ * Dismiss Parent.
+ * ----------------------------------------------------------------------------
+ *
  * Hides an HTML parent element via CSS.
  *
  * This function hides the parent element of the given one by setting its
@@ -25,14 +29,53 @@ function dismissParent(el) {
 };
 
 /**
- * Transposes chords up
+ * ----------------------------------------------------------------------------
+ * Transposes Chords.
+ * ----------------------------------------------------------------------------
  *
  * This function hides all chord divs, then shows those for the given transpose
  * value.
  *
  * @since 1.3.0
  */
-function transposeChords(cpressId, formControlId, direction) {
+function transposeChords(cpressId, formControlId, direction, baseKey) {
+
+  const arrTransposeValues = {
+    'A': ['A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'],
+    'Am': ['Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m'],
+    'A#': ['A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'],
+    'Bb': ['Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A'],
+    'A#m': ['A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am'],
+    'Bbm': ['Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am'],
+    'B': ['B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#'],
+    'Bm': ['Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m'],
+    'C': ['C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'],
+    'Cm': ['Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm'],
+    'C#': ['C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C'],
+    'Db': ['Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C'],
+    'C#m': ['C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm'],
+    'Dbm': ['Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm'],
+    'D': ['D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#'],
+    'Dm': ['Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m'],
+    'D#': ['D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D'],
+    'Eb': ['Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D'],
+    'D#m': ['D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm'],
+    'Ebm': ['Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm'],
+    'E': ['E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#'],
+    'Em': ['Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m'],
+    'F': ['F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'],
+    'Fm': ['Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em'],
+    'F#': ['F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F'],
+    'Gb': ['Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F'],
+    'F#m': ['F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm'],
+    'Gbm': ['Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm'],
+    'G': ['G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#'],
+    'Gm': ['Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m'],
+    'G#': ['G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G'],
+    'Ab': ['Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G'],
+    'G#m': ['G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm'],
+    'Abm': ['Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm']
+  };
 
   let transposeElementId = "selTranspose-" + cpressId;
   if (formControlId) {
@@ -63,7 +106,7 @@ function transposeChords(cpressId, formControlId, direction) {
   }
 
   /**
-   * Hide all hidable chords
+   * Hide all hideable chords
    */
   var divsToHide = document.getElementsByClassName("chord-hidable-" + cpressId);
   for (var i = 0; i < divsToHide.length; i++) {
@@ -84,12 +127,18 @@ function transposeChords(cpressId, formControlId, direction) {
   if (formControlId === 'btnTranspose-') {
     var btn = document.getElementById(transposeElementId);
     btn.value = x;
-    btn.innerText = x;
+    if (baseKey !== '') {
+      btn.innerText = x + ' (' + arrTransposeValues[baseKey][x] + ')';
+    } else {
+      btn.innerText = x;
+    }
   }
 }
 
 /**
+ * ----------------------------------------------------------------------------
  * Change Font Size.
+ * ----------------------------------------------------------------------------
  *
  * Increases/decreases the font size of an element. Usage:
  * - changeFontSize('myElement', 2);
@@ -97,7 +146,7 @@ function transposeChords(cpressId, formControlId, direction) {
  *
  * @since 5.6.0
  */
-function changeFontSize(elementId, amount){
+function changeFontSize(elementId, amount) {
   const element = document.getElementById(elementId);
   const sizeButton = document.getElementById('btnFontSize-' + elementId);
   let currentFontSize = parseFloat(element.style.fontSize);

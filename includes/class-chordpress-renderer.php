@@ -427,9 +427,11 @@ class ChordPress_Renderer {
    */
   private $allowedChordPrefixes = array( '~', '|', '/', '.', '-', '+', '1', '2', '3', '4', '5', '6', '7', '8', '9' );
 
-
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Constructor.
+   * --------------------------------------------------------------------------
+   *
    * Initialize the class and set its properties.
    *
    * @since    1.0.0
@@ -473,11 +475,15 @@ class ChordPress_Renderer {
     if (!$this->lineStyle = get_option('chordpress_text_line_style')) $this->lineStyle = 'margin: 1em 0 1em 0;';
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Directives.
+   * --------------------------------------------------------------------------
+   *
    * Get the ChordPro directives and store the supported ones in an array.
    *
    * @param object $text - Text inside shortcode wrapper.
+   *
    * @since 1.0.0
    */
   public function getDirectives($text) {
@@ -528,8 +534,11 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Display Text.
+   * --------------------------------------------------------------------------
+   *
    * Creates the formatted HTML of the ChordPro text.
    *
    * HTML Structure
@@ -556,6 +565,7 @@ class ChordPress_Renderer {
    * </div>
    *
    * @param object $text - Text inside shortcode wrapper.
+   *
    * @return string - Formatted HTML of the ChordPro text.
    * @since 1.0.0
    */
@@ -600,13 +610,23 @@ class ChordPress_Renderer {
           </div>
         </div>";
       if (!$this->hideTranspose) {
-        $interactionForm .= "<div class='cpress-col cpress-text-center' style='display: inline-block;'>";
+        $interactionForm .= "<div class='cpress-col cpress-text-center' style='display: inline-block; text-wrap: nowrap;'>";
         if ($this->showNumericTranspose) {
+          //
+          // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
+          //
+          if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
+            $songKey = "'" . $this->arrDirectives['key'] . "'";
+            $initialText = '0 (' . $this->arrDirectives['key'] . ')';
+          } else {
+            $songKey = "''";
+            $initialText = '0';
+          }
           $interactionForm .= "<span class=''>" . __('Transpose', 'chordpress') . "</span>
             <div class='cpress-btn-group' role='group'>
-              <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'down');\">-</button>
-              <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'reset');\" value='0'>0</button>
-              <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'up');\">+</button>
+              <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'down', " . $songKey . ");\">-</button>
+              <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'reset', " . $songKey . ");\" value='0'>" . $initialText . "</button>
+              <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'up', " . $songKey . ");\">+</button>
             </div>";
         } else {
           //
@@ -622,20 +642,22 @@ class ChordPress_Renderer {
             $tvalues = array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11' );
           }
           $interactionForm .= __('Transpose', 'chordpress') . "
-            <select class=\"cpress-form-control cpress-form-control-sm cpress-w-50 cpress-py-0 cpress-px-2 float-right\" id=\"selTranspose-%cpressID%\" onchange=\"transposeChords('%cpressID%', 'selTranspose-');return false;\" title=\"" . __('Only works for international key names', 'chordpress') . ".\">
-              <option value=\"0\">" . $tvalues[0] . "</option>
-              <option value=\"1\">" . $tvalues[1] . "</option>
-              <option value=\"2\">" . $tvalues[2] . "</option>
-              <option value=\"3\">" . $tvalues[3] . "</option>
-              <option value=\"4\">" . $tvalues[4] . "</option>
-              <option value=\"5\">" . $tvalues[5] . "</option>
-              <option value=\"6\">" . $tvalues[6] . "</option>
-              <option value=\"7\">" . $tvalues[7] . "</option>
-              <option value=\"8\">" . $tvalues[8] . "</option>
-              <option value=\"9\">" . $tvalues[9] . "</option>
-              <option value=\"10\">" . $tvalues[10] . "</option>
-              <option value=\"11\">" . $tvalues[11] . "</option>
-            </select>";
+            <div class=\"float-right\">
+              <select class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\" id=\"selTranspose-%cpressID%\" onchange=\"transposeChords('%cpressID%', 'selTranspose-');return false;\" title=\"" . __('Only works for international key names', 'chordpress') . ".\">
+                <option value=\"0\">" . $tvalues[0] . "</option>
+                <option value=\"1\">" . $tvalues[1] . "</option>
+                <option value=\"2\">" . $tvalues[2] . "</option>
+                <option value=\"3\">" . $tvalues[3] . "</option>
+                <option value=\"4\">" . $tvalues[4] . "</option>
+                <option value=\"5\">" . $tvalues[5] . "</option>
+                <option value=\"6\">" . $tvalues[6] . "</option>
+                <option value=\"7\">" . $tvalues[7] . "</option>
+                <option value=\"8\">" . $tvalues[8] . "</option>
+                <option value=\"9\">" . $tvalues[9] . "</option>
+                <option value=\"10\">" . $tvalues[10] . "</option>
+                <option value=\"11\">" . $tvalues[11] . "</option>
+              </select>
+            </div>";
         }
         $interactionForm .= "</div>";
       }
@@ -743,19 +765,24 @@ class ChordPress_Renderer {
       }
     }
 
-    // $this->C->dnd($returnText);
+// $this->C->dnd($returnText);
     return $returnText . "\n\n";
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Format and Display Line.
+   * --------------------------------------------------------------------------
+   *
    * Process a single of the ChordPro text and return the formatted HTML.
    *
    * @param string $line - Single line from inside shortcode wrapper.
+   *
    * @return string - Formatted HTML.
    * @since 1.0.0
    */
-  public function formatAndDisplayLine($line) {
+  public
+  function formatAndDisplayLine($line) {
     $returnText = "";
 
     /**
@@ -995,15 +1022,20 @@ class ChordPress_Renderer {
     return $returnText;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Strip Tags.
+   * --------------------------------------------------------------------------
+   *
    * Remove all <> wrapped text from a string.
    *
    * @param string $string - String to process.
+   *
    * @return string - Stripped text.
    * @since 1.0.0
    */
-  private function stripTags($string) {
+  private
+  function stripTags($string) {
     $retString = "";
     $isVisible = true;
     for ($i = 0; $i < strlen($string); $i++) {
@@ -1019,15 +1051,20 @@ class ChordPress_Renderer {
     return $retString;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Format Chord.
+   * --------------------------------------------------------------------------
+   *
    * Processes a note text and returns the formatted HTML.
    *
    * @param string $ch - Chord text, e.g. "A" or "B#" or "Db/F" or "IV".
+   *
    * @return string - Uppercase note string.
    * @since 1.0.0
    */
-  public function formatChord($ch) {
+  public
+  function formatChord($ch) {
     $useFlats = false;
     if (strlen($ch) == 0) return '';
 
@@ -1083,15 +1120,20 @@ class ChordPress_Renderer {
     return $xlatedNote . $this->formatRemainder($rem);
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Format Remainder.
+   * --------------------------------------------------------------------------
+   *
    * Process the remainder of the given chord.
    *
    * @param string $remainder - Chord text starting at second char.
+   *
    * @return string - Formatted remainder.
    * @since 1.0.0
    */
-  public function formatRemainder($remainder) {
+  public
+  function formatRemainder($remainder) {
     $indexOfSlash = strpos($remainder, '/');
     if ($indexOfSlash === false) return $remainder;
 
@@ -1148,15 +1190,20 @@ class ChordPress_Renderer {
     return $chord . "/" . $xlatedNote . $rem;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Note to Number.
+   * --------------------------------------------------------------------------
+   *
    * Convert note to number.
    *
    * @param string $n - Note to convert.
+   *
    * @return integer
    * @since 1.0.0
    */
-  public function noteToNumber($n) {
+  public
+  function noteToNumber($n) {
     $regularNotation = array(
       'A' => 0,
       'B' => 2,
@@ -1193,16 +1240,21 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Number to Note.
+   * --------------------------------------------------------------------------
+   *
    * Convert number to note.
    *
-   * @param integer $n - Numeric note value to convert to note string.
+   * @param integer $n        - Numeric note value to convert to note string.
    * @param boolean $useFlats - Whether to use flat notes or not.
+   *
    * @return string
    * @since 1.0.0
    */
-  public function numberToNote($n, $useFlats = false) {
+  public
+  function numberToNote($n, $useFlats = false) {
     $retVal = '';
 
     switch ($n) {
@@ -1259,80 +1311,127 @@ class ChordPress_Renderer {
     return $retVal;
   }
 
-  //---------------------------------------------------------------------------
   /**
-   * Set class variable: displayHBNotation.
+   * --------------------------------------------------------------------------
+   * Get Display HB Notation.
+   * --------------------------------------------------------------------------
    *
-   * @param boolean $g
-   * @since 1.0.0
-   */
-  public function setDisplayHBNotation($g) {
-    $this->displayHBNotation = $g;
-  }
-
-  //---------------------------------------------------------------------------
-  /**
    * Get class variable: displayHBNotation.
    *
    * @return boolean
    * @since 1.0.0
    */
-  public function getDisplayHBNotation() {
+  public
+  function getDisplayHBNotation() {
     return $this->displayHBNotation;
   }
 
-  //---------------------------------------------------------------------------
   /**
-   * Set class variable: float.
+   * --------------------------------------------------------------------------
+   * Set Display HB Notation.
+   * --------------------------------------------------------------------------
    *
-   * @param string $f - left/right/none/inherit.
+   * Set class variable: displayHBNotation.
+   *
+   * @param boolean $g
+   *
    * @since 1.0.0
    */
-  public function setFloat($f) {
-    $this->float = $f;
+  public
+  function setDisplayHBNotation($g) {
+    $this->displayHBNotation = $g;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Float.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: float.
    *
    * @return string
    * @since 1.0.0
    */
-  public function getFloat() {
+  public
+  function getFloat() {
     return $this->float;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Float.
+   * --------------------------------------------------------------------------
+   *
+   * Set class variable: float.
+   *
+   * @param string $f - left/right/none/inherit.
+   *
+   * @since 1.0.0
+   */
+  public
+  function setFloat($f) {
+    $this->float = $f;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Get HB Notation.
+   * --------------------------------------------------------------------------
+   *
+   * Get class variable: hbNotation.
+   *
+   * @return string -yes/no.
+   * @since 1.0.0
+   */
+  public
+  function getHBNotation() {
+    return $this->hbNotation;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Set HB Notation.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: hbNotation.
    *
    * @param string $g - yes/no.
+   *
    * @since 1.0.0
    */
-  public function setHBNotation($g) {
+  public
+  function setHBNotation($g) {
     $this->hbNotation = $g;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Hide Chords.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: hideChords.
    *
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideChords() {
+  public
+  function getHideChords() {
     return $this->hideChords;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Hide Chords.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: hideChords.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.5.0
    */
-  public function setHideChords($g) {
+  public
+  function setHideChords($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideChords = true;
     } else {
@@ -1340,25 +1439,34 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Hide Comments.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: hideComments.
    *
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideComments() {
+  public
+  function getHideComments() {
     return $this->hideComments;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Hide Comments.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: hideComments.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.5.0
    */
-  public function setHideComments($g) {
+  public
+  function setHideComments($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideComments = 1;
     } else {
@@ -1366,25 +1474,34 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Hide Composer.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: hideComposer.
    *
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideComposer() {
+  public
+  function getHideComposer() {
     return $this->hideComposer;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Hide Composer.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: hideComposer.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.5.0
    */
-  public function setHideComposer($g) {
+  public
+  function setHideComposer($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideComposer = 1;
     } else {
@@ -1392,25 +1509,34 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Hide Print.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: hidePrint.
    *
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHidePrint() {
+  public
+  function getHidePrint() {
     return $this->hidePrint;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Hide Print.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: hidePrint.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.5.0
    */
-  public function setHidePrint($g) {
+  public
+  function setHidePrint($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hidePrint = 1;
     } else {
@@ -1418,25 +1544,34 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Hide Subtitle.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: hideSubtitle.
    *
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideSubtitle() {
+  public
+  function getHideSubtitle() {
     return $this->hideSubtitle;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Hide Subtitle.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: hideSubtitle.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.5.0
    */
-  public function setHideSubtitle($g) {
+  public
+  function setHideSubtitle($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideSubtitle = 1;
     } else {
@@ -1444,25 +1579,34 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Hide Title.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: hideTitle.
    *
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideTitle() {
+  public
+  function getHideTitle() {
     return $this->hideTitle;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Hide Title.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: hideTitle.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.5.0
    */
-  public function setHideTitle($g) {
+  public
+  function setHideTitle($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideTitle = 1;
     } else {
@@ -1470,25 +1614,34 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Hide Transpose.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: hideTranspose.
    *
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideTranspose() {
+  public
+  function getHideTranspose() {
     return $this->hideTranspose;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Hide Transpose.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: hideTranspose.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.5.0
    */
-  public function setHideTranspose($g) {
+  public
+  function setHideTranspose($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideTranspose = 1;
     } else {
@@ -1496,25 +1649,34 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Numeric Transpose.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: showNumericTranspose.
    *
    * @return string -yes/no.
    * @since 3.6.0
    */
-  public function getNumericTranspose() {
+  public
+  function getNumericTranspose() {
     return $this->showNumericTranspose;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Numeric Transpose.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: showNumericTranspose.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.6.0
    */
-  public function setNumericTranspose($g) {
+  public
+  function setNumericTranspose($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->showNumericTranspose = 1;
     } else {
@@ -1522,25 +1684,34 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Fixed Interaction.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: fixedInteraction.
    *
    * @return string -yes/no.
    * @since 3.6.0
    */
-  public function getFixedInteraction() {
+  public
+  function getFixedInteraction() {
     return $this->fixedInteraction;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Fixed Interaction.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: fixedInteraction.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.6.0
    */
-  public function setFixedInteraction($g) {
+  public
+  function setFixedInteraction($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->fixedInteraction = 1;
     } else {
@@ -1548,25 +1719,34 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Hide Year.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: hideYear.
    *
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideYear() {
+  public
+  function getHideYear() {
     return $this->hideYear;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Hide Year.
+   * --------------------------------------------------------------------------
+   *
    * Set class variable: hideYear.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.5.0
    */
-  public function setHideYear($g) {
+  public
+  function setHideYear($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideYear = 1;
     } else {
@@ -1574,58 +1754,65 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
-   * Get class variable: hbNotation.
+   * --------------------------------------------------------------------------
+   * Get Interactive.
+   * --------------------------------------------------------------------------
    *
-   * @return string -yes/no.
-   * @since 1.0.0
-   */
-  public function getHBNotation() {
-    return $this->hbNotation;
-  }
-
-  //---------------------------------------------------------------------------
-  /**
-   * Set class variable: interactive.
-   *
-   * @param string $g - yes/no.
-   * @since 1.0.0
-   */
-  public function setInteractive($i) {
-    $this->interactive = $i;
-  }
-
-  //---------------------------------------------------------------------------
-  /**
    * Get class variable: interactive.
    *
    * @return string - yes/no.
    * @since 1.0.0
    */
-  public function getInteractive() {
+  public
+  function getInteractive() {
     return $this->interactive;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Interactive.
+   * --------------------------------------------------------------------------
+   *
+   * Set class variable: interactive.
+   *
+   * @param string $g - yes/no.
+   *
+   * @since 1.0.0
+   */
+  public
+  function setInteractive($i) {
+    $this->interactive = $i;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Get Show Chord Sheet.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: showChordSheet.
    *
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getShowChordSheet() {
+  public
+  function getShowChordSheet() {
     return $this->showChordSheet;
   }
 
-  //---------------------------------------------------------------------------
   /**
-   * Set class variable: hideYear.
+   * --------------------------------------------------------------------------
+   * Set Show Chord Sheet.
+   * --------------------------------------------------------------------------
+   *
+   * Set class variable: showChordSheet.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.5.0
    */
-  public function setShowChordSheet($g) {
+  public
+  function setShowChordSheet($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->showChordSheet = 1;
     } else {
@@ -1633,25 +1820,34 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Get Show Chord Sheet On Top.
+   * --------------------------------------------------------------------------
+   *
    * Get class variable: showChordSheetOnTop.
    *
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getShowChordSheetOnTop() {
+  public
+  function getShowChordSheetOnTop() {
     return $this->showChordSheetOnTop;
   }
 
-  //---------------------------------------------------------------------------
   /**
-   * Set class variable: hideYear.
+   * --------------------------------------------------------------------------
+   * Set Show Chord Sheet On Top.
+   * --------------------------------------------------------------------------
+   *
+   * Set class variable: showChordSheetOnTop.
    *
    * @param string $g - yes/no.
+   *
    * @since 3.5.0
    */
-  public function setShowChordSheetOnTop($g) {
+  public
+  function setShowChordSheetOnTop($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->showChordSheetOnTop = 1;
     } else {
@@ -1659,36 +1855,50 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
-   * Sets class variable: transpose.
+   * --------------------------------------------------------------------------
+   * Get Transpose.
+   * --------------------------------------------------------------------------
    *
-   * @param integer $t - Positive or negative number of steps for transponation.
-   * @since 1.0.0
-   */
-  public function setTranspose($t) {
-    $this->transpose = $t;
-  }
-
-  //---------------------------------------------------------------------------
-  /**
    * Get class variable: transpose.
    *
    * @return integer
    * @since 1.0.0
    */
-  public function getTranspose() {
+  public
+  function getTranspose() {
     return $this->transpose;
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Set Transpose.
+   * --------------------------------------------------------------------------
+   *
+   * Sets class variable: transpose.
+   *
+   * @param integer $t - Positive or negative number of steps for transponation.
+   *
+   * @since 1.0.0
+   */
+  public
+  function setTranspose($t) {
+    $this->transpose = $t;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Find Guitar Chord Post.
+   * --------------------------------------------------------------------------
+   *
    * Find a guitar chord type post by shortname.
    *
    * @param string $shortname - Shortname of the guitar post to look for.
+   *
    * @return integer - Post ID or NULL
    */
-  private function find_guitar_chord_post($shortname) {
+  private
+  function find_guitar_chord_post($shortname) {
     $query_args = array(
       'posts_per_page' => 1,
       'post_type' => 'guitar_chord',
@@ -1704,14 +1914,19 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Load Guitar Chord.
+   * --------------------------------------------------------------------------
+   *
    * Load a guitar chord based on post ID.
    *
    * @param integer $postid - Guitar chord post ID.
+   *
    * @return void
    */
-  private function load_guitar_chord($postid) {
+  private
+  function load_guitar_chord($postid) {
     $my_chord = array();
     $post = get_post($postid);
 
@@ -1742,12 +1957,12 @@ class ChordPress_Renderer {
     $this->C->setTuning($guitar_chord_tuning);
   }
 
-  //---------------------------------------------------------------------------
   /**
    * Create a modal guitar chord dialog.
    *
    * @param integer $postid - ID of the chord post
-   * @param string $chord - Vexchord HTML
+   * @param string  $chord  - Vexchord HTML
+   *
    * @return string - Modal chord dialog HTML
    */
 //    private function create_modal_chord($postid, $chord)
@@ -1782,15 +1997,20 @@ class ChordPress_Renderer {
 //        return $modal_chord;
 //    }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
+   * Random String.
+   * --------------------------------------------------------------------------
+   *
    * Generate random string.
    *
    * @param boolean $alphaonly - Whether to only use alpha charaters
-   * @param integer $length - Length of random string to generate
+   * @param integer $length    - Length of random string to generate
+   *
    * @return false|string
    */
-  private function random_string($alphaonly = false, $length = 15) {
+  private
+  function random_string($alphaonly = false, $length = 15) {
     if ($alphaonly) {
       return substr(str_shuffle(str_repeat($x = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     } else {
@@ -1798,16 +2018,19 @@ class ChordPress_Renderer {
     }
   }
 
-  //---------------------------------------------------------------------------
   /**
+   * --------------------------------------------------------------------------
    * Dump and Die.
+   * --------------------------------------------------------------------------
    *
-   * @param array $a Array to print out pretty
-   * @param bool $die Flag to die after dump or not
+   * @param array $a   Array to print out pretty
+   * @param bool  $die Flag to die after dump or not
+   *
    * @return string
    * @since 3.2.0
    */
-  private function dnd($a, $die = true) {
+  private
+  function dnd($a, $die = true) {
     $dump = highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
     if ($die) die($dump);
     else return $dump;

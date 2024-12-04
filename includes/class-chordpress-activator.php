@@ -20,16 +20,15 @@
  * @subpackage ChordPress/includes
  * @author     George Lewe <george@lewe.com>
  */
-class ChordPress_Activator
-{
-    /**
-     * Plugin activation function.
-     *
-     * This functions handles the plugin activation actions.
-     *
-     * @since    2.0.0
-     */
-    public static function activate()
-    {
-    }
+class ChordPress_Activator {
+  /**
+   * --------------------------------------------------------------------------
+   * Activate.
+   * --------------------------------------------------------------------------
+   *
+   * This functions handles the plugin activation actions.
+   *
+   * @since    2.0.0
+   */
+  public static function activate() {}
 }

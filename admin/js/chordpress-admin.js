@@ -20,6 +20,6 @@
  */
 function dismissParent(el) {
 
-   el.parentNode.style.display='none';
-   
+  el.parentNode.style.display = 'none';
+
 };
