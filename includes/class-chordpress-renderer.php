@@ -602,7 +602,7 @@ class ChordPress_Renderer {
         $interactionForm .= " fixed";
       }
       $interactionForm .= "\">";
-      $interactionForm .= "<div class='cpress-col cpress-pl-0'>" . __('Font', 'chordpress') . " 
+      $interactionForm .= "<div class='cpress-col cpress-pl-0'>" . __('Font', 'chordpress') . "<br>
           <div class='cpress-btn-group' role='group'>
             <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', -5);\">-</button>
             <button id=\"btnFontSize-%cpressID%\"  type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 0);\">100%</button>
@@ -610,7 +610,7 @@ class ChordPress_Renderer {
           </div>
         </div>";
       if (!$this->hideTranspose) {
-        $interactionForm .= "<div class='cpress-col cpress-text-center' style='display: inline-block; text-wrap: nowrap;'>";
+        $interactionForm .= "<div class='cpress-col' style='display: inline-block;'>";
         if ($this->showNumericTranspose) {
           //
           // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
@@ -622,7 +622,7 @@ class ChordPress_Renderer {
             $songKey = "''";
             $initialText = '0';
           }
-          $interactionForm .= "<span class=''>" . __('Transpose', 'chordpress') . "</span>
+          $interactionForm .= __('Transpose', 'chordpress') . "<br>
             <div class='cpress-btn-group' role='group'>
               <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'down', " . $songKey . ");\">-</button>
               <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'reset', " . $songKey . ");\" value='0'>" . $initialText . "</button>
@@ -661,9 +661,9 @@ class ChordPress_Renderer {
         }
         $interactionForm .= "</div>";
       }
-      $interactionForm .= "<div class='cpress-col cpress-text-end cpress-pr-0'>";
+      $interactionForm .= "<div class='cpress-col cpress-pr-0'>";
       if (!$this->hidePrint) {
-        $interactionForm .= "<button class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"window.print();\">" . __('Print', 'chordpress') . "</button>\n";
+        $interactionForm .= "<br><button class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"window.print();\">" . __('Print', 'chordpress') . "</button>\n";
       }
       $interactionForm .= "</div>";
       $returnText .= $interactionForm . "</div>\n";
