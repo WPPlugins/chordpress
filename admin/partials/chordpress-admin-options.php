@@ -297,10 +297,17 @@ if ($show_alert) {
           <table class="form-table" style="margin-left:16px;">
             <tbody>
             <tr>
+              <th scope="row"><?php echo esc_html(__('Hide Album', 'chordpress')); ?></th>
+              <td>
+                <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_album' name='<?php echo $pname; ?>_checkbox_hide_album' <?php checked(get_option($pname . '_checkbox_hide_album'), 1); ?> value='1'>
+                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/directives-album/" target="_blank"><?php echo esc_html(__('album directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed', 'chordpress')); ?>.</p>
+              </td>
+            </tr>
+            <tr>
               <th scope="row"><?php echo esc_html(__('Hide Artist', 'chordpress')); ?></th>
               <td>
                 <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_artist' name='<?php echo $pname; ?>_checkbox_hide_artist' <?php checked(get_option($pname . '_checkbox_hide_artist'), 1); ?> value='1'>
-                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-artist.html" target="_blank"><?php echo esc_html(__('artist directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed', 'chordpress')); ?>.</p>
+                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/directives-artist/" target="_blank"><?php echo esc_html(__('artist directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed', 'chordpress')); ?>.</p>
               </td>
             </tr>
             <tr>
@@ -314,35 +321,42 @@ if ($show_alert) {
               <th scope="row"><?php echo esc_html(__('Hide Comments', 'chordpress')); ?></th>
               <td>
                 <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_comments' name='<?php echo $pname; ?>_checkbox_hide_comments' <?php checked(get_option($pname . '_checkbox_hide_comments'), 1); ?> value='1'>
-                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-comment.html" target="_blank"><?php echo esc_html(__('comment directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidecomments=yes/no"', 'chordpress')); ?>.</p>
+                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/directives-comment/" target="_blank"><?php echo esc_html(__('comment directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidecomments=yes/no"', 'chordpress')); ?>.</p>
               </td>
             </tr>
             <tr>
               <th scope="row"><?php echo esc_html(__('Hide Composer', 'chordpress')); ?></th>
               <td>
                 <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_composer' name='<?php echo $pname; ?>_checkbox_hide_composer' <?php checked(get_option($pname . '_checkbox_hide_composer'), 1); ?> value='1'>
-                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-composer.html" target="_blank"><?php echo esc_html(__('composer directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidecomposer=yes/no"', 'chordpress')); ?>.</p>
+                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/directives-composer/" target="_blank"><?php echo esc_html(__('composer directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidecomposer=yes/no"', 'chordpress')); ?>.</p>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row"><?php echo esc_html(__('Hide Key', 'chordpress')); ?></th>
+              <td>
+                <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_key' name='<?php echo $pname; ?>_checkbox_hide_key' <?php checked(get_option($pname . '_checkbox_hide_key'), 1); ?> value='1'>
+                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/directives-key/" target="_blank"><?php echo esc_html(__('key directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed', 'chordpress')); ?>.</p>
               </td>
             </tr>
             <tr>
               <th scope="row"><?php echo esc_html(__('Hide Subtitle', 'chordpress')); ?></th>
               <td>
                 <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_subtitle' name='<?php echo $pname; ?>_checkbox_hide_subtitle' <?php checked(get_option($pname . '_checkbox_hide_subtitle'), 1); ?> value='1'>
-                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-subtitle.html" target="_blank"><?php echo esc_html(__('subtitle directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidesubtitle=yes/no"', 'chordpress')); ?>.</p>
+                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/directives-subtitle/" target="_blank"><?php echo esc_html(__('subtitle directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidesubtitle=yes/no"', 'chordpress')); ?>.</p>
               </td>
             </tr>
             <tr>
               <th scope="row"><?php echo esc_html(__('Hide Title', 'chordpress')); ?></th>
               <td>
                 <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_title' name='<?php echo $pname; ?>_checkbox_hide_title' <?php checked(get_option($pname . '_checkbox_hide_title'), 1); ?> value='1'>
-                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-title.html" target="_blank"><?php echo esc_html(__('title directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidetitle=yes/no"', 'chordpress')); ?>.</p>
+                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/directives-title/" target="_blank"><?php echo esc_html(__('title directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hidetitle=yes/no"', 'chordpress')); ?>.</p>
               </td>
             </tr>
             <tr>
               <th scope="row"><?php echo esc_html(__('Hide Year', 'chordpress')); ?></th>
               <td>
                 <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_year' name='<?php echo $pname; ?>_checkbox_hide_year' <?php checked(get_option($pname . '_checkbox_hide_year'), 1); ?> value='1'>
-                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/Directives-year.html" target="_blank"><?php echo esc_html(__('year directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hideyear=yes/no"', 'chordpress')); ?>.</p>
+                <p class="description"><?php echo esc_html(__('With this option selected, the', 'chordpress')); ?> <a href="https://www.chordpro.org/chordpro/directives-year/" target="_blank"><?php echo esc_html(__('year directive', 'chordpress')); ?></a> <?php echo esc_html(__('will not be displayed. You can overwrite this setting per shortcut with "hideyear=yes/no"', 'chordpress')); ?>.</p>
               </td>
             </tr>
             <tr>

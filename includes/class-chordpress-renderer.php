@@ -84,6 +84,15 @@ class ChordPress_Renderer {
   private $hideComposer;
 
   /**
+   * Hide key flag.
+   *
+   * @since    3.7.0
+   * @access   private
+   * @var      boolean $hideKey Hide key flag.
+   */
+  private $hideKey;
+
+  /**
    * Hide subtitle flag.
    *
    * @since    1.0.0
@@ -453,6 +462,7 @@ class ChordPress_Renderer {
     if (!$this->hideChords = get_option('chordpress_checkbox_hide_chords')) $this->hideChords = 0;
     if (!$this->hideComments = get_option('chordpress_checkbox_hide_comments')) $this->hideComments = 0;
     if (!$this->hideComposer = get_option('chordpress_checkbox_hide_composer')) $this->hideComposer = 0;
+    if (!$this->hideKey = get_option('chordpress_checkbox_hide_key')) $this->hideKey = 0;
     if (!$this->hidePrint = get_option('chordpress_checkbox_hide_print')) $this->hidePrint = 0;
     if (!$this->hideSubtitle = get_option('chordpress_checkbox_hide_subtitle')) $this->hideSubtitle = 0;
     if (!$this->hideTitle = get_option('chordpress_checkbox_hide_title')) $this->hideTitle = 0;
@@ -704,7 +714,7 @@ class ChordPress_Renderer {
       if (strlen($this->arrDirectives['year']) && !$this->hideYear) $returnText .= esc_html(__('Year', 'chordpress')) . ': ' . $this->arrDirectives['year'] . "<br>\n";
       if (strlen($this->arrDirectives['album']) && !$this->hideAlbum) $returnText .= esc_html(__('Album', 'chordpress')) . ': ' . $this->arrDirectives['album'] . "<br>\n";
 
-      if (strlen($this->arrDirectives['key'])) {
+      if (strlen($this->arrDirectives['key']) && !$this->hideKey) {
         $returnText .= esc_html(__('Key (original)', 'chordpress')) . ': ' . $this->arrDirectives['key'] . "<br>\n";
         $returnText .= esc_html(__('Key (transposed)', 'chordpress')) . ': <span class="chord-hidable-%cpressID% key-%cpressID%-0">' . $this->arrDirectives['key'] . '</span>';
         for ($t = 1; $t <= 11; $t++) {

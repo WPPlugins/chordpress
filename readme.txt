@@ -129,6 +129,11 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.7.0 =
+* 2024-12-08
+* Added 'Hide Album' and 'Hide Key' switches
+* Fixed chordrpo.org links
+
 = 3.6.4 =
 * 2024-12-06
 * Adjusted display of the font, transpose and print form objects
