@@ -106,7 +106,7 @@ function transposeChords(cpressId, formControlId, direction, baseKey) {
   }
 
   /**
-   * Hide all hideable chords
+   * Hide all hidable chords
    */
   var divsToHide = document.getElementsByClassName("chord-hidable-" + cpressId);
   for (var i = 0; i < divsToHide.length; i++) {
@@ -137,6 +137,35 @@ function transposeChords(cpressId, formControlId, direction, baseKey) {
 
 /**
  * ----------------------------------------------------------------------------
+ * Transposes Harmonica.
+ * ----------------------------------------------------------------------------
+ *
+ * This function hides all chord divs, then shows those for the given harmonica
+ * type.
+ *
+ * @since 3.8.0
+ */
+function transposeHarmonica(cpressId, formControlId, harmonicaType) {
+
+  /**
+   * Hide all hidable chords
+   */
+  var divsToHide = document.getElementsByClassName("chord-hidable-" + cpressId);
+  for (var i = 0; i < divsToHide.length; i++) {
+    divsToHide[i].style.display = "none";
+  }
+
+  /**
+   * Now show those for the selected harmonica type
+   */
+  var divsToShow = document.getElementsByClassName("key-" + cpressId + '-' + harmonicaType);
+  for (var i = 0; i < divsToShow.length; i++) {
+    divsToShow[i].style.display = "";
+  }
+}
+
+/**
+ * ----------------------------------------------------------------------------
  * Change Font Size.
  * ----------------------------------------------------------------------------
  *
@@ -144,7 +173,7 @@ function transposeChords(cpressId, formControlId, direction, baseKey) {
  * - changeFontSize('myElement', 2);
  * - changeFontSize('myElement', -2);
  *
- * @since 5.6.0
+ * @since 3.6.0
  */
 function changeFontSize(elementId, amount) {
   const element = document.getElementById(elementId);

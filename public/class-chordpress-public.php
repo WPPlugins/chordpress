@@ -123,6 +123,7 @@ class ChordPress_Public {
         'transpose' => '0',
         'numerictranspose' => '0',
         'fixedinteraction' => '0',
+        'harmonica' => 'none',
       ],
       $atts,
       $tag
@@ -158,6 +159,7 @@ class ChordPress_Public {
       if (isset($atts['fixedinteraction'])) $CPR->setFixedInteraction($atts['fixedinteraction']);
       $CPR->setInteractive($args['interactive']);
       $CPR->setTranspose($args['transpose']);
+      if (isset($atts['harmonica'])) $CPR->setHarmonica($atts['harmonica']);
 
       /**
        * Break content into separate lines

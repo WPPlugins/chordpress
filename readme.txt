@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
 Tested up to: 6.7
-Stable tag: 3.7.1
+Stable tag: 3.8.0
 Requires PHP: 5.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -129,6 +129,10 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.8.0 =
+* 2025-02-03
+* Support for harmonica notation
+
 = 3.7.1 =
 * 2024-12-08
 * Language file update

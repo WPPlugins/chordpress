@@ -39,6 +39,24 @@ class ChordPress_Renderer {
   private $displayHBNotation;
 
   /**
+   * Harmonica type shortcode flag.
+   *
+   * @since    3.8.0
+   * @access   private
+   * @var      string $harmonica Harmonica type.
+   */
+  private $harmonica;
+
+  /**
+   * Harmonica types.
+   *
+   * @since    3.8.0
+   * @access   private
+   * @var      array $harmonicaTypes Harmonica types.
+   */
+  private $harmonicaTypes = array( 'tremolo', 'diatonic', 'chromatic' );
+
+  /**
    * Hide album flag.
    *
    * @since    1.0.0
@@ -418,6 +436,59 @@ class ChordPress_Renderer {
   );
 
   /**
+   * Array of harmonica notation.
+   *
+   * @since    3.8.0
+   * @access   private
+   * @var      array
+   */
+  private $harmonicaNotes = array(
+    array( 'tremolo' => '1', 'diatonic' => '1', 'chromatic' => '1', 'note' => "C1" ),
+    array( 'tremolo' => '-', 'diatonic' => '-1/', 'chromatic' => '1s', 'note' => "C#1" ),
+    array( 'tremolo' => '-1', 'diatonic' => '-1', 'chromatic' => '-1', 'note' => "D1" ),
+    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-1s', 'note' => "D#1" ),
+    array( 'tremolo' => '2', 'diatonic' => '2', 'chromatic' => '2', 'note' => "E1" ),
+    array( 'tremolo' => '-2', 'diatonic' => '-2//', 'chromatic' => '-2', 'note' => "F1" ),
+    array( 'tremolo' => '-', 'diatonic' => '-2/', 'chromatic' => '-2s', 'note' => "F#1" ),
+    array( 'tremolo' => '3', 'diatonic' => '3', 'chromatic' => '3', 'note' => "G1" ),
+    array( 'tremolo' => '3', 'diatonic' => '-2', 'chromatic' => '3', 'note' => "G1" ),
+    array( 'tremolo' => '-', 'diatonic' => '-3///', 'chromatic' => '3s', 'note' => "G#1" ),
+    array( 'tremolo' => '-3', 'diatonic' => '-3//', 'chromatic' => '-3', 'note' => "A1" ),
+    array( 'tremolo' => '-', 'diatonic' => '-3/', 'chromatic' => '-3s', 'note' => "A#1" ),
+    array( 'tremolo' => '-4', 'diatonic' => '-3', 'chromatic' => '-4', 'note' => "B1" ),
+    array( 'tremolo' => '4', 'diatonic' => '4', 'chromatic' => '4', 'note' => "C2" ),
+    array( 'tremolo' => '5', 'diatonic' => '4', 'chromatic' => '5', 'note' => "C2" ),
+    array( 'tremolo' => '-', 'diatonic' => '-4/', 'chromatic' => '4s', 'note' => "C#2" ),
+    array( 'tremolo' => '-', 'diatonic' => '-4/', 'chromatic' => '5s', 'note' => "C#2" ),
+    array( 'tremolo' => '-5', 'diatonic' => '-4', 'chromatic' => '-5', 'note' => "D2" ),
+    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-5s', 'note' => "D#2" ),
+    array( 'tremolo' => '6', 'diatonic' => '5', 'chromatic' => '6', 'note' => "E2" ),
+    array( 'tremolo' => '-6', 'diatonic' => '-5', 'chromatic' => '-6', 'note' => "F2" ),
+    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-6s', 'note' => "F#2" ),
+    array( 'tremolo' => '7', 'diatonic' => '6', 'chromatic' => '7', 'note' => "G2" ),
+    array( 'tremolo' => '-', 'diatonic' => '-6/', 'chromatic' => '7s', 'note' => "G#2" ),
+    array( 'tremolo' => '-7', 'diatonic' => '-6', 'chromatic' => '-7', 'note' => "A2" ),
+    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-7s', 'note' => "A#2" ),
+    array( 'tremolo' => '-8', 'diatonic' => '-7', 'chromatic' => '-8', 'note' => "B2" ),
+    array( 'tremolo' => '8', 'diatonic' => '7', 'chromatic' => '8', 'note' => "C3" ),
+    array( 'tremolo' => '9', 'diatonic' => '7', 'chromatic' => '9', 'note' => "C3" ),
+    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '8s', 'note' => "C#3" ),
+    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '9s', 'note' => "C#3" ),
+    array( 'tremolo' => '-9', 'diatonic' => '-8', 'chromatic' => '-9', 'note' => "D3" ),
+    array( 'tremolo' => '-', 'diatonic' => '8/', 'chromatic' => '-9s', 'note' => "D#3" ),
+    array( 'tremolo' => '10', 'diatonic' => '8', 'chromatic' => '10', 'note' => "E3" ),
+    array( 'tremolo' => '-10', 'diatonic' => '-9', 'chromatic' => '-10', 'note' => "F3" ),
+    array( 'tremolo' => '', 'diatonic' => '9/', 'chromatic' => '-10s', 'note' => "F#3" ),
+    array( 'tremolo' => '11', 'diatonic' => '9', 'chromatic' => '11', 'note' => "G3" ),
+    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '11s', 'note' => "G#3" ),
+    array( 'tremolo' => '-11', 'diatonic' => '-10', 'chromatic' => '-11', 'note' => "A3" ),
+    array( 'tremolo' => '-', 'diatonic' => '10//', 'chromatic' => '-11s', 'note' => "A#3" ),
+    array( 'tremolo' => '-12', 'diatonic' => '10/', 'chromatic' => '-12', 'note' => "B3" ),
+    array( 'tremolo' => '12', 'diatonic' => '10', 'chromatic' => '12', 'note' => "C4" ),
+    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '12s', 'note' => "C#4" ),
+  );
+
+  /**
    * In monospace mode.
    * As long as true, lines are not analyzed, just printed out.
    *
@@ -619,53 +690,100 @@ class ChordPress_Renderer {
             <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 5);\">+</button>
           </div>
         </div>";
+
       if (!$this->hideTranspose) {
         $interactionForm .= "<div class='cpress-col' style='display: inline-block;'>";
-        if ($this->showNumericTranspose) {
+
+        if (!$this->harmonica) {
           //
-          // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
+          // Guitar chords
           //
-          if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
-            $songKey = "'" . $this->arrDirectives['key'] . "'";
-            $initialText = '0 (' . $this->arrDirectives['key'] . ')';
+          if ($this->showNumericTranspose && !$this->harmonica) {
+            //
+            // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
+            //
+            if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
+              $songKey = "'" . $this->arrDirectives['key'] . "'";
+              $initialText = '0 (' . $this->arrDirectives['key'] . ')';
+            } else {
+              $songKey = "''";
+              $initialText = '0';
+            }
+            $interactionForm .= __('Transpose', 'chordpress') . "<br>
+              <div class='cpress-btn-group' role='group'>
+                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'down', " . $songKey . ");\">-</button>
+                <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'reset', " . $songKey . ");\" value='0'>" . $initialText . "</button>
+                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'up', " . $songKey . ");\">+</button>
+              </div>";
           } else {
-            $songKey = "''";
-            $initialText = '0';
+            //
+            // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
+            //
+            if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
+              $i = 0;
+              foreach ($this->arrTransposeValues[$this->arrDirectives['key']] as $val) {
+                $tvalues[] = (string)$i . ' => ' . $val;
+                $i++;
+              }
+            } else {
+              $tvalues = array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11' );
+            }
+            $interactionForm .= __('Transpose', 'chordpress') . "
+              <div class=\"float-right\">
+                <select class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\" id=\"selTranspose-%cpressID%\" onchange=\"transposeChords('%cpressID%', 'selTranspose-');return false;\" title=\"" . __('Only works for international key names', 'chordpress') . ".\">
+                  <option value=\"0\">" . $tvalues[0] . "</option>
+                  <option value=\"1\">" . $tvalues[1] . "</option>
+                  <option value=\"2\">" . $tvalues[2] . "</option>
+                  <option value=\"3\">" . $tvalues[3] . "</option>
+                  <option value=\"4\">" . $tvalues[4] . "</option>
+                  <option value=\"5\">" . $tvalues[5] . "</option>
+                  <option value=\"6\">" . $tvalues[6] . "</option>
+                  <option value=\"7\">" . $tvalues[7] . "</option>
+                  <option value=\"8\">" . $tvalues[8] . "</option>
+                  <option value=\"9\">" . $tvalues[9] . "</option>
+                  <option value=\"10\">" . $tvalues[10] . "</option>
+                  <option value=\"11\">" . $tvalues[11] . "</option>
+                </select>
+              </div>";
           }
-          $interactionForm .= __('Transpose', 'chordpress') . "<br>
-            <div class='cpress-btn-group' role='group'>
-              <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'down', " . $songKey . ");\">-</button>
-              <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'reset', " . $songKey . ");\" value='0'>" . $initialText . "</button>
-              <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'up', " . $songKey . ");\">+</button>
-            </div>";
         } else {
           //
-          // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
+          // Harmonica notes
           //
-          if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
-            $i = 0;
-            foreach ($this->arrTransposeValues[$this->arrDirectives['key']] as $val) {
-              $tvalues[] = (string)$i . ' => ' . $val;
-              $i++;
-            }
-          } else {
-            $tvalues = array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11' );
+          switch ($this->harmonica) {
+            case 'tremolo':
+              $selectedDiatonic = '';
+              $selectedChromatic = '';
+              $selectedTremolo = ' selected';
+              break;
+            case 'diatonic':
+              $selectedDiatonic = ' selected';
+              $selectedChromatic = '';
+              $selectedTremolo = '';
+              break;
+            case 'chromatic':
+              $selectedDiatonic = '';
+              $selectedChromatic = ' selected';
+              $selectedTremolo = '';
+              break;
+            default:
+              $selectedDiatonic = '';
+              $selectedChromatic = '';
+              $selectedTremolo = '';
+              break;
           }
-          $interactionForm .= __('Transpose', 'chordpress') . "
-            <div class=\"float-right\">
-              <select class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\" id=\"selTranspose-%cpressID%\" onchange=\"transposeChords('%cpressID%', 'selTranspose-');return false;\" title=\"" . __('Only works for international key names', 'chordpress') . ".\">
-                <option value=\"0\">" . $tvalues[0] . "</option>
-                <option value=\"1\">" . $tvalues[1] . "</option>
-                <option value=\"2\">" . $tvalues[2] . "</option>
-                <option value=\"3\">" . $tvalues[3] . "</option>
-                <option value=\"4\">" . $tvalues[4] . "</option>
-                <option value=\"5\">" . $tvalues[5] . "</option>
-                <option value=\"6\">" . $tvalues[6] . "</option>
-                <option value=\"7\">" . $tvalues[7] . "</option>
-                <option value=\"8\">" . $tvalues[8] . "</option>
-                <option value=\"9\">" . $tvalues[9] . "</option>
-                <option value=\"10\">" . $tvalues[10] . "</option>
-                <option value=\"11\">" . $tvalues[11] . "</option>
+
+          $interactionForm .= __('Harmonica', 'chordpress') . "<br>
+            <div class=\"float-left\">
+              <select
+                class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\"
+                id=\"selTranspose-%cpressID%\"
+                onchange=\"transposeHarmonica('%cpressID%', 'selTranspose-', this.value);return false;\"
+                title=\"" . __('Only works when using harmonica notation', 'chordpress') . ".\"
+              >
+                <option value=\"diatonic\" " . $selectedDiatonic . ">" . __('Diatonic', 'chordpress') . "</option>
+                <option value=\"chromatic\" " . $selectedChromatic . ">" . __('Chromatic', 'chordpress') . "</option>
+                <option value=\"tremolo\" " . $selectedTremolo . ">" . __('Tremolo', 'chordpress') . "</option>
               </select>
             </div>";
         }
@@ -734,18 +852,14 @@ class ChordPress_Renderer {
      * Go through each line and process it
      */
     $this->inMonospace = false;
-//        $this->C->dnd($text, false);
     foreach ($text as $line) {
       if ($this->inMonospace && strpos($line, "{end_of_monospace}") === false) {
         $returnText .= $line;
       } else {
-//                $this->C->dnd("IN: " . $line, false);
         $returnText .= $this->formatAndDisplayLine($line);
-//                $this->C->dnd("OUT: " . $returnText, false);
       }
     }
     $returnText = str_replace('%cpressID%', $cpressID, $returnText);
-//        $this->C->dnd($returnText, false);
 
     /**
      * End of ChordPress song
@@ -791,8 +905,7 @@ class ChordPress_Renderer {
    * @return string - Formatted HTML.
    * @since 1.0.0
    */
-  public
-  function formatAndDisplayLine($line) {
+  public function formatAndDisplayLine($line) {
     $returnText = "";
 
     /**
@@ -928,50 +1041,72 @@ class ChordPress_Renderer {
 
           if (strlen(trim($arrChords[$i])) > 0) {
 
-            $returnText .= "<div class=\"chord chord-hidable-%cpressID% key-%cpressID%-0\"><span class=\"chordshort\">";
+            if (!$this->harmonica) {
+              $returnText .= "<div class=\"chord chord-hidable-%cpressID% key-%cpressID%-0\"><span class=\"chordshort\">";
+            } else {
+              $this->harmonica = strtolower($this->harmonica);
+              $returnText .= "<div class=\"chord chord-hidable-%cpressID% key-%cpressID%-" . $this->harmonica . "\"><span class=\"chordshort\">";
+            }
 
             /**
              * Allow chords starting with allowed prefixes as chord placeholders. Just return the string.
              * Att: ... will end up as &ellip; . Use blanks between each dot.
              */
             if (in_array($arrChords[$i][0], $this->allowedChordPrefixes)) {
-              $returnText .= $arrChords[$i];
+              $theChord = $arrChords[$i];
             } else {
               $theChord = $this->formatChord($arrChords[$i]);
               $this->allChords[] = $theChord;
-              $returnText .= $theChord;
             }
 
-            $returnText .= "</span>&nbsp;</div>\n";
+            $returnText .= $theChord . "</span>&nbsp;</div>\n";
 
-            /**
-             * Prepare all other 11 transposed versions of the chord
-             * but hide them. They need to be on the page for interactive
-             * mode to show/hide them via Javascript.
-             * But do not mark empty chord divs as hidable. They need to stay.
-             */
-            $returnText .= "\n";
-            $tempTranspose = $this->getTranspose();
-
-            for ($t = 1; $t <= 11; $t++) {
-              $this->setTranspose($t);
+            if (!$this->harmonica) {
               /**
-               * Allow chords starting with a special characters, e.g. ~ as chord placeholders.
-               * Just return the string.
+               * Prepare all other 11 transposed versions of the chord
+               * but hide them. They need to be on the page for interactive
+               * mode to show/hide them via Javascript.
+               * But do not mark empty chord divs as hidable. They need to stay.
                */
-              if (in_array($arrChords[$i][0], $this->allowedChordPrefixes)) {
-                $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none"><span class="chordshort">' . $arrChords[$i] . '</span>&nbsp;</div>';
-                $returnText .= "\n";
-              } else {
+              $returnText .= "\n";
+              $tempTranspose = $this->getTranspose();
+
+              for ($t = 1; $t <= 11; $t++) {
+                $this->setTranspose($t);
                 /**
-                 * This is a real chord.
+                 * Allow chords starting with a special characters, e.g. ~ as chord placeholders.
+                 * Just return the string.
                  */
-                $theChord = $this->formatChord($arrChords[$i]);
-                $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none"><span class="chordshort">' . $theChord . '</span>&nbsp;</div>';
+                if (in_array($arrChords[$i][0], $this->allowedChordPrefixes)) {
+                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none"><span class="chordshort">' . $arrChords[$i] . '</span>&nbsp;</div>';
+                  $returnText .= "\n";
+                } else {
+                  /**
+                   * This is a real chord.
+                   */
+                  $theChord = $this->formatChord($arrChords[$i]);
+                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none"><span class="chordshort">' . $theChord . '</span>&nbsp;</div>';
+                }
+              }
+
+              $this->setTranspose($tempTranspose);
+
+            } else {
+              /**
+               * Prepare all other version of the harmonica note.
+               * They need to be on the page for interactive mode to show/hide them via Javascript.
+               * But do not mark empty chord divs as hidable. They need to stay.
+               */
+              $returnText .= "\n";
+              foreach ($this->harmonicaTypes as $type) {
+                if ($type !== $this->harmonica) {
+//                  $this->dnd($theChord . "|" . $this->harmonica . "|" . $type . ": " . $this->translateHarmonicaNote($theChord, $this->harmonica, $type, false));
+                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $type . '" style="display:none"><span class="chordshort">' . $this->translateHarmonicaNote($theChord, $this->harmonica, $type) . '</span>&nbsp;</div>';
+                  $returnText .= "\n";
+                }
+                $returnText .= "\n";
               }
             }
-
-            $this->setTranspose($tempTranspose);
 
             /**
              * Now add the lyrics for this section.
@@ -1044,8 +1179,7 @@ class ChordPress_Renderer {
    * @return string - Stripped text.
    * @since 1.0.0
    */
-  private
-  function stripTags($string) {
+  private function stripTags($string) {
     $retString = "";
     $isVisible = true;
     for ($i = 0; $i < strlen($string); $i++) {
@@ -1073,8 +1207,7 @@ class ChordPress_Renderer {
    * @return string - Uppercase note string.
    * @since 1.0.0
    */
-  public
-  function formatChord($ch) {
+  public function formatChord($ch) {
     $useFlats = false;
     if (strlen($ch) == 0) return '';
 
@@ -1142,8 +1275,7 @@ class ChordPress_Renderer {
    * @return string - Formatted remainder.
    * @since 1.0.0
    */
-  public
-  function formatRemainder($remainder) {
+  public function formatRemainder($remainder) {
     $indexOfSlash = strpos($remainder, '/');
     if ($indexOfSlash === false) return $remainder;
 
@@ -1212,8 +1344,7 @@ class ChordPress_Renderer {
    * @return integer
    * @since 1.0.0
    */
-  public
-  function noteToNumber($n) {
+  public function noteToNumber($n) {
     $regularNotation = array(
       'A' => 0,
       'B' => 2,
@@ -1263,8 +1394,7 @@ class ChordPress_Renderer {
    * @return string
    * @since 1.0.0
    */
-  public
-  function numberToNote($n, $useFlats = false) {
+  public function numberToNote($n, $useFlats = false) {
     $retVal = '';
 
     switch ($n) {
@@ -1323,6 +1453,111 @@ class ChordPress_Renderer {
 
   /**
    * --------------------------------------------------------------------------
+   * Translate Harmonica Note.
+   * --------------------------------------------------------------------------
+   *
+   * Translates a given harmonica note and source type to the given target type.
+   *
+   * @param string $note - Harmonica note to translate
+   * @param string $from - Source harmonica type
+   * @param string $to   - Target harmonica type
+   *
+   * @return string
+   * @since 3.8.0
+   */
+  public function translateHarmonicaNote($note, $from, $to) {
+
+    $from = strtolower($from);
+    $to = strtolower($to);
+    $note = strtolower($note);
+    $translatedNote = '';
+
+    if ($from === $to) return $note;
+    if (!in_array($from, $this->harmonicaTypes) || !in_array($to, $this->harmonicaTypes)) return false;
+
+    switch ($from) {
+
+      case 'tremolo':
+
+        $fromNotes = array_filter($this->harmonicaNotes, function ($item) use ($note) {
+          return isset($item['tremolo']) && $item['tremolo'] === $note;
+        });
+        if (!count($fromNotes)) return '-'; // The original note is not in the harmonica notes array.
+
+        switch ($to) {
+          case 'diatonic':
+            $toValues = array_map(function ($item) {
+              return $item['diatonic'];
+            }, $fromNotes);
+            $translatedNote = reset($toValues);
+            break;
+
+          default: // case 'chromatic'
+            $toValues = array_map(function ($item) {
+              return $item['chromatic'];
+            }, $fromNotes);
+            $translatedNote = reset($toValues);
+            break;
+
+        }
+        break;
+
+      case 'diatonic':
+
+        $fromNotes = array_filter($this->harmonicaNotes, function ($item) use ($note) {
+          return isset($item['diatonic']) && $item['diatonic'] === $note;
+        });
+        if (!count($fromNotes)) return '-'; // The original note is not in the harmonica notes array.
+
+        switch ($to) {
+          case 'tremolo':
+            $toValues = array_map(function ($item) {
+              return $item['tremolo'];
+            }, $fromNotes);
+            $translatedNote = reset($toValues);
+            break;
+
+          default: // case 'chromatic'
+            $toValues = array_map(function ($item) {
+              return $item['chromatic'];
+            }, $fromNotes);
+            $translatedNote = reset($toValues);
+            break;
+
+        }
+        break;
+
+      default: // case 'chromatic':
+
+        $fromNotes = array_filter($this->harmonicaNotes, function ($item) use ($note) {
+          return isset($item['chromatic']) && $item['chromatic'] === $note;
+        });
+        if (!count($fromNotes)) return '-'; // The original note is not in the harmonica notes array.
+
+        switch ($to) {
+          case 'diatonic':
+            $toValues = array_map(function ($item) {
+              return $item['diatonic'];
+            }, $fromNotes);
+            $translatedNote = reset($toValues);
+            break;
+
+          default: // case 'tremolo'
+            $toValues = array_map(function ($item) {
+              return $item['tremolo'];
+            }, $fromNotes);
+            $translatedNote = reset($toValues);
+            break;
+
+        }
+        break;
+    }
+
+    return $translatedNote;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
    * Get Display HB Notation.
    * --------------------------------------------------------------------------
    *
@@ -1331,8 +1566,7 @@ class ChordPress_Renderer {
    * @return boolean
    * @since 1.0.0
    */
-  public
-  function getDisplayHBNotation() {
+  public function getDisplayHBNotation() {
     return $this->displayHBNotation;
   }
 
@@ -1347,8 +1581,7 @@ class ChordPress_Renderer {
    *
    * @since 1.0.0
    */
-  public
-  function setDisplayHBNotation($g) {
+  public function setDisplayHBNotation($g) {
     $this->displayHBNotation = $g;
   }
 
@@ -1362,8 +1595,7 @@ class ChordPress_Renderer {
    * @return string
    * @since 1.0.0
    */
-  public
-  function getFloat() {
+  public function getFloat() {
     return $this->float;
   }
 
@@ -1378,9 +1610,41 @@ class ChordPress_Renderer {
    *
    * @since 1.0.0
    */
-  public
-  function setFloat($f) {
+  public function setFloat($f) {
     $this->float = $f;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Get Harmonica.
+   * --------------------------------------------------------------------------
+   *
+   * Get class variable: harmonica.
+   *
+   * @return string
+   * @since 3.8.0
+   */
+  public function getHarmonica() {
+    return $this->harmonica;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Set Harmonica.
+   * --------------------------------------------------------------------------
+   *
+   * Set class variable: harmonica.
+   *
+   * @param string $g - tremolo/diatonic/chromatic.
+   *
+   * @since 3.8.0
+   */
+  public function setHarmonica($h) {
+    if (in_array(strtolower($h), $this->harmonicaTypes)) {
+      $this->harmonica = strtolower($h);
+    } else {
+      $this->harmonica = false;
+    }
   }
 
   /**
@@ -1393,8 +1657,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 1.0.0
    */
-  public
-  function getHBNotation() {
+  public function getHBNotation() {
     return $this->hbNotation;
   }
 
@@ -1409,8 +1672,7 @@ class ChordPress_Renderer {
    *
    * @since 1.0.0
    */
-  public
-  function setHBNotation($g) {
+  public function setHBNotation($g) {
     $this->hbNotation = $g;
   }
 
@@ -1424,8 +1686,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public
-  function getHideChords() {
+  public function getHideChords() {
     return $this->hideChords;
   }
 
@@ -1440,8 +1701,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public
-  function setHideChords($g) {
+  public function setHideChords($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideChords = true;
     } else {
@@ -1459,8 +1719,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public
-  function getHideComments() {
+  public function getHideComments() {
     return $this->hideComments;
   }
 
@@ -1475,8 +1734,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public
-  function setHideComments($g) {
+  public function setHideComments($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideComments = 1;
     } else {
@@ -1494,8 +1752,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public
-  function getHideComposer() {
+  public function getHideComposer() {
     return $this->hideComposer;
   }
 
@@ -1510,8 +1767,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public
-  function setHideComposer($g) {
+  public function setHideComposer($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideComposer = 1;
     } else {
@@ -1529,8 +1785,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public
-  function getHidePrint() {
+  public function getHidePrint() {
     return $this->hidePrint;
   }
 
@@ -1545,8 +1800,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public
-  function setHidePrint($g) {
+  public function setHidePrint($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hidePrint = 1;
     } else {
@@ -1564,8 +1818,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public
-  function getHideSubtitle() {
+  public function getHideSubtitle() {
     return $this->hideSubtitle;
   }
 
@@ -1580,8 +1833,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public
-  function setHideSubtitle($g) {
+  public function setHideSubtitle($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideSubtitle = 1;
     } else {
@@ -1599,8 +1851,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public
-  function getHideTitle() {
+  public function getHideTitle() {
     return $this->hideTitle;
   }
 
@@ -1615,8 +1866,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public
-  function setHideTitle($g) {
+  public function setHideTitle($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideTitle = 1;
     } else {
@@ -1634,8 +1884,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public
-  function getHideTranspose() {
+  public function getHideTranspose() {
     return $this->hideTranspose;
   }
 
@@ -1650,8 +1899,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public
-  function setHideTranspose($g) {
+  public function setHideTranspose($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideTranspose = 1;
     } else {
@@ -1669,8 +1917,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.6.0
    */
-  public
-  function getNumericTranspose() {
+  public function getNumericTranspose() {
     return $this->showNumericTranspose;
   }
 
@@ -1685,8 +1932,7 @@ class ChordPress_Renderer {
    *
    * @since 3.6.0
    */
-  public
-  function setNumericTranspose($g) {
+  public function setNumericTranspose($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->showNumericTranspose = 1;
     } else {
@@ -1704,8 +1950,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.6.0
    */
-  public
-  function getFixedInteraction() {
+  public function getFixedInteraction() {
     return $this->fixedInteraction;
   }
 
@@ -1720,8 +1965,7 @@ class ChordPress_Renderer {
    *
    * @since 3.6.0
    */
-  public
-  function setFixedInteraction($g) {
+  public function setFixedInteraction($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->fixedInteraction = 1;
     } else {
@@ -1739,8 +1983,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public
-  function getHideYear() {
+  public function getHideYear() {
     return $this->hideYear;
   }
 
@@ -1755,8 +1998,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public
-  function setHideYear($g) {
+  public function setHideYear($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideYear = 1;
     } else {
@@ -1774,8 +2016,7 @@ class ChordPress_Renderer {
    * @return string - yes/no.
    * @since 1.0.0
    */
-  public
-  function getInteractive() {
+  public function getInteractive() {
     return $this->interactive;
   }
 
@@ -1790,8 +2031,7 @@ class ChordPress_Renderer {
    *
    * @since 1.0.0
    */
-  public
-  function setInteractive($i) {
+  public function setInteractive($i) {
     $this->interactive = $i;
   }
 
@@ -1805,8 +2045,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public
-  function getShowChordSheet() {
+  public function getShowChordSheet() {
     return $this->showChordSheet;
   }
 
@@ -1821,8 +2060,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public
-  function setShowChordSheet($g) {
+  public function setShowChordSheet($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->showChordSheet = 1;
     } else {
@@ -1840,8 +2078,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public
-  function getShowChordSheetOnTop() {
+  public function getShowChordSheetOnTop() {
     return $this->showChordSheetOnTop;
   }
 
@@ -1856,8 +2093,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public
-  function setShowChordSheetOnTop($g) {
+  public function setShowChordSheetOnTop($g) {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->showChordSheetOnTop = 1;
     } else {
@@ -1875,8 +2111,7 @@ class ChordPress_Renderer {
    * @return integer
    * @since 1.0.0
    */
-  public
-  function getTranspose() {
+  public function getTranspose() {
     return $this->transpose;
   }
 
@@ -1891,8 +2126,7 @@ class ChordPress_Renderer {
    *
    * @since 1.0.0
    */
-  public
-  function setTranspose($t) {
+  public function setTranspose($t) {
     $this->transpose = $t;
   }
 
@@ -1907,8 +2141,7 @@ class ChordPress_Renderer {
    *
    * @return integer - Post ID or NULL
    */
-  private
-  function find_guitar_chord_post($shortname) {
+  private function find_guitar_chord_post($shortname) {
     $query_args = array(
       'posts_per_page' => 1,
       'post_type' => 'guitar_chord',
@@ -1935,8 +2168,7 @@ class ChordPress_Renderer {
    *
    * @return void
    */
-  private
-  function load_guitar_chord($postid) {
+  private function load_guitar_chord($postid) {
     $my_chord = array();
     $post = get_post($postid);
 
@@ -2019,8 +2251,7 @@ class ChordPress_Renderer {
    *
    * @return false|string
    */
-  private
-  function random_string($alphaonly = false, $length = 15) {
+  private function random_string($alphaonly = false, $length = 15) {
     if ($alphaonly) {
       return substr(str_shuffle(str_repeat($x = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     } else {
@@ -2039,8 +2270,7 @@ class ChordPress_Renderer {
    * @return string
    * @since 3.2.0
    */
-  private
-  function dnd($a, $die = true) {
+  private function dnd($a, $die = true) {
     $dump = highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
     if ($die) die($dump);
     else return $dump;

@@ -1,4 +1,4 @@
-# Copyright (C) 2024 George Lewe
+# Copyright (C) 2025 George Lewe
 # This file is distributed under the same license as the Lewe ChordPress plugin.
 msgid ""
 msgstr ""
@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2024-12-10T09:15:07+01:00\n"
+"POT-Creation-Date: 2025-01-23T19:34:27+01:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: chordpress\n"
@@ -1239,79 +1239,99 @@ msgstr ""
 msgid "Please contact the administrator to register this domain or obtain a valid license."
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:615
+#: includes/class-chordpress-renderer.php:686
 msgid "Font"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:635
-#: includes/class-chordpress-renderer.php:654
+#: includes/class-chordpress-renderer.php:712
+#: includes/class-chordpress-renderer.php:731
 msgid "Transpose"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:656
+#: includes/class-chordpress-renderer.php:733
 msgid "Only works for international key names"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:676
+#: includes/class-chordpress-renderer.php:776
+msgid "Harmonica"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:782
+msgid "Only works when using harmonica notation"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:784
+msgid "Diatonic"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:785
+msgid "Chromatic"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:786
+msgid "Tremolo"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:794
 msgid "Print"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:712
+#: includes/class-chordpress-renderer.php:830
 msgid "Composer"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:713
+#: includes/class-chordpress-renderer.php:831
 msgid "Artist"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:714
+#: includes/class-chordpress-renderer.php:832
 msgid "Year"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:715
+#: includes/class-chordpress-renderer.php:833
 msgid "Album"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:718
+#: includes/class-chordpress-renderer.php:836
 msgid "Key (original)"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:719
+#: includes/class-chordpress-renderer.php:837
 msgid "Key (transposed)"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:726
+#: includes/class-chordpress-renderer.php:844
 msgid "Time"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:727
+#: includes/class-chordpress-renderer.php:845
 msgid "Tempo"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:728
+#: includes/class-chordpress-renderer.php:846
 msgid "Capo"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:762
+#: includes/class-chordpress-renderer.php:876
 msgid "These known chords are used in this song"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:881
+#: includes/class-chordpress-renderer.php:994
 msgid "Missing square bracket in line"
 msgstr ""
 
-#: public/class-chordpress-public.php:248
+#: public/class-chordpress-public.php:250
 msgid "ChordPress Warning"
 msgstr ""
 
-#: public/class-chordpress-public.php:249
+#: public/class-chordpress-public.php:251
 msgid "There is no chord record with the ID "
 msgstr ""
 
-#: public/class-chordpress-public.php:249
+#: public/class-chordpress-public.php:251
 msgid "Please check your input or create a proper post for this chord first."
 msgstr ""
 
-#: public/class-chordpress-public.php:263
+#: public/class-chordpress-public.php:265
 msgid "No Title"
 msgstr ""
