@@ -38,6 +38,8 @@ if (get_option($pname . '_checkbox_uninstall_delete_options')) {
     $pname . '_checkbox_hide_chords',
     $pname . '_checkbox_hide_comments',
     $pname . '_checkbox_hide_composer',
+    $pname . '_checkbox_hide_fontsize',
+    $pname . '_checkbox_hide_key',
     $pname . '_checkbox_hide_print',
     $pname . '_checkbox_hide_subtitle',
     $pname . '_checkbox_hide_title',

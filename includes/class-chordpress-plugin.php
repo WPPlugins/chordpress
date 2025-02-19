@@ -136,6 +136,7 @@ class ChordPress_Plugin {
       $this->plugin_name . '_checkbox_hide_chords',
       $this->plugin_name . '_checkbox_hide_comments',
       $this->plugin_name . '_checkbox_hide_composer',
+      $this->plugin_name . '_checkbox_hide_fontsize',
       $this->plugin_name . '_checkbox_hide_key',
       $this->plugin_name . '_checkbox_hide_print',
       $this->plugin_name . '_checkbox_hide_subtitle',

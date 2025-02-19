@@ -138,6 +138,15 @@ class ChordPress_Renderer {
   private $hideTitle;
 
   /**
+   * Hide font size form element.
+   *
+   * @since    3.8.1
+   * @access   private
+   * @var      boolean $hideFontsize Hide fontsize form element
+   */
+  private $hideFontsize;
+
+  /**
    * Hide transpose button.
    *
    * @since    1.0.0
@@ -537,6 +546,7 @@ class ChordPress_Renderer {
     if (!$this->hidePrint = get_option('chordpress_checkbox_hide_print')) $this->hidePrint = 0;
     if (!$this->hideSubtitle = get_option('chordpress_checkbox_hide_subtitle')) $this->hideSubtitle = 0;
     if (!$this->hideTitle = get_option('chordpress_checkbox_hide_title')) $this->hideTitle = 0;
+    if (!$this->hideFontsize = get_option('chordpress_checkbox_hide_fontsize')) $this->hideFontsize = 0;
     if (!$this->hideTranspose = get_option('chordpress_checkbox_hide_transpose')) $this->hideTranspose = 0;
     if (!$this->hideYear = get_option('chordpress_checkbox_hide_year')) $this->hideYear = 0;
     if (!$this->displayHBNotation = get_option('chordpress_checkbox_hb_notation')) $this->displayHBNotation = 0;
@@ -683,13 +693,16 @@ class ChordPress_Renderer {
         $interactionForm .= " fixed";
       }
       $interactionForm .= "\">";
-      $interactionForm .= "<div class='cpress-col cpress-pl-0'>" . __('Font', 'chordpress') . "<br>
+
+      if (!$this->hideFontsize) {
+        $interactionForm .= "<div class='cpress-col cpress-pl-0'>" . __('Font', 'chordpress') . "<br>
           <div class='cpress-btn-group' role='group'>
             <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', -5);\">-</button>
             <button id=\"btnFontSize-%cpressID%\"  type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 0);\">100%</button>
             <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 5);\">+</button>
           </div>
         </div>";
+      }
 
       if (!$this->hideTranspose) {
         $interactionForm .= "<div class='cpress-col' style='display: inline-block;'>";
@@ -1871,6 +1884,39 @@ class ChordPress_Renderer {
       $this->hideTitle = 1;
     } else {
       $this->hideTitle = 0;
+    }
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Get Hide Fontsize.
+   * --------------------------------------------------------------------------
+   *
+   * Get class variable: hideFontsize.
+   *
+   * @return string -yes/no.
+   * @since 3.8.1
+   */
+  public function getFontsize() {
+    return $this->hideFontsize;
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Set Hide Fontsize.
+   * --------------------------------------------------------------------------
+   *
+   * Set class variable: hideFontsize.
+   *
+   * @param string $g - yes/no.
+   *
+   * @since 3.8.1
+   */
+  public function setHideFontsize($g) {
+    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+      $this->hideFontsize = 1;
+    } else {
+      $this->hideFontsize = 0;
     }
   }
 

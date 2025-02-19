@@ -151,6 +151,7 @@ class ChordPress_Public {
       if (isset($atts['hidesubtitle'])) $CPR->setHideSubtitle($atts['hidesubtitle']);
       if (isset($atts['hidetitle'])) $CPR->setHideTitle($atts['hidetitle']);
       if (isset($atts['hideyear'])) $CPR->setHideYear($atts['hideyear']);
+      if (isset($atts['hidefontsize'])) $CPR->setHideFontsize($atts['hidefontsize']);
       if (isset($atts['hidetranspose'])) $CPR->setHideTranspose($atts['hidetranspose']);
       if (isset($atts['hideprint'])) $CPR->setHidePrint($atts['hideprint']);
       if (isset($atts['showchordsheet'])) $CPR->setShowChordSheet($atts['showchordsheet']);

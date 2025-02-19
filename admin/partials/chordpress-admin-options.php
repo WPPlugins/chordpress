@@ -360,6 +360,13 @@ if ($show_alert) {
               </td>
             </tr>
             <tr>
+              <th scope="row"><?php echo esc_html(__('Hide Font Size', 'chordpress')); ?></th>
+              <td>
+                <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_fontsize' name='<?php echo $pname; ?>_checkbox_hide_fontsize' <?php checked(get_option($pname . '_checkbox_hide_fontsize'), 1); ?> value='1'>
+                <p class="description"><?php echo esc_html(__('With this option selected, the font size form element will be hidden in interactive mode. You can overwrite this setting per shortcut with "hidefontsize=yes/no"', 'chordpress')); ?>.</p>
+              </td>
+            </tr>
+            <tr>
               <th scope="row"><?php echo esc_html(__('Hide Transpose', 'chordpress')); ?></th>
               <td>
                 <input type='checkbox' id='<?php echo $pname; ?>_checkbox_hide_transpose' name='<?php echo $pname; ?>_checkbox_hide_transpose' <?php checked(get_option($pname . '_checkbox_hide_transpose'), 1); ?> value='1'>
