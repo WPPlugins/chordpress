@@ -98,7 +98,7 @@ function transposeChords(cpressId, formControlId, direction, baseKey) {
       if (x > 0) {
         x--;
       } else {
-        x = 0;
+        x = 11;
       }
     } else if (direction === 'reset') {
       x = 0;
@@ -137,6 +137,125 @@ function transposeChords(cpressId, formControlId, direction, baseKey) {
 
 /**
  * ----------------------------------------------------------------------------
+ * Transposes Chromatic.
+ * ----------------------------------------------------------------------------
+ *
+ * This function hides all chromatic note divs, then shows those for the given
+ * transpose value.
+ *
+ * @since 3.8.3
+ */
+function transposeChromatic(cpressId, formControlId, direction, baseNote) {
+
+  const arrTransposeValues = {
+    '1': ['1', '1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4'],
+    '1s': ['1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4' ],
+    '-1': ['-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s' ],
+    '-1s': ['-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5' ],
+    '2': ['2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s' ],
+    '-2': ['-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6' ],
+    '-2s': ['-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6' ],
+    '3': ['3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s' ],
+    '3s': ['3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7' ],
+    '-3': ['-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s' ],
+    '-3s': ['-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7' ],
+    '-4': ['-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s' ],
+    '4': ['4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8' ],
+    '4s': ['4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8' ],
+    '-5': ['-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9' ],
+    '-5s': ['-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s' ],
+    '6': ['6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9' ],
+    '-6': ['-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s' ],
+    '-6s': ['-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10' ],
+    '7': ['7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10' ],
+    '7s': ['7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s' ],
+    '-7': ['-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11' ],
+    '-7s': ['-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s' ],
+    '-8': ['-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11' ],
+    '8': ['8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s' ],
+    '9': ['9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12' ],
+    '9s': ['9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12' ],
+    '-9': ['-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s' ],
+    '-9s': ['-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ' ],
+    '10': ['10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ' ],
+    '-10': ['-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ' ],
+    '-10s': ['-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ' ],
+    '11': ['11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ' ],
+    '11s': ['11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '-11': ['-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '-11s': ['-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '-12': ['-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '12': ['12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '12s': ['12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+  };
+
+  let transposeElementId = "selTranspose-" + cpressId;
+  if (formControlId) {
+    transposeElementId = formControlId + cpressId;
+  }
+  // console.log(">>> transposeElementId: " + transposeElementId);
+
+  /**
+   * Get value from transpose form element
+   */
+  var x = document.getElementById(transposeElementId).value;
+  // console.log(">>> direction: " + direction);
+  if (direction) {
+    if (direction === 'up') {
+      if (x < 11) {
+        x++;
+      } else {
+        x = 0;
+      }
+    } else if (direction === 'down') {
+      if (x > 0) {
+        x--;
+      } else {
+        x = 11;
+      }
+    } else if (direction === 'reset') {
+      x = 0;
+    }
+  }
+
+  /**
+   * Hide all hidable chords
+   */
+  var divsToHide = document.getElementsByClassName("chord-hidable-" + cpressId);
+  // console.log(">>> divsToHide" + divsToHide);
+  for (var i = 0; i < divsToHide.length; i++) {
+    divsToHide[i].style.display = "none";
+  }
+
+  /**
+   * Now show those for the selected transpose value
+   */
+  var divsToShow = document.getElementsByClassName("key-" + cpressId + '-chromatic-' + x);
+  if (x === 0) {
+    divsToShow = document.getElementsByClassName("key-" + cpressId + '-chromatic');
+  }
+  // console.log(">>> divsToShow[0]" + divsToShow[0]);
+
+  for (var j = 0; j < divsToShow.length; j++) {
+    divsToShow[j].style.display = "";
+  }
+
+  /**
+   * Change value and text of the transpose button
+   */
+  if (formControlId === 'btnTranspose-') {
+    var btn = document.getElementById(transposeElementId);
+    btn.value = x;
+    if (baseNote !== '') {
+      btn.innerText = x + ' (' + arrTransposeValues[baseNote][x] + ')';
+    } else {
+      btn.innerText = x;
+    }
+  }
+}
+
+/**
+ * ----------------------------------------------------------------------------
  * Transposes Harmonica.
  * ----------------------------------------------------------------------------
  *
@@ -146,6 +265,16 @@ function transposeChords(cpressId, formControlId, direction, baseKey) {
  * @since 3.8.0
  */
 function transposeHarmonica(cpressId, formControlId, harmonicaType) {
+
+  /**
+   * Hide/show the transpose button if harmonica type id no chromatic.
+   */
+  const transposeButton = document.getElementById('btnTranspose-chromatic');
+  if (harmonicaType === 'chromatic') {
+    transposeButton.style.display = "";
+  } else {
+    transposeButton.style.display = "none";
+  }
 
   /**
    * Hide all hidable chords
@@ -159,8 +288,8 @@ function transposeHarmonica(cpressId, formControlId, harmonicaType) {
    * Now show those for the selected harmonica type
    */
   var divsToShow = document.getElementsByClassName("key-" + cpressId + '-' + harmonicaType);
-  for (var i = 0; i < divsToShow.length; i++) {
-    divsToShow[i].style.display = "";
+  for (var j = 0; j < divsToShow.length; j++) {
+    divsToShow[j].style.display = "";
   }
 }
 

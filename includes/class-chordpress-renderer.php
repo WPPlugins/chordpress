@@ -497,6 +497,48 @@ class ChordPress_Renderer {
     array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '12s', 'note' => "C#4" ),
   );
 
+  private $arrChromaticTranspose = array(
+    '1' => ['1', '1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4'],
+    '1s' => ['1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4' ],
+    '-1' => ['-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s' ],
+    '-1s' => ['-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5' ],
+    '2' => ['2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s' ],
+    '-2' => ['-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6' ],
+    '-2s' => ['-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6' ],
+    '3' => ['3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s' ],
+    '3s' => ['3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7' ],
+    '-3' => ['-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s' ],
+    '-3s' => ['-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7' ],
+    '-4' => ['-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s' ],
+    '4' => ['4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8' ],
+    '4s' => ['4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8' ],
+    '-5' => ['-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9' ],
+    '-5s' => ['-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s' ],
+    '6' => ['6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9' ],
+    '-6' => ['-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s' ],
+    '-6s' => ['-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10' ],
+    '7' => ['7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10' ],
+    '7s' => ['7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s' ],
+    '-7' => ['-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11' ],
+    '-7s' => ['-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s' ],
+    '-8' => ['-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11' ],
+    '8' => ['8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s' ],
+    '9' => ['9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12' ],
+    '9s' => ['9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12' ],
+    '-9' => ['-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s' ],
+    '-9s' => ['-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ' ],
+    '10' => ['10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ' ],
+    '-10' => ['-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ' ],
+    '-10s' => ['-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ' ],
+    '11' => ['11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ' ],
+    '11s' => ['11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '-11' => ['-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '-11s' => ['-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '-12' => ['-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '12' => ['12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '12s' => ['12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+  );
+
   /**
    * In monospace mode.
    * As long as true, lines are not analyzed, just printed out.
@@ -786,18 +828,39 @@ class ChordPress_Renderer {
               break;
           }
 
+          $interactionForm .=
+            "<div class='cpress-row'>
+              <div class='cpress-col-2'>";
+
           $interactionForm .= __('Harmonica', 'chordpress') . "<br>
-            <div class=\"float-left\">
-              <select
-                class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\"
-                id=\"selTranspose-%cpressID%\"
-                onchange=\"transposeHarmonica('%cpressID%', 'selTranspose-', this.value);return false;\"
-                title=\"" . __('Only works when using harmonica notation', 'chordpress') . ".\"
-              >
-                <option value=\"diatonic\" " . $selectedDiatonic . ">" . __('Diatonic', 'chordpress') . "</option>
-                <option value=\"chromatic\" " . $selectedChromatic . ">" . __('Chromatic', 'chordpress') . "</option>
-                <option value=\"tremolo\" " . $selectedTremolo . ">" . __('Tremolo', 'chordpress') . "</option>
-              </select>
+            <select
+              class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\"
+              id=\"selTranspose-%cpressID%\"
+              onchange=\"transposeHarmonica('%cpressID%', 'selTranspose-', this.value);return false;\"
+              title=\"" . __('Only works when using harmonica notation', 'chordpress') . ".\"
+            >
+              <option value=\"diatonic\" " . $selectedDiatonic . ">" . __('Diatonic', 'chordpress') . "</option>
+              <option value=\"chromatic\" " . $selectedChromatic . ">" . __('Chromatic', 'chordpress') . "</option>
+              <option value=\"tremolo\" " . $selectedTremolo . ">" . __('Tremolo', 'chordpress') . "</option>
+            </select>";
+
+          $interactionForm .= "
+            </div>
+            <div class='cpress-col-3'>";
+
+          if ($this->harmonica == 'chromatic') {
+            $baseNote = "''";
+            $initialText = '0';
+            $interactionForm .= "<span id='btnTranspose-chromatic'>" . __('Transpose', 'chordpress') . "<br>
+              <div class='cpress-btn-group' role='group'>
+                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'down', " . $baseNote . ");\">-</button>
+                <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'reset', " . $baseNote . ");\" value='0'>" . $initialText . "</button>
+                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'up', " . $baseNote . ");\">+</button>
+              </div>
+              </span>";
+          }
+          $interactionForm .= "
+              </div>
             </div>";
         }
         $interactionForm .= "</div>";
@@ -1119,6 +1182,17 @@ class ChordPress_Renderer {
                 }
                 $returnText .= "\n";
               }
+              /**
+               * If harmonica type is 'chromatic' prepare all transposed values of the harmonica note.
+               * They need to be on the page for interactive mode to show/hide them via Javascript.
+               */
+              if ($this->harmonica == 'chromatic') {
+                for ($t = 1; $t <= 11; $t++) {
+                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-chromatic-' . $t . '" style="display:none"><span class="chordshort">' . $this->transposeChromaticNote($theChord, $t) . '</span>&nbsp;</div>';
+                  $returnText .= "\n";
+                }
+                $returnText .= "\n";
+              }
             }
 
             /**
@@ -1274,6 +1348,45 @@ class ChordPress_Renderer {
      * Return the chord display plus the bass note (if any)
      */
     return $xlatedNote . $this->formatRemainder($rem);
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Format Chromatic Note.
+   * --------------------------------------------------------------------------
+   *
+   * Processes a Chromatic harmonica note and returns the formatted HTML.
+   *
+   * @param string $note - Chromatic note, e.g. "1" or "1s" or "-1" or "-1s".
+   *
+   * @return string - Transposed chromatic note
+   * @since 2.8.0
+   */
+  public function transposeChromaticNote($note, $transpose) {
+    if (strlen($note) == 0) return '';
+    if ($transpose === 0 || $transpose > 11) return $note;
+
+    /**
+     * Find the submitted note in the chromaticNotes array
+     */
+    if (array_key_exists($note, $this->arrChromaticTranspose)) {
+      $noteToTranspose = $this->arrChromaticTranspose[$note];
+      // $noteToTranspose now contains the array object for the submitted note
+    } else {
+      $noteToTranspose = false; // Note not found
+    }
+
+    if ($noteToTranspose !== false) {
+      /**
+       * Value found. Add transpose
+       */
+      return $noteToTranspose[$transpose];
+    } else {
+      /**
+       * Value not found
+       */
+      return $note;
+    }
   }
 
   /**
