@@ -830,11 +830,12 @@ class ChordPress_Renderer {
 
           $interactionForm .=
             "<div class='cpress-row'>
-              <div class='cpress-col-2'>";
+              <div class='cpress-col'>";
 
           $interactionForm .= __('Harmonica', 'chordpress') . "<br>
             <select
               class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\"
+              style=\"max-width: 200px;\"
               id=\"selTranspose-%cpressID%\"
               onchange=\"transposeHarmonica('%cpressID%', 'selTranspose-', this.value);return false;\"
               title=\"" . __('Only works when using harmonica notation', 'chordpress') . ".\"
@@ -846,7 +847,7 @@ class ChordPress_Renderer {
 
           $interactionForm .= "
             </div>
-            <div class='cpress-col-3'>";
+            <div class='cpress-col'>";
 
           if ($this->harmonica == 'chromatic') {
             $baseNote = "''";

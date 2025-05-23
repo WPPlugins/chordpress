@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
 Requires at least: 4.0
 Tested up to: 6.8
-Stable tag: 3.9.0
+Stable tag: 3.9.1
 Requires PHP: 5.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -129,6 +129,10 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.9.1 =
+* 2025-05-23
+* Width adjustment to the harmonica select box
+
 = 3.9.0 =
 * 2025-05-22
 * Added option to transpose chromatic harmonica notes
