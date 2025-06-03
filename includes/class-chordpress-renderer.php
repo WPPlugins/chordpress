@@ -706,24 +706,12 @@ class ChordPress_Renderer {
     /**
      * Start of ChordPress wrapper
      */
+    $cpressStyles = "<style>div.cpress { float: " . $this->float . "; } div.cpress_line { " . $this->lineStyle . "; } div.cpress_line_section { display: inline; float: left; } div.cpress_line_section .chord .chordshort { " . $this->chordStyle . "; } div.cpress_line_section .lyric { " . $this->lyricsStyle . "; } div.cpress_chorus { " . $this->chorusStyle . "; } div.cpress_verse { " . $this->verseStyle . "; } div.cpress_clear { clear: both; } div.cpress_meta { " . $this->metaStyle . "; } div.cpress_interaction { float: right; } div.cpress_interaction select { width: auto; } span.cpress_comment { " . $this->commentStyle . "; } div.cpress_chordsheet { text-align: center; }</style>";
+
     $returnText = "\n\n
       <!--begin: ChordPress SongSheet -->
       <div>
-        <style>
-          div.cpress { float: " . $this->float . "; }
-          div.cpress_line { " . $this->lineStyle . "; }
-          div.cpress_line_section { display: inline; float: left; }
-          div.cpress_line_section .chord .chordshort { " . $this->chordStyle . "; }
-          div.cpress_line_section .lyric { " . $this->lyricsStyle . "; }
-          div.cpress_chorus { " . $this->chorusStyle . "; }
-          div.cpress_verse { " . $this->verseStyle . "; }
-          div.cpress_clear { clear: both; }
-          div.cpress_meta { " . $this->metaStyle . "; }
-          div.cpress_interaction { float: right; }
-          div.cpress_interaction select { width: auto; }
-          span.cpress_comment { " . $this->commentStyle . "; }
-          div.cpress_chordsheet { text-align: center; }
-        </style>
+      " . $cpressStyles . "
       </div>\n";
 
     /**
@@ -868,7 +856,12 @@ class ChordPress_Renderer {
       }
       $interactionForm .= "<div class='cpress-col cpress-pr-0'>";
       if (!$this->hidePrint) {
-        $interactionForm .= "<br><button class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"window.print();\">" . __('Print', 'chordpress') . "</button>\n";
+        $printTitle = 'ChordPress SongSheet';
+        if (strlen($this->arrDirectives['title']) && !$this->hideTitle) {
+          $printTitle = $this->arrDirectives['title'];
+        }
+        $interactionForm .= "<br><button class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"printElement('%cpressID%', '" . $printTitle . "', '" . $cpressStyles . "');\">" . __('Print', 'chordpress') . "</button>\n";
+//        $interactionForm .= "<br><button class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"window.print();\">" . __('Print', 'chordpress') . "</button>\n";
       }
       $interactionForm .= "</div>";
       $returnText .= $interactionForm . "</div>\n";

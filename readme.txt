@@ -129,6 +129,10 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 3.9.2 =
+* 2025-06-02
+* Print button prints song only incl. custom styles
+
 = 3.9.1 =
 * 2025-05-23
 * Width adjustment to the harmonica select box

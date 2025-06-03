@@ -324,6 +324,46 @@ function changeFontSize(elementId, amount) {
 }
 
 /**
+ * ----------------------------------------------------------------------------
+ * Print Element.
+ * ----------------------------------------------------------------------------
+ * Prints the content of a specified HTML element in a new browser window.
+ *
+ * This function retrieves the inner HTML of the specified element by its ID,
+ * opens a new browser window, and writes the content into it. The new window
+ * is styled with basic CSS and given a title, which can be customized via the
+ * `printTitle` parameter. The function also ensures compatibility with older
+ * versions of Internet Explorer by closing and focusing the print window.
+ *
+ * @param {string} elementId - The ID of the HTML element whose content will be printed.
+ * @param {string} [printTitle='ChordPress Song'] - The title of the print window. Defaults to 'ChordPress Song'.
+ *
+ * @since 3.9.2
+ */
+function printElement(elementId, printTitle = 'ChordPress Song', cpressStyles = '') {
+  const content = document.getElementById(elementId).innerHTML;
+  const printWindow = window.open('', '', 'height=600,width=800');
+  printWindow.document.write(`
+    <html>
+      <head>
+        <title>${printTitle}</title>
+        <style>
+          body { font-family: Arial, sans-serif; padding: 20px; }
+        </style>
+        ${cpressStyles}
+      </head>
+      <body>
+        ${content}
+      </body>
+    </html>
+  `);
+  printWindow.document.close(); // Necessary for IE >= 10
+  printWindow.focus();          // Necessary for IE >= 10
+  printWindow.print();
+  printWindow.close();
+}
+
+/**
  * Modal Dialog
  *
  * This code block handles the guitar chord modal dialogs
