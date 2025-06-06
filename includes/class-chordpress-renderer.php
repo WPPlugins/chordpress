@@ -54,7 +54,7 @@ class ChordPress_Renderer {
    * @access   private
    * @var      array $harmonicaTypes Harmonica types.
    */
-  private $harmonicaTypes = array( 'tremolo', 'diatonic', 'chromatic' );
+  private $harmonicaTypes = [ 'tremolo', 'diatonic', 'chromatic' ];
 
   /**
    * Hide album flag.
@@ -498,45 +498,45 @@ class ChordPress_Renderer {
   );
 
   private $arrChromaticTranspose = array(
-    '1' => ['1', '1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4'],
-    '1s' => ['1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4' ],
-    '-1' => ['-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s' ],
-    '-1s' => ['-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5' ],
-    '2' => ['2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s' ],
-    '-2' => ['-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6' ],
-    '-2s' => ['-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6' ],
-    '3' => ['3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s' ],
-    '3s' => ['3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7' ],
-    '-3' => ['-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s' ],
-    '-3s' => ['-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7' ],
-    '-4' => ['-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s' ],
-    '4' => ['4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8' ],
-    '4s' => ['4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8' ],
-    '-5' => ['-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9' ],
-    '-5s' => ['-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s' ],
-    '6' => ['6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9' ],
-    '-6' => ['-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s' ],
-    '-6s' => ['-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10' ],
-    '7' => ['7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10' ],
-    '7s' => ['7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s' ],
-    '-7' => ['-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11' ],
-    '-7s' => ['-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s' ],
-    '-8' => ['-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11' ],
-    '8' => ['8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s' ],
-    '9' => ['9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12' ],
-    '9s' => ['9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12' ],
-    '-9' => ['-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s' ],
-    '-9s' => ['-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ' ],
-    '10' => ['10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ' ],
-    '-10' => ['-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ' ],
-    '-10s' => ['-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ' ],
-    '11' => ['11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ' ],
-    '11s' => ['11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '-11' => ['-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '-11s' => ['-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '-12' => ['-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '12' => ['12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '12s' => ['12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '1' => [ '1', '1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4' ],
+    '1s' => [ '1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4' ],
+    '-1' => [ '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s' ],
+    '-1s' => [ '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5' ],
+    '2' => [ '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s' ],
+    '-2' => [ '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6' ],
+    '-2s' => [ '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6' ],
+    '3' => [ '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s' ],
+    '3s' => [ '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7' ],
+    '-3' => [ '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s' ],
+    '-3s' => [ '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7' ],
+    '-4' => [ '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s' ],
+    '4' => [ '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8' ],
+    '4s' => [ '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8' ],
+    '-5' => [ '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9' ],
+    '-5s' => [ '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s' ],
+    '6' => [ '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9' ],
+    '-6' => [ '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s' ],
+    '-6s' => [ '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10' ],
+    '7' => [ '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10' ],
+    '7s' => [ '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s' ],
+    '-7' => [ '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11' ],
+    '-7s' => [ '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s' ],
+    '-8' => [ '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11' ],
+    '8' => [ '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s' ],
+    '9' => [ '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12' ],
+    '9s' => [ '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12' ],
+    '-9' => [ '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s' ],
+    '-9s' => [ '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ' ],
+    '10' => [ '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ' ],
+    '-10' => [ '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ' ],
+    '-10s' => [ '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ' ],
+    '11' => [ '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ' ],
+    '11s' => [ '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '-11' => [ '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '-11s' => [ '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '-12' => [ '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '12' => [ '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '12s' => [ '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
   );
 
   /**
@@ -557,6 +557,15 @@ class ChordPress_Renderer {
    * @var      array
    */
   private $allowedChordPrefixes = array( '~', '|', '/', '.', '-', '+', '1', '2', '3', '4', '5', '6', '7', '8', '9' );
+
+  /**
+   * Holds the styles for the songsheet
+   *
+   * @since    3.9.3
+   * @access   private
+   * @var      string
+   */
+  private $songsheetStyles = '';
 
   /**
    * --------------------------------------------------------------------------
@@ -615,11 +624,11 @@ class ChordPress_Renderer {
    *
    * Get the ChordPro directives and store the supported ones in an array.
    *
-   * @param object $text - Text inside shortcode wrapper.
+   * @param array $text - Text inside shortcode wrapper in an array (each line is an array element).
    *
    * @since 1.0.0
    */
-  public function getDirectives($text) {
+  public function getDirectives(array $text) {
     foreach ($text as $line) {
       $line = trim($this->stripTags($line));
       if (strlen($line) && $line[0] == '{') {
@@ -697,195 +706,51 @@ class ChordPress_Renderer {
    *    </div>
    * </div>
    *
-   * @param object $text - Text inside shortcode wrapper.
+   * @param array $text - Text inside shortcode wrapper in an array (each line is an array element).
    *
    * @return string - Formatted HTML of the ChordPro text.
    * @since 1.0.0
    */
-  public function displayText($text): string {
+  public function displayText(array $text): string {
     /**
-     * Start of ChordPress wrapper
+     * The styles need to be a one-line string in a separate variable because it is passed to the Javascript print function
      */
-    $cpressStyles = "<style>div.cpress { float: " . $this->float . "; } div.cpress_line { " . $this->lineStyle . "; } div.cpress_line_section { display: inline; float: left; } div.cpress_line_section .chord .chordshort { " . $this->chordStyle . "; } div.cpress_line_section .lyric { " . $this->lyricsStyle . "; } div.cpress_chorus { " . $this->chorusStyle . "; } div.cpress_verse { " . $this->verseStyle . "; } div.cpress_clear { clear: both; } div.cpress_meta { " . $this->metaStyle . "; } div.cpress_interaction { float: right; } div.cpress_interaction select { width: auto; } span.cpress_comment { " . $this->commentStyle . "; } div.cpress_chordsheet { text-align: center; }</style>";
+    $this->songsheetStyles = "<style>div.cpress { float: " . $this->float . "; } div.cpress_line { " . $this->lineStyle . "; } div.cpress_line_section { display: inline; float: left; } div.cpress_line_section .chord .chordshort { " . $this->chordStyle . "; } div.cpress_line_section .lyric { " . $this->lyricsStyle . "; } div.cpress_chorus { " . $this->chorusStyle . "; } div.cpress_verse { " . $this->verseStyle . "; } div.cpress_clear { clear: both; } div.cpress_meta { " . $this->metaStyle . "; } div.cpress_interaction { float: right; } div.cpress_interaction select { width: auto; } span.cpress_comment { " . $this->commentStyle . "; } div.cpress_chordsheet { text-align: center; }</style>";
 
-    $returnText = "\n\n
+    $songsheetHtml = "\n\n
       <!--begin: ChordPress SongSheet -->
       <div>
-      " . $cpressStyles . "
+      " . $this->songsheetStyles . "
       </div>\n";
 
     /**
      * Interaction menu
      */
     if (in_array(strtolower($this->interactive), array( "yes", "1", "true" ))) {
-      $interactionForm = "<div class=\"cpress-interaction cpress-row";
-      if ($this->fixedInteraction) {
-        $interactionForm .= " fixed";
-      }
-      $interactionForm .= "\">";
-
-      if (!$this->hideFontsize) {
-        $interactionForm .= "<div class='cpress-col cpress-pl-0'>" . __('Font', 'chordpress') . "<br>
-          <div class='cpress-btn-group' role='group'>
-            <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', -5);\">-</button>
-            <button id=\"btnFontSize-%cpressID%\"  type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 0);\">100%</button>
-            <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 5);\">+</button>
-          </div>
-        </div>";
-      }
-
-      if (!$this->hideTranspose) {
-        $interactionForm .= "<div class='cpress-col' style='display: inline-block;'>";
-
-        if (!$this->harmonica) {
-          //
-          // Guitar chords
-          //
-          if ($this->showNumericTranspose && !$this->harmonica) {
-            //
-            // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
-            //
-            if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
-              $songKey = "'" . $this->arrDirectives['key'] . "'";
-              $initialText = '0 (' . $this->arrDirectives['key'] . ')';
-            } else {
-              $songKey = "''";
-              $initialText = '0';
-            }
-            $interactionForm .= __('Transpose', 'chordpress') . "<br>
-              <div class='cpress-btn-group' role='group'>
-                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'down', " . $songKey . ");\">-</button>
-                <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'reset', " . $songKey . ");\" value='0'>" . $initialText . "</button>
-                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'up', " . $songKey . ");\">+</button>
-              </div>";
-          } else {
-            //
-            // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
-            //
-            if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
-              $i = 0;
-              foreach ($this->arrTransposeValues[$this->arrDirectives['key']] as $val) {
-                $tvalues[] = (string)$i . ' => ' . $val;
-                $i++;
-              }
-            } else {
-              $tvalues = array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11' );
-            }
-            $interactionForm .= __('Transpose', 'chordpress') . "
-              <div class=\"float-right\">
-                <select class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\" id=\"selTranspose-%cpressID%\" onchange=\"transposeChords('%cpressID%', 'selTranspose-');return false;\" title=\"" . __('Only works for international key names', 'chordpress') . ".\">
-                  <option value=\"0\">" . $tvalues[0] . "</option>
-                  <option value=\"1\">" . $tvalues[1] . "</option>
-                  <option value=\"2\">" . $tvalues[2] . "</option>
-                  <option value=\"3\">" . $tvalues[3] . "</option>
-                  <option value=\"4\">" . $tvalues[4] . "</option>
-                  <option value=\"5\">" . $tvalues[5] . "</option>
-                  <option value=\"6\">" . $tvalues[6] . "</option>
-                  <option value=\"7\">" . $tvalues[7] . "</option>
-                  <option value=\"8\">" . $tvalues[8] . "</option>
-                  <option value=\"9\">" . $tvalues[9] . "</option>
-                  <option value=\"10\">" . $tvalues[10] . "</option>
-                  <option value=\"11\">" . $tvalues[11] . "</option>
-                </select>
-              </div>";
-          }
-        } else {
-          //
-          // Harmonica notes
-          //
-          switch ($this->harmonica) {
-            case 'tremolo':
-              $selectedDiatonic = '';
-              $selectedChromatic = '';
-              $selectedTremolo = ' selected';
-              break;
-            case 'diatonic':
-              $selectedDiatonic = ' selected';
-              $selectedChromatic = '';
-              $selectedTremolo = '';
-              break;
-            case 'chromatic':
-              $selectedDiatonic = '';
-              $selectedChromatic = ' selected';
-              $selectedTremolo = '';
-              break;
-            default:
-              $selectedDiatonic = '';
-              $selectedChromatic = '';
-              $selectedTremolo = '';
-              break;
-          }
-
-          $interactionForm .=
-            "<div class='cpress-row'>
-              <div class='cpress-col'>";
-
-          $interactionForm .= __('Harmonica', 'chordpress') . "<br>
-            <select
-              class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\"
-              style=\"max-width: 200px;\"
-              id=\"selTranspose-%cpressID%\"
-              onchange=\"transposeHarmonica('%cpressID%', 'selTranspose-', this.value);return false;\"
-              title=\"" . __('Only works when using harmonica notation', 'chordpress') . ".\"
-            >
-              <option value=\"diatonic\" " . $selectedDiatonic . ">" . __('Diatonic', 'chordpress') . "</option>
-              <option value=\"chromatic\" " . $selectedChromatic . ">" . __('Chromatic', 'chordpress') . "</option>
-              <option value=\"tremolo\" " . $selectedTremolo . ">" . __('Tremolo', 'chordpress') . "</option>
-            </select>";
-
-          $interactionForm .= "
-            </div>
-            <div class='cpress-col'>";
-
-          if ($this->harmonica == 'chromatic') {
-            $baseNote = "''";
-            $initialText = '0';
-            $interactionForm .= "<span id='btnTranspose-chromatic'>" . __('Transpose', 'chordpress') . "<br>
-              <div class='cpress-btn-group' role='group'>
-                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'down', " . $baseNote . ");\">-</button>
-                <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'reset', " . $baseNote . ");\" value='0'>" . $initialText . "</button>
-                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'up', " . $baseNote . ");\">+</button>
-              </div>
-              </span>";
-          }
-          $interactionForm .= "
-              </div>
-            </div>";
-        }
-        $interactionForm .= "</div>";
-      }
-      $interactionForm .= "<div class='cpress-col cpress-pr-0'>";
-      if (!$this->hidePrint) {
-        $printTitle = 'ChordPress SongSheet';
-        if (strlen($this->arrDirectives['title']) && !$this->hideTitle) {
-          $printTitle = $this->arrDirectives['title'];
-        }
-        $interactionForm .= "<br><button class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"printElement('%cpressID%', '" . $printTitle . "', '" . $cpressStyles . "');\">" . __('Print', 'chordpress') . "</button>\n";
-//        $interactionForm .= "<br><button class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"window.print();\">" . __('Print', 'chordpress') . "</button>\n";
-      }
-      $interactionForm .= "</div>";
-      $returnText .= $interactionForm . "</div>\n";
+      $songsheetHtml .= $this->buildInteractionMenu();
     }
 
-    $returnText .= "<div id=\"%cpressID%\" class=\"cpress\">\n";
+    $songsheetHtml .= "<div id=\"%cpressID%\" class=\"cpress\">\n";
 
     /**
-     * Print header if directives exist
+     * Print header and subtitle if directives exist
      */
     $randId = $this->random_string(true);
     if (strlen($this->arrDirectives['title']) && !$this->hideTitle) {
       $cpressID = str_replace(' ', '-', strtolower(trim($this->arrDirectives['title']))) . '-' . $randId;
-      $returnText = str_replace('%cpressID%', $cpressID, $returnText);
-      $returnText .= '<' . $this->titleLevel . '>' . $this->arrDirectives['title'] . '</' . $this->titleLevel . ">\n";
+      $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
+      $songsheetHtml .= '<' . $this->titleLevel . '>' . $this->arrDirectives['title'] . '</' . $this->titleLevel . ">\n";
     } else {
       $cpressID = 'ccpress-id-' . $randId;
-      $returnText = str_replace('%cpressID%', $cpressID, $returnText);
+      $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
     }
-
     if (strlen($this->arrDirectives['subtitle']) && !$this->hideSubtitle) {
-      $returnText .= '<' . $this->subtitleLevel . '>' . $this->arrDirectives['subtitle'] . '</' . $this->subtitleLevel . ">\n";
+      $songsheetHtml .= '<' . $this->subtitleLevel . '>' . $this->arrDirectives['subtitle'] . '</' . $this->subtitleLevel . ">\n";
     }
 
+    /**
+     * Print meta data if directives exist
+     */
     if (
       strlen($this->arrDirectives['album']) ||
       strlen($this->arrDirectives['artist']) ||
@@ -896,26 +761,26 @@ class ChordPress_Renderer {
       strlen($this->arrDirectives['time']) ||
       strlen($this->arrDirectives['year'])
     ) {
-      $returnText .= "<div class=\"cpress_meta\">\n";
-      if (strlen($this->arrDirectives['composer']) && !$this->hideComposer) $returnText .= esc_html(__('Composer', 'chordpress')) . ': ' . $this->arrDirectives['composer'] . "<br>\n";
-      if (strlen($this->arrDirectives['artist']) && !$this->hideArtist) $returnText .= esc_html(__('Artist', 'chordpress')) . ': ' . $this->arrDirectives['artist'] . "<br>\n";
-      if (strlen($this->arrDirectives['year']) && !$this->hideYear) $returnText .= esc_html(__('Year', 'chordpress')) . ': ' . $this->arrDirectives['year'] . "<br>\n";
-      if (strlen($this->arrDirectives['album']) && !$this->hideAlbum) $returnText .= esc_html(__('Album', 'chordpress')) . ': ' . $this->arrDirectives['album'] . "<br>\n";
+      $songsheetHtml .= "<div class=\"cpress_meta\">\n";
+      if (strlen($this->arrDirectives['composer']) && !$this->hideComposer) $songsheetHtml .= esc_html(__('Composer', 'chordpress')) . ': ' . $this->arrDirectives['composer'] . "<br>\n";
+      if (strlen($this->arrDirectives['artist']) && !$this->hideArtist) $songsheetHtml .= esc_html(__('Artist', 'chordpress')) . ': ' . $this->arrDirectives['artist'] . "<br>\n";
+      if (strlen($this->arrDirectives['year']) && !$this->hideYear) $songsheetHtml .= esc_html(__('Year', 'chordpress')) . ': ' . $this->arrDirectives['year'] . "<br>\n";
+      if (strlen($this->arrDirectives['album']) && !$this->hideAlbum) $songsheetHtml .= esc_html(__('Album', 'chordpress')) . ': ' . $this->arrDirectives['album'] . "<br>\n";
 
       if (strlen($this->arrDirectives['key']) && !$this->hideKey) {
-        $returnText .= esc_html(__('Key (original)', 'chordpress')) . ': ' . $this->arrDirectives['key'] . "<br>\n";
-        $returnText .= esc_html(__('Key (transposed)', 'chordpress')) . ': <span class="chord-hidable-%cpressID% key-%cpressID%-0">' . $this->arrDirectives['key'] . '</span>';
+        $songsheetHtml .= esc_html(__('Key (original)', 'chordpress')) . ': ' . $this->arrDirectives['key'] . "<br>\n";
+        $songsheetHtml .= esc_html(__('Key (transposed)', 'chordpress')) . ': <span class="chord-hidable-%cpressID% key-%cpressID%-0">' . $this->arrDirectives['key'] . '</span>';
         for ($t = 1; $t <= 11; $t++) {
-          $returnText .= '<span class="chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none">' . $this->arrTransposeValues[$this->arrDirectives['key']][$t] . '</span>';
+          $songsheetHtml .= '<span class="chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none">' . $this->arrTransposeValues[$this->arrDirectives['key']][$t] . '</span>';
         }
-        $returnText .= "<br>\n";
+        $songsheetHtml .= "<br>\n";
       }
 
-      if (strlen($this->arrDirectives['time'])) $returnText .= esc_html(__('Time', 'chordpress')) . ': ' . $this->arrDirectives['time'] . "<br>\n";
-      if (strlen($this->arrDirectives['tempo'])) $returnText .= esc_html(__('Tempo', 'chordpress')) . ': ' . $this->arrDirectives['tempo'] . "<br>\n";
-      if (strlen($this->arrDirectives['capo'])) $returnText .= esc_html(__('Capo', 'chordpress')) . ': ' . $this->arrDirectives['capo'] . "<br>\n";
-      $returnText = preg_replace('/<br>$/', '', $returnText); // Remove last <br>
-      $returnText .= "</div>\n";
+      if (strlen($this->arrDirectives['time'])) $songsheetHtml .= esc_html(__('Time', 'chordpress')) . ': ' . $this->arrDirectives['time'] . "<br>\n";
+      if (strlen($this->arrDirectives['tempo'])) $songsheetHtml .= esc_html(__('Tempo', 'chordpress')) . ': ' . $this->arrDirectives['tempo'] . "<br>\n";
+      if (strlen($this->arrDirectives['capo'])) $songsheetHtml .= esc_html(__('Capo', 'chordpress')) . ': ' . $this->arrDirectives['capo'] . "<br>\n";
+      $songsheetHtml = preg_replace('/<br>$/', '', $songsheetHtml); // Remove last <br>
+      $songsheetHtml .= "</div>\n";
     }
 
     /**
@@ -924,17 +789,17 @@ class ChordPress_Renderer {
     $this->inMonospace = false;
     foreach ($text as $line) {
       if ($this->inMonospace && strpos($line, "{end_of_monospace}") === false) {
-        $returnText .= $line;
+        $songsheetHtml .= $line;
       } else {
-        $returnText .= $this->formatAndDisplayLine($line);
+        $songsheetHtml .= $this->formatAndDisplayLine($line);
       }
     }
-    $returnText = str_replace('%cpressID%', $cpressID, $returnText);
+    $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
 
     /**
      * End of ChordPress song
      */
-    $returnText .= "</div>\n<!--end: ChordPress SongSheet-->\n";
+    $songsheetHtml .= "</div>\n<!--end: ChordPress SongSheet-->\n";
 
     /**
      * Build chord sheet if option set to true.
@@ -953,14 +818,180 @@ class ChordPress_Renderer {
       }
       $chordSheetText .= "</div>\n<div style=\"clear:both; padding: 16px 0 16px 0;\"><hr></div>\n<!--end: ChordPress ChordSheet-->\n\n";
       if ($this->showChordSheetOnTop) {
-        $returnText = $chordSheetText . $returnText;
+        $songsheetHtml = $chordSheetText . $songsheetHtml;
       } else {
-        $returnText = $returnText . $chordSheetText;
+        $songsheetHtml = $songsheetHtml . $chordSheetText;
       }
     }
 
-// $this->C->dnd($returnText);
-    return $returnText . "\n\n";
+// $this->C->dnd($songsheetHtml);
+    return $songsheetHtml . "\n\n";
+  }
+
+  /**
+   * --------------------------------------------------------------------------
+   * Builds the Interactive Menu
+   * --------------------------------------------------------------------------
+   *
+   * Builds the interaction menu for the ChordPress song sheet.
+   *
+   * This function generates the HTML for the interaction menu, which includes
+   * options for font size adjustment, transposition, and printing. The menu
+   * can be fixed at the bottom of the page if the `fixedInteraction` property
+   * is set. The function also handles harmonica-specific options if applicable.
+   *
+   * @return string The HTML string for the interaction menu.
+   * @since  3.9.2
+   * @access private
+   *
+   */
+  private function buildInteractionMenu(): string {
+    $interactionForm = "<div class=\"cpress-interaction cpress-row";
+    if ($this->fixedInteraction) {
+      $interactionForm .= " fixed";
+    }
+    $interactionForm .= "\">";
+
+    if (!$this->hideFontsize) {
+      $interactionForm .= "<div class='cpress-col cpress-mb-2'>" . __('Font Size', 'chordpress') . "<br>
+          <div class='cpress-btn-group' role='group'>
+            <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', -5);\">-</button>
+            <button id=\"btnFontSize-%cpressID%\"  type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 0);\">100%</button>
+            <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 5);\">+</button>
+          </div>
+        </div>";
+    }
+
+    if (!$this->hideTranspose) {
+      $interactionForm .= "<div class='cpress-col' style='display: inline-block;'>";
+
+      if (!$this->harmonica) {
+        //
+        // Guitar chords
+        //
+        if ($this->showNumericTranspose && !$this->harmonica) {
+          //
+          // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
+          //
+          if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
+            $songKey = "'" . $this->arrDirectives['key'] . "'";
+            $initialText = '0 (' . $this->arrDirectives['key'] . ')';
+          } else {
+            $songKey = "''";
+            $initialText = '0';
+          }
+          $interactionForm .= __('Transpose', 'chordpress') . "<br>
+              <div class='cpress-btn-group' role='group'>
+                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'down', " . $songKey . ");\">-</button>
+                <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'reset', " . $songKey . ");\" value='0'>" . $initialText . "</button>
+                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'up', " . $songKey . ");\">+</button>
+              </div>";
+        } else {
+          //
+          // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
+          //
+          if (strlen($this->arrDirectives['key']) && in_array($this->arrDirectives['key'], $this->arrKeys)) {
+            $i = 0;
+            foreach ($this->arrTransposeValues[$this->arrDirectives['key']] as $val) {
+              $tvalues[] = (string)$i . ' => ' . $val;
+              $i++;
+            }
+          } else {
+            $tvalues = array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11' );
+          }
+          $interactionForm .= __('Transpose', 'chordpress') . "
+              <div class=\"float-right\">
+                <select class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\" id=\"selTranspose-%cpressID%\" onchange=\"transposeChords('%cpressID%', 'selTranspose-');return false;\" title=\"" . __('Only works for international key names', 'chordpress') . ".\">
+                  <option value=\"0\">" . $tvalues[0] . "</option>
+                  <option value=\"1\">" . $tvalues[1] . "</option>
+                  <option value=\"2\">" . $tvalues[2] . "</option>
+                  <option value=\"3\">" . $tvalues[3] . "</option>
+                  <option value=\"4\">" . $tvalues[4] . "</option>
+                  <option value=\"5\">" . $tvalues[5] . "</option>
+                  <option value=\"6\">" . $tvalues[6] . "</option>
+                  <option value=\"7\">" . $tvalues[7] . "</option>
+                  <option value=\"8\">" . $tvalues[8] . "</option>
+                  <option value=\"9\">" . $tvalues[9] . "</option>
+                  <option value=\"10\">" . $tvalues[10] . "</option>
+                  <option value=\"11\">" . $tvalues[11] . "</option>
+                </select>
+              </div>";
+        }
+      } else {
+        //
+        // Harmonica notes
+        //
+        switch ($this->harmonica) {
+          case 'tremolo':
+            $selectedDiatonic = '';
+            $selectedChromatic = '';
+            $selectedTremolo = ' selected';
+            break;
+          case 'diatonic':
+            $selectedDiatonic = ' selected';
+            $selectedChromatic = '';
+            $selectedTremolo = '';
+            break;
+          case 'chromatic':
+            $selectedDiatonic = '';
+            $selectedChromatic = ' selected';
+            $selectedTremolo = '';
+            break;
+          default:
+            $selectedDiatonic = '';
+            $selectedChromatic = '';
+            $selectedTremolo = '';
+            break;
+        }
+
+        $interactionForm .=
+          "<div class='cpress-row'>
+              <div class='cpress-col'>";
+
+        $interactionForm .= __('Harmonica', 'chordpress') . "<br>
+            <select
+              class=\"cpress-form-control cpress-form-control-sm cpress-py-0 cpress-px-2\"
+              style=\"max-width: 200px;\"
+              id=\"selTranspose-%cpressID%\"
+              onchange=\"transposeHarmonica('%cpressID%', 'selTranspose-', this.value);return false;\"
+              title=\"" . __('Only works when using harmonica notation', 'chordpress') . ".\"
+            >
+              <option value=\"diatonic\" " . $selectedDiatonic . ">" . __('Diatonic', 'chordpress') . "</option>
+              <option value=\"chromatic\" " . $selectedChromatic . ">" . __('Chromatic', 'chordpress') . "</option>
+              <option value=\"tremolo\" " . $selectedTremolo . ">" . __('Tremolo', 'chordpress') . "</option>
+            </select>";
+
+        $interactionForm .= "
+            </div>
+            <div class='cpress-col'>";
+
+        if ($this->harmonica == 'chromatic') {
+          $baseNote = "''";
+          $initialText = '0';
+          $interactionForm .= "<span id='btnTranspose-chromatic'>" . __('Transpose', 'chordpress') . "<br>
+              <div class='cpress-btn-group' role='group'>
+                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'down', " . $baseNote . ");\">-</button>
+                <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'reset', " . $baseNote . ");\" value='0'>" . $initialText . "</button>
+                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'up', " . $baseNote . ");\">+</button>
+              </div>
+              </span>";
+        }
+        $interactionForm .= "
+              </div>
+            </div>";
+      }
+      $interactionForm .= "</div>";
+    }
+    $interactionForm .= "<div class='cpress-col cpress-pr-0'>";
+    if (!$this->hidePrint) {
+      $printTitle = 'ChordPress SongSheet';
+      if (strlen($this->arrDirectives['title']) && !$this->hideTitle) {
+        $printTitle = $this->arrDirectives['title'];
+      }
+      $interactionForm .= "<br><button class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"printElement('%cpressID%', '" . $printTitle . "', '" . $this->songsheetStyles . "');\">" . __('Print', 'chordpress') . "</button>\n";
+    }
+    $interactionForm .= "</div>";
+    return $interactionForm;
   }
 
   /**
@@ -975,7 +1006,7 @@ class ChordPress_Renderer {
    * @return string - Formatted HTML.
    * @since 1.0.0
    */
-  public function formatAndDisplayLine($line) {
+  public function formatAndDisplayLine(string $line): string {
     $returnText = "";
 
     /**
@@ -1260,7 +1291,7 @@ class ChordPress_Renderer {
    * @return string - Stripped text.
    * @since 1.0.0
    */
-  private function stripTags($string) {
+  private function stripTags(string $string): string {
     $retString = "";
     $isVisible = true;
     for ($i = 0; $i < strlen($string); $i++) {
@@ -1288,7 +1319,7 @@ class ChordPress_Renderer {
    * @return string - Uppercase note string.
    * @since 1.0.0
    */
-  public function formatChord($ch) {
+  public function formatChord(string $ch): string {
     $useFlats = false;
     if (strlen($ch) == 0) return '';
 
@@ -1351,12 +1382,13 @@ class ChordPress_Renderer {
    *
    * Processes a Chromatic harmonica note and returns the formatted HTML.
    *
-   * @param string $note - Chromatic note, e.g. "1" or "1s" or "-1" or "-1s".
+   * @param string $note      - Chromatic note, e.g. "1" or "1s" or "-1" or "-1s".
+   * @param int    $transpose - Numeric transpose value, 0-11.
    *
    * @return string - Transposed chromatic note
    * @since 2.8.0
    */
-  public function transposeChromaticNote($note, $transpose) {
+  public function transposeChromaticNote(string $note, int $transpose): string {
     if (strlen($note) == 0) return '';
     if ($transpose === 0 || $transpose > 11) return $note;
 
@@ -1395,7 +1427,7 @@ class ChordPress_Renderer {
    * @return string - Formatted remainder.
    * @since 1.0.0
    */
-  public function formatRemainder($remainder) {
+  public function formatRemainder(string $remainder): string {
     $indexOfSlash = strpos($remainder, '/');
     if ($indexOfSlash === false) return $remainder;
 
@@ -1464,7 +1496,7 @@ class ChordPress_Renderer {
    * @return integer
    * @since 1.0.0
    */
-  public function noteToNumber($n) {
+  public function noteToNumber(string $n): int {
     $regularNotation = array(
       'A' => 0,
       'B' => 2,
@@ -1514,7 +1546,7 @@ class ChordPress_Renderer {
    * @return string
    * @since 1.0.0
    */
-  public function numberToNote($n, $useFlats = false) {
+  public function numberToNote(string $n, bool $useFlats = false): string {
     $retVal = '';
 
     switch ($n) {
@@ -1585,7 +1617,7 @@ class ChordPress_Renderer {
    * @return string
    * @since 3.8.0
    */
-  public function translateHarmonicaNote($note, $from, $to) {
+  public function translateHarmonicaNote(string $note, string $from, string $to): string {
 
     $from = strtolower($from);
     $to = strtolower($to);
@@ -1686,7 +1718,7 @@ class ChordPress_Renderer {
    * @return boolean
    * @since 1.0.0
    */
-  public function getDisplayHBNotation() {
+  public function getDisplayHBNotation(): bool {
     return $this->displayHBNotation;
   }
 
@@ -1701,7 +1733,7 @@ class ChordPress_Renderer {
    *
    * @since 1.0.0
    */
-  public function setDisplayHBNotation($g) {
+  public function setDisplayHBNotation(bool $g): void {
     $this->displayHBNotation = $g;
   }
 
@@ -1715,7 +1747,7 @@ class ChordPress_Renderer {
    * @return string
    * @since 1.0.0
    */
-  public function getFloat() {
+  public function getFloat(): string {
     return $this->float;
   }
 
@@ -1730,7 +1762,7 @@ class ChordPress_Renderer {
    *
    * @since 1.0.0
    */
-  public function setFloat($f) {
+  public function setFloat(string $f): void {
     $this->float = $f;
   }
 
@@ -1744,7 +1776,7 @@ class ChordPress_Renderer {
    * @return string
    * @since 3.8.0
    */
-  public function getHarmonica() {
+  public function getHarmonica(): string {
     return $this->harmonica;
   }
 
@@ -1759,7 +1791,7 @@ class ChordPress_Renderer {
    *
    * @since 3.8.0
    */
-  public function setHarmonica($h) {
+  public function setHarmonica(string $h): void {
     if (in_array(strtolower($h), $this->harmonicaTypes)) {
       $this->harmonica = strtolower($h);
     } else {
@@ -1777,7 +1809,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 1.0.0
    */
-  public function getHBNotation() {
+  public function getHBNotation(): string {
     return $this->hbNotation;
   }
 
@@ -1792,7 +1824,7 @@ class ChordPress_Renderer {
    *
    * @since 1.0.0
    */
-  public function setHBNotation($g) {
+  public function setHBNotation(string $g): void {
     $this->hbNotation = $g;
   }
 
@@ -1806,7 +1838,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideChords() {
+  public function getHideChords(): string {
     return $this->hideChords;
   }
 
@@ -1821,7 +1853,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public function setHideChords($g) {
+  public function setHideChords(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideChords = true;
     } else {
@@ -1839,7 +1871,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideComments() {
+  public function getHideComments(): string {
     return $this->hideComments;
   }
 
@@ -1854,7 +1886,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public function setHideComments($g) {
+  public function setHideComments(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideComments = 1;
     } else {
@@ -1872,7 +1904,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideComposer() {
+  public function getHideComposer(): string {
     return $this->hideComposer;
   }
 
@@ -1887,7 +1919,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public function setHideComposer($g) {
+  public function setHideComposer(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideComposer = 1;
     } else {
@@ -1905,7 +1937,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHidePrint() {
+  public function getHidePrint(): string {
     return $this->hidePrint;
   }
 
@@ -1920,7 +1952,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public function setHidePrint($g) {
+  public function setHidePrint(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hidePrint = 1;
     } else {
@@ -1938,7 +1970,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideSubtitle() {
+  public function getHideSubtitle(): string {
     return $this->hideSubtitle;
   }
 
@@ -1953,7 +1985,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public function setHideSubtitle($g) {
+  public function setHideSubtitle(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideSubtitle = 1;
     } else {
@@ -1971,7 +2003,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideTitle() {
+  public function getHideTitle(): string {
     return $this->hideTitle;
   }
 
@@ -1986,7 +2018,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public function setHideTitle($g) {
+  public function setHideTitle(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideTitle = 1;
     } else {
@@ -2004,7 +2036,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.8.1
    */
-  public function getFontsize() {
+  public function getFontsize(): string {
     return $this->hideFontsize;
   }
 
@@ -2019,7 +2051,7 @@ class ChordPress_Renderer {
    *
    * @since 3.8.1
    */
-  public function setHideFontsize($g) {
+  public function setHideFontsize(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideFontsize = 1;
     } else {
@@ -2037,7 +2069,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideTranspose() {
+  public function getHideTranspose(): string {
     return $this->hideTranspose;
   }
 
@@ -2052,7 +2084,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public function setHideTranspose($g) {
+  public function setHideTranspose(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideTranspose = 1;
     } else {
@@ -2070,7 +2102,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.6.0
    */
-  public function getNumericTranspose() {
+  public function getNumericTranspose(): string {
     return $this->showNumericTranspose;
   }
 
@@ -2085,7 +2117,7 @@ class ChordPress_Renderer {
    *
    * @since 3.6.0
    */
-  public function setNumericTranspose($g) {
+  public function setNumericTranspose(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->showNumericTranspose = 1;
     } else {
@@ -2103,7 +2135,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.6.0
    */
-  public function getFixedInteraction() {
+  public function getFixedInteraction(): string {
     return $this->fixedInteraction;
   }
 
@@ -2118,7 +2150,7 @@ class ChordPress_Renderer {
    *
    * @since 3.6.0
    */
-  public function setFixedInteraction($g) {
+  public function setFixedInteraction(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->fixedInteraction = 1;
     } else {
@@ -2136,7 +2168,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getHideYear() {
+  public function getHideYear(): string {
     return $this->hideYear;
   }
 
@@ -2151,7 +2183,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public function setHideYear($g) {
+  public function setHideYear(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->hideYear = 1;
     } else {
@@ -2169,7 +2201,7 @@ class ChordPress_Renderer {
    * @return string - yes/no.
    * @since 1.0.0
    */
-  public function getInteractive() {
+  public function getInteractive(): string {
     return $this->interactive;
   }
 
@@ -2184,7 +2216,7 @@ class ChordPress_Renderer {
    *
    * @since 1.0.0
    */
-  public function setInteractive($i) {
+  public function setInteractive(string $i): void {
     $this->interactive = $i;
   }
 
@@ -2198,7 +2230,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getShowChordSheet() {
+  public function getShowChordSheet(): string {
     return $this->showChordSheet;
   }
 
@@ -2213,7 +2245,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public function setShowChordSheet($g) {
+  public function setShowChordSheet(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->showChordSheet = 1;
     } else {
@@ -2231,7 +2263,7 @@ class ChordPress_Renderer {
    * @return string -yes/no.
    * @since 3.5.0
    */
-  public function getShowChordSheetOnTop() {
+  public function getShowChordSheetOnTop(): string {
     return $this->showChordSheetOnTop;
   }
 
@@ -2246,7 +2278,7 @@ class ChordPress_Renderer {
    *
    * @since 3.5.0
    */
-  public function setShowChordSheetOnTop($g) {
+  public function setShowChordSheetOnTop(string $g): void {
     if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
       $this->showChordSheetOnTop = 1;
     } else {
@@ -2264,7 +2296,7 @@ class ChordPress_Renderer {
    * @return integer
    * @since 1.0.0
    */
-  public function getTranspose() {
+  public function getTranspose(): int {
     return $this->transpose;
   }
 
@@ -2279,7 +2311,7 @@ class ChordPress_Renderer {
    *
    * @since 1.0.0
    */
-  public function setTranspose($t) {
+  public function setTranspose(int $t): void {
     $this->transpose = $t;
   }
 
@@ -2294,7 +2326,7 @@ class ChordPress_Renderer {
    *
    * @return integer - Post ID or NULL
    */
-  private function find_guitar_chord_post($shortname) {
+  private function find_guitar_chord_post(string $shortname): int {
     $query_args = array(
       'posts_per_page' => 1,
       'post_type' => 'guitar_chord',
@@ -2321,7 +2353,7 @@ class ChordPress_Renderer {
    *
    * @return void
    */
-  private function load_guitar_chord($postid) {
+  private function load_guitar_chord(int $postid): void {
     $my_chord = array();
     $post = get_post($postid);
 
@@ -2360,8 +2392,7 @@ class ChordPress_Renderer {
    *
    * @return string - Modal chord dialog HTML
    */
-//    private function create_modal_chord($postid, $chord)
-//    {
+//    private function create_modal_chord(int $postid, string $chord): string {
 //        $modal_chord = '<!-- <button id="cpress-chord-' . $postid . '-modal-button">Click here to trigger the modal!</button> -->
 //        <div id="cpress-chord-' . $postid . '-modal" class="cpress-modal">
 //            <div class="cpress-modal-content">
@@ -2404,7 +2435,7 @@ class ChordPress_Renderer {
    *
    * @return false|string
    */
-  private function random_string($alphaonly = false, $length = 15) {
+  private function random_string(bool $alphaonly = false, int $length = 15): string|false {
     if ($alphaonly) {
       return substr(str_shuffle(str_repeat($x = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     } else {
@@ -2423,9 +2454,12 @@ class ChordPress_Renderer {
    * @return string
    * @since 3.2.0
    */
-  private function dnd($a, $die = true) {
+  private function dnd(array $a, bool $die = true): string {
     $dump = highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
-    if ($die) die($dump);
-    else return $dump;
+    if ($die) {
+      die($dump);
+    } else {
+      return $dump;
+    }
   }
 }

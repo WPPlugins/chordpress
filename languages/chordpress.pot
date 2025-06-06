@@ -2,14 +2,14 @@
 # This file is distributed under the same license as the Lewe ChordPress plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lewe ChordPress 3.9.0\n"
+"Project-Id-Version: Lewe ChordPress 3.9.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chordpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-05-22T18:00:03+02:00\n"
+"POT-Creation-Date: 2025-06-06T19:11:35+02:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.4.0\n"
 "X-Domain: chordpress\n"
@@ -549,7 +549,7 @@ msgid "Fixed Interaction"
 msgstr ""
 
 #: admin/partials/chordpress-admin-options.php:394
-msgid "With this option selected, the interaction menu will be fixed at the bottom of the page. Note, that this might lead to unexpected results depending on the WordPress theme you use. You can overwrite this setting per shortcut with \"fixedinteraction=yes/no\""
+msgid "With this option selected, the interaction menu will be fixed at the bottom of the page. Note, that this might lead to unexpected results depending on the WordPress theme you use and if you use more than one ChordPress songsheet on a page. You can overwrite this setting per shortcut with \"fixedinteraction=yes/no\""
 msgstr ""
 
 #: admin/partials/chordpress-admin-options.php:398
@@ -1247,85 +1247,85 @@ msgstr ""
 msgid "Please contact the administrator to register this domain or obtain a valid license."
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:740
-msgid "Font"
-msgstr ""
-
-#: includes/class-chordpress-renderer.php:767
-#: includes/class-chordpress-renderer.php:786
-#: includes/class-chordpress-renderer.php:854
-msgid "Transpose"
-msgstr ""
-
-#: includes/class-chordpress-renderer.php:788
-msgid "Only works for international key names"
-msgstr ""
-
-#: includes/class-chordpress-renderer.php:835
-msgid "Harmonica"
-msgstr ""
-
-#: includes/class-chordpress-renderer.php:840
-msgid "Only works when using harmonica notation"
-msgstr ""
-
-#: includes/class-chordpress-renderer.php:842
-msgid "Diatonic"
-msgstr ""
-
-#: includes/class-chordpress-renderer.php:843
-msgid "Chromatic"
-msgstr ""
-
-#: includes/class-chordpress-renderer.php:844
-msgid "Tremolo"
-msgstr ""
-
-#: includes/class-chordpress-renderer.php:870
-msgid "Print"
-msgstr ""
-
-#: includes/class-chordpress-renderer.php:906
+#: includes/class-chordpress-renderer.php:763
 msgid "Composer"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:907
+#: includes/class-chordpress-renderer.php:764
 msgid "Artist"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:908
+#: includes/class-chordpress-renderer.php:765
 msgid "Year"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:909
+#: includes/class-chordpress-renderer.php:766
 msgid "Album"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:912
+#: includes/class-chordpress-renderer.php:769
 msgid "Key (original)"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:913
+#: includes/class-chordpress-renderer.php:770
 msgid "Key (transposed)"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:920
+#: includes/class-chordpress-renderer.php:777
 msgid "Time"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:921
+#: includes/class-chordpress-renderer.php:778
 msgid "Tempo"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:922
+#: includes/class-chordpress-renderer.php:779
 msgid "Capo"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:952
+#: includes/class-chordpress-renderer.php:809
 msgid "These known chords are used in this song"
 msgstr ""
 
-#: includes/class-chordpress-renderer.php:1070
+#: includes/class-chordpress-renderer.php:854
+msgid "Font Size"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:881
+#: includes/class-chordpress-renderer.php:900
+#: includes/class-chordpress-renderer.php:969
+msgid "Transpose"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:902
+msgid "Only works for international key names"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:949
+msgid "Harmonica"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:955
+msgid "Only works when using harmonica notation"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:957
+msgid "Diatonic"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:958
+msgid "Chromatic"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:959
+msgid "Tremolo"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:989
+msgid "Print"
+msgstr ""
+
+#: includes/class-chordpress-renderer.php:1093
 msgid "Missing square bracket in line"
 msgstr ""
 

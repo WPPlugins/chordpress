@@ -391,7 +391,7 @@ if ($show_alert) {
               <th scope="row"><?php echo esc_html(__('Fixed Interaction', 'chordpress')); ?></th>
               <td>
                 <input type='checkbox' id='<?php echo $pname; ?>_checkbox_fixed_interaction' name='<?php echo $pname; ?>_checkbox_fixed_interaction' <?php checked(get_option($pname . '_checkbox_fixed_interaction'), 1); ?> value='1'>
-                <p class="description"><?php echo esc_html(__('With this option selected, the interaction menu will be fixed at the bottom of the page. Note, that this might lead to unexpected results depending on the WordPress theme you use. You can overwrite this setting per shortcut with "fixedinteraction=yes/no"', 'chordpress')); ?>.</p>
+                <p class="description"><?php echo esc_html(__('With this option selected, the interaction menu will be fixed at the bottom of the page. Note, that this might lead to unexpected results depending on the WordPress theme you use and if you use more than one ChordPress songsheet on a page. You can overwrite this setting per shortcut with "fixedinteraction=yes/no"', 'chordpress')); ?>.</p>
               </td>
             </tr>
             <tr>
