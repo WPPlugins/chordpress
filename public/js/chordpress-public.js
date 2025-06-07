@@ -149,44 +149,44 @@ function transposeChromatic(cpressId, formControlId, direction, baseNote) {
 
   const arrTransposeValues = {
     '1': ['1', '1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4'],
-    '1s': ['1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4' ],
-    '-1': ['-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s' ],
-    '-1s': ['-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5' ],
-    '2': ['2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s' ],
-    '-2': ['-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6' ],
-    '-2s': ['-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6' ],
-    '3': ['3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s' ],
-    '3s': ['3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7' ],
-    '-3': ['-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s' ],
-    '-3s': ['-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7' ],
-    '-4': ['-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s' ],
-    '4': ['4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8' ],
-    '4s': ['4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8' ],
-    '-5': ['-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9' ],
-    '-5s': ['-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s' ],
-    '6': ['6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9' ],
-    '-6': ['-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s' ],
-    '-6s': ['-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10' ],
-    '7': ['7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10' ],
-    '7s': ['7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s' ],
-    '-7': ['-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11' ],
-    '-7s': ['-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s' ],
-    '-8': ['-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11' ],
-    '8': ['8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s' ],
-    '9': ['9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12' ],
-    '9s': ['9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12' ],
-    '-9': ['-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s' ],
-    '-9s': ['-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ' ],
-    '10': ['10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ' ],
-    '-10': ['-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ' ],
-    '-10s': ['-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ' ],
-    '11': ['11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ' ],
-    '11s': ['11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '-11': ['-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '-11s': ['-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '-12': ['-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '12': ['12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '12s': ['12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
+    '1s': ['1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4'],
+    '-1': ['-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s'],
+    '-1s': ['-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5'],
+    '2': ['2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s'],
+    '-2': ['-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6'],
+    '-2s': ['-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6'],
+    '3': ['3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s'],
+    '3s': ['3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7'],
+    '-3': ['-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s'],
+    '-3s': ['-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7'],
+    '-4': ['-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s'],
+    '4': ['4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8'],
+    '4s': ['4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8'],
+    '-5': ['-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9'],
+    '-5s': ['-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s'],
+    '6': ['6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9'],
+    '-6': ['-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s'],
+    '-6s': ['-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10'],
+    '7': ['7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10'],
+    '7s': ['7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s'],
+    '-7': ['-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11'],
+    '-7s': ['-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s'],
+    '-8': ['-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11'],
+    '8': ['8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s'],
+    '9': ['9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12'],
+    '9s': ['9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12'],
+    '-9': ['-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s'],
+    '-9s': ['-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' '],
+    '10': ['10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' '],
+    '-10': ['-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' '],
+    '-10s': ['-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' '],
+    '11': ['11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' '],
+    '11s': ['11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' '],
+    '-11': ['-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    '-11s': ['-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    '-12': ['-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    '12': ['12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    '12s': ['12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
   };
 
   let transposeElementId = "selTranspose-" + cpressId;
@@ -298,29 +298,69 @@ function transposeHarmonica(cpressId, formControlId, harmonicaType) {
  * Change Font Size.
  * ----------------------------------------------------------------------------
  *
- * Increases/decreases the font size of an element. Usage:
- * - changeFontSize('myElement', 2);
- * - changeFontSize('myElement', -2);
+ * Changes the font size of a specified HTML element and adjusts the font size
+ * of all heading tags (`h1` to `h5`) within that element proportionally.
+ *
+ * This function allows increasing, decreasing, or resetting the font size of
+ * an element. It also ensures that heading tags inside the element scale
+ * proportionally based on their original font size.
+ *
+ * @param {string} elementId - The ID of the HTML element whose font size will be changed.
+ * @param {number} amount - The amount to adjust the font size by:
+ *                          - Positive values increase the font size.
+ *                          - Negative values decrease the font size.
+ *                          - A value of 0 resets the font size to 100%.
  *
  * @since 3.6.0
  */
 function changeFontSize(elementId, amount) {
+  // Get the target element by its ID
   const element = document.getElementById(elementId);
+
+  // Get the button associated with the font size control
   const sizeButton = document.getElementById('btnFontSize-' + elementId);
+
+  // Parse the current font size of the element, defaulting to 100% if not set
   let currentFontSize = parseFloat(element.style.fontSize);
   if (isNaN(currentFontSize)) {
     currentFontSize = 100; // Default font size
   }
+
+  // Calculate the new font size
+  let newFontSize;
   if (amount === 0) {
-    element.style.fontSize = '100%';
-    sizeButton.innerText = '100%';
-    return;
+    newFontSize = 100; // Reset to default size
+  } else {
+    newFontSize = currentFontSize + amount;
+    if (newFontSize < 0) return; // Prevent negative font sizes
   }
-  const newFontSize = currentFontSize + amount;
-  if (newFontSize >= 0) {
-    element.style.fontSize = newFontSize + '%';
-    sizeButton.innerText = newFontSize + '%';
-  }
+
+  // Apply the new font size to the element
+  element.style.setProperty('font-size', newFontSize + '%', 'important');
+
+  // Calculate the scaling factor relative to the default size (100%)
+  const scale = newFontSize / 100;
+
+  // Adjust the font size of all heading tags (`h1` to `h5`) within the element
+  ['h1', 'h2', 'h3', 'h4', 'h5'].forEach(tag => {
+    const headings = element.getElementsByTagName(tag);
+    for (let i = 0; i < headings.length; i++) {
+      // Store the original font size in a data attribute if not already stored
+      if (!headings[i].dataset.baseFontSize) {
+        headings[i].dataset.baseFontSize = window.getComputedStyle(headings[i]).fontSize;
+      }
+
+      // Calculate the new font size based on the original size and scaling factor
+      const baseSize = parseFloat(headings[i].dataset.baseFontSize);
+      const newSize = baseSize * scale;
+
+      // Apply the new font size to the heading
+      headings[i].style.setProperty('font-size', newSize + 'px', 'important');
+    }
+  });
+
+  // Update the button text to reflect the new font size
+  sizeButton.innerText = newFontSize + '%';
 }
 
 /**

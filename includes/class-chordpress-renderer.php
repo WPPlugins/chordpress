@@ -715,7 +715,7 @@ class ChordPress_Renderer {
     /**
      * The styles need to be a one-line string in a separate variable because it is passed to the Javascript print function
      */
-    $this->songsheetStyles = "<style>div.cpress { float: " . $this->float . "; } div.cpress_line { " . $this->lineStyle . "; } div.cpress_line_section { display: inline; float: left; } div.cpress_line_section .chord .chordshort { " . $this->chordStyle . "; } div.cpress_line_section .lyric { " . $this->lyricsStyle . "; } div.cpress_chorus { " . $this->chorusStyle . "; } div.cpress_verse { " . $this->verseStyle . "; } div.cpress_clear { clear: both; } div.cpress_meta { " . $this->metaStyle . "; } div.cpress_interaction { float: right; } div.cpress_interaction select { width: auto; } span.cpress_comment { " . $this->commentStyle . "; } div.cpress_chordsheet { text-align: center; }</style>";
+    $this->songsheetStyles = "<style>div.cpress { float: " . $this->float . "; clear: both; } div.cpress_line { " . $this->lineStyle . "; } div.cpress_line_section { display: inline; float: left; } div.cpress_line_section .chord .chordshort { " . $this->chordStyle . "; } div.cpress_line_section .lyric { " . $this->lyricsStyle . "; } div.cpress_chorus { " . $this->chorusStyle . "; } div.cpress_verse { " . $this->verseStyle . "; } div.cpress_clear { clear: both; } div.cpress_meta { " . $this->metaStyle . "; } div.cpress_interaction { float: right; } div.cpress_interaction select { width: auto; } span.cpress_comment { " . $this->commentStyle . "; } div.cpress_chordsheet { text-align: center; }</style>";
 
     $songsheetHtml = "\n\n
       <!--begin: ChordPress SongSheet -->
