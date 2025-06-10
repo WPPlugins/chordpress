@@ -360,7 +360,7 @@ function changeFontSize(elementId, amount) {
   });
 
   // Scale specified classes
-  ['cpress_line'].forEach(className => {
+  ['cpress_verse', 'cpress_chorus', 'cpress_line', 'cpress_comment', 'lyric'].forEach(className => {
     const elems = element.getElementsByClassName(className);
     for (let i = 0; i < elems.length; i++) {
       if (!elems[i].dataset.baseFontSize) {
