@@ -1027,7 +1027,7 @@ class ChordPress_Renderer {
       /**
        * No chords on this line
        */
-      if (isset($line[0]) && ($line[0] == '#' || $line == '<br />')) {
+      if (isset($line[0]) && ($line[0] == '#' || $line == '<br>' || $line == '<br />')) {
         /**
          * Line starts with "#": It's a comment line => return empty string
          */
@@ -2433,9 +2433,9 @@ class ChordPress_Renderer {
    * @param boolean $alphaonly - Whether to only use alpha charaters
    * @param integer $length    - Length of random string to generate
    *
-   * @return false|string
+   * @return false
    */
-  private function random_string(bool $alphaonly = false, int $length = 15): string|false {
+  private function random_string(bool $alphaonly = false, int $length = 15): string {
     if ($alphaonly) {
       return substr(str_shuffle(str_repeat($x = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ', ceil($length / strlen($x)))), 1, $length);
     } else {
