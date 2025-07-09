@@ -718,10 +718,12 @@ class ChordPress_Renderer {
     $this->songsheetStyles = "<style>div.cpress { float: " . $this->float . "; clear: both; } div.cpress_line { " . $this->lineStyle . "; } div.cpress_line_section { display: inline; float: left; } div.cpress_line_section .chord .chordshort { " . $this->chordStyle . "; } div.cpress_line_section .lyric { " . $this->lyricsStyle . "; } div.cpress_chorus { " . $this->chorusStyle . "; } div.cpress_verse { " . $this->verseStyle . "; } div.cpress_clear { clear: both; } div.cpress_meta { " . $this->metaStyle . "; } div.cpress_interaction { float: right; } div.cpress_interaction select { width: auto; } span.cpress_comment { " . $this->commentStyle . "; } div.cpress_chordsheet { text-align: center; }</style>";
 
     $songsheetHtml = "\n\n
-      <!--begin: ChordPress SongSheet -->
+      <!-- ChordPress -->\n\n
+      <!-- ChordPress Styles -->
       <div>
       " . $this->songsheetStyles . "
-      </div>\n";
+      </div>\n
+      <!-- /ChordPress Styles -->\n\n";
 
     /**
      * Interaction menu
@@ -730,7 +732,8 @@ class ChordPress_Renderer {
       $songsheetHtml .= $this->buildInteractionMenu();
     }
 
-    $songsheetHtml .= "<div id=\"%cpressID%\" class=\"cpress\">\n";
+    $songsheetHtml .= "<!-- ChordPress Song %cpressID% -->\n
+      <div id=\"%cpressID%\" class=\"cpress\">\n";
 
     /**
      * Print header and subtitle if directives exist
@@ -741,7 +744,7 @@ class ChordPress_Renderer {
       $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
       $songsheetHtml .= '<' . $this->titleLevel . '>' . $this->arrDirectives['title'] . '</' . $this->titleLevel . ">\n";
     } else {
-      $cpressID = 'ccpress-id-' . $randId;
+      $cpressID = 'cpress-id-' . $randId;
       $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
     }
     if (strlen($this->arrDirectives['subtitle']) && !$this->hideSubtitle) {
@@ -787,25 +790,64 @@ class ChordPress_Renderer {
      * Go through each line and process it
      */
     $this->inMonospace = false;
+    $openSections = []; // Stack to track open sections
     foreach ($text as $line) {
+      $trimmed = trim($line);
+
+      if (strpos($trimmed, '{start_of_verse}') !== false) {
+        $songsheetHtml .= "<div class=\"cpress_verse\">\n<div class=\"cpress_line\">\n";
+        $openSections[] = 'verse';
+        continue; // no need to process further for this line
+      }
+
+      if (strpos($trimmed, '{end_of_verse}') !== false) {
+        if (!empty($openSections) && end($openSections) === 'verse') {
+          array_pop($openSections);
+          $songsheetHtml .= "</div></div>\n";
+        }
+        continue; // no need to process further for this line
+      }
+
+      if (strpos($trimmed, '{start_of_chorus}') !== false) {
+        $songsheetHtml .= "<div class=\"cpress_chorus\">\n<div class=\"cpress_line\">\n";
+        $openSections[] = 'chorus';
+        continue; // no need to process further for this line
+      }
+
+      if (strpos($trimmed, '{end_of_chorus}') !== false) {
+        if (!empty($openSections) && end($openSections) === 'chorus') {
+          array_pop($openSections);
+          $songsheetHtml .= "</div></div>\n";
+        }
+        continue; // no need to process further for this line
+      }
+
       if ($this->inMonospace && strpos($line, "{end_of_monospace}") === false) {
         $songsheetHtml .= $line;
       } else {
         $songsheetHtml .= $this->formatAndDisplayLine($line);
       }
     }
-    $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
+    // Close any remaining open sections
+    while (!empty($openSections)) {
+      $section = array_pop($openSections);
+      $songsheetHtml .= "</div></div>\n";
+    }
 
     /**
      * End of ChordPress song
      */
-    $songsheetHtml .= "</div>\n<!--end: ChordPress SongSheet-->\n";
+    $songsheetHtml .= "</div>\n
+    <!-- /ChordPress Song %cpressID% -->\n
+    <!-- /ChordPress -->\n\n";
+
+    $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
 
     /**
      * Build chord sheet if option set to true.
      */
     if ($this->showChordSheet) {
-      $chordSheetText = "\n<!--begin: ChordPress ChordSheet-->\n";
+      $chordSheetText = "\n<!-- ChordPress ChordSheet-->\n";
       $chordSheetText .= "<div class='cpress_chordsheet'>\n";
       $chordSheetText .= "<div><hr></div>\n";
       $chordSheetText .= "<p><i>" . esc_html(__('These known chords are used in this song', 'chordpress')) . ".</i></p>";
@@ -816,7 +858,9 @@ class ChordPress_Renderer {
           $chordSheetText .= $this->C->createSvgChord(true);
         }
       }
-      $chordSheetText .= "</div>\n<div style=\"clear:both; padding: 16px 0 16px 0;\"><hr></div>\n<!--end: ChordPress ChordSheet-->\n\n";
+      $chordSheetText .= "</div>\n
+      <div style=\"clear:both; padding: 16px 0 16px 0;\"><hr></div>\n
+      <!-- /ChordPress ChordSheet-->\n\n";
       if ($this->showChordSheetOnTop) {
         $songsheetHtml = $chordSheetText . $songsheetHtml;
       } else {
@@ -846,14 +890,19 @@ class ChordPress_Renderer {
    *
    */
   private function buildInteractionMenu(): string {
-    $interactionForm = "<div class=\"cpress-interaction cpress-row";
+    $interactionForm = "
+      <!-- ChordPress Interaction -->
+      <div class=\"cpress-interaction cpress-row";
+
     if ($this->fixedInteraction) {
       $interactionForm .= " fixed";
     }
+
     $interactionForm .= "\">";
 
     if (!$this->hideFontsize) {
-      $interactionForm .= "<div class='cpress-col cpress-mb-2'>" . __('Font Size', 'chordpress') . "<br>
+      $interactionForm .= "
+        <div class='cpress-col cpress-mb-2'>" . __('Font Size', 'chordpress') . "<br>
           <div class='cpress-btn-group' role='group'>
             <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', -5);\">-</button>
             <button id=\"btnFontSize-%cpressID%\"  type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"changeFontSize('%cpressID%', 0);\">100%</button>
@@ -881,11 +930,11 @@ class ChordPress_Renderer {
             $initialText = '0';
           }
           $interactionForm .= __('Transpose', 'chordpress') . "<br>
-              <div class='cpress-btn-group' role='group'>
-                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'down', " . $songKey . ");\">-</button>
-                <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'reset', " . $songKey . ");\" value='0'>" . $initialText . "</button>
-                <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'up', " . $songKey . ");\">+</button>
-              </div>";
+            <div class='cpress-btn-group' role='group'>
+              <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'down', " . $songKey . ");\">-</button>
+              <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'reset', " . $songKey . ");\" value='0'>" . $initialText . "</button>
+              <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChords('%cpressID%', 'btnTranspose-', 'up', " . $songKey . ");\">+</button>
+            </div>";
         } else {
           //
           // Let's see if a 'Key' directive was given. If so, we can add the transposed keys to the list.
@@ -982,6 +1031,7 @@ class ChordPress_Renderer {
       }
       $interactionForm .= "</div>";
     }
+
     $interactionForm .= "<div class='cpress-col cpress-pr-0'>";
     if (!$this->hidePrint) {
       $printTitle = 'ChordPress SongSheet';
@@ -990,7 +1040,10 @@ class ChordPress_Renderer {
       }
       $interactionForm .= "<br><button class=\"cpress-btn cpress-btn-secondary cpress-btn-sm\" onclick=\"printElement('%cpressID%', '" . $printTitle . "', '" . $this->songsheetStyles . "');\">" . __('Print', 'chordpress') . "</button>\n";
     }
-    $interactionForm .= "</div>";
+    $interactionForm .= "</div>
+      </div>\n
+      <!-- /ChordPress Interaction -->\n";
+
     return $interactionForm;
   }
 
