@@ -716,6 +716,7 @@ class ChordPress_Renderer {
      * The styles need to be a one-line string in a separate variable because it is passed to the Javascript print function
      */
     $this->songsheetStyles = "<style>div.cpress { float: " . $this->float . "; clear: both; } div.cpress_line { " . $this->lineStyle . "; } div.cpress_line_section { display: inline; float: left; } div.cpress_line_section .chord .chordshort { " . $this->chordStyle . "; } div.cpress_line_section .lyric { " . $this->lyricsStyle . "; } div.cpress_chorus { " . $this->chorusStyle . "; } div.cpress_verse { " . $this->verseStyle . "; } div.cpress_clear { clear: both; } div.cpress_meta { " . $this->metaStyle . "; } div.cpress_interaction { float: right; } div.cpress_interaction select { width: auto; } span.cpress_comment { " . $this->commentStyle . "; } div.cpress_chordsheet { text-align: center; }</style>";
+    $this->songsheetStyles = str_replace(';;', ';', $this->songsheetStyles);
 
     $songsheetHtml = "\n\n
       <!-- ChordPress -->\n\n
@@ -1023,7 +1024,7 @@ class ChordPress_Renderer {
                 <button id=\"btnTranspose-%cpressID%\" type='button' class='cpress-btn cpress-btn-outline-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'reset', " . $baseNote . ");\" value='0'>" . $initialText . "</button>
                 <button type='button' class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"transposeChromatic('%cpressID%', 'btnTranspose-', 'up', " . $baseNote . ");\">+</button>
               </div>
-              </span>";
+            </span>";
         }
         $interactionForm .= "
               </div>
@@ -1038,7 +1039,10 @@ class ChordPress_Renderer {
       if (strlen($this->arrDirectives['title']) && !$this->hideTitle) {
         $printTitle = $this->arrDirectives['title'];
       }
-      $interactionForm .= "<br><button class=\"cpress-btn cpress-btn-secondary cpress-btn-sm\" onclick=\"printElement('%cpressID%', '" . $printTitle . "', '" . $this->songsheetStyles . "');\">" . __('Print', 'chordpress') . "</button>\n";
+      $escapedStyles = htmlspecialchars($this->songsheetStyles, ENT_QUOTES);
+      $printFunctionCall = "printElement('%cpressID%', '{$printTitle}', '{$escapedStyles}');";
+      $printButton = "<br><button class='cpress-btn cpress-btn-secondary cpress-btn-sm' onclick=\"{$printFunctionCall}\">" . __('Print', 'chordpress') . "</button>";
+      $interactionForm .= $printButton;
     }
     $interactionForm .= "</div>
       </div>\n
