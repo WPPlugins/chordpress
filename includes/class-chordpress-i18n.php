@@ -35,7 +35,6 @@ class ChordPress_i18n {
    * @since    2.0.0
    */
   public function load_plugin_textdomain() {
-
     load_plugin_textdomain(
       'chordpress',
       false,

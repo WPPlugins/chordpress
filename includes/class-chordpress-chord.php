@@ -16,8 +16,8 @@ class ChordPress_Chord {
    *
    * @since    3.0.0
    * @access   private
-   * @var      string $backgroundColor       The background color of the chord diagram. By default the background is transparent.
-   *                                         To set the background to transparent either set this to 'none' or undefined. Default: 'none'
+   * @var      string $backgroundColor The background color of the chord diagram. By default the background is transparent.
+   *                                   To set the background to transparent either set this to 'none' or undefined. Default: 'none'
    */
   private $backgroundColor;
 
@@ -26,8 +26,8 @@ class ChordPress_Chord {
    *
    * @since    3.0.0
    * @access   private
-   * @var      integer $barreChordRadius       Barre chord rectangle border radius relative to the nutSize (eg. 1 means completely round endges,
-   *                                           0 means not rounded at all). Default: 0.25
+   * @var      integer $barreChordRadius Barre chord rectangle border radius relative to the nutSize (eg. 1 means completely round endges,
+   *                                     0 means not rounded at all). Default: 0.25
    */
   private $barreChordRadius;
 
@@ -75,8 +75,8 @@ class ChordPress_Chord {
    *
    * @since    3.0.0
    * @access   private
-   * @var      string $color       Global color of the whole chart. Can be overridden with more specifig color settings such as
-   *                               $titleColor or $stringColor etc. Default: '#000000'
+   * @var      string $color Global color of the whole chart. Can be overridden with more specifig color settings such as
+   *                         $titleColor or $stringColor etc. Default: '#000000'
    */
   private $color;
 
@@ -92,9 +92,9 @@ class ChordPress_Chord {
   /**
    * Fingers.
    * Example:
-   *    [1, 2, '2'],                           // finger at string 1, fret 2, with text '2'
+   *    [1, 2, '2'],                             // finger at string 1, fret 2, with text '2'
    *    [2, 3, { text: '3', color: '#F00' }],  // finger at string 2, fret 3, with text '3', colored red
-   *    [3, 3, { shape: 'triangle' }],         // finger is triangle shaped
+   *    [3, 3, { shape: 'triangle' }],           // finger is triangle shaped
    *    [6, 'x']
    *
    * @since    3.0.0
@@ -108,8 +108,8 @@ class ChordPress_Chord {
    *
    * @since    3.0.0
    * @access   private
-   * @var      string $fixedDiagramPosition       When set to 'true' the distance between the chord diagram and the top of the SVG stayes the same,
-   *                                              no matter if a title is defined or not. Default: 'false'
+   * @var      string $fixedDiagramPosition When set to 'true' the distance between the chord diagram and the top of the SVG stayes the same,
+   *                                        no matter if a title is defined or not. Default: 'false'
    */
   private $fixedDiagramPosition;
 
@@ -244,8 +244,8 @@ class ChordPress_Chord {
    *
    * @since    3.0.0
    * @access   private
-   * @var      integer $sidePadding       The minimum side padding (from the guitar to the edge of the SVG) relative to the whole width.
-   *                                      This is only applied if it's larger than the letters inside of the padding (eg the starting fret). Default: 0.2
+   * @var      integer $sidePadding The minimum side padding (from the guitar to the edge of the SVG) relative to the whole width.
+   *                                This is only applied if it's larger than the letters inside of the padding (eg the starting fret). Default: 0.2
    */
   private $sidePadding;
 
@@ -317,8 +317,8 @@ class ChordPress_Chord {
    *
    * @since    3.0.0
    * @access   private
-   * @var      integer $titleFontSize       Font size of the title. This is only the initial font size. If the title doesn't fit,
-   *                                        the title is automatically scaled so that it fits. Default: 48
+   * @var      integer $titleFontSize Font size of the title. This is only the initial font size. If the title doesn't fit,
+   *                                  the title is automatically scaled so that it fits. Default: 48
    */
   private $titleFontSize;
 
@@ -379,8 +379,8 @@ class ChordPress_Chord {
     /**
      * Get global options or set diagram defaults
      */
-    if (!$this->color = get_option('chordpress_text_chord_color')) $this->color = '#000000';                                // Global color of the whole chart. Can be overridden with more specifig color settings such as @link titleColor or @link stringColor etc. | '#000000'
-    if (!$this->nutColor = get_option('chordpress_text_chord_nutColor')) $this->nutColor = $this->color;                    // Color of a finger / nut | '#000'
+    if (!$this->color = get_option('chordpress_text_chord_color')) $this->color = '#000000';            // Global color of the whole chart. Can be overridden with more specifig color settings such as @link titleColor or @link stringColor etc. | '#000000'
+    if (!$this->nutColor = get_option('chordpress_text_chord_nutColor')) $this->nutColor = $this->color;  // Color of a finger / nut | '#000'
 
     if (!$this->backgroundColor = get_option('chordpress_text_chord_backgroundColor')) $this->backgroundColor = "none";                            // The background CSS color of the chord diagram. By default the background is transparent. To set the background to transparent either set this to 'none' or undefined | 'none'
     if (!$this->barreChordRadius = get_option('chordpress_number_chord_barreChordRadius')) $this->barreChordRadius = 0.25;                         // Barre chord rectangle border radius relative to the nutSize (eg. 1 means completely round endges, 0 means not rounded at all) | 0.25
@@ -400,7 +400,7 @@ class ChordPress_Chord {
     if (!$this->nutSize = get_option('chordpress_number_chord_nutSize')) $this->nutSize = 0.85;                                                    // Size of a nut relative to the string spacing | 0.65
     if (!$this->nutStrokeColor = get_option('chordpress_text_chord_nutStrokeColor')) $this->nutStrokeColor = $this->nutColor;                      // Stroke color of a nut. Defaults to the nut color if not set | nutColor
     if (!$this->nutStrokeWidth = get_option('chordpress_number_chord_nutStrokeWidth')) $this->nutStrokeWidth = 0;                                  // Stroke width of a nut | 0
-    if (!$this->nutTextColor = get_option('chordpress_text_chord_nutTextColor')) $this->nutTextColor = '#FFFFFF';                                  // Color of text inside nuts | '#FFF'
+    if (!$this->nutTextColor = get_option('chordpress_text_chord_nutTextColor')) $this->nutTextColor = '#FFFFFF';                                // Color of text inside nuts | '#FFF'
     if (!$this->nutTextSize = get_option('chordpress_number_chord_nutTextSize')) $this->nutTextSize = 24;                                          // Size of text inside nuts | 22
     if (!$this->position = get_option('chordpress_number_chord_position')) $this->position = 1;                                                    // Default position if no positon is provided (first fret is 1) | 1
     if (!$this->sidePadding = get_option('chordpress_number_chord_sidePadding')) $this->sidePadding = 0.2;                                         // The minimum side padding (from the guitar to the edge of the SVG) relative to the whole width. This is only applied if it's larger than the letters inside of the padding (eg the starting fret) | 0.2
@@ -415,7 +415,6 @@ class ChordPress_Chord {
     if (!$this->tuning = get_option('chordpress_text_chord_tuning')) $this->tuning = "['E','A','D','G','B','E']";                                  // Labels under the strings. Can be any string. | [ 'E', 'A', 'D', 'G', 'B', 'E' ]
     if (!$this->tuningsColor = get_option('chordpress_text_chord_tuningsColor')) $this->tuningsColor = $this->color;                               // Tunings color (overrides color) | color
     if (!$this->tuningsFontSize = get_option('chordpress_number_chord_tuningsFontSize')) $this->tuningsFontSize = 28;                              // Font size of the string labels | 28
-
   }
 
   /**
@@ -428,15 +427,15 @@ class ChordPress_Chord {
    * @return    string
    * @since     3.0.0
    */
-  public function buildChordParmeters() {
+  public function buildChordParameters() {
     $this->fingers = $this->replace_brackets($this->fingers);
     if (!strpos($this->barres, 'fromString')) $this->barres = $this->setBarres($this->barres);
 
     $output = ".chord({
-      title: '" . $this->title . "',
+      title: '" . esc_js($this->title) . "',
       fingers: [" . htmlspecialchars_decode($this->fingers, ENT_QUOTES) . "],
       barres: [" . htmlspecialchars_decode($this->barres, ENT_QUOTES) . "],
-      position: " . $this->position . ",
+      position: " . intval($this->position) . ",
     })\n";
 
     return $output;
@@ -452,40 +451,40 @@ class ChordPress_Chord {
    * @return    string
    * @since     3.0.0
    */
-  public function buildConfigureParmeters() {
+  public function buildConfigureParameters() {
     $output = ".configure({
-      backgroundColor: '" . $this->backgroundColor . "',
-      barreChordRadius: " . $this->barreChordRadius . ",
-      barreChordStrokeColor: '" . $this->barreChordStrokeColor . "',
-      barreChordStrokeWidth: " . $this->barreChordStrokeWidth . ",
-      color: '" . $this->color . "',
-      emptyStringIndicatorSize: " . $this->emptyStringIndicatorSize . ",
-      fixedDiagramPosition: " . $this->fixedDiagramPosition . ",
-      fontFamily: '" . $this->fontFamily . "',
-      fretColor: '" . $this->fretColor . "',
-      fretLabelColor: '" . $this->fretLabelColor . "',
-      fretLabelPosition: '" . $this->fretLabelPosition . "',
-      fretLabelFontSize: " . $this->fretLabelFontSize . ",
-      frets: " . $this->frets . ",
-      fretSize: " . $this->fretSize . ",
-      nutColor: '" . $this->nutColor . "',
-      nutSize: " . $this->nutSize . ",
-      nutStrokeColor: '" . $this->nutStrokeColor . "',
-      nutStrokeWidth: " . $this->nutStrokeWidth . ",
-      nutTextColor: '" . $this->nutTextColor . "',
-      nutTextSize: " . $this->nutTextSize . ",
-      sidePadding: " . $this->sidePadding . ",
-      stringColor: '" . $this->stringColor . "',
-      strings: " . $this->strings . ",
-      strokeWidth: " . $this->strokeWidth . ",
-      style: '" . $this->style . "',
-      titleBottomMargin: " . $this->titleBottomMargin . ",
-      titleColor: '" . $this->titleColor . "',
-      titleFontSize: " . $this->titleFontSize . ",
-      topFretWidth: " . $this->topFretWidth . ",
+      backgroundColor: '" . esc_js($this->backgroundColor) . "',
+      barreChordRadius: " . floatval($this->barreChordRadius) . ",
+      barreChordStrokeColor: '" . esc_js($this->barreChordStrokeColor) . "',
+      barreChordStrokeWidth: " . intval($this->barreChordStrokeWidth) . ",
+      color: '" . esc_js($this->color) . "',
+      emptyStringIndicatorSize: " . floatval($this->emptyStringIndicatorSize) . ",
+      fixedDiagramPosition: " . esc_js($this->fixedDiagramPosition) . ",
+      fontFamily: '" . esc_js($this->fontFamily) . "',
+      fretColor: '" . esc_js($this->fretColor) . "',
+      fretLabelColor: '" . esc_js($this->fretLabelColor) . "',
+      fretLabelPosition: '" . esc_js($this->fretLabelPosition) . "',
+      fretLabelFontSize: " . intval($this->fretLabelFontSize) . ",
+      frets: " . intval($this->frets) . ",
+      fretSize: " . floatval($this->fretSize) . ",
+      nutColor: '" . esc_js($this->nutColor) . "',
+      nutSize: " . floatval($this->nutSize) . ",
+      nutStrokeColor: '" . esc_js($this->nutStrokeColor) . "',
+      nutStrokeWidth: " . intval($this->nutStrokeWidth) . ",
+      nutTextColor: '" . esc_js($this->nutTextColor) . "',
+      nutTextSize: " . intval($this->nutTextSize) . ",
+      sidePadding: " . floatval($this->sidePadding) . ",
+      stringColor: '" . esc_js($this->stringColor) . "',
+      strings: " . intval($this->strings) . ",
+      strokeWidth: " . intval($this->strokeWidth) . ",
+      style: '" . esc_js($this->style) . "',
+      titleBottomMargin: " . intval($this->titleBottomMargin) . ",
+      titleColor: '" . esc_js($this->titleColor) . "',
+      titleFontSize: " . intval($this->titleFontSize) . ",
+      topFretWidth: " . intval($this->topFretWidth) . ",
       tuning: " . htmlspecialchars_decode($this->tuning, ENT_QUOTES) . ",
-      tuningsColor: '" . $this->tuningsColor . "',
-      tuningsFontSize: " . $this->tuningsFontSize . ",
+      tuningsColor: '" . esc_js($this->tuningsColor) . "',
+      tuningsFontSize: " . intval($this->tuningsFontSize) . ",
     })";
     return $output;
   }
@@ -515,17 +514,17 @@ class ChordPress_Chord {
      * Build output
      */
     $output = "\n\n
-        <!-- ChordPress Chord -->
-        <div id=\"" . $id . "\" class=\"cpress-chord\" style=\"width:" . $this->canvasWidth . "px;" . $float . "\"></div>
-        <script>\n
-            async function drawChord" . $id . "() {
-                var chart = new svguitar.SVGuitarChord('#" . $id . "')
-                " . $this->buildChordParmeters() . "
-                " . $this->buildConfigureParmeters() . "
-                .draw();
-            };
-            drawChord" . $id . "();
-        </script>\n\n";
+      <!-- ChordPress Chord -->
+      <div id=\"" . esc_attr($id) . "\" class=\"cpress-chord\" style=\"width:" . intval($this->canvasWidth) . "px;" . esc_attr($float) . "\"></div>
+      <script>\n
+        async function drawChord" . esc_js($id) . "() {
+          var chart = new svguitar.SVGuitarChord('#" . esc_js($id) . "')
+          " . $this->buildChordParameters() . "
+          " . $this->buildConfigureParameters() . "
+          .draw();
+        };
+        drawChord" . esc_js($id) . "();
+      </script>\n\n";
     return $output;
   }
 
@@ -543,13 +542,13 @@ class ChordPress_Chord {
    */
   public function createSvgChordFunction($id) {
     $output = "\n\n
-        function drawChord" . $id . "() {
-            var chart = new svguitar.SVGuitarChord('#" . $id . "')
-            " . $this->buildChordParmeters() . "
-            " . $this->buildConfigureParmeters() . "
-            .draw();
-        };
-        \n\n";
+      function drawChord" . esc_js($id) . "() {
+        var chart = new svguitar.SVGuitarChord('#" . esc_js($id) . "')
+        " . $this->buildChordParameters() . "
+        " . $this->buildConfigureParameters() . "
+        .draw();
+      };
+      \n\n";
     return $output;
   }
 
@@ -571,12 +570,15 @@ class ChordPress_Chord {
    * --------------------------------------------------------------------------
    *
    * @param string $property Property name
-   * @param string $value    Value to set the property to
+   * @param mixed  $value    Value to set the property to
    *
    * @since     2.1.0
    */
   public function setProperty($property, $value) {
-    $this->{$property} = $value;
+    // Validate property exists to prevent arbitrary property injection
+    if (property_exists($this, $property)) {
+      $this->{$property} = $value;
+    }
   }
 
   /**
@@ -585,7 +587,7 @@ class ChordPress_Chord {
    * --------------------------------------------------------------------------
    *
    * @param array|string $a   Array to print out pretty
-   * @param boolean      $die Wether to die after dump or not. Default: true.
+   * @param boolean      $die Whether to die after dump or not. Default: true.
    *
    * @return   void
    * @since    2.0.0
@@ -640,18 +642,23 @@ class ChordPress_Chord {
    * and converts it into an SVGuitar chord javascript tuning parameter:
    * {fromString:6,toString:1,fret:1}
    *
-   * @param string   Simple tuning string
+   * @param string $simpleBarre Simple barre string
    *
+   * @return string Formatted barre string
    * @since     3.0.0
    */
   public function setBarres($simpleBarre) {
     if (!strlen($simpleBarre)) {
       $this->setProperty('barres', "");
-      return;
+      return "";
     }
     $barre_array = explode(",", $simpleBarre);
-    $barres = "{fromString:" . $barre_array[0] . ",toString:" . $barre_array[1] . ",fret:" . $barre_array[2] . "}";
-    $this->setProperty('barres', $barres);
+    if (count($barre_array) >= 3) {
+      $barres = "{fromString:" . intval($barre_array[0]) . ",toString:" . intval($barre_array[1]) . ",fret:" . intval($barre_array[2]) . "}";
+      $this->setProperty('barres', $barres);
+      return $barres;
+    }
+    return "";
   }
 
   /**
@@ -661,18 +668,19 @@ class ChordPress_Chord {
    *
    * This function converts a simplified tuning input:
    * 'E,A,D,G,B,E'
-   * and convert it into anSVGuitar chord javascript tuning parameter:
+   * and convert it into an SVGuitar chord javascript tuning parameter:
    * ['E','A','D','G','B','E']
    *
-   * @param string   Simple tuning string
+   * @param string $simpleTuning Simple tuning string
    *
+   * @return void
    * @since     3.0.0
    */
   public function setTuning($simpleTuning) {
     $tuning_array = explode(",", $simpleTuning);
     $tuning = "[";
     foreach ($tuning_array as $note) {
-      $tuning .= "'" . $note . "',";
+      $tuning .= "'" . esc_js(trim($note)) . "',";
     }
     $tuning = rtrim($tuning, ",");
     $tuning .= "]";

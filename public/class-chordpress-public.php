@@ -80,7 +80,7 @@ class ChordPress_Public {
    * @since    1.0.0
    */
   public function enqueue_scripts() {
-    wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/chordpress-public.js', array( 'jquery' ), $this->version, null);
+    wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/chordpress-public.js', array('jquery'), $this->version, null);
     wp_enqueue_script($this->plugin_name . '-svguitar', plugin_dir_url(__DIR__) . 'global/js/svguitar.umd.js');
   }
 
@@ -109,7 +109,7 @@ class ChordPress_Public {
      * Get shortcode arguments and change to lower case
      */
     $atts = array_change_key_case((array)$atts, CASE_LOWER);
-//        $this->dnd($atts);
+    //        $this->dnd($atts);
 
     /**
      * Set shortcode argument defaults
@@ -128,7 +128,7 @@ class ChordPress_Public {
       $atts,
       $tag
     );
-//        $this->dnd($atts);
+    //        $this->dnd($atts);
     $content = do_shortcode($content);
 
     /**
@@ -249,7 +249,11 @@ class ChordPress_Public {
          */
         $alert_style = 'warning';
         $alert_title = __('ChordPress Warning', 'chordpress');
-        $alert_text = __('There is no chord record with the ID ' . $args['chord'] . '.', 'chordpress') . ' ' . __('Please check your input or create a proper post for this chord first.', 'chordpress');
+        $alert_text = sprintf(
+          /* translators: %s: Chord post ID */
+          __('There is no chord record with the ID %s. Please check your input or create a proper post for this chord first.', 'chordpress'),
+          esc_html($args['chord'])
+        );
         $output = $P->alert($alert_style, $alert_title, 'strong', $alert_text, true, '98%');
         return $output;
       }
@@ -257,14 +261,14 @@ class ChordPress_Public {
       /**
        * Retrieve chord data from shortcode parameters
        */
-      if (strlen($args['barre'])) $C->setBarres($args['barre']);
-      if (strlen($args['fingers'])) $C->setProperty('fingers', $C->replace_brackets($args['fingers']));
-      if (strlen($args['frets'])) $C->setProperty('frets', $args['frets']);
-      if (strlen($args['position'])) $C->setProperty('position', $args['position']);
-      if (strlen($args['strings'])) $C->setProperty('strings', $args['strings']);
-      if (strlen($args['title'])) $C->setProperty('title', $args['title']);
+      if (strlen($args['barre'])) $C->setBarres(sanitize_text_field($args['barre']));
+      if (strlen($args['fingers'])) $C->setProperty('fingers', $C->replace_brackets(sanitize_text_field($args['fingers'])));
+      if (strlen($args['frets'])) $C->setProperty('frets', absint($args['frets']));
+      if (strlen($args['position'])) $C->setProperty('position', absint($args['position']));
+      if (strlen($args['strings'])) $C->setProperty('strings', absint($args['strings']));
+      if (strlen($args['title'])) $C->setProperty('title', sanitize_text_field($args['title']));
       else $C->setProperty('title', __('No Title', 'chordpress'));
-      if (strlen($args['tuning'])) $C->setTuning($args['tuning']);
+      if (strlen($args['tuning'])) $C->setTuning(sanitize_text_field($args['tuning']));
     }
 
     $output = $C->createSvgChord();
@@ -287,24 +291,25 @@ class ChordPress_Public {
    * @return string                Modal chord dialog HTML
    */
   private function create_modal_chord($postid, $chord) {
-    $modal_chord = '<button id="cpress-chord-' . $postid . '-modal-button">Click here to trigger the modal!</button>
-        <div id="cpress-chord-' . $postid . '-modal" class="cpress-modal">
+    $safe_postid = esc_attr($postid);
+    $modal_chord = '<button id="cpress-chord-' . $safe_postid . '-modal-button">Click here to trigger the modal!</button>
+        <div id="cpress-chord-' . $safe_postid . '-modal" class="cpress-modal">
             <div class="cpress-modal-content">
-                <span id="cpress-chord-' . $postid . '-modal-close" class="cpress-modal-close">&times;</span>
+                <span id="cpress-chord-' . $safe_postid . '-modal-close" class="cpress-modal-close">&times;</span>
                 ' . $chord . '
             </div>
         </div>
         <script>
-        var cpress_' . $postid . '_modal = document.getElementById("cpress-chord-' . $postid . '-modal");
-        var cpress_' . $postid . '_btn = document.getElementById("cpress-chord-' . $postid . '-modal-button");
-        var cpress_' . $postid . '_close = document.getElementById("cpress-chord-' . $postid . '-modal-close");
+        var cpress_' . esc_js($postid) . '_modal = document.getElementById("cpress-chord-' . $safe_postid . '-modal");
+        var cpress_' . esc_js($postid) . '_btn = document.getElementById("cpress-chord-' . $safe_postid . '-modal-button");
+        var cpress_' . esc_js($postid) . '_close = document.getElementById("cpress-chord-' . $safe_postid . '-modal-close");
 
-        cpress_' . $postid . '_btn.onclick = function()   { cpress_' . $postid . '_modal.style.display = "block"; }
-        cpress_' . $postid . '_close.onclick = function() { cpress_' . $postid . '_modal.style.display = "none"; }
+        cpress_' . esc_js($postid) . '_btn.onclick = function()   { cpress_' . esc_js($postid) . '_modal.style.display = "block"; }
+        cpress_' . esc_js($postid) . '_close.onclick = function() { cpress_' . esc_js($postid) . '_modal.style.display = "none"; }
 
         window.onclick = function(event) {
-            if (event.target == cpress_' . $postid . '_modal) {
-                cpress_' . $postid . '_modal.style.display = "none";
+            if (event.target == cpress_' . esc_js($postid) . '_modal) {
+                cpress_' . esc_js($postid) . '_modal.style.display = "none";
             }
         } 
         </script>';
@@ -328,11 +333,15 @@ class ChordPress_Public {
       'posts_per_page' => 1,
       'post_type' => 'guitar_chord',
       'meta_key' => 'guitar_chord_name',
-      'meta_value' => $shortname
+      'meta_value' => sanitize_text_field($shortname)
     );
     $query_result = new WP_Query($query_args);
 
-    return $query_result->posts[0]->ID;
+    if (!empty($query_result->posts)) {
+      return $query_result->posts[0]->ID;
+    }
+
+    return null;
   }
 
   /**
@@ -347,16 +356,18 @@ class ChordPress_Public {
    * @return string               SVGuitar HTML
    */
   private function build_guitar_chord_from_postid($postid) {
+    $C = new ChordPress_Chord();
+
     /**
      * Retrieve chord data from chord post
      */
-    $guitar_chord_barres = esc_html(get_post_meta($positid, 'guitar_chord_barres', true));
-    $guitar_chord_fingers = esc_html(get_post_meta($positid, 'guitar_chord_fingers', true));
-    $guitar_chord_frets = esc_html(get_post_meta($positid, 'guitar_chord_frets', true));
-    $guitar_chord_strings = esc_html(get_post_meta($positid, 'guitar_chord_strings', true));
-    $guitar_chord_position = esc_html(get_post_meta($positid, 'guitar_chord_position', true));
-    $guitar_chord_title = get_the_title($positid);
-    $guitar_chord_tuning = esc_html(get_post_meta($positid, 'guitar_chord_tuning', true));
+    $guitar_chord_barres = esc_html(get_post_meta($postid, 'guitar_chord_barres', true));
+    $guitar_chord_fingers = esc_html(get_post_meta($postid, 'guitar_chord_fingers', true));
+    $guitar_chord_frets = esc_html(get_post_meta($postid, 'guitar_chord_frets', true));
+    $guitar_chord_strings = esc_html(get_post_meta($postid, 'guitar_chord_strings', true));
+    $guitar_chord_position = esc_html(get_post_meta($postid, 'guitar_chord_position', true));
+    $guitar_chord_title = get_the_title($postid);
+    $guitar_chord_tuning = esc_html(get_post_meta($postid, 'guitar_chord_tuning', true));
 
     /**
      * Set chord properties

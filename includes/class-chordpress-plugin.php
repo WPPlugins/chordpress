@@ -38,7 +38,7 @@ class ChordPress_Plugin {
    *
    * @since    1.0.0
    * @access   protected
-   * @var      array $plugin_name Array of option names.
+   * @var      array $options Array of option names.
    */
   protected $options = array();
 
@@ -77,6 +77,15 @@ class ChordPress_Plugin {
    * @var      string $plugin_uri The prefix to uniquely identify this plugin.
    */
   protected $plugin_uri;
+
+  /**
+   * The donation URI of this plugin.
+   *
+   * @since    2.0.0
+   * @access   protected
+   * @var      string $plugin_donation_uri The donation URI of this plugin.
+   */
+  protected $plugin_donation_uri;
 
   /**
    * Bootstrap alert box styles.
@@ -376,7 +385,7 @@ class ChordPress_Plugin {
    *
    * Get the option names of the plugin.
    *
-   * @return    string    Get the option names of the plugin.
+   * @return    array    Get the option names of the plugin.
    * @since     2.0.0
    */
   public function get_options() {
@@ -492,14 +501,13 @@ class ChordPress_Plugin {
    *
    * @param string $style        Bootstrap style
    * @param string $heading      Heading of the alert box
-   * @param string $headingLevel HTML heading level to use for the heading
+   * @param string $headinglevel HTML heading level to use for the heading
    * @param string $content      Content of the alert box
    * @param string $dismissible  Whether the alert box shall be dismissible or not: yes/no
    * @param string $width        Width of the alert box in pixel or percent
    *
    * @return string HTML code of the alert box
    * @since     2.0.0
-   *
    */
   public function alert($style, $heading, $headinglevel, $content, $dismissible, $width = '100%') {
     /**
@@ -565,12 +573,12 @@ class ChordPress_Plugin {
    *
    * Pretty prints an array.
    *
-   * @param array $a Array to print out pretty
+   * @param array $a Array to print out pretty.
    *
-   * @return   string
+   * @return string HTML formatted code display.
    * @since    2.0.0
    */
-  function pretty_dump($a) {
+  public function pretty_dump($a) {
     return highlight_string("<?php\n\$data =\n" . var_export($a, true) . ";\n?>");
   }
 
@@ -579,10 +587,12 @@ class ChordPress_Plugin {
    * Dump and Die.
    * --------------------------------------------------------------------------
    *
-   * @param array $a   Array to print out pretty
-   * @param bool  $die Flag to die after dump or not
+   * Dumps an array with pretty formatting and optionally terminates execution.
    *
-   * @return string
+   * @param array $a   Array to print out pretty.
+   * @param bool  $die Flag to die after dump or not.
+   *
+   * @return string HTML formatted code display.
    * @since 3.2.0
    */
   public function dnd($a, $die = true) {
@@ -596,28 +606,34 @@ class ChordPress_Plugin {
    * Create Option Row.
    * --------------------------------------------------------------------------
    *
-   * Meta Links (shown underneath the plugin description on the admin plugin page)
+   * Creates HTML table row for plugin options form.
    *
+   * @param string $type        Input type (text, checkbox).
+   * @param string $name        Option name.
+   * @param string $label       Label text for the option.
+   * @param string $description Description text for the option.
+   *
+   * @return string HTML table row markup.
    * @since    1.0.0
    */
   public function create_option_row($type, $name, $label, $description) {
     $output = "
       <tr>
-        <th scope=\"row\"><label for=\"" . $name . "\">" . $label . "</label></th>
+        <th scope=\"row\"><label for=\"" . esc_attr($name) . "\">" . esc_html($label) . "</label></th>
         <td>";
 
     switch ($type) {
 
       case 'text':
-        $output .= "<input type=\"text\" id=\"" . $name . "\" name=\"" . $name . "\" value=\"" . get_option($name) . "\" />";
+        $output .= "<input type=\"text\" id=\"" . esc_attr($name) . "\" name=\"" . esc_attr($name) . "\" value=\"" . esc_attr(get_option($name)) . "\" />";
         break;
 
       case 'checkbox':
-        $output .= "<input type=\"checkbox\" id=\"" . $name . "\" name=\"" . $name . "\" " . checked(get_option($name), 1) . " value=\"1\" />";
+        $output .= "<input type=\"checkbox\" id=\"" . esc_attr($name) . "\" name=\"" . esc_attr($name) . "\" " . checked(get_option($name), 1, false) . " value=\"1\" />";
         break;
     }
 
-    $output .= "<p class=\"description\">" . $description . "</p>
+    $output .= "<p class=\"description\">" . esc_html($description) . "</p>
         </td>
       </tr>";
 
@@ -629,16 +645,46 @@ class ChordPress_Plugin {
    * Add Guitar Chord.
    * --------------------------------------------------------------------------
    *
-   * Insert a new guitar chord post
+   * Insert a new guitar chord post.
    *
-   * @param array $chord
+   * @param array $chord Array containing chord data.
    *
-   * @return void
+   * @return int|false Post ID on success, false on failure.
    * @since 3.3.0
    */
-  public function add_guitar_chord($chord) {
+  public function add_guitar_chord($chord, $action = 'replace') {
     if (!current_user_can('edit_posts')) {
-      return;
+      return false;
+    }
+
+    // Validate required chord data
+    if (!is_array($chord) || empty($chord['chord_title'])) {
+      return false;
+    }
+
+    // Only delete existing chords if action is 'replace'
+    if ($action === 'replace') {
+      // Check for existing chord posts with the same title and name
+      $existing_posts = get_posts(array(
+        'post_type' => 'guitar_chord',
+        'post_status' => 'any',
+        'title' => wp_strip_all_tags($chord['chord_title']),
+        'meta_query' => array(
+          array(
+            'key' => 'guitar_chord_name',
+            'value' => isset($chord['chord_name']) ? sanitize_text_field($chord['chord_name']) : '',
+            'compare' => '='
+          )
+        ),
+        'numberposts' => -1
+      ));
+
+      // Delete existing chord posts to prevent duplicates
+      if (!empty($existing_posts)) {
+        foreach ($existing_posts as $existing_post) {
+          wp_delete_post($existing_post->ID, true); // Force delete (bypass trash)
+        }
+      }
     }
 
     $chord_post = array(
@@ -654,20 +700,21 @@ class ChordPress_Plugin {
     // Insert the post into the database
     $post_id = wp_insert_post($chord_post);
 
-    if ($post_id) {
+    if ($post_id && !is_wp_error($post_id)) {
       $meta_options = array(
-        'guitar_chord_name' => $chord['chord_name'],
-        'guitar_chord_barres' => $chord['chord_barres'],
-        'guitar_chord_fingers' => $chord['chord_fingers'],
-        'guitar_chord_frets' => $chord['chord_frets'],
-        'guitar_chord_position' => $chord['chord_position'],
-        'guitar_chord_strings' => $chord['chord_strings'],
-        'guitar_chord_tuning' => $chord['chord_tuning'],
+        'guitar_chord_name' => isset($chord['chord_name']) ? sanitize_text_field($chord['chord_name']) : '',
+        'guitar_chord_barres' => isset($chord['chord_barres']) ? sanitize_text_field($chord['chord_barres']) : '',
+        'guitar_chord_fingers' => isset($chord['chord_fingers']) ? sanitize_text_field($chord['chord_fingers']) : '',
+        'guitar_chord_frets' => isset($chord['chord_frets']) ? absint($chord['chord_frets']) : 0,
+        'guitar_chord_position' => isset($chord['chord_position']) ? absint($chord['chord_position']) : 0,
+        'guitar_chord_strings' => isset($chord['chord_strings']) ? absint($chord['chord_strings']) : 6,
+        'guitar_chord_tuning' => isset($chord['chord_tuning']) ? sanitize_text_field($chord['chord_tuning']) : '',
       );
       foreach ($meta_options as $key => $val) {
         update_post_meta($post_id, $key, $val);
       }
+      return $post_id;
     }
-    return $post_id;
+    return false;
   }
 }

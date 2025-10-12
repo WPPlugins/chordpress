@@ -1,35 +1,22 @@
 <?php
 
 /**
- * License management
+ * License management API.
  *
- * @link       https://www.lewe.com
- * @since      2.0.0
- *
- * @package    ChordPress
- * @subpackage ChordPress/includes
- */
-
-/**
- * License management
- *
- * @package    ChordPress
- * @subpackage ChordPress/includes
+ * @since      1.0.0
+ * @package    Lewe Jira Connector
+ * @subpackage Lewe Jira Connector/includes
  * @author     George Lewe <george@lewe.com>
  */
 class ChordPress_License {
-  const SECRET_KEY = '5e091d9b9cbf36.90197318';
-  const LICENSE_SERVER = 'https://lic.lewe.com';
-  const ITEM_REFERENCE = 'ChordPress';
-
   /**
-   * The license key of this plugin.
+   * The JSON response from the license server.
    *
    * @since    1.0.0
-   * @access   private
-   * @var      string $key The license key of this plugin.
+   * @access   public
+   * @var      array $details The JSON response from the license server.
    */
-  private $key = '';
+  public $details;
 
   /**
    * The grace period in days after expiry during which a warning message is displayed.
@@ -41,6 +28,33 @@ class ChordPress_License {
   private $gracePeriod = 30;
 
   /**
+   * The host REST URI.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      $string $host    The host REST URI
+   */
+  private $host;
+
+  /**
+   * The license server item reference.
+   *
+   * @since    2.1.0
+   * @access   private
+   * @var      string $item_reference
+   */
+  private $item_reference;
+
+  /**
+   * The license key of this plugin.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      string $key The license key of this plugin.
+   */
+  private $key = '';
+
+  /**
    * The language array with license response messages.
    *
    * @since    1.0.0
@@ -50,24 +64,46 @@ class ChordPress_License {
   private $lang = array();
 
   /**
-   * The JSON response from the license server.
+   * The unique identifier of this plugin.
    *
    * @since    1.0.0
-   * @access   public
-   * @var      array $details The JSON response from the license server.
+   * @access   protected
+   * @var      string $plugin_slug The string used to uniquely identify this plugin.
    */
-  public $details;
+  protected $plugin_slug;
 
   /**
-   * --------------------------------------------------------------------------
+   * The name of this plugin.
+   *
+   * @since    1.0.0
+   * @access   protected
+   * @var      string $plugin_slug The string used to uniquely identify this plugin.
+   */
+  protected $plugin_title;
+
+  /**
+   * The license server secret key.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      string $secret_key
+   */
+  private $secret_key;
+
+
+  //---------------------------------------------------------------------------
+  /**
    * Constructor.
-   * --------------------------------------------------------------------------
    *
    * Fill the license messages array.
    *
    * @since    1.0.0
    */
   public function __construct() {
+    $this->host = 'https://lic.lewe.com/';
+    $this->secret_key = '5e091d9b9cbf36.90197318';
+    $this->item_reference = 'ChordPress';
+
     $this->lang['lic_active'] = esc_html(__('Active License', 'chordpress'));
     $this->lang['lic_active_subject'] = esc_html(__('This is an active license for this domain. Awesome!', 'chordpress'));
     $this->lang['lic_active_unregistered_subject'] = esc_html(__('This is an active license but not registered for this domain.', 'chordpress'));
@@ -113,123 +149,90 @@ class ChordPress_License {
     $this->lang['lic_unregistered_help'] = esc_html(__('Please contact the administrator to register this domain or obtain a valid license.', 'chordpress'));
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Activate.
-   * --------------------------------------------------------------------------
-   *
    * Activate a license and register the domain the request is coming from.
    *
-   * @return   string    The JSON response from the license server.
+   * @return   JSON    The JSON reponse from the license server.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function activate() {
-    $parms = array(
-      'slm_action' => 'slm_activate',
-      'secret_key' => self::SECRET_KEY,
-      'license_key' => $this->key,
-      'registered_domain' => $_SERVER['SERVER_NAME'],
-      'item_reference' => urlencode(self::ITEM_REFERENCE),
-    );
-
-    $response = $this->callAPI('GET', self::LICENSE_SERVER, $parms);
-    $response = json_decode($response);
-    $this->details = $response;
-    return $response;
+    $request = $this->build_request('activate');
+    $response = wp_remote_get($request);
+    // $http_code = wp_remote_retrieve_response_code( $response );
+    $body = wp_remote_retrieve_body($response);
+    $body = json_decode($body, true); // Decode as associative array
+    $this->details = $body;
+    return $body;
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Call API.
-   * --------------------------------------------------------------------------
+   * Build the REST API request URI.
    *
-   * Call the license server API via curl.
+   * @param array $data Array with request parameters
    *
-   * @param string $method POST, PUT, GET, ...
-   * @param string $url    API host URL
-   * @param array  $parms  URL paramater: array("param" => "value") ==> index.php?param=value
-   *
-   * @return   string       The JSON response from the license server.
-   * @since    1.0.0
+   * @return   string    The REST API request URI
+   * @since    2.1.0
    * @access   private
+   *
    */
-  private function callAPI($method, $url, $data = false) {
-    $curl = curl_init();
+  private function build_request($action = 'check') {
+    $request = $this->host . '?';
 
-    switch (strtoupper($method)) {
-      case "POST":
-        curl_setopt($curl, CURLOPT_POST, 1);
-        if ($data)
-          curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+    switch ($action) {
+      case 'activate':
+        $request .= 'slm_action=slm_activate&secret_key=' . $this->secret_key . '&license_key=' . $this->key . '&registered_domain=' . $_SERVER['SERVER_NAME'] . '&item_reference=' . urlencode($this->item_reference);
         break;
-      case "PUT":
-        curl_setopt($curl, CURLOPT_PUT, 1);
+      case 'deactivate':
+        $request .= 'slm_action=slm_deactivate&secret_key=' . $this->secret_key . '&license_key=' . $this->key . '&registered_domain=' . $_SERVER['SERVER_NAME'] . '&item_reference=' . urlencode($this->item_reference);
         break;
       default:
-        if ($data)
-          $url = sprintf("%s?%s", $url, http_build_query($data));
+        $request .= 'slm_action=slm_check&secret_key=' . $this->secret_key . '&license_key=' . $this->key;
+        break;
     }
 
-    // Optional Authentication:
-    // curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
-    // curl_setopt($curl, CURLOPT_USERPWD, "username:password");
-
-    // Optional Debugging:
-    // $query = LICENSE_SERVER . '?slm_action=' . $data['slm_action'] . '&amp;secret_key=' . $data['secret_key'] . '&amp;license_key=' . $data['license_key'] . '&amp;registered_domain=' . $data['registered_domain'] . '&amp;item_reference=' . $data['item_reference'];
-    // die($query);
-
-    curl_setopt($curl, CURLOPT_URL, $url);
-    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-    $result = curl_exec($curl);
-    curl_close($curl);
-
-    return $result;
+    return $request;
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Deactivate.
-   * --------------------------------------------------------------------------
-   *
    * Deactivate a license and deregister the domain the request is coming from.
    *
-   * @return   string    The JSON reponse from the license server.
+   * @return   JSON    The JSON reponse from the license server.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function deactivate() {
-    $parms = array(
-      'slm_action' => 'slm_deactivate',
-      'secret_key' => self::SECRET_KEY,
-      'license_key' => $this->key,
-      'registered_domain' => $_SERVER['SERVER_NAME'],
-      'item_reference' => urlencode(self::ITEM_REFERENCE),
-    );
-
-    $response = $this->callAPI('GET', self::LICENSE_SERVER, $parms);
-    $response = json_decode($response);
-    $this->details = $response;
-    return $response;
+    $request = $this->build_request('deactivate');
+    $response = wp_remote_get($request);
+    // $http_code = wp_remote_retrieve_response_code( $response );
+    $body = wp_remote_retrieve_body($response);
+    $body = json_decode($body, true); // Decode as associative array
+    $this->details = $body;
+    return $body;
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Domain registered.
-   * --------------------------------------------------------------------------
-   *
    * Check whether the current domain is registered.
    *
    * @return   boolean    True, if domain is registered, false, if not.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function domainRegistered() {
     // if (!$this->readKey()) return false; // Enable if using the readKey() method
 
-    if (count($this->details->registered_domains)) {
-      foreach ($this->details->registered_domains as $domain) {
-        if ($domain->registered_domain == $_SERVER['SERVER_NAME']) return true;
+    if (is_array($this->details) && isset($this->details['registered_domains']) && count($this->details['registered_domains'])) {
+      foreach ($this->details['registered_domains'] as $domain) {
+        if ($domain['registered_domain'] == $_SERVER['SERVER_NAME']) {
+          return true;
+        }
       }
       return false;
     } else {
@@ -237,70 +240,75 @@ class ChordPress_License {
     }
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Days to Expiry.
-   * --------------------------------------------------------------------------
-   *
    * Return the number of days until license expiry.
    *
    * @return   integer    The number of days until license expiry.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function daysToExpiry() {
     $todayDate = new DateTime('now');
-    $expiryDate = new DateTime($this->details->date_expiry);
+    $expiryDate = new DateTime($this->details['date_expiry']);
     $daysToExpiry = $todayDate->diff($expiryDate);
     return intval($daysToExpiry->format('%R%a'));
   }
 
+  //--------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Load.
-   * --------------------------------------------------------------------------
+   * Check for a successful http return code.
    *
+   * @return boolean True if successful, false if not
+   * @since    2.1.0
+   * @access   public
+   *
+   */
+  public function http_success($code) {
+    return $code >= 200 && $code < 300;
+  }
+
+  //---------------------------------------------------------------------------
+  /**
    * Load the license information from license server and save to $details.
    *
    * @since    1.0.0
    * @access   public
    */
   public function load() {
-    $parms = array(
-      'slm_action' => 'slm_check',
-      'secret_key' => self::SECRET_KEY,
-      'license_key' => $this->key,
-    );
-    $response = $this->callAPI('GET', self::LICENSE_SERVER, $parms);
-    $response = json_decode($response);
-    $this->details = $response;
+    // $BS = new Lewe_Jira_Connector_Bootstrap('jco');
+    $request = $this->build_request('check');
+    $response = wp_remote_get($request);
+    // $http_code = wp_remote_retrieve_response_code( $response );
+    $body = wp_remote_retrieve_body($response);
+    $body = json_decode($body, true); // Decode as associative array
+    $this->details = $body;
+    // $BS->dnd($body);
+    return $body;
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Get Key.
-   * --------------------------------------------------------------------------
-   *
    * Get the license key.
    *
    * @return   string    The license key.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function getKey() {
     return $this->key;
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Read Key.
-   * --------------------------------------------------------------------------
-   *
    * Read the license key from database.
    *
    * @return   string    The license key.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function readKey() {
     //
@@ -310,17 +318,16 @@ class ChordPress_License {
     //
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Save Key.
-   * --------------------------------------------------------------------------
-   *
    * Save the license key to the database.
    *
+   * @param string $key The license key.
    * @since    1.0.0
    * @access   public
+   *
    */
-  public function saveKey($value) {
+  public function saveKey($key) {
     //
     // You may want to use this method to save the license key elsewhere
     // e.g. to a database with this pseudo code
@@ -328,39 +335,34 @@ class ChordPress_License {
     //
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Set Key.
-   * --------------------------------------------------------------------------
-   *
    * Set the license key.
    *
    * @param string $key The license key.
-   *
    * @since    1.0.0
    * @access   public
+   *
    */
   public function setKey($key) {
     $this->key = $key;
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Show Status.
-   * --------------------------------------------------------------------------
-   *
    * Create a table with license details and displays it inside a Bootstrap
    * alert box. This method assumes that your application uses Bootstrap 4.
    *
-   * @param array   $data        License information array.
+   * @param array $data License information array.
    * @param boolean $showDetails Whether or not to show details.
    *
    * @return   string    HTML Bootstrap 4 alert box with license information.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function showStatus($data, $showDetails = false) {
-    if (isset($data->result) && $data->result == "error") {
+    if (isset($data['result']) && $data['result'] == "error") {
       $alert['type'] = 'danger';
       $alert['title'] = $this->lang['lic_invalid'];
       $alert['subject'] = $this->lang['lic_invalid_subject'];
@@ -369,9 +371,9 @@ class ChordPress_License {
       $details = "";
     } else {
       $domains = "";
-      if (isset($data->registered_domains) && count($data->registered_domains)) {
-        foreach ($data->registered_domains as $domain) {
-          $domains .= $domain->registered_domain . ', ';
+      if (isset($data['registered_domains']) && count($data['registered_domains'])) {
+        foreach ($data['registered_domains'] as $domain) {
+          $domains .= $domain['registered_domain'] . ', ';
         }
         $domains = substr($domains, 0, -2); // Remove last comma and blank
       }
@@ -386,16 +388,16 @@ class ChordPress_License {
 
       $details = "<div style=\"height:20px;\"></div>";
       $details .= "<table class=\"lic-table\">
-        <tr><th>" . $this->lang['lic_product'] . ":</th><td>" . $data->product_ref . "</td></tr>
-        <tr><th>" . $this->lang['lic_key'] . ":</th><td>" . $data->license_key . "</td></tr>
-        <tr><th>" . $this->lang['lic_name'] . ":</th><td>" . $data->first_name . " " . $data->last_name . "</td></tr>
-        <tr><th>" . $this->lang['lic_email'] . ":</th><td>" . $data->email . "</td></tr>
-        <tr><th>" . $this->lang['lic_company'] . ":</th><td>" . $data->company_name . "</td></tr>
-        <tr><th>" . $this->lang['lic_date_created'] . ":</th><td>" . $data->date_created . "</td></tr>
-        <tr><th>" . $this->lang['lic_date_renewed'] . ":</th><td>" . $data->date_renewed . "</td></tr>
-        <tr><th>" . $this->lang['lic_date_expiry'] . ":</th><td>" . $data->date_expiry . $daysleft . "</td></tr>
-        <tr><th>" . $this->lang['lic_registered_domains'] . ":</th><td>" . $domains . "</td></tr>
-        </table>";
+                <tr><th>" . $this->lang['lic_product'] . ":</th><td>" . $data['product_ref'] . "</td></tr>
+                <tr><th>" . $this->lang['lic_key'] . ":</th><td>" . $data['license_key'] . "</td></tr>
+                <tr><th>" . $this->lang['lic_name'] . ":</th><td>" . $data['first_name'] . " " . $data['last_name'] . "</td></tr>
+                <tr><th>" . $this->lang['lic_email'] . ":</th><td>" . $data['email'] . "</td></tr>
+                <tr><th>" . $this->lang['lic_company'] . ":</th><td>" . $data['company_name'] . "</td></tr>
+                <tr><th>" . $this->lang['lic_date_created'] . ":</th><td>" . $data['date_created'] . "</td></tr>
+                <tr><th>" . $this->lang['lic_date_renewed'] . ":</th><td>" . $data['date_renewed'] . "</td></tr>
+                <tr><th>" . $this->lang['lic_date_expiry'] . ":</th><td>" . $data['date_expiry'] . $daysleft . "</td></tr>
+                <tr><th>" . $this->lang['lic_registered_domains'] . ":</th><td>" . $domains . "</td></tr>
+            </table>";
 
       switch ($this->status()) {
 
@@ -404,7 +406,7 @@ class ChordPress_License {
             $title = $this->lang['lic_expiringsoon'];
             $alert['type'] = 'warning';
             $alert['title'] = $title;
-            $alert['subject'] = sprintf($LANG['lic_expiringsoon_subject'], $this->daysToExpiry());
+            $alert['subject'] = sprintf($this->lang['lic_expiringsoon_subject'], $this->daysToExpiry());
             $alert['text'] = '';
             $alert['help'] = '';
           } else {
@@ -444,7 +446,7 @@ class ChordPress_License {
           break;
 
         case "unregistered":
-          $title = $this->lang['lic_active'];
+          $title = $this->lang['lic_unregistered'];
           $alert['type'] = 'warning';
           $alert['title'] = $title;
           $alert['subject'] = $this->lang['lic_active_unregistered_subject'];
@@ -455,158 +457,136 @@ class ChordPress_License {
     }
 
     $alertBox = '
-      <div class="jco-callout jco-callout-' . $alert['type'] . '">
-        <span class="jco-text-' . $alert['type'] . '"><strong>' . $alert['title'] . '</strong></span>
-        <hr>
-        ' . $alert['subject'] . '
-        ' . (($showDetails) ? $details : '') . '
-      </div>';
+        <div class="jco-callout jco-callout-' . $alert['type'] . '">
+            <span class="jco-text-' . $alert['type'] . '"><strong>' . $alert['title'] . '</strong></span>
+            <hr>
+            ' . $alert['subject'] . '
+            ' . (($showDetails) ? $details : '') . '
+        </div>';
 
     return $alertBox;
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Show Result.
-   * --------------------------------------------------------------------------
-   *
    * Create and return a Bootstrap 4 alert box with the API call result and message.
    *
-   * @param string $response JSON response from API call.
-   *
+   * @param JSON $response JSON response from API call.
    * @return   string    HTML Bootstrap 4 alert box with license information.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function showResult($response) {
-    if (isset($response->result) && $response->result == "error") {
+    if (isset($response['result']) && $response['result'] == "error") {
       $alert['title'] = 'License Error';
       $alert['type'] = 'danger';
     } else {
       $alert['title'] = 'License Success';
       $alert['type'] = 'success';
     }
-    $alert['text'] = $response->message;
+    $alert['text'] = $response['message'];
 
     $alertBox = '
-    <div class="jco-alert jco-alert-' . $alert['type'] . '">
-      <p><strong>' . $alert['title'] . '</strong></p>
-      <hr>
-      <p>' . $alert['text'] . '</p>
-    </div>';
+         <div class="jco-alert jco-alert-' . $alert['type'] . '">
+            <p><strong>' . $alert['title'] . '</strong></p>
+            <hr>
+            <p>' . $alert['text'] . '</p>
+         </div>';
 
     return $alertBox;
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Status.
-   * --------------------------------------------------------------------------
-   *
    * Get license status.
    *
    * @return   string    active/blocked/invalid/expired/pending/unregistered.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function status() {
     $this->load();
-    if ($this->details->result == 'error') return "invalid";
 
-    switch ($this->details->status) {
+    if ($this->details['result'] == 'error') {
+      return "invalid";
+    }
+
+    switch ($this->details['status']) {
       case "active":
-        if (!$this->domainRegistered()) return 'unregistered';
+        if (!$this->domainRegistered()) {
+          return 'unregistered';
+        }
         return 'active';
         break;
-
       case "expired":
         return 'expired';
         break;
-
       case "blocked":
         return 'blocked';
         break;
-
       case "pending":
         return 'pending';
         break;
     }
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Is Invalid.
-   * --------------------------------------------------------------------------
-   *
    * Get license valid or not.
    *
    * @return   boolean    True if valid, false if not.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function isInvalid() {
     $this->load();
-    if ($this->details->result == 'error') return true;
-    else return false;
+    return isset($this->details['result']) && $this->details['result'] == 'error';
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Is Expired.
-   * --------------------------------------------------------------------------
-   *
    * Get license expired or not.
    *
    * @return   boolean    True if expired, false if not.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function isExpired() {
     $this->load();
-    if ($this->details->result != 'error' && $this->details->status == 'expired') return true;
-    else return false;
+    return $this->details['result'] != 'error' && $this->details['status'] == 'expired';
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Is In Grace Period.
-   * --------------------------------------------------------------------------
-   *
    * Get license in grace period or not.
    *
    * @return   boolean    True if expired, false if not.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function isInGracePeriod() {
     $todayDate = new DateTime('now');
-    $expiryDate = new DateTime($this->details->date_expiry);
+    $expiryDate = new DateTime($this->details['date_expiry']);
     $daysToExpiry = $todayDate->diff($expiryDate);
-
-    if ($daysToExpiry < 0 && abs($daysToExpiry) <= $this->gracePeriod) {
-      return true;
-    } else {
-      return false;
-    }
+    return $daysToExpiry < 0 && abs($daysToExpiry) <= $this->gracePeriod;
   }
 
+  //---------------------------------------------------------------------------
   /**
-   * --------------------------------------------------------------------------
-   * Is Blocked.
-   * --------------------------------------------------------------------------
-   *
    * Get license blocked or not.
    *
    * @return   boolean    True if blocked, false if not.
    * @since    1.0.0
    * @access   public
+   *
    */
   public function isBlocked() {
     $this->load();
-    if ($this->details->result != 'error' && $this->details->status == 'blocked') {
-      return true;
-    } else {
-      return false;
-    }
+    return $this->details['result'] != 'error' && $this->details['status'] == 'blocked';
   }
 }

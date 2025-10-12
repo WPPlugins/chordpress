@@ -26,7 +26,7 @@ class ChordPress_Admin {
    *
    * @since    1.0.0
    * @access   private
-   * @var      array $plugin_name Array of option names of this plugin.
+   * @var      array $options Array of option names of this plugin.
    */
   private $options = array();
 
@@ -57,6 +57,7 @@ class ChordPress_Admin {
    *
    * @param string $plugin_name The slug of this plugin.
    * @param string $version     The version of this plugin.
+   * @param array  $options     Array of plugin options.
    *
    * @since    1.0.0
    */
@@ -89,7 +90,7 @@ class ChordPress_Admin {
    * @since    1.0.0
    */
   public function enqueue_scripts() {
-    wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/chordpress-admin.js', array( 'jquery' ), $this->version, false);
+    wp_enqueue_script($this->plugin_name, plugin_dir_url(__FILE__) . 'js/chordpress-admin.js', array('jquery'), $this->version, false);
     wp_enqueue_script($this->plugin_name . '-svguitar', plugin_dir_url(__DIR__) . 'global/js/svguitar.umd.js');
   }
 
@@ -135,8 +136,8 @@ class ChordPress_Admin {
       'label' => __('Guitar Chord', 'chordpress'),
       'description' => __('Guitar chord diagram', 'chordpress'),
       'labels' => $labels,
-      'supports' => array( 'title' ),
-      'taxonomies' => array( 'category', 'post_tag' ),
+      'supports' => array('title'),
+      'taxonomies' => array('category', 'post_tag'),
       'hierarchical' => false,
       'public' => true,
       'show_ui' => true,
@@ -167,6 +168,9 @@ class ChordPress_Admin {
       add_option($option, '');
       register_setting($this->plugin_name . '_options_group', $option, $this->plugin_name . '_callback');
     }
+
+    // Include the meta box display function
+    require_once plugin_dir_path(__FILE__) . 'partials/chordpress-admin-chord-meta-box.php';
 
     add_meta_box(
       'guitar_chord_meta_box',
@@ -234,13 +238,17 @@ class ChordPress_Admin {
    *
    * Action Links (shown underneath the plugin name on the admin plugin page)
    *
+   * @param array  $actions Array of existing action links.
+   * @param string $file    Plugin file path.
+   *
+   * @return array Modified array of action links.
    * @since    1.0.0
    */
   public function action_links($actions, $file) {
     if ($file == $this->plugin_name . '/' . $this->plugin_name . '.php') {
-      $settings = array( 'settings' => '<a href="admin.php?page=' . $this->plugin_name . '%2Fadmin%2Fpartials%2Fchordpress-admin-options.php">' . __('Settings', 'chordpress') . '</a>' );
+      $settings = array('settings' => '<a href="' . esc_url(admin_url('admin.php?page=' . $this->plugin_name . '%2Fadmin%2Fpartials%2Fchordpress-admin-options.php')) . '">' . esc_html(__('Settings', 'chordpress')) . '</a>');
       $actions = array_merge($settings, $actions);
-      $documentation = array( 'documentation' => '<a href="https://lewe.gitbook.io/lewe-chordpress/" target="_blank">' . __('Documentation', 'chordpress') . '</a>' );
+      $documentation = array('documentation' => '<a href="' . esc_url('https://lewe.gitbook.io/lewe-chordpress/') . '" target="_blank">' . esc_html(__('Documentation', 'chordpress')) . '</a>');
       $actions = array_merge($documentation, $actions);
     }
 
@@ -254,6 +262,10 @@ class ChordPress_Admin {
    *
    * Meta Links (shown underneath the plugin description on the admin plugin page)
    *
+   * @param array  $links Array of existing meta links.
+   * @param string $file  Plugin file path.
+   *
+   * @return array Modified array of meta links.
    * @since    1.0.0
    */
   public function meta_links($links, $file) {
@@ -274,24 +286,34 @@ class ChordPress_Admin {
    * Save Guitar Chord.
    * --------------------------------------------------------------------------
    *
-   * @param int $post_id
+   * Handles saving of guitar chord meta data with proper security checks.
+   * Includes nonce verification and input validation.
+   *
+   * @param int $post_id The ID of the post being saved.
    *
    * @return void
    * @since 2.1.0
    *
    */
   public function save_guitar_chord($post_id) {
+    // Check user permissions
     if (!current_user_can('edit_post', $post_id)) {
       return;
     }
 
+    // Check if autosave
     if (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE) {
+      return;
+    }
+
+    // Verify nonce for security
+    if (!isset($_POST['guitar_chord_nonce']) || !wp_verify_nonce($_POST['guitar_chord_nonce'], 'guitar_chord_meta_box')) {
       return;
     }
 
     $post = get_post($post_id);
 
-    if (isset($_POST['post_type']) && 'guitar_chord' == $_POST['post_type'] && $post->post_type == 'guitar_chord') {
+    if (isset($_POST['post_type']) && 'guitar_chord' === $_POST['post_type'] && $post->post_type === 'guitar_chord') {
       $meta_options = array(
         'guitar_chord_name',
         'guitar_chord_barres',
@@ -302,7 +324,9 @@ class ChordPress_Admin {
         'guitar_chord_tuning',
       );
       foreach ($meta_options as $meta_option) {
-        update_post_meta($post_id, $meta_option, sanitize_text_field($_POST[$meta_option]));
+        if (isset($_POST[$meta_option])) {
+          update_post_meta($post_id, $meta_option, sanitize_text_field($_POST[$meta_option]));
+        }
       }
     }
   }
@@ -335,8 +359,8 @@ class ChordPress_Admin {
    * Show guitar chord column.
    * --------------------------------------------------------------------------
    *
-   * @param string $column Column ID
-   * @param int    $post_id
+   * @param string $column  Column ID to display.
+   * @param int    $post_id Post ID for the guitar chord.
    *
    * @since 2.1.0
    *
@@ -345,15 +369,15 @@ class ChordPress_Admin {
     switch ($column) {
 
       case 'guitar_chord_name':
-        echo get_post_meta($post_id, 'guitar_chord_name', true);
+        echo esc_html(get_post_meta($post_id, 'guitar_chord_name', true));
         break;
 
       case 'guitar_chord_strings':
-        echo get_post_meta($post_id, 'guitar_chord_strings', true);
+        echo esc_html(get_post_meta($post_id, 'guitar_chord_strings', true));
         break;
 
       case 'guitar_chord_shortcode':
-        echo '[chordpress-chord chord="' . $post_id . '"]';
+        echo esc_html('[chordpress-chord chord="' . $post_id . '"]');
         break;
     }
   }
@@ -365,8 +389,8 @@ class ChordPress_Admin {
    *
    * Upgrade message (if Upgrade Notice section exists in readme.txt).
    *
-   * @param string $data
-   * @param string $response
+   * @param array $data     Plugin data array containing upgrade notice.
+   * @param array $response Plugin update response data.
    *
    * @since 3.0.0
    *
@@ -385,11 +409,11 @@ class ChordPress_Admin {
    * Insert a value or key/value pair after a specific key in an array.
    * If key doesn't exist, value is appended to the end of the array.
    *
-   * @param array  $array
-   * @param string $key
-   * @param array  $new
+   * @param array  $array Original array to modify.
+   * @param string $key   Key to insert after.
+   * @param array  $new   New key/value pairs to insert.
    *
-   * @return array
+   * @return array Modified array with new values inserted.
    */
   private function array_insert_after(array $array, $key, array $new) {
     $keys = array_keys($array);

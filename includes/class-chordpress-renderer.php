@@ -21,6 +21,146 @@
  */
 class ChordPress_Renderer {
   /**
+   * Array of all chords in this song.
+   *
+   * @since    2.1.0
+   * @access   private
+   * @var      array $allChords Array of all chords in this song.
+   */
+  private $allChords = array();
+
+  /**
+   * Array of allowed prefixes for chords.
+   *
+   * @since    3.6.1
+   * @access   private
+   * @var      array
+   */
+  private $allowedChordPrefixes = array('~', '|', '/', '.', '-', '+', '1', '2', '3', '4', '5', '6', '7', '8', '9');
+
+  /**
+   * Array of chromatic harmonica transpose notation.
+   *
+   * @since    3.8.0
+   * @access   private
+   * @var      array
+   */
+  private $arrChromaticTranspose = array(
+    '1' => ['1', '1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4'],
+    '1s' => ['1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4'],
+    '-1' => ['-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s'],
+    '-1s' => ['-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5'],
+    '2' => ['2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s'],
+    '-2' => ['-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6'],
+    '-2s' => ['-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6'],
+    '3' => ['3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s'],
+    '3s' => ['3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7'],
+    '-3' => ['-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s'],
+    '-3s' => ['-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7'],
+    '-4' => ['-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s'],
+    '4' => ['4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8'],
+    '4s' => ['4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8'],
+    '-5' => ['-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9'],
+    '-5s' => ['-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s'],
+    '6' => ['6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9'],
+    '-6' => ['-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s'],
+    '-6s' => ['-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10'],
+    '7' => ['7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10'],
+    '7s' => ['7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s'],
+    '-7' => ['-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11'],
+    '-7s' => ['-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s'],
+    '-8' => ['-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11'],
+    '8' => ['8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s'],
+    '9' => ['9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12'],
+    '9s' => ['9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12'],
+    '-9' => ['-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s'],
+    '-9s' => ['-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' '],
+    '10' => ['10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' '],
+    '-10' => ['-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' '],
+    '-10s' => ['-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' '],
+    '11' => ['11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' '],
+    '11s' => ['11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' '],
+    '-11' => ['-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    '-11s' => ['-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    '-12' => ['-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    '12' => ['12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+    '12s' => ['12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '],
+  );
+
+  /**
+   * Array of supported ChordPro directives.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      array $arrDirectives Array of supported ChordPro directives.
+   */
+  private $arrDirectives = array(
+    'album' => '',
+    'artist' => '',
+    'capo' => '',
+    'composer' => '',
+    'key' => '',
+    'subtitle' => '',
+    'tempo' => '',
+    'time' => '',
+    'title' => '',
+    'year' => '',
+  );
+
+  /**
+   * Array of supported Key directives.
+   *
+   * @since    3.1.0
+   * @access   private
+   * @var      array
+   */
+  private $arrKeys = array('A', 'Am', 'A#', 'A#m', 'Bb', 'Bbm', 'B', 'Bm', 'C', 'Cm', 'C#', 'C#m', 'Db', 'Dbm', 'D', 'Dm', 'D#', 'D#m', 'Eb', 'Ebm', 'E', 'Em', 'F', 'Fm', 'G', 'Gm', 'G#', 'G#m', 'Ab', 'Abm');
+
+  /**
+   * Array of transposed keys.
+   *
+   * @since    3.1.0
+   * @access   private
+   * @var      array
+   */
+  private $arrTransposeValues = array(
+    'A' => array('A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#'),
+    'Am' => array('Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m'),
+    'A#' => array('A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A'),
+    'Bb' => array('Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A'),
+    'A#m' => array('A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am'),
+    'Bbm' => array('Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am'),
+    'B' => array('B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#'),
+    'Bm' => array('Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m'),
+    'C' => array('C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B'),
+    'Cm' => array('Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm'),
+    'C#' => array('C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C'),
+    'Db' => array('Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C'),
+    'C#m' => array('C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm'),
+    'Dbm' => array('Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm'),
+    'D' => array('D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#'),
+    'Dm' => array('Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m'),
+    'D#' => array('D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D'),
+    'Eb' => array('Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D'),
+    'D#m' => array('D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm'),
+    'Ebm' => array('Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm'),
+    'E' => array('E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#'),
+    'Em' => array('Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m'),
+    'F' => array('F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E'),
+    'Fm' => array('Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em'),
+    'F#' => array('F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F'),
+    'Gb' => array('Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F'),
+    'F#m' => array('F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm'),
+    'Gbm' => array('Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm'),
+    'G' => array('G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#'),
+    'Gm' => array('Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m'),
+    'G#' => array('G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G'),
+    'Ab' => array('Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G'),
+    'G#m' => array('G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm'),
+    'Abm' => array('Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm'),
+  );
+
+  /**
    * Guitar chord instance.
    *
    * @since    2.1.0
@@ -28,6 +168,33 @@ class ChordPress_Renderer {
    * @var      ChordPress_Chord $C Guitar chord instance.
    */
   private $C;
+
+  /**
+   * CSS styles for the chords.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      string $chordStyle CSS styles for the chorus sections.
+   */
+  private $chordStyle;
+
+  /**
+   * CSS styles for the chorus sections.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      string $chorusStyle CSS styles for the chorus sections.
+   */
+  private $chorusStyle;
+
+  /**
+   * CSS styles for comments.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      string $commentStyle CSS styles for comments.
+   */
+  private $commentStyle;
 
   /**
    * Display H/B notation flag.
@@ -39,6 +206,24 @@ class ChordPress_Renderer {
   private $displayHBNotation;
 
   /**
+   * Place interaction bar fixed at bottom of page.
+   *
+   * @since    3.6.0
+   * @access   private
+   * @var      boolean $fixedInteraction
+   */
+  private $fixedInteraction;
+
+  /**
+   * CSS float directive: no/left/right.
+   *
+   * @since    1.5.0
+   * @access   private
+   * @var      string $float CSS float directive: no/left/right.
+   */
+  private $float;
+
+  /**
    * Harmonica type shortcode flag.
    *
    * @since    3.8.0
@@ -48,13 +233,75 @@ class ChordPress_Renderer {
   private $harmonica;
 
   /**
+   * Array of harmonica notation.
+   *
+   * @since    3.8.0
+   * @access   private
+   * @var      array
+   */
+  private $harmonicaNotes = array(
+    array('tremolo' => '1', 'diatonic' => '1', 'chromatic' => '1', 'note' => "C1"),
+    array('tremolo' => '-', 'diatonic' => '-1/', 'chromatic' => '1s', 'note' => "C#1"),
+    array('tremolo' => '-1', 'diatonic' => '-1', 'chromatic' => '-1', 'note' => "D1"),
+    array('tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-1s', 'note' => "D#1"),
+    array('tremolo' => '2', 'diatonic' => '2', 'chromatic' => '2', 'note' => "E1"),
+    array('tremolo' => '-2', 'diatonic' => '-2//', 'chromatic' => '-2', 'note' => "F1"),
+    array('tremolo' => '-', 'diatonic' => '-2/', 'chromatic' => '-2s', 'note' => "F#1"),
+    array('tremolo' => '3', 'diatonic' => '3', 'chromatic' => '3', 'note' => "G1"),
+    array('tremolo' => '3', 'diatonic' => '-2', 'chromatic' => '3', 'note' => "G1"),
+    array('tremolo' => '-', 'diatonic' => '-3///', 'chromatic' => '3s', 'note' => "G#1"),
+    array('tremolo' => '-3', 'diatonic' => '-3//', 'chromatic' => '-3', 'note' => "A1"),
+    array('tremolo' => '-', 'diatonic' => '-3/', 'chromatic' => '-3s', 'note' => "A#1"),
+    array('tremolo' => '-4', 'diatonic' => '-3', 'chromatic' => '-4', 'note' => "B1"),
+    array('tremolo' => '4', 'diatonic' => '4', 'chromatic' => '4', 'note' => "C2"),
+    array('tremolo' => '5', 'diatonic' => '4', 'chromatic' => '5', 'note' => "C2"),
+    array('tremolo' => '-', 'diatonic' => '-4/', 'chromatic' => '4s', 'note' => "C#2"),
+    array('tremolo' => '-', 'diatonic' => '-4/', 'chromatic' => '5s', 'note' => "C#2"),
+    array('tremolo' => '-5', 'diatonic' => '-4', 'chromatic' => '-5', 'note' => "D2"),
+    array('tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-5s', 'note' => "D#2"),
+    array('tremolo' => '6', 'diatonic' => '5', 'chromatic' => '6', 'note' => "E2"),
+    array('tremolo' => '-6', 'diatonic' => '-5', 'chromatic' => '-6', 'note' => "F2"),
+    array('tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-6s', 'note' => "F#2"),
+    array('tremolo' => '7', 'diatonic' => '6', 'chromatic' => '7', 'note' => "G2"),
+    array('tremolo' => '-', 'diatonic' => '-6/', 'chromatic' => '7s', 'note' => "G#2"),
+    array('tremolo' => '-7', 'diatonic' => '-6', 'chromatic' => '-7', 'note' => "A2"),
+    array('tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-7s', 'note' => "A#2"),
+    array('tremolo' => '-8', 'diatonic' => '-7', 'chromatic' => '-8', 'note' => "B2"),
+    array('tremolo' => '8', 'diatonic' => '7', 'chromatic' => '8', 'note' => "C3"),
+    array('tremolo' => '9', 'diatonic' => '7', 'chromatic' => '9', 'note' => "C3"),
+    array('tremolo' => '-', 'diatonic' => '-', 'chromatic' => '8s', 'note' => "C#3"),
+    array('tremolo' => '-', 'diatonic' => '-', 'chromatic' => '9s', 'note' => "C#3"),
+    array('tremolo' => '-9', 'diatonic' => '-8', 'chromatic' => '-9', 'note' => "D3"),
+    array('tremolo' => '-', 'diatonic' => '8/', 'chromatic' => '-9s', 'note' => "D#3"),
+    array('tremolo' => '10', 'diatonic' => '8', 'chromatic' => '10', 'note' => "E3"),
+    array('tremolo' => '-10', 'diatonic' => '-9', 'chromatic' => '-10', 'note' => "F3"),
+    array('tremolo' => '', 'diatonic' => '9/', 'chromatic' => '-10s', 'note' => "F#3"),
+    array('tremolo' => '11', 'diatonic' => '9', 'chromatic' => '11', 'note' => "G3"),
+    array('tremolo' => '-', 'diatonic' => '-', 'chromatic' => '11s', 'note' => "G#3"),
+    array('tremolo' => '-11', 'diatonic' => '-10', 'chromatic' => '-11', 'note' => "A3"),
+    array('tremolo' => '-', 'diatonic' => '10//', 'chromatic' => '-11s', 'note' => "A#3"),
+    array('tremolo' => '-12', 'diatonic' => '10/', 'chromatic' => '-12', 'note' => "B3"),
+    array('tremolo' => '12', 'diatonic' => '10', 'chromatic' => '12', 'note' => "C4"),
+    array('tremolo' => '-', 'diatonic' => '-', 'chromatic' => '12s', 'note' => "C#4"),
+  );
+
+  /**
    * Harmonica types.
    *
    * @since    3.8.0
    * @access   private
    * @var      array $harmonicaTypes Harmonica types.
    */
-  private $harmonicaTypes = [ 'tremolo', 'diatonic', 'chromatic' ];
+  private $harmonicaTypes = ['tremolo', 'diatonic', 'chromatic'];
+
+  /**
+   * Shortcode directive hbNotation: no/yes.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      string $hbNotation Shortcode directive hbNotation: no/yes.
+   */
+  private $hbNotation;
 
   /**
    * Hide album flag.
@@ -102,6 +349,15 @@ class ChordPress_Renderer {
   private $hideComposer;
 
   /**
+   * Hide font size form element.
+   *
+   * @since    3.8.1
+   * @access   private
+   * @var      boolean $hideFontsize Hide fontsize form element.
+   */
+  private $hideFontsize;
+
+  /**
    * Hide key flag.
    *
    * @since    3.7.0
@@ -109,15 +365,6 @@ class ChordPress_Renderer {
    * @var      boolean $hideKey Hide key flag.
    */
   private $hideKey;
-
-  /**
-   * Hide subtitle flag.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      boolean $hideSubtitle Hide subtitle flag.
-   */
-  private $hideSubtitle;
 
   /**
    * Hide print button.
@@ -129,6 +376,15 @@ class ChordPress_Renderer {
   private $hidePrint;
 
   /**
+   * Hide subtitle flag.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      boolean $hideSubtitle Hide subtitle flag.
+   */
+  private $hideSubtitle;
+
+  /**
    * Hide title flag.
    *
    * @since    1.0.0
@@ -138,40 +394,13 @@ class ChordPress_Renderer {
   private $hideTitle;
 
   /**
-   * Hide font size form element.
-   *
-   * @since    3.8.1
-   * @access   private
-   * @var      boolean $hideFontsize Hide fontsize form element
-   */
-  private $hideFontsize;
-
-  /**
    * Hide transpose button.
    *
    * @since    1.0.0
    * @access   private
-   * @var      boolean $hideTranspose Hide transpose button
+   * @var      boolean $hideTranspose Hide transpose button.
    */
   private $hideTranspose;
-
-  /**
-   * Show numeric transpose input.
-   *
-   * @since    3.6.0
-   * @access   private
-   * @var      boolean $showNumericTranspose Hide transpose button
-   */
-  private $showNumericTranspose;
-
-  /**
-   * Place interaction bar fixed at bottom of page.
-   *
-   * @since    3.6.0
-   * @access   private
-   * @var      boolean $fixedInteraction
-   */
-  private $fixedInteraction;
 
   /**
    * Hide year flag.
@@ -183,112 +412,23 @@ class ChordPress_Renderer {
   private $hideYear;
 
   /**
-   * HTML header level for title.
+   * In monospace mode.
+   * As long as true, lines are not analyzed, just printed out.
    *
-   * @since    1.0.0
+   * @since    3.5.0
    * @access   private
-   * @var      string $titleLevel HTML header level for title.
+   * @var      boolean $inMonospace Monospace mode flag.
    */
-  private $titleLevel;
+  private $inMonospace;
 
   /**
-   * HTML header level for subtitle.
+   * Shortcode directive interactive: no/yes.
    *
-   * @since    1.0.0
+   * @since    1.5.0
    * @access   private
-   * @var      string $subtitleLevel HTML header level for subtitle.
+   * @var      string $interactive Shortcode directive interactive: no/yes.
    */
-  private $subtitleLevel;
-
-  /**
-   * CSS styles for meta info.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $metaStyle CSS styles for meta info.
-   */
-  private $metaStyle;
-
-  /**
-   * CSS text color for chords.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $chordTextcolor CSS text color for chords.
-   */
-  private $chordTextcolor;
-
-  /**
-   * CSS text size for chords.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $chordTextsize CSS text size for chords.
-   */
-  private $chordTextsize;
-
-  /**
-   * CSS text color for lyrics.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $lyricsTextcolor CSS text color for lyrics.
-   */
-  private $lyricsTextcolor;
-
-  /**
-   * CSS text size for lyrics.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $lyricsTextsize CSS text size for lyrics.
-   */
-  private $lyricsTextsize;
-
-  /**
-   * CSS styles for lyrics.
-   *
-   * @since    2.3.0
-   * @access   private
-   * @var      string $lyricsStyle CSS styles for lyrics.
-   */
-  private $lyricsStyle;
-
-  /**
-   * CSS styles for comments.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $commentStyle CSS styles for comments.
-   */
-  private $commentStyle;
-
-  /**
-   * CSS styles for the chords.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $chordStyle CSS styles for the chorus sections.
-   */
-  private $chordStyle;
-
-  /**
-   * CSS styles for the chorus sections.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $chorusStyle CSS styles for the chorus sections.
-   */
-  private $chorusStyle;
-
-  /**
-   * CSS styles for the verse sections.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      string $verseStyle CSS styles for the verse sections.
-   */
-  private $verseStyle;
+  private $interactive;
 
   /**
    * CSS styles for the line sections.
@@ -300,25 +440,25 @@ class ChordPress_Renderer {
   private $lineStyle;
 
   /**
-   * CSS float directive: no/left/right.
+   * CSS styles for lyrics.
    *
-   * @since    1.5.0
+   * @since    2.3.0
    * @access   private
-   * @var      string $float CSS float directive: no/left/right.
+   * @var      string $lyricsStyle CSS styles for lyrics.
    */
-  private $float;
+  private $lyricsStyle;
 
   /**
-   * Shortcode directive hbNotation: no/yes.
+   * CSS styles for meta info.
    *
    * @since    1.0.0
    * @access   private
-   * @var      string $hbNotation Shortcode directive hbNotation: no/yes.
+   * @var      string $metaStyle CSS styles for meta info.
    */
-  private $hbNotation;
+  private $metaStyle;
 
   /**
-   * Show Chord Sheet for Vexchords.
+   * Show Chord Sheet.
    *
    * @since    2.1.0
    * @access   private
@@ -336,13 +476,40 @@ class ChordPress_Renderer {
   private $showChordSheetOnTop;
 
   /**
-   * Shortcode directive interactive: no/yes.
+   * Show numeric transpose input.
    *
-   * @since    1.5.0
+   * @since    3.6.0
    * @access   private
-   * @var      string $interactive Shortcode directive interactive: no/yes.
+   * @var      boolean $showNumericTranspose Show numeric transpose input.
    */
-  private $interactive;
+  private $showNumericTranspose;
+
+  /**
+   * Holds the styles for the songsheet
+   *
+   * @since    3.9.3
+   * @access   private
+   * @var      string
+   */
+  private $songsheetStyles = '';
+
+  /**
+   * HTML header level for subtitle.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      string $subtitleLevel HTML header level for subtitle.
+   */
+  private $subtitleLevel;
+
+  /**
+   * HTML header level for title.
+   *
+   * @since    1.0.0
+   * @access   private
+   * @var      string $titleLevel HTML header level for title.
+   */
+  private $titleLevel;
 
   /**
    * Shortcode directive transpose: 0-11 (semitones).
@@ -354,35 +521,6 @@ class ChordPress_Renderer {
   private $transpose;
 
   /**
-   * Array of supported ChordPro directives.
-   *
-   * @since    1.0.0
-   * @access   private
-   * @var      array $arrDirectives Array of supported ChordPro directives.
-   */
-  private $arrDirectives = array(
-    'album' => '',
-    'artist' => '',
-    'capo' => '',
-    'composer' => '',
-    'key' => '',
-    'subtitle' => '',
-    'tempo' => '',
-    'time' => '',
-    'title' => '',
-    'year' => '',
-  );
-
-  /**
-   * Array of all chords in this song.
-   *
-   * @since    2.1.0
-   * @access   private
-   * @var      array $allChords Array of all chords in this song.
-   */
-  private $allChords = array();
-
-  /**
    * Array of unique chords in this song.
    *
    * @since    2.1.0
@@ -392,180 +530,13 @@ class ChordPress_Renderer {
   private $uniqueChords = array();
 
   /**
-   * Array of supported Key directives.
+   * CSS styles for the verse sections.
    *
-   * @since    3.1.0
+   * @since    1.0.0
    * @access   private
-   * @var      array
+   * @var      string $verseStyle CSS styles for the verse sections.
    */
-  private $arrKeys = array( 'A', 'Am', 'A#', 'A#m', 'Bb', 'Bbm', 'B', 'Bm', 'C', 'Cm', 'C#', 'C#m', 'Db', 'Dbm', 'D', 'Dm', 'D#', 'D#m', 'Eb', 'Ebm', 'E', 'Em', 'F', 'Fm', 'G', 'Gm', 'G#', 'G#m', 'Ab', 'Abm' );
-
-  /**
-   * Array of transposed keys.
-   *
-   * @since    3.1.0
-   * @access   private
-   * @var      array
-   */
-  private $arrTransposeValues = array(
-    'A' => array( 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#' ),
-    'Am' => array( 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m' ),
-    'A#' => array( 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A' ),
-    'Bb' => array( 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A' ),
-    'A#m' => array( 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am' ),
-    'Bbm' => array( 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am' ),
-    'B' => array( 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#' ),
-    'Bm' => array( 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m' ),
-    'C' => array( 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B' ),
-    'Cm' => array( 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm' ),
-    'C#' => array( 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C' ),
-    'Db' => array( 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C' ),
-    'C#m' => array( 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm' ),
-    'Dbm' => array( 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm' ),
-    'D' => array( 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#' ),
-    'Dm' => array( 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m' ),
-    'D#' => array( 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D' ),
-    'Eb' => array( 'Eb', 'E', 'F', 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D' ),
-    'D#m' => array( 'D#m', 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm' ),
-    'Ebm' => array( 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm' ),
-    'E' => array( 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#' ),
-    'Em' => array( 'Em', 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m' ),
-    'F' => array( 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E' ),
-    'Fm' => array( 'Fm', 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em' ),
-    'F#' => array( 'F#', 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F' ),
-    'Gb' => array( 'Gb', 'G', 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F' ),
-    'F#m' => array( 'F#m', 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm' ),
-    'Gbm' => array( 'Gbm', 'Gm', 'Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm' ),
-    'G' => array( 'G', 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#' ),
-    'Gm' => array( 'Gm', 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m' ),
-    'G#' => array( 'G#', 'A', 'A#', 'B', 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G' ),
-    'Ab' => array( 'Ab', 'A', 'Bb', 'B', 'C', 'Db', 'D', 'Eb', 'E', 'F', 'Gb', 'G' ),
-    'G#m' => array( 'G#m', 'Am', 'A#m', 'Bm', 'Cm', 'C#m', 'Dm', 'D#m', 'Em', 'Fm', 'F#m', 'Gm' ),
-    'Abm' => array( 'Abm', 'Am', 'Bbm', 'Bm', 'Cm', 'Dbm', 'Dm', 'Ebm', 'Em', 'Fm', 'Gbm', 'Gm' ),
-  );
-
-  /**
-   * Array of harmonica notation.
-   *
-   * @since    3.8.0
-   * @access   private
-   * @var      array
-   */
-  private $harmonicaNotes = array(
-    array( 'tremolo' => '1', 'diatonic' => '1', 'chromatic' => '1', 'note' => "C1" ),
-    array( 'tremolo' => '-', 'diatonic' => '-1/', 'chromatic' => '1s', 'note' => "C#1" ),
-    array( 'tremolo' => '-1', 'diatonic' => '-1', 'chromatic' => '-1', 'note' => "D1" ),
-    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-1s', 'note' => "D#1" ),
-    array( 'tremolo' => '2', 'diatonic' => '2', 'chromatic' => '2', 'note' => "E1" ),
-    array( 'tremolo' => '-2', 'diatonic' => '-2//', 'chromatic' => '-2', 'note' => "F1" ),
-    array( 'tremolo' => '-', 'diatonic' => '-2/', 'chromatic' => '-2s', 'note' => "F#1" ),
-    array( 'tremolo' => '3', 'diatonic' => '3', 'chromatic' => '3', 'note' => "G1" ),
-    array( 'tremolo' => '3', 'diatonic' => '-2', 'chromatic' => '3', 'note' => "G1" ),
-    array( 'tremolo' => '-', 'diatonic' => '-3///', 'chromatic' => '3s', 'note' => "G#1" ),
-    array( 'tremolo' => '-3', 'diatonic' => '-3//', 'chromatic' => '-3', 'note' => "A1" ),
-    array( 'tremolo' => '-', 'diatonic' => '-3/', 'chromatic' => '-3s', 'note' => "A#1" ),
-    array( 'tremolo' => '-4', 'diatonic' => '-3', 'chromatic' => '-4', 'note' => "B1" ),
-    array( 'tremolo' => '4', 'diatonic' => '4', 'chromatic' => '4', 'note' => "C2" ),
-    array( 'tremolo' => '5', 'diatonic' => '4', 'chromatic' => '5', 'note' => "C2" ),
-    array( 'tremolo' => '-', 'diatonic' => '-4/', 'chromatic' => '4s', 'note' => "C#2" ),
-    array( 'tremolo' => '-', 'diatonic' => '-4/', 'chromatic' => '5s', 'note' => "C#2" ),
-    array( 'tremolo' => '-5', 'diatonic' => '-4', 'chromatic' => '-5', 'note' => "D2" ),
-    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-5s', 'note' => "D#2" ),
-    array( 'tremolo' => '6', 'diatonic' => '5', 'chromatic' => '6', 'note' => "E2" ),
-    array( 'tremolo' => '-6', 'diatonic' => '-5', 'chromatic' => '-6', 'note' => "F2" ),
-    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-6s', 'note' => "F#2" ),
-    array( 'tremolo' => '7', 'diatonic' => '6', 'chromatic' => '7', 'note' => "G2" ),
-    array( 'tremolo' => '-', 'diatonic' => '-6/', 'chromatic' => '7s', 'note' => "G#2" ),
-    array( 'tremolo' => '-7', 'diatonic' => '-6', 'chromatic' => '-7', 'note' => "A2" ),
-    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '-7s', 'note' => "A#2" ),
-    array( 'tremolo' => '-8', 'diatonic' => '-7', 'chromatic' => '-8', 'note' => "B2" ),
-    array( 'tremolo' => '8', 'diatonic' => '7', 'chromatic' => '8', 'note' => "C3" ),
-    array( 'tremolo' => '9', 'diatonic' => '7', 'chromatic' => '9', 'note' => "C3" ),
-    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '8s', 'note' => "C#3" ),
-    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '9s', 'note' => "C#3" ),
-    array( 'tremolo' => '-9', 'diatonic' => '-8', 'chromatic' => '-9', 'note' => "D3" ),
-    array( 'tremolo' => '-', 'diatonic' => '8/', 'chromatic' => '-9s', 'note' => "D#3" ),
-    array( 'tremolo' => '10', 'diatonic' => '8', 'chromatic' => '10', 'note' => "E3" ),
-    array( 'tremolo' => '-10', 'diatonic' => '-9', 'chromatic' => '-10', 'note' => "F3" ),
-    array( 'tremolo' => '', 'diatonic' => '9/', 'chromatic' => '-10s', 'note' => "F#3" ),
-    array( 'tremolo' => '11', 'diatonic' => '9', 'chromatic' => '11', 'note' => "G3" ),
-    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '11s', 'note' => "G#3" ),
-    array( 'tremolo' => '-11', 'diatonic' => '-10', 'chromatic' => '-11', 'note' => "A3" ),
-    array( 'tremolo' => '-', 'diatonic' => '10//', 'chromatic' => '-11s', 'note' => "A#3" ),
-    array( 'tremolo' => '-12', 'diatonic' => '10/', 'chromatic' => '-12', 'note' => "B3" ),
-    array( 'tremolo' => '12', 'diatonic' => '10', 'chromatic' => '12', 'note' => "C4" ),
-    array( 'tremolo' => '-', 'diatonic' => '-', 'chromatic' => '12s', 'note' => "C#4" ),
-  );
-
-  private $arrChromaticTranspose = array(
-    '1' => [ '1', '1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4' ],
-    '1s' => [ '1s', '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4' ],
-    '-1' => [ '-1', '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s' ],
-    '-1s' => [ '-1s', '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5' ],
-    '2' => [ '2', '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s' ],
-    '-2' => [ '-2', '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6' ],
-    '-2s' => [ '-2s', '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6' ],
-    '3' => [ '3', '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s' ],
-    '3s' => [ '3s', '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7' ],
-    '-3' => [ '-3', '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s' ],
-    '-3s' => [ '-3s', '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7' ],
-    '-4' => [ '-4', '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s' ],
-    '4' => [ '4', '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8' ],
-    '4s' => [ '4s', '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8' ],
-    '-5' => [ '-5', '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9' ],
-    '-5s' => [ '-5s', '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s' ],
-    '6' => [ '6', '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9' ],
-    '-6' => [ '-6', '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s' ],
-    '-6s' => [ '-6s', '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10' ],
-    '7' => [ '7', '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10' ],
-    '7s' => [ '7s', '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s' ],
-    '-7' => [ '-7', '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11' ],
-    '-7s' => [ '-7s', '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s' ],
-    '-8' => [ '-8', '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11' ],
-    '8' => [ '8', '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s' ],
-    '9' => [ '9', '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12' ],
-    '9s' => [ '9s', '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12' ],
-    '-9' => [ '-9', '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s' ],
-    '-9s' => [ '-9s', '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ' ],
-    '10' => [ '10', '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ' ],
-    '-10' => [ '-10', '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ' ],
-    '-10s' => [ '-10s', '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ' ],
-    '11' => [ '11', '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ' ],
-    '11s' => [ '11s', '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '-11' => [ '-11', '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '-11s' => [ '-11s', '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '-12' => [ '-12', '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '12' => [ '12', '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-    '12s' => [ '12s', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ' ],
-  );
-
-  /**
-   * In monospace mode.
-   * As long as true, lines are not analyzed, just printed out.
-   *
-   * @since    3.5.0
-   * @access   private
-   * @var      boolean $inMonospace Monospace mode flag.
-   */
-  private $inMonospace;
-
-  /**
-   * Array of allowed prefixes for chords.
-   *
-   * @since    3.6.1
-   * @access   private
-   * @var      array
-   */
-  private $allowedChordPrefixes = array( '~', '|', '/', '.', '-', '+', '1', '2', '3', '4', '5', '6', '7', '8', '9' );
-
-  /**
-   * Holds the styles for the songsheet
-   *
-   * @since    3.9.3
-   * @access   private
-   * @var      string
-   */
-  private $songsheetStyles = '';
+  private $verseStyle;
 
   /**
    * --------------------------------------------------------------------------
@@ -715,7 +686,7 @@ class ChordPress_Renderer {
     /**
      * The styles need to be a one-line string in a separate variable because it is passed to the Javascript print function
      */
-    $this->songsheetStyles = "<style>div.cpress { float: " . $this->float . "; clear: both; } div.cpress_line { " . $this->lineStyle . "; } div.cpress_line_section { display: inline; float: left; } div.cpress_line_section .chord .chordshort { " . $this->chordStyle . "; } div.cpress_line_section .lyric { " . $this->lyricsStyle . "; } div.cpress_chorus { " . $this->chorusStyle . "; } div.cpress_verse { " . $this->verseStyle . "; } div.cpress_clear { clear: both; } div.cpress_meta { " . $this->metaStyle . "; } div.cpress_interaction { float: right; } div.cpress_interaction select { width: auto; } span.cpress_comment { " . $this->commentStyle . "; } div.cpress_chordsheet { text-align: center; }</style>";
+    $this->songsheetStyles = "<style>div.cpress { float: " . $this->float . "; clear: both; } div.cpress_line { " . $this->lineStyle . "; } div.cpress_line_section { display: inline; float: left; } div.cpress_line_section .chord .chordshort { " . $this->chordStyle . "; } div.cpress_line_section .lyric { " . $this->lyricsStyle . "; } div.cpress_chorus { " . $this->chorusStyle . "; } div.cpress_verse { " . $this->verseStyle . "; } div.cpress_clear { clear: both; } div.cpress_meta { " . $this->metaStyle . "; } div.cpress_interaction { float: right; } div.cpress_interaction select { width: auto; } span.cpress_comment { " . $this->commentStyle . "; } div.cpress_chordsheet { text-align: center; } div.cpress-chord-container { display: inline-block; margin: 10px; vertical-align: top; }</style>";
     $this->songsheetStyles = str_replace(';;', ';', $this->songsheetStyles);
 
     $songsheetHtml = "\n\n
@@ -729,7 +700,7 @@ class ChordPress_Renderer {
     /**
      * Interaction menu
      */
-    if (in_array(strtolower($this->interactive), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($this->interactive), array("yes", "1", "true"))) {
       $songsheetHtml .= $this->buildInteractionMenu();
     }
 
@@ -743,13 +714,13 @@ class ChordPress_Renderer {
     if (strlen($this->arrDirectives['title']) && !$this->hideTitle) {
       $cpressID = str_replace(' ', '-', strtolower(trim($this->arrDirectives['title']))) . '-' . $randId;
       $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
-      $songsheetHtml .= '<' . $this->titleLevel . '>' . $this->arrDirectives['title'] . '</' . $this->titleLevel . ">\n";
+      $songsheetHtml .= '<' . $this->titleLevel . '>' . esc_html($this->arrDirectives['title']) . '</' . $this->titleLevel . ">\n";
     } else {
       $cpressID = 'cpress-id-' . $randId;
       $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
     }
     if (strlen($this->arrDirectives['subtitle']) && !$this->hideSubtitle) {
-      $songsheetHtml .= '<' . $this->subtitleLevel . '>' . $this->arrDirectives['subtitle'] . '</' . $this->subtitleLevel . ">\n";
+      $songsheetHtml .= '<' . $this->subtitleLevel . '>' . esc_html($this->arrDirectives['subtitle']) . '</' . $this->subtitleLevel . ">\n";
     }
 
     /**
@@ -766,23 +737,23 @@ class ChordPress_Renderer {
       strlen($this->arrDirectives['year'])
     ) {
       $songsheetHtml .= "<div class=\"cpress_meta\">\n";
-      if (strlen($this->arrDirectives['composer']) && !$this->hideComposer) $songsheetHtml .= esc_html(__('Composer', 'chordpress')) . ': ' . $this->arrDirectives['composer'] . "<br>\n";
-      if (strlen($this->arrDirectives['artist']) && !$this->hideArtist) $songsheetHtml .= esc_html(__('Artist', 'chordpress')) . ': ' . $this->arrDirectives['artist'] . "<br>\n";
-      if (strlen($this->arrDirectives['year']) && !$this->hideYear) $songsheetHtml .= esc_html(__('Year', 'chordpress')) . ': ' . $this->arrDirectives['year'] . "<br>\n";
-      if (strlen($this->arrDirectives['album']) && !$this->hideAlbum) $songsheetHtml .= esc_html(__('Album', 'chordpress')) . ': ' . $this->arrDirectives['album'] . "<br>\n";
+      if (strlen($this->arrDirectives['composer']) && !$this->hideComposer) $songsheetHtml .= esc_html(__('Composer', 'chordpress')) . ': ' . esc_html($this->arrDirectives['composer']) . "<br>\n";
+      if (strlen($this->arrDirectives['artist']) && !$this->hideArtist) $songsheetHtml .= esc_html(__('Artist', 'chordpress')) . ': ' . esc_html($this->arrDirectives['artist']) . "<br>\n";
+      if (strlen($this->arrDirectives['year']) && !$this->hideYear) $songsheetHtml .= esc_html(__('Year', 'chordpress')) . ': ' . esc_html($this->arrDirectives['year']) . "<br>\n";
+      if (strlen($this->arrDirectives['album']) && !$this->hideAlbum) $songsheetHtml .= esc_html(__('Album', 'chordpress')) . ': ' . esc_html($this->arrDirectives['album']) . "<br>\n";
 
       if (strlen($this->arrDirectives['key']) && !$this->hideKey) {
-        $songsheetHtml .= esc_html(__('Key (original)', 'chordpress')) . ': ' . $this->arrDirectives['key'] . "<br>\n";
-        $songsheetHtml .= esc_html(__('Key (transposed)', 'chordpress')) . ': <span class="chord-hidable-%cpressID% key-%cpressID%-0">' . $this->arrDirectives['key'] . '</span>';
+        $songsheetHtml .= esc_html(__('Key (original)', 'chordpress')) . ': ' . esc_html($this->arrDirectives['key']) . "<br>\n";
+        $songsheetHtml .= esc_html(__('Key (transposed)', 'chordpress')) . ': <span class="chord-hidable-%cpressID% key-%cpressID%-0">' . esc_html($this->arrDirectives['key']) . '</span>';
         for ($t = 1; $t <= 11; $t++) {
-          $songsheetHtml .= '<span class="chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none">' . $this->arrTransposeValues[$this->arrDirectives['key']][$t] . '</span>';
+          $songsheetHtml .= '<span class="chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none">' . esc_html($this->arrTransposeValues[$this->arrDirectives['key']][$t]) . '</span>';
         }
         $songsheetHtml .= "<br>\n";
       }
 
-      if (strlen($this->arrDirectives['time'])) $songsheetHtml .= esc_html(__('Time', 'chordpress')) . ': ' . $this->arrDirectives['time'] . "<br>\n";
-      if (strlen($this->arrDirectives['tempo'])) $songsheetHtml .= esc_html(__('Tempo', 'chordpress')) . ': ' . $this->arrDirectives['tempo'] . "<br>\n";
-      if (strlen($this->arrDirectives['capo'])) $songsheetHtml .= esc_html(__('Capo', 'chordpress')) . ': ' . $this->arrDirectives['capo'] . "<br>\n";
+      if (strlen($this->arrDirectives['time'])) $songsheetHtml .= esc_html(__('Time', 'chordpress')) . ': ' . esc_html($this->arrDirectives['time']) . "<br>\n";
+      if (strlen($this->arrDirectives['tempo'])) $songsheetHtml .= esc_html(__('Tempo', 'chordpress')) . ': ' . esc_html($this->arrDirectives['tempo']) . "<br>\n";
+      if (strlen($this->arrDirectives['capo'])) $songsheetHtml .= esc_html(__('Capo', 'chordpress')) . ': ' . esc_html($this->arrDirectives['capo']) . "<br>\n";
       $songsheetHtml = preg_replace('/<br>$/', '', $songsheetHtml); // Remove last <br>
       $songsheetHtml .= "</div>\n";
     }
@@ -845,6 +816,57 @@ class ChordPress_Renderer {
     $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
 
     /**
+     * Generate chord data for transpose functionality (always needed)
+     */
+    $this->uniqueChords = array_unique($this->allChords);
+    $chordData = array();
+    
+    error_log('ChordPress Debug: Processing ' . count($this->uniqueChords) . ' unique chords for ' . $cpressID);
+    
+    foreach ($this->uniqueChords as $uc) {
+      if ($postid = $this->find_guitar_chord_post($uc)) {
+        $chordVariations = array();
+        
+        // Original chord (transpose level 0)
+        $this->load_guitar_chord($postid);
+        $originalChordHtml = $this->C->createSvgChord(true);
+        $chordVariations[0] = $originalChordHtml;
+        
+        // Generate all transposed versions
+        if (isset($this->arrTransposeValues[$uc])) {
+          for ($t = 1; $t <= 11; $t++) {
+            $transposedChord = $this->arrTransposeValues[$uc][$t];
+            if ($transposedPostId = $this->find_guitar_chord_post($transposedChord)) {
+              $this->load_guitar_chord($transposedPostId);
+              $transposedChordHtml = $this->C->createSvgChord(true);
+              $chordVariations[$t] = $transposedChordHtml;
+            }
+            // Skip chord if transposed version doesn't exist (no post found)
+          }
+        }
+        
+        $chordData[$uc] = $chordVariations;
+      }
+    }
+    
+    // Add JavaScript data for chord sheet regeneration (always needed for transpose)
+    $jsonData = wp_json_encode($chordData, JSON_HEX_TAG | JSON_HEX_QUOT | JSON_HEX_AMP | JSON_HEX_APOS | JSON_UNESCAPED_SLASHES);
+    $songsheetHtml .= "<script type='text/javascript'>\n";
+    $songsheetHtml .= "console.log('About to set chord data for %cpressID%');\n";
+    $songsheetHtml .= "console.log('Variable name will be: chordSheetData_%cpressID%');\n";
+    $songsheetHtml .= "try {\n";
+    $songsheetHtml .= "  var safeVarName = 'chordSheetData_' + '%cpressID%'.replace(/-/g, '_');\n";
+    $songsheetHtml .= "  window[safeVarName] = " . $jsonData . ";\n";
+    $songsheetHtml .= "  console.log('Chord data loaded for %cpressID% using variable:', safeVarName);\n";
+    $songsheetHtml .= "  console.log('Total chords loaded:', Object.keys(window[safeVarName]).length);\n";
+    $songsheetHtml .= "} catch(e) {\n";
+    $songsheetHtml .= "  console.error('Error loading chord data for %cpressID%:', e);\n";
+    $songsheetHtml .= "}\n";
+    $songsheetHtml .= "</script>\n";
+    
+    error_log('ChordPress Debug: Generated script tag for ' . $cpressID . ' with ' . count($chordData) . ' chords');
+
+    /**
      * Build chord sheet if option set to true.
      */
     if ($this->showChordSheet) {
@@ -852,13 +874,18 @@ class ChordPress_Renderer {
       $chordSheetText .= "<div class='cpress_chordsheet'>\n";
       $chordSheetText .= "<div><hr></div>\n";
       $chordSheetText .= "<p><i>" . esc_html(__('These known chords are used in this song', 'chordpress')) . ".</i></p>";
-      $this->uniqueChords = array_unique($this->allChords);
+      $chordSheetText .= "<div id='chordsheet-content-%cpressID%'>\n";
+      
+      // Generate chord sheet display
       foreach ($this->uniqueChords as $uc) {
         if ($postid = $this->find_guitar_chord_post($uc)) {
           $this->load_guitar_chord($postid);
-          $chordSheetText .= $this->C->createSvgChord(true);
+          $originalChordHtml = $this->C->createSvgChord(true);
+          $chordSheetText .= $originalChordHtml;
         }
       }
+      
+      $chordSheetText .= "</div>\n"; // Close chordsheet-content div
       $chordSheetText .= "</div>\n
       <div style=\"clear:both; padding: 16px 0 16px 0;\"><hr></div>\n
       <!-- /ChordPress ChordSheet-->\n\n";
@@ -869,7 +896,10 @@ class ChordPress_Renderer {
       }
     }
 
-// $this->C->dnd($songsheetHtml);
+    // Final replacement of %cpressID% placeholders for any content added after the initial replacement
+    $songsheetHtml = str_replace('%cpressID%', $cpressID, $songsheetHtml);
+
+    // $this->C->dnd($songsheetHtml);
     return $songsheetHtml . "\n\n";
   }
 
@@ -947,7 +977,7 @@ class ChordPress_Renderer {
               $i++;
             }
           } else {
-            $tvalues = array( '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11' );
+            $tvalues = array('0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11');
           }
           $interactionForm .= __('Transpose', 'chordpress') . "
               <div class=\"float-right\">
@@ -1137,7 +1167,7 @@ class ChordPress_Renderer {
           //
           return "";
         } elseif (strpos($directiveName, 'comment') !== false && !$this->hideComments) {
-          $arrLyrics[] = '<span class="cpress_comment">' . $directiveValue . '</span>';
+          $arrLyrics[] = '<span class="cpress_comment">' . esc_html($directiveValue) . '</span>';
         }
       } else {
         /**
@@ -1203,7 +1233,7 @@ class ChordPress_Renderer {
               $returnText .= "<div class=\"chord chord-hidable-%cpressID% key-%cpressID%-0\"><span class=\"chordshort\">";
             } else {
               $this->harmonica = strtolower($this->harmonica);
-              $returnText .= "<div class=\"chord chord-hidable-%cpressID% key-%cpressID%-" . $this->harmonica . "\"><span class=\"chordshort\">";
+              $returnText .= "<div class=\"chord chord-hidable-%cpressID% key-%cpressID%-" . esc_attr($this->harmonica) . "\"><span class=\"chordshort\">";
             }
 
             /**
@@ -1217,7 +1247,7 @@ class ChordPress_Renderer {
               $this->allChords[] = $theChord;
             }
 
-            $returnText .= $theChord . "</span>&nbsp;</div>\n";
+            $returnText .= esc_html($theChord) . "</span>&nbsp;</div>\n";
 
             if (!$this->harmonica) {
               /**
@@ -1236,19 +1266,18 @@ class ChordPress_Renderer {
                  * Just return the string.
                  */
                 if (in_array($arrChords[$i][0], $this->allowedChordPrefixes)) {
-                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none"><span class="chordshort">' . $arrChords[$i] . '</span>&nbsp;</div>';
+                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none"><span class="chordshort">' . esc_html($arrChords[$i]) . '</span>&nbsp;</div>';
                   $returnText .= "\n";
                 } else {
                   /**
                    * This is a real chord.
                    */
                   $theChord = $this->formatChord($arrChords[$i]);
-                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none"><span class="chordshort">' . $theChord . '</span>&nbsp;</div>';
+                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $t . '" style="display:none"><span class="chordshort">' . esc_html($theChord) . '</span>&nbsp;</div>';
                 }
               }
 
               $this->setTranspose($tempTranspose);
-
             } else {
               /**
                * Prepare all other version of the harmonica note.
@@ -1258,8 +1287,8 @@ class ChordPress_Renderer {
               $returnText .= "\n";
               foreach ($this->harmonicaTypes as $type) {
                 if ($type !== $this->harmonica) {
-//                  $this->dnd($theChord . "|" . $this->harmonica . "|" . $type . ": " . $this->translateHarmonicaNote($theChord, $this->harmonica, $type, false));
-                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . $type . '" style="display:none"><span class="chordshort">' . $this->translateHarmonicaNote($theChord, $this->harmonica, $type) . '</span>&nbsp;</div>';
+                  //                  $this->dnd($theChord . "|" . $this->harmonica . "|" . $type . ": " . $this->translateHarmonicaNote($theChord, $this->harmonica, $type, false));
+                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-' . esc_attr($type) . '" style="display:none"><span class="chordshort">' . esc_html($this->translateHarmonicaNote($theChord, $this->harmonica, $type)) . '</span>&nbsp;</div>';
                   $returnText .= "\n";
                 }
                 $returnText .= "\n";
@@ -1270,7 +1299,7 @@ class ChordPress_Renderer {
                */
               if ($this->harmonica == 'chromatic') {
                 for ($t = 1; $t <= 11; $t++) {
-                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-chromatic-' . $t . '" style="display:none"><span class="chordshort">' . $this->transposeChromaticNote($theChord, $t) . '</span>&nbsp;</div>';
+                  $returnText .= '<div class="chord chord-hidable-%cpressID% key-%cpressID%-chromatic-' . $t . '" style="display:none"><span class="chordshort">' . esc_html($this->transposeChromaticNote($theChord, $t)) . '</span>&nbsp;</div>';
                   $returnText .= "\n";
                 }
                 $returnText .= "\n";
@@ -1286,7 +1315,7 @@ class ChordPress_Renderer {
               $endOf1stWord = strpos($lyrics, ' ');
               $numSpaces = substr_count($lyrics, ' ');
               if ($endOf1stWord > 0 && $numSpaces == 1) {
-                $returnText .= substr($lyrics, 0, $endOf1stWord) . '&nbsp;';
+                $returnText .= esc_html(substr($lyrics, 0, $endOf1stWord)) . '&nbsp;';
                 $lyrics = substr($lyrics, $endOf1stWord);
                 $returnText .= "</div></div>\n<div class=\"cpress_line_section\">\n<div class=\"chord\">&nbsp;</div><div class=\"lyric\">";
               }
@@ -1296,7 +1325,7 @@ class ChordPress_Renderer {
             $returnText .= '<div class="lyric">';
           }
 
-          if (strlen($lyrics) > 0) $returnText .= $lyrics;
+          if (strlen($lyrics) > 0) $returnText .= esc_html($lyrics);
           $returnText .= "</div>\n"; // end of lyric
           $returnText .= "</div>\n"; // end of line
 
@@ -1307,7 +1336,7 @@ class ChordPress_Renderer {
        * If there are more lyric parts than chord parts, add them here
        */
       for ($i = count($arrChords); $i < count($arrLyrics); $i++) {
-        $returnText .= $arrLyrics[$i];
+        $returnText .= esc_html($arrLyrics[$i]);
       }
     } else {
 
@@ -1317,7 +1346,7 @@ class ChordPress_Renderer {
       $returnText .= '<div class="cpress_line_section"><div class="lyric">';
 
       for ($i = 0; $i < count($arrLyrics); $i++) {
-        $returnText .= $arrLyrics[$i];
+        $returnText .= esc_html($arrLyrics[$i]);
       }
 
       $returnText .= "</div></div>";
@@ -1383,9 +1412,9 @@ class ChordPress_Renderer {
     /**
      * Return other valid chord identifiers as is
      */
-    $italianChords = array( 'Do', 'do', 'Re', 're', 'Mi', 'mi', 'Fa', 'fa', 'Sol', 'sol', 'La', 'la', 'Si', 'si' );
-    $nashvilleChords = array( '1', '2', '3', '4', '5', '6', '7' );
-    $romanChords = array( 'I', 'I7', 'II', 'III', 'iii', 'IV', 'V', 'V7', 'VI', 'vi', 'VI7', 'vi7', 'VII' );
+    $italianChords = array('Do', 'do', 'Re', 're', 'Mi', 'mi', 'Fa', 'fa', 'Sol', 'sol', 'La', 'la', 'Si', 'si');
+    $nashvilleChords = array('1', '2', '3', '4', '5', '6', '7');
+    $romanChords = array('I', 'I7', 'II', 'III', 'iii', 'IV', 'V', 'V7', 'VI', 'vi', 'VI7', 'vi7', 'VII');
     if (in_array($ch, $italianChords) or in_array($ch, $nashvilleChords) or in_array($ch, $romanChords)) return $ch;
 
     /**
@@ -1575,7 +1604,7 @@ class ChordPress_Renderer {
       'G' => 10,
     );
 
-    if (in_array(strtolower($this->hbNotation), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($this->hbNotation), array("yes", "1", "true"))) {
       if (array_key_exists(strtoupper($n), $hbNotation)) {
         return $hbNotation[strtoupper($n)];
       } else {
@@ -1707,7 +1736,6 @@ class ChordPress_Renderer {
             }, $fromNotes);
             $translatedNote = reset($toValues);
             break;
-
         }
         break;
 
@@ -1732,7 +1760,6 @@ class ChordPress_Renderer {
             }, $fromNotes);
             $translatedNote = reset($toValues);
             break;
-
         }
         break;
 
@@ -1757,7 +1784,6 @@ class ChordPress_Renderer {
             }, $fromNotes);
             $translatedNote = reset($toValues);
             break;
-
         }
         break;
     }
@@ -1911,7 +1937,7 @@ class ChordPress_Renderer {
    * @since 3.5.0
    */
   public function setHideChords(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->hideChords = true;
     } else {
       $this->hideChords = false;
@@ -1944,7 +1970,7 @@ class ChordPress_Renderer {
    * @since 3.5.0
    */
   public function setHideComments(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->hideComments = 1;
     } else {
       $this->hideComments = 0;
@@ -1977,7 +2003,7 @@ class ChordPress_Renderer {
    * @since 3.5.0
    */
   public function setHideComposer(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->hideComposer = 1;
     } else {
       $this->hideComposer = 0;
@@ -2010,7 +2036,7 @@ class ChordPress_Renderer {
    * @since 3.5.0
    */
   public function setHidePrint(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->hidePrint = 1;
     } else {
       $this->hidePrint = 0;
@@ -2043,7 +2069,7 @@ class ChordPress_Renderer {
    * @since 3.5.0
    */
   public function setHideSubtitle(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->hideSubtitle = 1;
     } else {
       $this->hideSubtitle = 0;
@@ -2076,7 +2102,7 @@ class ChordPress_Renderer {
    * @since 3.5.0
    */
   public function setHideTitle(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->hideTitle = 1;
     } else {
       $this->hideTitle = 0;
@@ -2109,7 +2135,7 @@ class ChordPress_Renderer {
    * @since 3.8.1
    */
   public function setHideFontsize(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->hideFontsize = 1;
     } else {
       $this->hideFontsize = 0;
@@ -2142,7 +2168,7 @@ class ChordPress_Renderer {
    * @since 3.5.0
    */
   public function setHideTranspose(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->hideTranspose = 1;
     } else {
       $this->hideTranspose = 0;
@@ -2175,7 +2201,7 @@ class ChordPress_Renderer {
    * @since 3.6.0
    */
   public function setNumericTranspose(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->showNumericTranspose = 1;
     } else {
       $this->showNumericTranspose = 0;
@@ -2208,7 +2234,7 @@ class ChordPress_Renderer {
    * @since 3.6.0
    */
   public function setFixedInteraction(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->fixedInteraction = 1;
     } else {
       $this->fixedInteraction = 0;
@@ -2241,7 +2267,7 @@ class ChordPress_Renderer {
    * @since 3.5.0
    */
   public function setHideYear(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->hideYear = 1;
     } else {
       $this->hideYear = 0;
@@ -2303,7 +2329,7 @@ class ChordPress_Renderer {
    * @since 3.5.0
    */
   public function setShowChordSheet(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->showChordSheet = 1;
     } else {
       $this->showChordSheet = 0;
@@ -2336,7 +2362,7 @@ class ChordPress_Renderer {
    * @since 3.5.0
    */
   public function setShowChordSheetOnTop(string $g): void {
-    if (in_array(strtolower($g), array( "yes", "1", "true" ))) {
+    if (in_array(strtolower($g), array("yes", "1", "true"))) {
       $this->showChordSheetOnTop = 1;
     } else {
       $this->showChordSheetOnTop = 0;
@@ -2449,36 +2475,36 @@ class ChordPress_Renderer {
    *
    * @return string - Modal chord dialog HTML
    */
-//    private function create_modal_chord(int $postid, string $chord): string {
-//        $modal_chord = '<!-- <button id="cpress-chord-' . $postid . '-modal-button">Click here to trigger the modal!</button> -->
-//        <div id="cpress-chord-' . $postid . '-modal" class="cpress-modal">
-//            <div class="cpress-modal-content">
-//                <span id="cpress-chord-' . $postid . '-modal-close" class="cpress-modal-close">&times;</span>
-//                ' . $chord . '
-//            </div>
-//        </div>
-//        <script>
-//        var cpress_' . $postid . '_modal = document.getElementById("cpress-chord-' . $postid . '-modal");
-//        var cpress_' . $postid . '_btn = document.getElementById("cpress-chord-' . $postid . '-modal-button");
-//        var cpress_' . $postid . '_close = document.getElementById("cpress-chord-' . $postid . '-modal-close");
-//
-//        cpress_' . $postid . '_btn.onclick = function() {
-//            cpress_' . $postid . '_modal.style.display = "block";
-//        }
-//
-//        cpress_' . $postid . '_close.onclick = function() {
-//            cpress_' . $postid . '_modal.style.display = "none";
-//        }
-//
-//        window.onclick = function(event) {
-//            if (event.target == cpress_' . $postid . '_modal) {
-//                cpress_' . $postid . '_modal.style.display = "none";
-//            }
-//        }
-//        </script>';
-//
-//        return $modal_chord;
-//    }
+  //    private function create_modal_chord(int $postid, string $chord): string {
+  //        $modal_chord = '<!-- <button id="cpress-chord-' . $postid . '-modal-button">Click here to trigger the modal!</button> -->
+  //        <div id="cpress-chord-' . $postid . '-modal" class="cpress-modal">
+  //            <div class="cpress-modal-content">
+  //                <span id="cpress-chord-' . $postid . '-modal-close" class="cpress-modal-close">&times;</span>
+  //                ' . $chord . '
+  //            </div>
+  //        </div>
+  //        <script>
+  //        var cpress_' . $postid . '_modal = document.getElementById("cpress-chord-' . $postid . '-modal");
+  //        var cpress_' . $postid . '_btn = document.getElementById("cpress-chord-' . $postid . '-modal-button");
+  //        var cpress_' . $postid . '_close = document.getElementById("cpress-chord-' . $postid . '-modal-close");
+  //
+  //        cpress_' . $postid . '_btn.onclick = function() {
+  //            cpress_' . $postid . '_modal.style.display = "block";
+  //        }
+  //
+  //        cpress_' . $postid . '_close.onclick = function() {
+  //            cpress_' . $postid . '_modal.style.display = "none";
+  //        }
+  //
+  //        window.onclick = function(event) {
+  //            if (event.target == cpress_' . $postid . '_modal) {
+  //                cpress_' . $postid . '_modal.style.display = "none";
+  //            }
+  //        }
+  //        </script>';
+  //
+  //        return $modal_chord;
+  //    }
 
   /**
    * --------------------------------------------------------------------------

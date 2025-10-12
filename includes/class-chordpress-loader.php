@@ -77,6 +77,7 @@ class ChordPress_Loader {
    * @param int    $priority      Optional. The priority at which the function should be fired. Default is 10.
    * @param int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1.
    *
+   * @return void
    * @since    1.0.0
    */
   public function add_action($hook, $component, $callback, $priority = 10, $accepted_args = 1) {
@@ -94,8 +95,9 @@ class ChordPress_Loader {
    * @param object $component     A reference to the instance of the object on which the filter is defined.
    * @param string $callback      The name of the function definition on the $component.
    * @param int    $priority      Optional. The priority at which the function should be fired. Default is 10.
-   * @param int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1
+   * @param int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1.
    *
+   * @return void
    * @since    1.0.0
    */
   public function add_filter($hook, $component, $callback, $priority = 10, $accepted_args = 1) {
@@ -109,11 +111,11 @@ class ChordPress_Loader {
    *
    * Add a new shortcode to the collection to be registered with WordPress.
    *
-   * @param string $hook          The name of the WordPress filter that is being registered.
-   * @param object $component     A reference to the instance of the object on which the filter is defined.
+   * @param string $hook          The name of the WordPress shortcode that is being registered.
+   * @param object $component     A reference to the instance of the object on which the shortcode is defined.
    * @param string $callback      The name of the function definition on the $component.
    * @param int    $priority      Optional. The priority at which the function should be fired. Default is 10.
-   * @param int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1
+   * @param int    $accepted_args Optional. The number of arguments that should be passed to the $callback. Default is 1.
    *
    * @since    1.0.0
    */
@@ -162,15 +164,15 @@ class ChordPress_Loader {
    */
   public function run() {
     foreach ($this->filters as $hook) {
-      add_filter($hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args']);
+      add_filter($hook['hook'], array($hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']);
     }
 
     foreach ($this->actions as $hook) {
-      add_action($hook['hook'], array( $hook['component'], $hook['callback'] ), $hook['priority'], $hook['accepted_args']);
+      add_action($hook['hook'], array($hook['component'], $hook['callback']), $hook['priority'], $hook['accepted_args']);
     }
 
     foreach ($this->shortcodes as $hook) {
-      add_shortcode($hook['hook'], array( $hook['component'], $hook['callback'] ));
+      add_shortcode($hook['hook'], array($hook['component'], $hook['callback']));
     }
   }
 }

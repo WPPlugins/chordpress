@@ -133,6 +133,97 @@ function transposeChords(cpressId, formControlId, direction, baseKey) {
       btn.innerText = x;
     }
   }
+
+  /**
+   * Regenerate chord sheet for the new transpose level
+   */
+  regenerateChordSheet(cpressId, x);
+}
+
+/**
+ * ----------------------------------------------------------------------------
+ * Regenerate Chord Sheet.
+ * ----------------------------------------------------------------------------
+ *
+ * This function regenerates the chord sheet with chords for the specified
+ * transpose level to avoid display issues with transposed chord diagrams.
+ *
+ * @since 3.9.9
+ */
+function regenerateChordSheet(cpressId, transposeLevel) {
+  console.log('Regenerating chord sheet for ID:', cpressId, 'transpose level:', transposeLevel);
+  
+  // Convert hyphens to underscores for variable name compatibility
+  const safeId = cpressId.replace(/-/g, '_');
+  const chordDataVar = 'chordSheetData_' + safeId;
+  
+  const chordSheetElement = document.getElementById('chordsheet-content-' + cpressId);
+  
+  if (!chordSheetElement) {
+    console.error('Chord sheet element not found for ID:', cpressId);
+    return;
+  }
+  
+  if (!window[chordDataVar]) {
+    console.error('No chord data found for ID:', cpressId);
+    return;
+  }
+  
+  const chordData = window[chordDataVar];
+  console.log('Available chord data:', Object.keys(chordData));
+  
+  // Clear current chord sheet content
+  chordSheetElement.innerHTML = '';
+  
+  // Generate chord diagrams for the specified transpose level
+  let chordsDisplayed = 0;
+  for (const originalChord in chordData) {
+    const chordVariations = chordData[originalChord];
+    let chordHtml = '';
+    
+    if (transposeLevel === 0) {
+      // Always show original chords for transpose level 0
+      chordHtml = chordVariations[0];
+      console.log(`Showing original chord: ${originalChord}`);
+    } else if (chordVariations[transposeLevel]) {
+      // Only show transposed chord if it exists
+      chordHtml = chordVariations[transposeLevel];
+      console.log(`Showing transposed chord for ${originalChord} at level ${transposeLevel}`);
+    } else {
+      // Skip this chord if transposed version doesn't exist
+      console.log(`Skipping chord ${originalChord} - no transpose level ${transposeLevel} available`);
+      continue;
+    }
+    
+    if (chordHtml) {
+      // Create a unique container for each chord
+      const chordContainer = document.createElement('div');
+      chordContainer.className = 'chord-container-' + originalChord.replace(/[^a-zA-Z0-9]/g, '');
+      chordContainer.innerHTML = chordHtml;
+      
+      // Append the chord diagram to the chord sheet
+      chordSheetElement.appendChild(chordContainer);
+      chordsDisplayed++;
+      
+      // Execute any scripts in the chord HTML - do this after DOM insertion
+      const scripts = chordContainer.getElementsByTagName('script');
+      
+      for (let i = 0; i < scripts.length; i++) {
+        try {
+          const scriptContent = scripts[i].innerHTML;
+          if (scriptContent.trim()) {
+            // Use Function constructor instead of eval for better security
+            const func = new Function(scriptContent);
+            func();
+          }
+        } catch (e) {
+          console.error(`Error executing script for chord ${originalChord}:`, e);
+        }
+      }
+    }
+  }
+  
+  console.log(`Chord sheet regenerated with ${chordsDisplayed} diagrams for transpose level: ${transposeLevel}`);
 }
 
 /**
