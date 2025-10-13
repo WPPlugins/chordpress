@@ -250,7 +250,6 @@ class ChordPress_Public {
         $alert_style = 'warning';
         $alert_title = __('ChordPress Warning', 'chordpress');
         $alert_text = sprintf(
-          /* translators: %s: Chord post ID */
           __('There is no chord record with the ID %s. Please check your input or create a proper post for this chord first.', 'chordpress'),
           esc_html($args['chord'])
         );

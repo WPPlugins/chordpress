@@ -1336,7 +1336,12 @@ class ChordPress_Renderer {
        * If there are more lyric parts than chord parts, add them here
        */
       for ($i = count($arrChords); $i < count($arrLyrics); $i++) {
-        $returnText .= esc_html($arrLyrics[$i]);
+        // Check if this is HTML content that shouldn't be escaped
+        if (strpos($arrLyrics[$i], '<') !== false && strpos($arrLyrics[$i], '>') !== false) {
+          $returnText .= $arrLyrics[$i];
+        } else {
+          $returnText .= esc_html($arrLyrics[$i]);
+        }
       }
     } else {
 
@@ -1346,7 +1351,12 @@ class ChordPress_Renderer {
       $returnText .= '<div class="cpress_line_section"><div class="lyric">';
 
       for ($i = 0; $i < count($arrLyrics); $i++) {
-        $returnText .= esc_html($arrLyrics[$i]);
+        // Check if this is HTML content that shouldn't be escaped
+        if (strpos($arrLyrics[$i], '<') !== false && strpos($arrLyrics[$i], '>') !== false) {
+          $returnText .= $arrLyrics[$i];
+        } else {
+          $returnText .= esc_html($arrLyrics[$i]);
+        }
       }
 
       $returnText .= "</div></div>";

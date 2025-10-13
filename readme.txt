@@ -2,10 +2,10 @@
 Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
-Requires at least: 4.0
+Requires at least: 5.0
 Tested up to: 6.8
-Stable tag: 4.0.0
-Requires PHP: 5.2.4+
+Stable tag: 4.0.1
+Requires PHP: 7.4 or higher
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -129,6 +129,10 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
 == Changelog ==
+= 4.0.0 =
+* 2025-10-12
+* HTML tag rendering fix
+
 = 4.0.0 =
 * 2025-10-12
 * Transpose will also update the Chordsheet diagrams
