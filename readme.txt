@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music
 Requires at least: 6.7
 Tested up to: 7.1
-Stable tag: 5.0.0
+Stable tag: 5.0.1
 Requires PHP: 8.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -132,16 +132,11 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 == External services ==
 This plugin bundles its CSS, JavaScript and chord notation data. It does not load files from external servers and makes no remote requests by default.
 
-Licensing is disabled in the default build. When licensing is enabled by defining `CHORDPRESS_LICENSE_REQUIRED` in `wp-config.php`, the plugin connects to the LeweLic license server to activate, deactivate or check a license key:
-
-* Service: LeweLic license server
-* Provider: George Lewe / Lewe, https://www.lewe.com/, support@lewe.com
-* URL: https://lewelic.lewe.com
-* Data sent: the license key, the site hostname, the product reference and the public product item key
-* When: only when a license action is requested or a license status check is due while licensing is enabled
-* No page content, user content or other site data is sent to this service
-
 == Changelog ==
+= 5.0.1 =
+* 2026-11-17
+* Readme and changelog cleanup
+
 = 5.0.0 =
 * 2026-11-17
 * Complete rewrite for PHP 8.2+ and WordPress 6.7+
@@ -410,6 +405,9 @@ Licensing is disabled in the default build. When licensing is enabled by definin
 * Initital development for http://sayandsound.lewe.com
 
 == Upgrade Notice ==
+= 5.0.1 =
+Maintenance release. No database changes.
+
 = 5.0.0 =
 Major rewrite. Back up your database first. 4.x settings and chords migrate automatically; if migration fails, old data is kept. Requires WordPress 6.7+ and PHP 8.2+. Review custom CSS and the new settings screen after upgrading.
 
