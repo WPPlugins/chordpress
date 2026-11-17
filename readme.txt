@@ -1,11 +1,11 @@
-=== Lewe ChordPress - ChordPro Text Formatter ===
+=== Lewe ChordPress ===
 Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
-Tags: chordpro,chord,chords,lyrics,music,notes,sheet,sound,guitar
-Requires at least: 5.0
-Tested up to: 7.0
-Stable tag: 4.0.1
-Requires PHP: 7.4 or higher
+Tags: chordpro,chord,chords,lyrics,music
+Requires at least: 6.7
+Tested up to: 7.1
+Stable tag: 5.0.0
+Requires PHP: 8.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
 
@@ -93,7 +93,7 @@ Use the "Lewe ChordPress" admin menu of your backend to change the default setti
 == Support ==
 Choose your preferred support channel:
 1. [Wordpress Support Forum](https://wordpress.org/support/plugin/chordpress/ "Wordpress Support Forum")
-2. [Lewe Service Desk](https://georgelewe.atlassian.net/servicedesk/customer/portal/5 "Lewe Service Desk")
+2. [Lewe Service Desk](https://desk.lewe.com "Lewe Service Desk")
 4. [Lewe ChordPress User Manual](https://lewe.gitbook.io/lewe-chordpress/ "Lewe ChordPress User Manual")
 
 == Credits ==
@@ -101,6 +101,7 @@ Choose your preferred support channel:
 * [@rlisle](https://profiles.wordpress.org/rlisle/ "@rlisle") for his work on the ChordsAndLyrics plugin that he created in 2009
 * Ahkâm for the beautiful [Lewe ChordPress Plugin Icon](https://www.freeiconspng.com/img/17579 "Lewe ChordPress Plugin Icon")
 * The developers of the [SVGuitar](https://github.com/omnibrain/svguitar "SVGuitar") chord rendering module
+* The [Poppins](https://fonts.google.com/specimen/Poppins "Poppins") typeface by the Poppins Project Authors, licensed under the [SIL Open Font License 1.1](https://openfontlicense.org "SIL Open Font License 1.1")
 
 == Screenshots ==
 1. Lewe ChordPress Output Options
@@ -128,8 +129,30 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 3. Upload the 'chordpress' folder to your '/wp-content/plugins/' directory
 4. Activate the plugin on the 'Plugins' page of your WordPress backend
 
+== External services ==
+This plugin bundles its CSS, JavaScript and chord notation data. It does not load files from external servers and makes no remote requests by default.
+
+Licensing is disabled in the default build. When licensing is enabled by defining `CHORDPRESS_LICENSE_REQUIRED` in `wp-config.php`, the plugin connects to the LeweLic license server to activate, deactivate or check a license key:
+
+* Service: LeweLic license server
+* Provider: George Lewe / Lewe, https://www.lewe.com/, support@lewe.com
+* URL: https://lewelic.lewe.com
+* Data sent: the license key, the site hostname, the product reference and the public product item key
+* When: only when a license action is requested or a license status check is due while licensing is enabled
+* No page content, user content or other site data is sent to this service
+
 == Changelog ==
-= 4.0.0 =
+= 5.0.0 =
+* 2026-11-17
+* Complete rewrite for PHP 8.2+ and WordPress 6.7+
+* Automatic migration of 4.x settings and guitar chord posts on upgrade
+* Bundled chord definitions are installed once on a fresh installation
+* Batched chord lookups, enqueued and minified CSS/JavaScript, and JavaScript transposition for faster pages
+* Redesigned settings screen and chord editor with live preview
+* Safe HTML policy for lyrics; scripts, iframes and event handlers are removed
+* Removed the remaining jTab code
+
+= 4.0.2 =
 * 2025-10-12
 * HTML tag rendering fix
 
@@ -387,5 +410,8 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 * Initital development for http://sayandsound.lewe.com
 
 == Upgrade Notice ==
+= 5.0.0 =
+Major rewrite. Back up your database first. 4.x settings and chords migrate automatically; if migration fails, old data is kept. Requires WordPress 6.7+ and PHP 8.2+. Review custom CSS and the new settings screen after upgrading.
+
 = 3.2.0 =
 Enjoy 84 common guitar chords ready to add as Guitar Chord post...
