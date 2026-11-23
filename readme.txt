@@ -4,7 +4,7 @@ Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music
 Requires at least: 6.7
 Tested up to: 7.1
-Stable tag: 5.0.1
+Stable tag: 5.0.2
 Requires PHP: 8.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -133,6 +133,14 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 This plugin bundles its CSS, JavaScript and chord notation data. It does not load files from external servers and makes no remote requests by default.
 
 == Changelog ==
+= 5.0.2 =
+* 2026-11-23
+* Fixed: Large blank area at the top of the page when printing chord sheets
+* Fixed: Mobile controls (font size, transpose, print) now stay on one row
+* Fixed: Changing the chord font size no longer resizes the plugin interface
+* Fixed: Comment formatting now applies to the comment line, so text-align works
+* New: Title and subtitle style options under Formatting options
+
 = 5.0.1 =
 * 2026-11-17
 * Readme and changelog cleanup
@@ -405,6 +413,9 @@ This plugin bundles its CSS, JavaScript and chord notation data. It does not loa
 * Initital development for http://sayandsound.lewe.com
 
 == Upgrade Notice ==
+= 5.0.2 =
+Maintenance release with print, mobile layout and formatting fixes. No database changes.
+
 = 5.0.1 =
 Maintenance release. No database changes.
 

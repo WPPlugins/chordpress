@@ -103,6 +103,14 @@ final class Settings {
 			'default' => 'h2',
 			'options' => array( 'h1', 'h2', 'h3', 'h4', 'h5', 'h6' ),
 		),
+		'text_title_style'                      => array(
+			'type'    => 'css',
+			'default' => '',
+		),
+		'text_subtitle_style'                   => array(
+			'type'    => 'css',
+			'default' => '',
+		),
 		'text_meta_style'                       => array(
 			'type'    => 'css',
 			'default' => '',

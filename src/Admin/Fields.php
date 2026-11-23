@@ -328,6 +328,16 @@ final class Fields {
 				'label'       => __( 'Subtitle Level', 'chordpress' ),
 				'description' => __( 'Select the heading level for the subtitle directive.', 'chordpress' ),
 			),
+			'text_title_style'                      => array(
+				'tab'         => 'tab_formatting',
+				'label'       => __( 'Title Style', 'chordpress' ),
+				'description' => __( 'CSS for the song title, for example: text-align: center;', 'chordpress' ),
+			),
+			'text_subtitle_style'                   => array(
+				'tab'         => 'tab_formatting',
+				'label'       => __( 'Subtitle Style', 'chordpress' ),
+				'description' => __( 'CSS for the song subtitle, for example: text-align: center;', 'chordpress' ),
+			),
 			'text_meta_style'                       => array(
 				'tab'         => 'tab_formatting',
 				'label'       => __( 'Meta Information Style', 'chordpress' ),

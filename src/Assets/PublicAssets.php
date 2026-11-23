@@ -148,13 +148,15 @@ final class PublicAssets {
 			}
 		};
 
+		$add( '.cpress .cpress-title', (string) ( $settings['text_title_style'] ?? '' ) );
+		$add( '.cpress .cpress-subtitle', (string) ( $settings['text_subtitle_style'] ?? '' ) );
 		$add( '.cpress .cpress_meta', (string) ( $settings['text_meta_style'] ?? '' ) );
 		$add( '.cpress .cpress_line', (string) ( $settings['text_line_style'] ?? '' ) );
 		$add( '.cpress .cpress_line_section .chord .chordshort', (string) ( $settings['text_chord_style'] ?? '' ) );
 		$add( '.cpress .cpress_line_section .lyric', (string) ( $settings['text_lyrics_style'] ?? '' ) );
 		$add( '.cpress .cpress_chorus', (string) ( $settings['text_chorus_style'] ?? '' ) );
 		$add( '.cpress .cpress_verse', (string) ( $settings['text_verse_style'] ?? '' ) );
-		$add( '.cpress .cpress_comment', (string) ( $settings['text_comment_style'] ?? '' ) );
+		$add( '.cpress .cpress_line--comment', (string) ( $settings['text_comment_style'] ?? '' ) );
 
 		return implode( "\n", $rules );
 	}

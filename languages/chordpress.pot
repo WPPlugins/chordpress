@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Lewe ChordPress 5.0.1\n"
+"Project-Id-Version: Lewe ChordPress 5.0.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/chordpress\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2026-11-17T17:09:21+00:00\n"
+"POT-Creation-Date: 2026-11-23T18:45:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: chordpress\n"
@@ -127,7 +127,7 @@ msgid "Number of strings on the instrument."
 msgstr ""
 
 #: src/Admin/ChordMetaBox.php:123
-#: src/Admin/Fields.php:523
+#: src/Admin/Fields.php:533
 msgid "Tuning"
 msgstr ""
 
@@ -376,344 +376,360 @@ msgid "Select the heading level for the subtitle directive."
 msgstr ""
 
 #: src/Admin/Fields.php:333
-msgid "Meta Information Style"
+msgid "Title Style"
 msgstr ""
 
 #: src/Admin/Fields.php:334
-msgid "CSS for the meta header block, for example: font-style: italic;"
+msgid "CSS for the song title, for example: text-align: center;"
 msgstr ""
 
 #: src/Admin/Fields.php:338
-msgid "Chord Style"
+msgid "Subtitle Style"
 msgstr ""
 
 #: src/Admin/Fields.php:339
-msgid "CSS for chords in the song text, for example a background color or badge."
+msgid "CSS for the song subtitle, for example: text-align: center;"
 msgstr ""
 
 #: src/Admin/Fields.php:343
-msgid "Lyrics Style"
+msgid "Meta Information Style"
 msgstr ""
 
 #: src/Admin/Fields.php:344
-msgid "CSS for lyrics. Leave empty to use the page default."
+msgid "CSS for the meta header block, for example: font-style: italic;"
 msgstr ""
 
 #: src/Admin/Fields.php:348
-msgid "Comment Style"
+msgid "Chord Style"
 msgstr ""
 
 #: src/Admin/Fields.php:349
-msgid "CSS for comment directives."
+msgid "CSS for chords in the song text, for example a background color or badge."
 msgstr ""
 
 #: src/Admin/Fields.php:353
-msgid "Chorus Style"
+msgid "Lyrics Style"
 msgstr ""
 
 #: src/Admin/Fields.php:354
-msgid "CSS for chorus sections."
+msgid "CSS for lyrics. Leave empty to use the page default."
 msgstr ""
 
 #: src/Admin/Fields.php:358
-msgid "Verse Style"
+msgid "Comment Style"
 msgstr ""
 
 #: src/Admin/Fields.php:359
-msgid "CSS for verse sections."
+msgid "CSS for comment directives."
 msgstr ""
 
 #: src/Admin/Fields.php:363
-msgid "Line Style"
+msgid "Chorus Style"
 msgstr ""
 
 #: src/Admin/Fields.php:364
-msgid "CSS for song lines. Leave empty to use the default margin."
+msgid "CSS for chorus sections."
 msgstr ""
 
 #: src/Admin/Fields.php:368
-msgid "Background Color"
+msgid "Verse Style"
 msgstr ""
 
 #: src/Admin/Fields.php:369
-msgid "Background color of the chord diagram. Use none or leave empty for transparent."
+msgid "CSS for verse sections."
 msgstr ""
 
 #: src/Admin/Fields.php:373
-msgid "Barre Border Radius"
+msgid "Line Style"
 msgstr ""
 
 #: src/Admin/Fields.php:374
-msgid "Border radius of a barre relative to the nut size."
+msgid "CSS for song lines. Leave empty to use the default margin."
 msgstr ""
 
 #: src/Admin/Fields.php:378
-msgid "Barre Bar Stroke Color"
+msgid "Background Color"
 msgstr ""
 
 #: src/Admin/Fields.php:379
-msgid "Stroke color of a barre. Leave empty to use the nut color."
+msgid "Background color of the chord diagram. Use none or leave empty for transparent."
 msgstr ""
 
 #: src/Admin/Fields.php:383
-msgid "Barre Bar Stroke Width"
+msgid "Barre Border Radius"
 msgstr ""
 
 #: src/Admin/Fields.php:384
-msgid "Stroke width of a barre in pixels."
+msgid "Border radius of a barre relative to the nut size."
 msgstr ""
 
 #: src/Admin/Fields.php:388
-msgid "Canvas Width"
+msgid "Barre Bar Stroke Color"
 msgstr ""
 
 #: src/Admin/Fields.php:389
-msgid "Width of chord diagrams in pixels. The height is adjusted automatically."
+msgid "Stroke color of a barre. Leave empty to use the nut color."
 msgstr ""
 
 #: src/Admin/Fields.php:393
-msgid "Global Color"
+msgid "Barre Bar Stroke Width"
 msgstr ""
 
 #: src/Admin/Fields.php:394
-msgid "Global color of the chord chart. More specific colors override this value."
+msgid "Stroke width of a barre in pixels."
 msgstr ""
 
 #: src/Admin/Fields.php:398
-msgid "Empty String Indicator Size"
+msgid "Canvas Width"
 msgstr ""
 
 #: src/Admin/Fields.php:399
-msgid "Size of the X and O indicators relative to the string spacing."
+msgid "Width of chord diagrams in pixels. The height is adjusted automatically."
 msgstr ""
 
 #: src/Admin/Fields.php:403
-msgid "Fixed Diagram Position"
+msgid "Global Color"
 msgstr ""
 
 #: src/Admin/Fields.php:404
-msgid "Keep the distance between the diagram and the top of the SVG constant, whether a title is shown or not."
+msgid "Global color of the chord chart. More specific colors override this value."
 msgstr ""
 
 #: src/Admin/Fields.php:408
-msgid "Font Family"
+msgid "Empty String Indicator Size"
 msgstr ""
 
 #: src/Admin/Fields.php:409
-msgid "Font family used for letters and numbers in chord diagrams."
+msgid "Size of the X and O indicators relative to the string spacing."
 msgstr ""
 
 #: src/Admin/Fields.php:413
-msgid "Fret Color"
+msgid "Fixed Diagram Position"
 msgstr ""
 
 #: src/Admin/Fields.php:414
-msgid "Fret color. Leave empty to use the global color."
+msgid "Keep the distance between the diagram and the top of the SVG constant, whether a title is shown or not."
 msgstr ""
 
 #: src/Admin/Fields.php:418
-msgid "Fret Label Color"
+msgid "Font Family"
 msgstr ""
 
 #: src/Admin/Fields.php:419
-msgid "Fret label color. Leave empty to use the global color."
+msgid "Font family used for letters and numbers in chord diagrams."
 msgstr ""
 
 #: src/Admin/Fields.php:423
-msgid "Fret Label Position"
+msgid "Fret Color"
 msgstr ""
 
 #: src/Admin/Fields.php:424
-msgid "Position of the fret label."
+msgid "Fret color. Leave empty to use the global color."
 msgstr ""
 
 #: src/Admin/Fields.php:428
-msgid "Fret Label Font Size"
+msgid "Fret Label Color"
 msgstr ""
 
 #: src/Admin/Fields.php:429
-msgid "Font size of the fret label."
+msgid "Fret label color. Leave empty to use the global color."
 msgstr ""
 
 #: src/Admin/Fields.php:433
-msgid "Frets"
+msgid "Fret Label Position"
 msgstr ""
 
 #: src/Admin/Fields.php:434
-msgid "Number of frets to show in the chart."
+msgid "Position of the fret label."
 msgstr ""
 
 #: src/Admin/Fields.php:438
-msgid "Fret Height"
+msgid "Fret Label Font Size"
 msgstr ""
 
 #: src/Admin/Fields.php:439
-msgid "Height of a fret relative to the string spacing."
+msgid "Font size of the fret label."
 msgstr ""
 
 #: src/Admin/Fields.php:443
-msgid "Nut Size"
+msgid "Frets"
 msgstr ""
 
 #: src/Admin/Fields.php:444
-msgid "Size of a nut relative to the string spacing."
+msgid "Number of frets to show in the chart."
 msgstr ""
 
 #: src/Admin/Fields.php:448
-msgid "Nut Color"
+msgid "Fret Height"
 msgstr ""
 
 #: src/Admin/Fields.php:449
-msgid "Color of a finger or nut. Leave empty to use the global color."
+msgid "Height of a fret relative to the string spacing."
 msgstr ""
 
 #: src/Admin/Fields.php:453
-msgid "Nut Stroke Color"
+msgid "Nut Size"
 msgstr ""
 
 #: src/Admin/Fields.php:454
-msgid "Stroke color of a nut. Leave empty to use the nut color."
+msgid "Size of a nut relative to the string spacing."
 msgstr ""
 
 #: src/Admin/Fields.php:458
-msgid "Nut Stroke Width"
+msgid "Nut Color"
 msgstr ""
 
 #: src/Admin/Fields.php:459
-msgid "Stroke width of a nut."
+msgid "Color of a finger or nut. Leave empty to use the global color."
 msgstr ""
 
 #: src/Admin/Fields.php:463
-msgid "Nut Text Color"
+msgid "Nut Stroke Color"
 msgstr ""
 
 #: src/Admin/Fields.php:464
-msgid "Text color inside a nut."
+msgid "Stroke color of a nut. Leave empty to use the nut color."
 msgstr ""
 
 #: src/Admin/Fields.php:468
-msgid "Nut Text Size"
+msgid "Nut Stroke Width"
 msgstr ""
 
 #: src/Admin/Fields.php:469
-msgid "Font size of the nut label."
+msgid "Stroke width of a nut."
 msgstr ""
 
 #: src/Admin/Fields.php:473
-msgid "Position"
+msgid "Nut Text Color"
 msgstr ""
 
 #: src/Admin/Fields.php:474
-msgid "Default starting fret position. The first fret is 1."
+msgid "Text color inside a nut."
 msgstr ""
 
 #: src/Admin/Fields.php:478
-msgid "Side Padding"
+msgid "Nut Text Size"
 msgstr ""
 
 #: src/Admin/Fields.php:479
-msgid "Minimum side padding relative to the whole width."
+msgid "Font size of the nut label."
 msgstr ""
 
 #: src/Admin/Fields.php:483
-msgid "String Color"
+msgid "Position"
 msgstr ""
 
 #: src/Admin/Fields.php:484
-msgid "String color. Leave empty to use the global color."
+msgid "Default starting fret position. The first fret is 1."
 msgstr ""
 
 #: src/Admin/Fields.php:488
+msgid "Side Padding"
+msgstr ""
+
+#: src/Admin/Fields.php:489
+msgid "Minimum side padding relative to the whole width."
+msgstr ""
+
+#: src/Admin/Fields.php:493
+msgid "String Color"
+msgstr ""
+
+#: src/Admin/Fields.php:494
+msgid "String color. Leave empty to use the global color."
+msgstr ""
+
+#: src/Admin/Fields.php:498
 #: src/Chords/ChordPostType.php:54
 #: src/Chords/ChordPostType.php:61
 msgid "Strings"
 msgstr ""
 
-#: src/Admin/Fields.php:489
+#: src/Admin/Fields.php:499
 msgid "Number of strings."
 msgstr ""
 
-#: src/Admin/Fields.php:493
+#: src/Admin/Fields.php:503
 msgid "Stroke Width"
 msgstr ""
 
-#: src/Admin/Fields.php:494
+#: src/Admin/Fields.php:504
 msgid "Global stroke width of the chord diagram."
 msgstr ""
 
-#: src/Admin/Fields.php:498
+#: src/Admin/Fields.php:508
 msgid "Style"
 msgstr ""
 
-#: src/Admin/Fields.php:499
+#: src/Admin/Fields.php:509
 msgid "Select the normal or hand-drawn chord diagram style."
 msgstr ""
 
-#: src/Admin/Fields.php:503
+#: src/Admin/Fields.php:513
 msgid "Title Bottom Margin"
 msgstr ""
 
-#: src/Admin/Fields.php:504
+#: src/Admin/Fields.php:514
 msgid "Space between the title and the chord chart."
 msgstr ""
 
-#: src/Admin/Fields.php:508
+#: src/Admin/Fields.php:518
 msgid "Title Color"
 msgstr ""
 
-#: src/Admin/Fields.php:509
+#: src/Admin/Fields.php:519
 msgid "Title color. Leave empty to use the global color."
 msgstr ""
 
-#: src/Admin/Fields.php:513
+#: src/Admin/Fields.php:523
 msgid "Title Font Size"
 msgstr ""
 
-#: src/Admin/Fields.php:514
+#: src/Admin/Fields.php:524
 msgid "Initial font size of the title. The title is scaled down if it does not fit."
 msgstr ""
 
-#: src/Admin/Fields.php:518
+#: src/Admin/Fields.php:528
 msgid "Top Fret Width"
 msgstr ""
 
-#: src/Admin/Fields.php:519
+#: src/Admin/Fields.php:529
 msgid "Width of the nut when the position is 1."
 msgstr ""
 
-#: src/Admin/Fields.php:524
+#: src/Admin/Fields.php:534
 msgid "Tuning labels under the strings, separated by commas."
 msgstr ""
 
-#: src/Admin/Fields.php:528
+#: src/Admin/Fields.php:538
 msgid "Tunings Color"
 msgstr ""
 
-#: src/Admin/Fields.php:529
+#: src/Admin/Fields.php:539
 msgid "Tuning label color. Leave empty to use the global color."
 msgstr ""
 
-#: src/Admin/Fields.php:533
+#: src/Admin/Fields.php:543
 msgid "Tunings Font Size"
 msgstr ""
 
-#: src/Admin/Fields.php:534
+#: src/Admin/Fields.php:544
 msgid "Font size of the tuning labels."
 msgstr ""
 
-#: src/Admin/Fields.php:538
+#: src/Admin/Fields.php:548
 msgid "Remove options on delete"
 msgstr ""
 
-#: src/Admin/Fields.php:539
+#: src/Admin/Fields.php:549
 msgid "Remove plugin options, transients and user meta when the plugin is deleted. Deactivation does not remove data."
 msgstr ""
 
-#: src/Admin/Fields.php:543
+#: src/Admin/Fields.php:553
 msgid "Remove guitar chord posts on delete"
 msgstr ""
 
-#: src/Admin/Fields.php:544
+#: src/Admin/Fields.php:554
 msgid "Remove all guitar chord posts when the plugin is deleted. Deactivation does not remove data."
 msgstr ""
 
