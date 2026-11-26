@@ -83,7 +83,7 @@ final class ChordProParser {
 					continue;
 				}
 
-				if ( 'comment' === $name ) {
+				if ( self::is_comment_directive( $name ) ) {
 					$section[] = array(
 						'type' => 'comment',
 						'text' => $value,
@@ -260,6 +260,20 @@ final class ChordProParser {
 		);
 
 		return $aliases[ $name ] ?? $name;
+	}
+
+	/**
+	 * Whether a normalized directive name is a comment directive.
+	 *
+	 * ChordPress 4.x rendered every directive whose name contains "comment",
+	 * so older songs may use names such as {comments: Chorus}. Those lines must
+	 * still render as comments instead of being dropped as unknown directives.
+	 *
+	 * @param string $name Normalized directive name.
+	 * @return bool
+	 */
+	private static function is_comment_directive( string $name ): bool {
+		return str_contains( $name, 'comment' );
 	}
 
 	/**
