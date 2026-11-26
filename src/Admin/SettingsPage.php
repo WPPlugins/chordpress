@@ -245,7 +245,7 @@ final class SettingsPage {
 	 * @return void
 	 */
 	private function render_info(): void {
-		$documentation = 'https://lewe.gitbook.io/lewe-chordpress/';
+		$documentation = 'https://book.lewe.com/chordpress/';
 		$support       = 'https://desk.lewe.com';
 		$review        = 'https://wordpress.org/support/plugin/chordpress/reviews/';
 		$donate        = 'https://www.paypal.me/GeorgeLewe';

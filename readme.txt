@@ -3,8 +3,8 @@ Contributors: glewe,rlisle
 Donate link: https://www.paypal.me/GeorgeLewe
 Tags: chordpro,chord,chords,lyrics,music
 Requires at least: 6.7
-Tested up to: 7.1
-Stable tag: 5.0.2
+Tested up to: 7.2
+Stable tag: 5.0.3
 Requires PHP: 8.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl.html
@@ -88,13 +88,13 @@ Optional shortcode parameters
 Use the "Lewe ChordPress" admin menu of your backend to change the default settings.
 
 == Documentation ==
-[Lewe ChordPress User Manual](https://lewe.gitbook.io/lewe-chordpress/ "Lewe ChordPress User Manual")
+[Lewe ChordPress User Manual](https://book.lewe.com/chordpress/ "Lewe ChordPress User Manual")
 
 == Support ==
 Choose your preferred support channel:
 1. [Wordpress Support Forum](https://wordpress.org/support/plugin/chordpress/ "Wordpress Support Forum")
 2. [Lewe Service Desk](https://desk.lewe.com "Lewe Service Desk")
-4. [Lewe ChordPress User Manual](https://lewe.gitbook.io/lewe-chordpress/ "Lewe ChordPress User Manual")
+4. [Lewe ChordPress User Manual](https://book.lewe.com/chordpress/ "Lewe ChordPress User Manual")
 
 == Credits ==
 * The [ChordPro](https://profiles.wordpress.org/rlisle/ "ChordPro") team of course
@@ -133,6 +133,10 @@ The H/B notation uses H instead of B and B is used insetad of Bb. This notation 
 This plugin bundles its CSS, JavaScript and chord notation data. It does not load files from external servers and makes no remote requests by default.
 
 == Changelog ==
+= 5.0.3 =
+* 2026-11-24
+* Fixed: Blank lines between the metadata directives no longer leave an empty gap below the title and subtitle
+
 = 5.0.2 =
 * 2026-11-23
 * Fixed: Large blank area at the top of the page when printing chord sheets
@@ -413,6 +417,9 @@ This plugin bundles its CSS, JavaScript and chord notation data. It does not loa
 * Initital development for http://sayandsound.lewe.com
 
 == Upgrade Notice ==
+= 5.0.3 =
+Maintenance release. No database changes.
+
 = 5.0.2 =
 Maintenance release with print, mobile layout and formatting fixes. No database changes.
 

@@ -184,7 +184,7 @@ final class Admin {
 	 */
 	public function action_links( array $actions ): array {
 		$settings = '<a href="' . esc_url( admin_url( 'admin.php?page=' . self::MENU_SLUG ) ) . '">' . esc_html__( 'Settings', 'chordpress' ) . '</a>';
-		$docs     = '<a href="' . esc_url( 'https://lewe.gitbook.io/lewe-chordpress/' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Documentation', 'chordpress' ) . '</a>';
+		$docs     = '<a href="' . esc_url( 'https://book.lewe.com/chordpress/' ) . '" target="_blank" rel="noopener noreferrer">' . esc_html__( 'Documentation', 'chordpress' ) . '</a>';
 
 		return array_merge(
 			array(

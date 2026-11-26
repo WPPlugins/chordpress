@@ -416,27 +416,52 @@ final class SongRenderer {
 	/**
 	 * Render all sections.
 	 *
+	 * Blank lines before the first content are dropped. Directives such as the
+	 * title are rendered above the body, so a blank line that separated them
+	 * from the lyrics would otherwise show up as a gap below the header.
+	 *
 	 * @param array<int, array<string, mixed>> $sections Sections.
 	 * @return string
 	 */
 	private function render_sections( array $sections ): string {
-		$html = '';
+		$html    = '';
+		$started = false;
 
 		foreach ( $sections as $section ) {
 			$type  = isset( $section['type'] ) && is_scalar( $section['type'] ) ? (string) $section['type'] : 'plain';
 			$lines = isset( $section['lines'] ) && is_array( $section['lines'] ) ? $section['lines'] : array();
 
 			if ( 'monospace' === $type ) {
-				$html .= $this->render_monospace( $lines );
+				$rendered = $this->render_monospace( $lines );
+
+				if ( '' !== $rendered ) {
+					$started = true;
+					$html   .= $rendered;
+				}
+
 				continue;
 			}
 
 			$content = '';
 
 			foreach ( $lines as $line ) {
-				if ( is_array( $line ) ) {
-					$content .= $this->render_line( $line );
+				if ( ! is_array( $line ) ) {
+					continue;
 				}
+
+				$line_type = isset( $line['type'] ) && is_scalar( $line['type'] ) ? (string) $line['type'] : 'lyric';
+
+				if ( ! $started && 'blank' === $line_type ) {
+					continue;
+				}
+
+				$rendered = $this->render_line( $line );
+
+				if ( '' !== $rendered ) {
+					$started = true;
+				}
+
+				$content .= $rendered;
 			}
 
 			if ( 'verse' === $type ) {
